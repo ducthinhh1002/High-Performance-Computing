@@ -1,0 +1,37 @@
+# Đợt 1 / E5 — paper §5 strategies on IID and label-sorted (non-IID) shards.
+name: dot1_e5_strategies
+description: >
+  MNIST/LeNet, 3 epochs, 4 processes (Downpour = 1 server + 3 workers), evaluation every epoch, 2 seeds.
+  Sequential and sync use global batch 256 (lr 0.05); psgd/admm/downpour use local batch 64.
+binary: pdl_train
+repeats: 2
+timeout: 1800
+mpi: {launcher: mpirun, extra_args: [], allow_oversubscribe: true}
+env: {OMP_NUM_THREADS: 1}
+base_args:
+  device: cpu
+  impl: blocked
+  threads: 1
+  model: lenet
+  train-data: data/mnist-train.pdlds
+  test-data: data/mnist-test.pdlds
+  epochs: 3
+  momentum: 0.9
+  eval-every: 1
+variants:
+  - {strategy: sequential, np: 1, partition: global, batch-size: 256, lr: 0.05}
+  - {strategy: sync, np: 4, partition: global, global-batch: 256, lr: 0.05}
+  - {strategy: psgd, np: 4, partition: iid, batch-size: 64, lr: 0.01, avg-period: 0, reshuffle: 0}
+  - {strategy: psgd, np: 4, partition: sorted, batch-size: 64, lr: 0.01, avg-period: 0, reshuffle: 0}
+  - {strategy: psgd, np: 4, partition: sorted, batch-size: 64, lr: 0.01, avg-period: 0, reshuffle: 1}
+  - {strategy: psgd, np: 4, partition: iid, batch-size: 64, lr: 0.01, avg-period: 10, reshuffle: 0}
+  - {strategy: psgd, np: 4, partition: sorted, batch-size: 64, lr: 0.01, avg-period: 10, reshuffle: 0}
+  - {strategy: admm, np: 4, partition: iid, batch-size: 64, lr: 0.01, admm-rho: 0.05, admm-local-steps: 20}
+  - {strategy: admm, np: 4, partition: sorted, batch-size: 64, lr: 0.01, admm-rho: 0.05, admm-local-steps: 20}
+  - {strategy: downpour, np: 4, partition: iid, batch-size: 64, lr: 0.005, push-every: 2, fetch-every: 2}
+  - {strategy: downpour, np: 4, partition: sorted, batch-size: 64, lr: 0.005, push-every: 2, fetch-every: 2}
+analysis:
+  group_by: [strategy, partition, avg_period, reshuffle]
+  baseline: {strategy: sequential}
+  match_on: []
+  plots: [convergence, training_time, phase_breakdown]

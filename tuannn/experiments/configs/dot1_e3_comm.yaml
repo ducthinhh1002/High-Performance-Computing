@@ -1,0 +1,10 @@
+# Đợt 1 / E3 — MPI communication: 6 allreduce algorithms x message size x process count.
+name: dot1_e3_comm
+description: pdl_bench_comm with k = 2, 4, 8; 4 B .. 16 MiB (x4); 20 repetitions, max over ranks.
+binary: pdl_bench_comm
+repeats: 1
+timeout: 1800
+mpi: {launcher: mpirun, np: [2, 4, 8], extra_args: [], allow_oversubscribe: true}
+env: {OMP_NUM_THREADS: 1}
+base_args: {algos: all, min-bytes: 4, max-bytes: 16777216, factor: 4, reps: 20, warmup: 3}
+analysis: {group_by: [np], plots: [comm_allreduce, comm_scaling, pingpong]}

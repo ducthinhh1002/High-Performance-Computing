@@ -22,6 +22,7 @@ Quy ước đặt tên thư mục: chữ thường, không dấu, không khoản
 |---|---|---|---|
 | [`vinhvn/`](vinhvn/) | (điền) | (điền) | Thực nghiệm Parallel and Distributed Deep Learning: CPU/GPU, giao tiếp NCCL, data/model parallelism |
 | [`hieunv/`](hieunv/) | (điền) | (điền) | Đo lại mục 3 của Parallel and Distributed Deep Learning: CPU so với GPU (convolution, matvec), đối chiếu với bài báo, kiểm chứng băng thông bộ nhớ |
+| [`tuannn/`](tuannn/) | Tuan Nguyen | [tuannt2906](https://github.com/tuannt2906) | Huấn luyện CNN song song/phân tán tự cài đặt bằng C/MPI/OpenMP/CUDA: bản tuần tự và bản song song, Sync SGD, Parallel SGD, ADMM, Downpour, 6 thuật toán allreduce |
 | (thư mục của bạn) | | | |
 
 Khi thêm thư mục mới, thêm **một dòng** vào bảng này trong cùng Pull Request.

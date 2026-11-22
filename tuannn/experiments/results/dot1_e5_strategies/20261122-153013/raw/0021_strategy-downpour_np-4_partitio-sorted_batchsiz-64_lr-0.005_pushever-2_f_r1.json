@@ -1,0 +1,552 @@
+{
+  "schema": "pdl-bench/train/v1",
+  "version": "1.0.0",
+  "run_id": "0021_strategy-downpour_np-4_partitio-sorted_batchsiz-64_lr-0.005_pushever-2_f_r1",
+  "tag": "dot1_e5_strategies",
+  "config": {
+    "strategy": "downpour",
+    "device": "cpu",
+    "impl": "blocked",
+    "threads": 1,
+    "gpu_id": -1,
+    "timing_sync": 1,
+    "train_data": "data/mnist-train.pdlds",
+    "test_data": "data/mnist-test.pdlds",
+    "train_limit": 0,
+    "test_limit": 0,
+    "partition": "sorted",
+    "model": "lenet",
+    "width": 1,
+    "epochs": 3,
+    "batch_size": 64,
+    "global_batch": 0,
+    "lr": 0.005,
+    "momentum": 0.9,
+    "weight_decay": 0,
+    "lr_decay": 1,
+    "lr_step": 0,
+    "lr_scale": 0,
+    "max_steps": 0,
+    "warmup_steps": 0,
+    "seed": 43,
+    "allreduce": "mpi",
+    "fusion": "flat",
+    "overlap": 0,
+    "measure_sync": 1,
+    "avg_period": 0,
+    "reshuffle": 0,
+    "admm_rho": 0.05,
+    "admm_local_steps": 20,
+    "push_every": 2,
+    "fetch_every": 2,
+    "server_lr": 0,
+    "check_sync": 0,
+    "check_finite": 1,
+    "eval_every": 1,
+    "output": "tuannn/experiments/results/dot1_e5_strategies/20261122-153013/raw/0021_strategy-downpour_np-4_partitio-sorted_batchsiz-64_lr-0.005_pushever-2_f_r1.json",
+    "log_steps": 0,
+    "dump_params": "",
+    "run_id": "0021_strategy-downpour_np-4_partitio-sorted_batchsiz-64_lr-0.005_pushever-2_f_r1",
+    "tag": "dot1_e5_strategies",
+    "verbose": 1
+  },
+  "environment": {
+    "timestamp": "2026-11-22T08:38:44Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "logical_cpus": 8,
+    "compiler": "Clang 14.0.3",
+    "build_type": "Release",
+    "build_flags": "-Wall -Wextra -Wno-unused-parameter -O3 -march=native",
+    "git_commit": "unknown",
+    "git_dirty": false,
+    "pdl_version": "1.0.0",
+    "mpi_library": "MPICH Version:      5.0.2",
+    "mpi_world_size": 4,
+    "mpi_hosts": 1,
+    "openmp": false,
+    "omp_max_threads": 1,
+    "cuda": false,
+    "cuda_runtime": 0,
+    "cuda_driver": 0,
+    "cublas": false,
+    "gpu_name": null,
+    "device": "cpu",
+    "impl": "cpu-blocked",
+    "threads": 1,
+    "command_line": "build/bin/pdl_train --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 3 --momentum 0.9 --eval-every 1 --strategy downpour --partition sorted --batch-size 64 --lr 0.005 --push-every 2 --fetch-every 2 --seed 43 --output tuannn/experiments/results/dot1_e5_strategies/20261122-153013/raw/0021_strategy-downpour_np-4_partitio-sorted_batchsiz-64_lr-0.005_pushever-2_f_r1.json --run-id 0021_strategy-downpour_np-4_partitio-sorted_batchsiz-64_lr-0.005_pushever-2_f_r1 --tag dot1_e5_strategies",
+    "OMP_NUM_THREADS": "1"
+  },
+  "strategy": "downpour",
+  "world_size": 4,
+  "num_workers": 3,
+  "dataset": {
+    "train": "data/mnist-train.pdlds",
+    "test": "data/mnist-test.pdlds",
+    "n_train": 60000,
+    "n_train_local_rank0": 0,
+    "n_test": 10000,
+    "shape": [
+      1,
+      28,
+      28
+    ],
+    "classes": 10,
+    "partition": "sorted"
+  },
+  "model": {
+    "spec": "conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10",
+    "num_params": 61706,
+    "param_bytes": 246824,
+    "flops_per_sample": 845852,
+    "layers": [
+      {
+        "name": "conv1",
+        "kind": "conv",
+        "in": [
+          1,
+          28,
+          28
+        ],
+        "out": [
+          6,
+          28,
+          28
+        ],
+        "params": 156,
+        "flops": 235200
+      },
+      {
+        "name": "relu1",
+        "kind": "relu",
+        "in": [
+          6,
+          28,
+          28
+        ],
+        "out": [
+          6,
+          28,
+          28
+        ],
+        "params": 0,
+        "flops": 4704
+      },
+      {
+        "name": "pool1",
+        "kind": "maxpool",
+        "in": [
+          6,
+          28,
+          28
+        ],
+        "out": [
+          6,
+          14,
+          14
+        ],
+        "params": 0,
+        "flops": 4704
+      },
+      {
+        "name": "conv2",
+        "kind": "conv",
+        "in": [
+          6,
+          14,
+          14
+        ],
+        "out": [
+          16,
+          10,
+          10
+        ],
+        "params": 2416,
+        "flops": 480000
+      },
+      {
+        "name": "relu2",
+        "kind": "relu",
+        "in": [
+          16,
+          10,
+          10
+        ],
+        "out": [
+          16,
+          10,
+          10
+        ],
+        "params": 0,
+        "flops": 1600
+      },
+      {
+        "name": "pool2",
+        "kind": "maxpool",
+        "in": [
+          16,
+          10,
+          10
+        ],
+        "out": [
+          16,
+          5,
+          5
+        ],
+        "params": 0,
+        "flops": 1600
+      },
+      {
+        "name": "fc1",
+        "kind": "fc",
+        "in": [
+          16,
+          5,
+          5
+        ],
+        "out": [
+          120,
+          1,
+          1
+        ],
+        "params": 48120,
+        "flops": 96000
+      },
+      {
+        "name": "relu3",
+        "kind": "relu",
+        "in": [
+          120,
+          1,
+          1
+        ],
+        "out": [
+          120,
+          1,
+          1
+        ],
+        "params": 0,
+        "flops": 120
+      },
+      {
+        "name": "fc2",
+        "kind": "fc",
+        "in": [
+          120,
+          1,
+          1
+        ],
+        "out": [
+          84,
+          1,
+          1
+        ],
+        "params": 10164,
+        "flops": 20160
+      },
+      {
+        "name": "relu4",
+        "kind": "relu",
+        "in": [
+          84,
+          1,
+          1
+        ],
+        "out": [
+          84,
+          1,
+          1
+        ],
+        "params": 0,
+        "flops": 84
+      },
+      {
+        "name": "fc3",
+        "kind": "fc",
+        "in": [
+          84,
+          1,
+          1
+        ],
+        "out": [
+          10,
+          1,
+          1
+        ],
+        "params": 850,
+        "flops": 1680
+      }
+    ]
+  },
+  "local_batch": 64,
+  "global_batch": 192,
+  "steps_per_epoch": 312,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.429242791,
+      "train_acc": 0.858623798,
+      "test_loss": 0.366780172,
+      "test_acc": 0.8867,
+      "time_s": 7.307953,
+      "elapsed_s": 7.307953,
+      "samples": 59904,
+      "steps": 312,
+      "phases_mean": {
+        "data": 0.0133726672,
+        "h2d": 0.00549333286,
+        "forward": 3.005174,
+        "backward": 3.60917167,
+        "transfer": 0.00786966652,
+        "sync_wait": 0,
+        "comm": 0.614808,
+        "update": 0.0327836661,
+        "eval": 0,
+        "shuffle": 0
+      },
+      "phases_max": {
+        "data": 0.0138970003,
+        "h2d": 0.00562799897,
+        "forward": 3.017349,
+        "backward": 3.612779,
+        "transfer": 0.00808000122,
+        "sync_wait": 0,
+        "comm": 0.618677001,
+        "update": 0.0337470007,
+        "eval": 0,
+        "shuffle": 0
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.159298567,
+      "train_acc": 0.950854701,
+      "test_loss": 0.271807138,
+      "test_acc": 0.9189,
+      "time_s": 8.644325,
+      "elapsed_s": 15.952278,
+      "samples": 59904,
+      "steps": 312,
+      "phases_mean": {
+        "data": 0.0123673335,
+        "h2d": 0.00541733287,
+        "forward": 2.99013933,
+        "backward": 3.60241667,
+        "transfer": 0.0075813339,
+        "sync_wait": 0,
+        "comm": 1.98009567,
+        "update": 0.0325406678,
+        "eval": 0,
+        "shuffle": 0
+      },
+      "phases_max": {
+        "data": 0.0128430004,
+        "h2d": 0.00558499922,
+        "forward": 2.995153,
+        "backward": 3.606416,
+        "transfer": 0.0077249998,
+        "sync_wait": 0,
+        "comm": 1.990405,
+        "update": 0.0342320015,
+        "eval": 0,
+        "shuffle": 0
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.120968045,
+      "train_acc": 0.96212273,
+      "test_loss": 0.21020027,
+      "test_acc": 0.9351,
+      "time_s": 9.51949,
+      "elapsed_s": 25.469994,
+      "samples": 59904,
+      "steps": 312,
+      "phases_mean": {
+        "data": 0.0120756678,
+        "h2d": 0.00551899938,
+        "forward": 3.28176533,
+        "backward": 3.93849967,
+        "transfer": 0.00749466661,
+        "sync_wait": 0,
+        "comm": 2.254467,
+        "update": 0.0335993323,
+        "eval": 0,
+        "shuffle": 0
+      },
+      "phases_max": {
+        "data": 0.0124380024,
+        "h2d": 0.00559900014,
+        "forward": 3.31241,
+        "backward": 3.961399,
+        "transfer": 0.00771099911,
+        "sync_wait": 0,
+        "comm": 2.357282,
+        "update": 0.0350149977,
+        "eval": 0,
+        "shuffle": 0
+      }
+    }
+  ],
+  "summary": {
+    "train_time_s": 25.469994,
+    "wall_time_s": 26.979454,
+    "samples_processed": 179712,
+    "throughput_samples_per_s": 7055.83205,
+    "final_train_loss": 0.120968045,
+    "final_train_acc": 0.96212273,
+    "final_test_loss": 0.21020027,
+    "final_test_acc": 0.9351,
+    "best_test_acc": 0.9351,
+    "phases_mean": {
+      "data": 0.0378156685,
+      "h2d": 0.0164296651,
+      "forward": 9.27707867,
+      "backward": 11.150088,
+      "transfer": 0.022945667,
+      "sync_wait": 0,
+      "comm": 4.84937067,
+      "update": 0.0989236663,
+      "eval": 0,
+      "shuffle": 0
+    },
+    "phases_max": {
+      "data": 0.0391660015,
+      "h2d": 0.0167349972,
+      "forward": 9.320544,
+      "backward": 11.174932,
+      "transfer": 0.0234640014,
+      "sync_wait": 0,
+      "comm": 4.961326,
+      "update": 0.102994,
+      "eval": 0,
+      "shuffle": 0
+    },
+    "phases_min": {
+      "data": 0.0355590022,
+      "h2d": 0.0161469979,
+      "forward": 9.225615,
+      "backward": 11.104752,
+      "transfer": 0.022153,
+      "sync_wait": 0,
+      "comm": 4.779951,
+      "update": 0.0959500003,
+      "eval": 0,
+      "shuffle": 0
+    },
+    "compute_time_mean_s": 20.5803357,
+    "comm_time_mean_s": 4.87231633,
+    "sync_wait_mean_s": 0,
+    "comm_fraction": 0.191449561,
+    "load_imbalance": 1.00305128,
+    "comm_bytes_per_rank": 115516908,
+    "comm_calls_per_rank": 468,
+    "sync_checks": 0,
+    "sync_failures": 0,
+    "nonfinite_events": 0,
+    "server": {
+      "updates": 1404,
+      "mean_staleness": 10.9487179,
+      "max_staleness": 14,
+      "phases": {
+        "data": 0,
+        "h2d": 0,
+        "forward": 0,
+        "backward": 0,
+        "transfer": 0.0523430003,
+        "sync_wait": 0.00557599741,
+        "comm": 22.516346,
+        "update": 0.0412959987,
+        "eval": 4.29346,
+        "shuffle": 0
+      }
+    }
+  },
+  "per_rank": [
+    {
+      "rank": 0,
+      "role": "server",
+      "train_time_s": 22.616154,
+      "samples": 0,
+      "phases": {
+        "data": 0,
+        "h2d": 0,
+        "forward": 0,
+        "backward": 0,
+        "transfer": 0.0523430003,
+        "sync_wait": 0.00557599741,
+        "comm": 22.516346,
+        "update": 0.0412959987,
+        "eval": 4.29346,
+        "shuffle": 0
+      },
+      "comm_bytes": 115515504,
+      "comm_messages": 468,
+      "comm_calls": 468
+    },
+    {
+      "rank": 1,
+      "role": "worker",
+      "train_time_s": 25.449303,
+      "samples": 59904,
+      "phases": {
+        "data": 0.0391660015,
+        "h2d": 0.0164070003,
+        "forward": 9.225615,
+        "backward": 11.104752,
+        "transfer": 0.0234640014,
+        "sync_wait": 0,
+        "comm": 4.961326,
+        "update": 0.0978269986,
+        "eval": 0,
+        "shuffle": 0
+      },
+      "comm_bytes": 115517376,
+      "comm_messages": 624,
+      "comm_calls": 468
+    },
+    {
+      "rank": 2,
+      "role": "worker",
+      "train_time_s": 25.469994,
+      "samples": 59904,
+      "phases": {
+        "data": 0.0355590022,
+        "h2d": 0.0161469979,
+        "forward": 9.320544,
+        "backward": 11.174932,
+        "transfer": 0.022153,
+        "sync_wait": 0,
+        "comm": 4.779951,
+        "update": 0.0959500003,
+        "eval": 0,
+        "shuffle": 0
+      },
+      "comm_bytes": 115517376,
+      "comm_messages": 624,
+      "comm_calls": 468
+    },
+    {
+      "rank": 3,
+      "role": "worker",
+      "train_time_s": 25.429528,
+      "samples": 59904,
+      "phases": {
+        "data": 0.0387220018,
+        "h2d": 0.0167349972,
+        "forward": 9.285077,
+        "backward": 11.17058,
+        "transfer": 0.0232199997,
+        "sync_wait": 0,
+        "comm": 4.806835,
+        "update": 0.102994,
+        "eval": 0,
+        "shuffle": 0
+      },
+      "comm_bytes": 115517376,
+      "comm_messages": 624,
+      "comm_calls": 468
+    }
+  ]
+}

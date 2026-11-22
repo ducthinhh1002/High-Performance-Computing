@@ -1,0 +1,14 @@
+# build/bin/pdl_bench_compute --reps 5 --warmup 1 --max-naive 5 --conv 1:224:224:96:11:4:0 --op fc --impls cpu-naive,cpu-blocked --sizes 256,512,1024,2048,4096 --fc-batch 1 --seed 42 --output tuannn/experiments/results/dot1_e2_paper_cpu/20261122-152553/raw/0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0.json --run-id 0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0 --tag dot1_e2_paper_cpu
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=1 | CPU: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz | GPU: -
+[INFO ] fc         cpu-naive    M=1      N=256    K=256    batch=1          0.090 ms       1.45 GFLOP/s  ok
+[INFO ] fc         cpu-naive    M=1      N=512    K=512    batch=1          0.387 ms       1.35 GFLOP/s  ok
+[INFO ] fc         cpu-naive    M=1      N=1024   K=1024   batch=1          1.679 ms       1.25 GFLOP/s  ok
+[INFO ] fc         cpu-naive    M=1      N=2048   K=2048   batch=1          6.738 ms       1.24 GFLOP/s  ok
+[INFO ] fc         cpu-naive    M=1      N=4096   K=4096   batch=1         26.901 ms       1.25 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=256    K=256    batch=1          0.012 ms      10.92 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=512    K=512    batch=1          0.051 ms      10.32 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=1024   K=1024   batch=1          0.220 ms       9.55 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=2048   K=2048   batch=1          1.292 ms       6.49 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=4096   K=4096   batch=1          6.008 ms       5.58 GFLOP/s  ok
+[INFO ] results written to tuannn/experiments/results/dot1_e2_paper_cpu/20261122-152553/raw/0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0.json

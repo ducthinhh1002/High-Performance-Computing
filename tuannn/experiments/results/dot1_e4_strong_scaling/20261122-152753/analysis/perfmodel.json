@@ -1,0 +1,19 @@
+{
+  "run_dir": "tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753",
+  "comm_source": "tuannn/experiments/results/dot1_e3_comm/20261122-152706",
+  "alpha_s": 2.6581056171060726e-06,
+  "beta_s_per_byte": 2.9671377608429447e-10,
+  "bandwidth_Bps": 3370251335.131492,
+  "gamma_s_per_byte": 6.929432764163409e-10,
+  "allreduce_median_abs_rel_err": 0.5916605426738746,
+  "allreduce_by_algo": {
+    "mpi": 1.698417296560791,
+    "naive": 0.6441507610062596,
+    "rd": 0.3756962327552177,
+    "reduce_bcast": 2.4154213758291947,
+    "ring": 0.1694830927714571,
+    "tree": 0.5276506025784707
+  },
+  "train_median_abs_rel_err": 0.0985656699796692,
+  "notes": "Single-node runs: MPI uses shared memory, so \u03b1/\u03b2 describe intra-node copies and the model ignores memory-bandwidth contention between ranks."
+}

@@ -1,0 +1,21 @@
+# Sinh ra khi build / chạy — không đưa lên repo
+code/build*/
+code/sequential/obj/
+code/sequential/seq_train
+code/sequential/*.json
+code/data/*.pdlds
+code/data/raw/
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+.DS_Store
+# Thông tin đăng nhập / cấu hình máy
+.env
+*kubeconfig*
+.claude/settings.local.json
+# Bài báo gốc có bản quyền: chỉ dẫn link, không commit PDF
+*.pdf
+!report/*.pdf
+!slides/*.pdf

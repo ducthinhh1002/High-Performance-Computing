@@ -1,0 +1,30 @@
+\begin{tabular}{llllllllllll}
+\hline
+op & impl & device & n & M & N & K & batch & conv & model & include\_transfer & threads \\
+\hline
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 1 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 2 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 4 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 8 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 16 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 32 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-blocked & cpu & 0 & 96 & 2916 & 121 & 64 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 1 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 2 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 4 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 8 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 16 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 32 & 1:224:224:96:11:4:0 & - & False & 1 \\
+conv & cpu-direct & cpu & 0 & 96 & 2916 & 121 & 64 & 1:224:224:96:11:4:0 & - & False & 1 \\
+fc & cpu-blocked & cpu & 256 & 1 & 256 & 256 & 1 & - & - & False & 1 \\
+fc & cpu-blocked & cpu & 512 & 1 & 512 & 512 & 1 & - & - & False & 1 \\
+fc & cpu-blocked & cpu & 1024 & 1 & 1024 & 1024 & 1 & - & - & False & 1 \\
+fc & cpu-blocked & cpu & 2048 & 1 & 2048 & 2048 & 1 & - & - & False & 1 \\
+fc & cpu-blocked & cpu & 4096 & 1 & 4096 & 4096 & 1 & - & - & False & 1 \\
+fc & cpu-naive & cpu & 256 & 1 & 256 & 256 & 1 & - & - & False & 1 \\
+fc & cpu-naive & cpu & 512 & 1 & 512 & 512 & 1 & - & - & False & 1 \\
+fc & cpu-naive & cpu & 1024 & 1 & 1024 & 1024 & 1 & - & - & False & 1 \\
+fc & cpu-naive & cpu & 2048 & 1 & 2048 & 2048 & 1 & - & - & False & 1 \\
+fc & cpu-naive & cpu & 4096 & 1 & 4096 & 4096 & 1 & - & - & False & 1 \\
+\hline
+\end{tabular}

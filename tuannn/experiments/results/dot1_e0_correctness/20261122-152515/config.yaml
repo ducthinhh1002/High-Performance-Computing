@@ -1,0 +1,15 @@
+# Đợt 1 / E0 — tính đúng. Chạy từ thư mục code/:
+#   pdlbench all ../experiments/configs/dot1_e0_correctness.yaml --results-dir ../experiments/results
+name: dot1_e0_correctness
+description: pdl_check on CPU (1 process) and MPI tests with 2 and 4 processes.
+binary: pdl_check
+repeats: 1
+vary_seed: false
+timeout: 600
+mpi: {launcher: mpirun, extra_args: [], allow_oversubscribe: true}
+env: {OMP_NUM_THREADS: 1}
+variants:
+  - {np: 1, tests: "gradcheck,kernels,determinism,finite", device: cpu}
+  - {np: 2, tests: "allreduce,equivalence,sync", device: cpu}
+  - {np: 4, tests: "allreduce,equivalence,sync", device: cpu}
+analysis: {group_by: [np], plots: []}
