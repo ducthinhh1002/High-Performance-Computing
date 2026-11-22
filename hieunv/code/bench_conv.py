@@ -10,14 +10,19 @@ Implementations:
             plus bias. This is the main series, comparable to the paper.
   batched - im2col for the whole batch, one batched GEMM (extension).
   conv2d  - the library convolution (oneDNN on CPU, cuDNN on GPU) (extension).
+
+caffe and batched write into preallocated buffers (Caffe keeps its column buffer and output
+blob too). F.conv2d has no out= argument, so on CPU it still allocates its output on every
+call and the first-touch page faults of that buffer are part of its time. On Linux, run with
+MALLOC_MMAP_MAX_=0 and a large MALLOC_TRIM_THRESHOLD_ so malloc reuses memory instead.
 """
 import argparse
 
 import torch
 import torch.nn.functional as F
 
-from common import (DEFAULT_THREADS, append_rows, bench, get_device, make_row,
-                    parse_ints, resolve_threads)
+from common import (DEFAULT_THREADS, append_rows, bench, get_device, gpu_warmup, make_row,
+                    ordered, parse_ints, resolve_threads)
 
 IMG = 224
 C_IN = 1
@@ -40,6 +45,10 @@ def make_layer(device):
     return weight, bias
 
 
+def im2col(x, out):
+    return torch._C._nn.im2col(x, (K, K), (1, 1), (0, 0), (STRIDE, STRIDE), out=out)
+
+
 def make_fn(impl, x, weight, bias):
     """Return a zero-argument callable that runs one forward pass of the layer."""
     w2 = weight.view(C_OUT, PATCH_LEN)        # unrolled kernels, 96 x 121
@@ -47,17 +56,21 @@ def make_fn(impl, x, weight, bias):
     n = x.shape[0]
 
     if impl == "caffe":
-        out = torch.empty(n, C_OUT, PATCHES, device=x.device)   # preallocated, like Caffe's top blob
+        out = torch.empty(n, C_OUT, PATCHES, device=x.device)       # Caffe's top blob
+        cols = torch.empty(1, PATCH_LEN, PATCHES, device=x.device)  # Caffe's column buffer
 
         def fn():
             for i in range(n):
-                cols = F.unfold(x[i:i + 1], K, stride=STRIDE)[0]   # 121 x 2916
-                torch.addmm(b2, w2, cols, out=out[i])               # 96 x 2916
+                im2col(x[i:i + 1], cols)                            # 121 x 2916
+                torch.addmm(b2, w2, cols[0], out=out[i])            # 96 x 2916
             return out
     elif impl == "batched":
+        out = torch.empty(n, C_OUT, PATCHES, device=x.device)
+        cols = torch.empty(n, PATCH_LEN, PATCHES, device=x.device)
+
         def fn():
-            cols = F.unfold(x, K, stride=STRIDE)                    # n x 121 x 2916
-            return torch.matmul(w2, cols).add_(b2)                  # n x 96 x 2916
+            im2col(x, cols)                                         # n x 121 x 2916
+            return torch.matmul(w2, cols, out=out).add_(b2)         # n x 96 x 2916
     elif impl == "conv2d":
         def fn():
             return F.conv2d(x, weight, bias, stride=STRIDE)
@@ -78,7 +91,8 @@ def check_correctness(device):
                                        msg=lambda m, impl=impl: f"{impl} != conv2d on {device}: {m}")
 
 
-def run(device_name, threads_list, impls, batches, warmup, repeat, machine, out_csv, log=print):
+def run(device_name, threads_list, impls, batches, warmup, repeat, machine, out_csv, log=print,
+        order_seed=0, warm_seconds=0):
     device = get_device(device_name)
     if device.type == "cuda":
         threads_list = [DEFAULT_THREADS]      # host threads do not matter for GPU runs
@@ -88,7 +102,8 @@ def run(device_name, threads_list, impls, batches, warmup, repeat, machine, out_
     for threads in threads_list:
         torch.set_num_threads(threads)
         for impl in impls:
-            for n in batches:
+            gpu_warmup(device, warm_seconds)
+            for n in ordered(batches, order_seed):
                 x = torch.randn(n, C_IN, IMG, IMG, device=device)
                 with torch.inference_mode():
                     fn = make_fn(impl, x, weight, bias)
@@ -99,7 +114,8 @@ def run(device_name, threads_list, impls, batches, warmup, repeat, machine, out_
                                flops, nbytes, machine)
                 rows.append(row)
                 log(f"conv  {device.type:4s} t={threads:<2d} {impl:7s} batch={n:<4d} "
-                    f"{stats['mean_ms']:10.3f} ms ± {stats['std_ms']:.3f}  ({row['gflops']} GFLOP/s)")
+                    f"{stats['mean_ms']:10.3f} ms ± {stats['std_ms']:.3f}  ({row['gflops']} GFLOP/s)"
+                    + (f"  issue {stats['issue_ms']:.3f} ms" if device.type == "cuda" else ""))
                 del x, fn
         append_rows(out_csv, [r for r in rows if r["threads"] == threads])
     torch.set_num_threads(DEFAULT_THREADS)

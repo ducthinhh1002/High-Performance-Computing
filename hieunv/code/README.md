@@ -6,7 +6,9 @@
 | `bench_conv.py` | Experiment 1 (paper Fig 1–2): conv layer 96×11×11, stride 4, on 224×224 greyscale, vs batch size. Impls: `caffe` (per-image im2col + GEMM, main), `batched`, `conv2d` |
 | `bench_fc.py` | Experiment 2 (paper Fig 3–4): `matvec` (main, O(n²)) and `gemm` (O(n³)) vs n |
 | `run_all.py` | runs the full grid on every available device, saves one run folder |
-| `plot.py` | Fig 1–6 + `summary.md` / `summary.csv` for one run folder |
+| `aggregate.py` | combines several runs into one folder (mean, std between runs) |
+| `gpu_sampler.py`, `gpu_diag.py` | NVML clock log during GPU work; wall vs host issue time vs SM clock table |
+| `plot.py` | Fig 1–6 + `summary.md` / `summary.csv` for one run or an aggregated folder (error bars) |
 
 Every benchmark first checks that its implementations agree (caffe and batched vs conv2d,
 matvec/gemm vs float64), so a wrong kernel is never timed.
@@ -31,14 +33,18 @@ Use the self-contained notebook `../kaggle/hpc_replication_kaggle.ipynb` (it wri
 
 1. kaggle.com → Create → New Notebook → File → Import Notebook → pick the .ipynb.
 2. Settings → Accelerator: **GPU T4 x2** (recent PyTorch builds may no longer support the P100).
-3. Run All. Then download `results_kaggle.zip` (Output panel) into `results\kaggle\`.
+3. Run All: a cold-GPU diagnostic, then 3 full runs (GPU first, 30 repeats), about 35 minutes; a failing
+   step stops the notebook. Then download `results_kaggle.zip` (Output panel) into `results\kaggle\`.
 
 Results go to `<outdir>/<machine>/<tag>/` (`env.json`, `conv.csv`, `fc.csv`, `log.txt`);
 outdir is `../results` locally and `/kaggle/working/results` on Kaggle.
 
 ## Measurement rules
 
-- 3 warm-up + 10 timed runs per point (paper: 10), mean ± std reported.
+- 3 warm-up + 10 timed runs per point (paper: 10; the Kaggle notebook uses 30), mean ± std reported.
+- `caffe` and `batched` write into preallocated buffers. `conv2d` cannot, so on CPU it includes allocating its
+  output. Runs made before 2026-11-22 also allocated in `batched`: do not use their CPU `batched`/`conv2d` series.
+- GPU: 5 s busy warm-up before each implementation, shuffled sizes (`--order-seed`).
 - Data already on the device; host↔GPU copies are not timed (the paper times forward only).
 - float32, TF32 disabled on GPU (the paper's GPU had plain FP32 only).
 - CPU baseline is 1 thread (the paper's abstract says "single core CPU"); `max` threads is an extension.

@@ -11,7 +11,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE.parent / "kaggle" / "hpc_replication_kaggle.ipynb"
-FILES = ["common.py", "bench_conv.py", "bench_fc.py", "run_all.py", "plot.py"]
+FILES = ["common.py", "gpu_sampler.py", "bench_conv.py", "bench_fc.py", "run_all.py",
+         "aggregate.py", "gpu_diag.py", "plot.py"]
+RUNS, REPEAT = 3, 30
 WORK = "/kaggle/working"
 
 
@@ -34,8 +36,10 @@ measured **on the same machine**, like the paper did on one AWS instance.
 
 **Before running**
 1. Settings → Accelerator → **GPU T4 x2** (recent PyTorch builds may no longer support the P100).
-2. Run All (or Save Version → Save & Run All). The full run takes roughly 5–10 minutes.
-3. Download `results_kaggle.zip` from the Output panel and unzip it into `results\\kaggle\\` on the laptop.
+2. Run All (or Save Version → Save & Run All). Three full runs, roughly 35 minutes in total.
+3. Download `results_kaggle.zip` from the Output panel, then stop the session (power button).
+
+Any failing step raises an error, so Run All stops there instead of carrying on.
 
 The code cells below are generated from the project's `code/` folder by `make_kaggle_notebook.py`.
 """),
@@ -56,29 +60,70 @@ print("torch CPU threads (max):", torch.get_num_threads())
         body = (HERE / name).read_text(encoding="utf-8")
         cells.append(code(f"%%writefile {WORK}/code/{name}\n{body}"))
     cells += [
-        md("## 3 · Smoke test (a few seconds, kept out of the results)"),
-        code(f"!rm -rf {WORK}/smoke && cd {WORK}/code && "
-             f"python run_all.py --machine kaggle --quick --tag smoke --outdir {WORK}/smoke"),
-        md("## 4 · Full run: CPU 1 thread, CPU max threads, GPU"),
+        md("## 3 · Helper: run a command, stream its output, stop the notebook if it fails"),
         code(f"""
-from datetime import datetime
-TAG = datetime.now().strftime("run_kaggle_%Y%m%d_%H%M%S")
-RUN = f"{WORK}/results/kaggle/{{TAG}}"
-print(RUN)
-!cd {WORK}/code && python run_all.py --machine kaggle --tag {{TAG}}
-"""),
-        md("## 5 · Figures and summary"),
-        code(f"""
-!cd {WORK}/code && python plot.py {{RUN}}
+import os, shutil, subprocess, sys
 from pathlib import Path
+WORK = Path("{WORK}")
+CODE, RES = WORK / "code", WORK / "results" / "kaggle"
+# glibc: serve big buffers from the heap and keep them, so F.conv2d on the CPU does not pay
+# page faults for a fresh output buffer on every call (recorded in env.json).
+ENV = dict(os.environ, MALLOC_MMAP_MAX_="0", MALLOC_TRIM_THRESHOLD_="68719476736", PYTHONUNBUFFERED="1")
+
+def py(*args):
+    cmd = [sys.executable, *map(str, args)]
+    p = subprocess.Popen(cmd, cwd=CODE, env=ENV, text=True, encoding="utf-8",
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    for line in p.stdout:
+        print(line, end="")
+    if p.wait():
+        raise RuntimeError(f"exit code {{p.returncode}}: {{' '.join(cmd)}}")
+"""),
+        md("## 4 · Smoke test (a few seconds, kept out of the results)"),
+        code("""
+shutil.rmtree(WORK / "smoke", ignore_errors=True)
+py("run_all.py", "--machine", "kaggle", "--quick", "--tag", "smoke", "--outdir", WORK / "smoke",
+   "--devices", "cuda,cpu", "--warm-seconds", 1, "--order-seed", 1)
+"""),
+        md("""
+## 5 · Diagnostic: cold GPU, ascending batch sizes (the conditions of the first Kaggle run)
+
+Reproduces the jump seen around batch 96-128, now with the SM clock and the host issue time.
+"""),
+        code("""
+import time
+from datetime import datetime
+STAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
+time.sleep(30)                                  # let the GPU fall back to its idle clocks
+DIAG = RES / f"diag_cold_{STAMP}"
+py("run_all.py", "--machine", "kaggle", "--tag", DIAG.name, "--outdir", RES.parent,
+   "--devices", "cuda", "--skip", "fc", "--warm-seconds", 0, "--order-seed", 0)
+"""),
+        md(f"## 6 · {RUNS} full runs, GPU first (warm GPU, shuffled sizes, {REPEAT} repeats per point)"),
+    ]
+    for i in range(1, RUNS + 1):
+        cells.append(code(f"""
+RUN{i} = RES / f"run{i}_{{STAMP}}"
+py("run_all.py", "--machine", "kaggle", "--tag", RUN{i}.name, "--outdir", RES.parent,
+   "--devices", "cuda,cpu", "--repeat", {REPEAT}, "--order-seed", {i})
+"""))
+    runs = ", ".join(f"RUN{i}" for i in range(1, RUNS + 1))
+    cells += [
+        md("## 7 · Combine the runs, figures, summary and GPU diagnosis"),
+        code(f"""
+AGG = RES / f"agg_{{STAMP}}"
+py("aggregate.py", {runs}, "--out", AGG)
+py("plot.py", AGG)
+py("gpu_diag.py", DIAG, {runs}, "--out", AGG / "gpu_diag.md")
 from IPython.display import Image, Markdown, display
-fig_dir = Path(RUN) / "figures"
-display(Markdown((fig_dir / "summary.md").read_text(encoding="utf-8")))
-for png in sorted(fig_dir.glob("*.png")):
+display(Markdown((AGG / "figures" / "summary.md").read_text(encoding="utf-8")))
+for png in sorted((AGG / "figures").glob("*.png")):
     display(Image(filename=str(png), width=900))
 """),
-        md("## 6 · Package the results for download"),
-        code(f"!cd {WORK} && rm -f results_kaggle.zip && zip -rq results_kaggle.zip results && ls -lh results_kaggle.zip"),
+        md("## 8 · Package the results for download"),
+        code("""
+print(shutil.make_archive(str(WORK / "results_kaggle"), "zip", WORK, "results"))
+"""),
     ]
     return {
         "cells": cells,

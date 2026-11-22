@@ -9,8 +9,8 @@ import argparse
 
 import torch
 
-from common import (DEFAULT_THREADS, append_rows, bench, get_device, make_row,
-                    parse_ints, resolve_threads)
+from common import (DEFAULT_THREADS, append_rows, bench, get_device, gpu_warmup, make_row,
+                    ordered, parse_ints, resolve_threads)
 
 OPS = ("matvec", "gemm")
 DEFAULT_SIZES = {
@@ -45,7 +45,8 @@ def check_correctness(device):
                                    (a.double() @ b.double()).float(), rtol=1e-4, atol=1e-3)
 
 
-def run(device_name, threads_list, ops, sizes, warmup, repeat, machine, out_csv, log=print):
+def run(device_name, threads_list, ops, sizes, warmup, repeat, machine, out_csv, log=print,
+        order_seed=0, warm_seconds=0):
     """sizes: dict op -> list of n."""
     device = get_device(device_name)
     if device.type == "cuda":
@@ -55,7 +56,8 @@ def run(device_name, threads_list, ops, sizes, warmup, repeat, machine, out_csv,
     for threads in threads_list:
         torch.set_num_threads(threads)
         for op in ops:
-            for n in sizes[op]:
+            gpu_warmup(device, warm_seconds)
+            for n in ordered(sizes[op], order_seed):
                 fn, flops, nbytes = make_fn(op, n, device)
                 with torch.inference_mode():
                     stats = bench(fn, device, warmup, repeat)

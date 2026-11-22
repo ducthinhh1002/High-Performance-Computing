@@ -10,6 +10,7 @@ Figures (PNG, in <run folder>/figures unless --figdir is given):
   fig4_fc_speedup     matrix-vector speedup over the CPU baseline vs n                (paper Fig 4)
   fig5_conv_impls     time per image of caffe / batched / conv2d, one panel per device (extension)
   fig6_gemm_time      matrix-matrix time vs n, log-log                                (extension)
+A folder written by aggregate.py (several runs) gets error bars: +-1 std between runs.
 Summary: summary.md (readable) and summary.csv (one row per metric), the table view of the charts.
 """
 import argparse
@@ -73,6 +74,11 @@ def load_run(run_dir):
             df = pd.read_csv(path)
             df["config"] = np.where(df["device"] == "cuda", "cuda", "cpu-" + df["threads"].astype(str))
             frames[name] = df
+        raw = run_dir / f"runs_{name}.csv"          # only in a folder written by aggregate.py
+        if raw.exists():
+            df = pd.read_csv(raw)
+            df["config"] = np.where(df["device"] == "cuda", "cuda", "cpu-" + df["threads"].astype(str))
+            frames[f"runs_{name}"] = df
     return env, frames
 
 
@@ -151,7 +157,14 @@ def top_legend(ax):
 
 
 def reps(df):
-    return int(df["repeats"].max())
+    text = f"trung bình {int(df['repeats'].max())} lần đo"
+    if "runs" in df and df["runs"].max() > 1:
+        text += f" × {int(df['runs'].max())} lần chạy (thanh sai số: ±1 độ lệch chuẩn giữa các lần chạy)"
+    return text
+
+
+def yerr(d):
+    return d["run_std_ms"].to_numpy(float) if "run_std_ms" in d else None
 
 
 def footnote(fig, text, width=135):
@@ -188,7 +201,9 @@ def save(fig, figdir, name):
     print("saved", path)
 
 
-def scatter_line(ax, x, y, color, label, line=True):
+def scatter_line(ax, x, y, color, label, line=True, err=None):
+    if err is not None:
+        ax.errorbar(x, y, yerr=err, fmt="none", ecolor=color, elinewidth=1, capsize=3, zorder=2.5)
     if line:
         ax.plot(x, y, color=color, lw=2, zorder=2)
     ax.plot(x, y, "o", color=color, ms=6, mec=SURFACE, mew=1.5, label=label, zorder=3)
@@ -211,7 +226,7 @@ def fig_conv_time(conv, meta, figdir, summary):
         summary.append(("conv_caffe", key, "r2", r2))
         xs = np.array([0, x.max()])
         ax.plot(xs, slope * xs + intercept, color=color, lw=2, zorder=2)
-        scatter_line(ax, x, y, color, label, line=False)
+        scatter_line(ax, x, y, color, label, line=False, err=yerr(d))
         labels.append((x.max(), slope * x.max() + intercept, f"{label}\n{slope:.3g} ms/ảnh · R² {r2:.3f}", color))
     ax.set_xlim(left=0)
     ax.set_ylim(bottom=0)
@@ -221,13 +236,18 @@ def fig_conv_time(conv, meta, figdir, summary):
     top_legend(ax)
     end_labels(ax, labels, min_gap=0.12)
     footnote(fig, "Lớp conv của paper: ảnh xám 224×224, 96 filter 11×11, stride 4. Cài đặt kiểu Caffe "
-                  f"(im2col + GEMM từng ảnh), trung bình {reps(df)} lần đo. Đường thẳng: hồi quy tuyến tính, "
+                  f"(im2col + GEMM từng ảnh), {reps(df)}. Đường thẳng: hồi quy tuyến tính, "
                   f"độ dốc = ms/ảnh. Paper: CPU {PAPER_CPU_SLOPE}, GPU {PAPER_GPU_SLOPE}.")
     save(fig, figdir, "fig1_conv_time")
 
 
-def fig_speedup(df, impl, baseline, meta, figdir, name, title, xlabel, log_x, note):
-    table = speedup_table(df[df["impl"] == impl], baseline)
+def fig_speedup(df, impl, baseline, meta, figdir, name, title, xlabel, log_x, note, runs=None):
+    table, spread = speedup_table(df[df["impl"] == impl], baseline), None
+    if runs is not None and table is not None:
+        # Speedup inside each run (same machine state), then mean and std over the runs.
+        per_run = pd.concat({r: speedup_table(d[d["impl"] == impl], baseline)
+                             for r, d in runs.groupby("run")})
+        table, spread = per_run.groupby(level=1).mean(), per_run.groupby(level=1).std()
     if table is None or table.empty:
         print(f"skip {name}: need the baseline and at least one other device/thread config")
         return None
@@ -237,7 +257,8 @@ def fig_speedup(df, impl, baseline, meta, figdir, name, title, xlabel, log_x, no
         if key not in table:
             continue
         s = table[key].dropna()
-        scatter_line(ax, s.index.to_numpy(float), s.to_numpy(float), color, label)
+        err = None if spread is None else spread[key].reindex(s.index).to_numpy(float)
+        scatter_line(ax, s.index.to_numpy(float), s.to_numpy(float), color, label, err=err)
         labels.append((s.index[-1], s.iloc[-1], f"{label}\n{s.iloc[-1]:.1f}× ở {int(s.index[-1])}", color))
     ax.axhline(1, color=AXIS, lw=0.8, zorder=1)
     if log_x:
@@ -268,10 +289,11 @@ def fig_fc_time(fc, op, meta, figdir, name, title, summary, expected, min_n):
         n, t = d["size"].to_numpy(float), d["mean_ms"].to_numpy(float)
         k = powfit(n, t, min_n)
         summary.append((op, key, "exponent", k))
+        summary.append((op, key, "exponent_n1024", powfit(n, t, 1024)))
         summary.append((op, key, "time_ms_at_max_n", t[-1]))
         summary.append((op, key, "gflops_at_max_n", float(d["gflops"].iloc[-1])))
         summary.append((op, key, "gbps_at_max_n", float(d["gbps"].iloc[-1])))
-        scatter_line(ax, n, t, color, label)
+        scatter_line(ax, n, t, color, label, err=yerr(d))
         labels.append((n[-1], t[-1], f"{label}\nt $\\propto$ n$^{{{k:.2f}}}$", color))
     log_y(ax)
     int_ticks(ax, pow2(df["size"].unique()), log=True)
@@ -281,7 +303,7 @@ def fig_fc_time(fc, op, meta, figdir, name, title, summary, expected, min_n):
     top_legend(ax)
     end_labels(ax, labels, min_gap=0.12)
     footnote(fig, f"Trục log–log: độ dốc của đường là số mũ k trong t ~ n^k (lý thuyết: k = {expected}), "
-                  f"khớp trên các n ≥ {min_n}. Trung bình {reps(df)} lần đo.")
+                  f"khớp trên các n ≥ {min_n}. {reps(df).capitalize()}.")
     save(fig, figdir, name)
 
 
@@ -307,7 +329,8 @@ def fig_conv_impls(conv, meta, figdir):
     handles, labels = axes[0][0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="upper left", bbox_to_anchor=(0.06, 0.93), ncol=3)
     footnote(fig, "Mỗi khung một thiết bị, trục y riêng cho từng khung. Đường càng thấp càng nhanh; "
-                  "đường giảm dần theo batch size nghĩa là gộp batch giúp tận dụng phần cứng tốt hơn.",
+                  "đường giảm dần theo batch size nghĩa là gộp batch giúp tận dụng phần cứng tốt hơn. "
+                  "Trên CPU, thời gian của thư viện có kèm việc cấp phát bộ nhớ đầu ra ở mỗi lần gọi.",
              width=60 * len(keys))
     save(fig, figdir, "fig5_conv_impls")
 
@@ -348,14 +371,16 @@ def write_summary(run_dir, figdir, env, meta, summary, conv_speed, fc_speed, bas
             lines.append(f"| {size} | " + " | ".join(f"{v:.2f}×" for v in row) + " |")
 
     lines += ["", "## Thí nghiệm 2 — lớp fully-connected (so với Hình 3–4 của paper)", "",
-              "| Cấu hình | Phép | Số mũ k (t ∝ nᵏ) | Thời gian ở n lớn nhất (ms) | GFLOP/s | GB/s |",
-              "|---|---|---|---|---|---|"]
+              "| Cấu hình | Phép | Số mũ k (t ∝ nᵏ) | k nếu khớp từ n ≥ 1024 | Thời gian ở n lớn nhất (ms) "
+              "| GFLOP/s | GB/s |",
+              "|---|---|---|---|---|---|---|"]
     for op, expected in (("matvec", 2), ("gemm", 3)):
         for key, (label, _, _) in meta.items():
             k = get(op, key, "exponent")
             if k is None:
                 continue
             lines.append(f"| {label} | {op} (lý thuyết k={expected}) | {k:.2f} | "
+                         f"{get(op, key, 'exponent_n1024'):.2f} | "
                          f"{get(op, key, 'time_ms_at_max_n'):.3f} | {get(op, key, 'gflops_at_max_n'):.1f} | "
                          f"{get(op, key, 'gbps_at_max_n'):.1f} |")
     if fc_speed is not None:
@@ -407,7 +432,8 @@ def main():
                                  "Hình 2 · Lớp convolution: speedup theo batch size",
                                  "Batch size (số ảnh)", False,
                                  "Speedup = thời gian của baseline / thời gian của cấu hình, cùng batch size, "
-                                 "cài đặt kiểu Caffe. Đường ngang: 1× (bằng baseline).")
+                                 "cài đặt kiểu Caffe. Đường ngang: 1× (bằng baseline).",
+                                 frames.get("runs_conv"))
         fig_conv_impls(conv, meta, figdir)
     if "fc" in frames:
         fc = frames["fc"]
@@ -418,7 +444,7 @@ def main():
                                "Hình 4 · Nhân ma trận–vector: speedup theo n",
                                "Kích thước n (ma trận n×n)", True,
                                "Speedup = thời gian của baseline / thời gian của cấu hình, cùng n. "
-                               "Đường ngang: 1× (bằng baseline).")
+                               "Đường ngang: 1× (bằng baseline).", frames.get("runs_fc"))
         fig_fc_time(fc, "gemm", meta, figdir, "fig6_gemm_time",
                     "Hình 6 · Nhân ma trận–ma trận: thời gian theo n (mở rộng)", summary, 3,
                     args.fit_min_n_gemm)

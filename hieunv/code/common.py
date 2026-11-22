@@ -3,7 +3,10 @@ import csv
 import json
 import os
 import platform
+import random
 import statistics
+import subprocess
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -18,8 +21,8 @@ DEFAULT_THREADS = torch.get_num_threads()
 
 CSV_FIELDS = [
     "exp", "impl", "device", "threads", "size",
-    "mean_ms", "std_ms", "min_ms", "median_ms", "warmup", "repeats",
-    "gflops", "gbps", "machine", "timestamp",
+    "mean_ms", "std_ms", "min_ms", "median_ms", "issue_ms", "warmup", "repeats",
+    "gflops", "gbps", "order", "t_start", "t_end", "machine", "timestamp",
 ]
 
 
@@ -67,18 +70,28 @@ def bench(fn, device, warmup=3, repeat=10):
 
     GPU work is asynchronous, so the device is synchronized before starting and
     after finishing each timed run: the time covers the full kernel execution.
+
+    issue_ms is the part until fn() returns, i.e. before the final synchronize. On a GPU
+    that is the host's launch work (as long as the launches fit in the CUDA queue), so
+    issue_ms ~ mean_ms means the run is bound by the CPU launching kernels, and
+    issue_ms << mean_ms means it is bound by the GPU executing them.
     """
     for _ in range(warmup):
         fn()
     sync(device)
-    times = []
+    times, issue = [], []
+    t_start = time.time()
     for _ in range(repeat):
         sync(device)
         start = time.perf_counter()
         fn()
+        issue.append((time.perf_counter() - start) * 1000.0)
         sync(device)
         times.append((time.perf_counter() - start) * 1000.0)
     return {
+        "issue_ms": statistics.fmean(issue),
+        "t_start": t_start,
+        "t_end": time.time(),
         "mean_ms": statistics.fmean(times),
         "std_ms": statistics.stdev(times) if len(times) > 1 else 0.0,
         "min_ms": min(times),
@@ -86,7 +99,64 @@ def bench(fn, device, warmup=3, repeat=10):
     }
 
 
+def ordered(items, seed):
+    """Measurement order. Seed 0 keeps it ascending; any other seed shuffles reproducibly.
+
+    With an ascending order "larger batch" and "later in time" cannot be told apart, e.g.
+    a GPU raising its clocks during the sweep would look like a batch-size effect.
+    """
+    items = list(items)
+    if seed:
+        random.Random(seed).shuffle(items)
+    return items
+
+
+def gpu_warmup(device, seconds):
+    """Keep the GPU busy so it reaches its sustained clocks before anything is timed."""
+    if device.type != "cuda" or seconds <= 0:
+        return
+    a = torch.randn(4096, 4096, device=device)
+    b = torch.empty_like(a)
+    end = time.perf_counter() + seconds
+    while time.perf_counter() < end:
+        torch.mm(a, a, out=b)
+        torch.cuda.synchronize(device)
+    del a, b
+
+
+class GpuClockLog:
+    """Log GPU 0 clocks/power/temperature (gpu_sampler.py, every 20 ms) while the block runs."""
+
+    def __init__(self, path, enabled, log=print):
+        self.path, self.enabled, self.log, self.proc = Path(path), enabled, log, None
+
+    def __enter__(self):
+        if self.enabled:
+            self.err = self.path.with_suffix(".err")
+            self.err_fh = self.err.open("w", encoding="utf-8")
+            self.proc = subprocess.Popen(
+                [sys.executable, str(Path(__file__).with_name("gpu_sampler.py")), str(self.path), "20"],
+                stderr=self.err_fh)
+            time.sleep(1)
+        return self
+
+    def __exit__(self, *exc):
+        if self.proc is None:
+            return
+        self.proc.terminate()
+        self.proc.wait(timeout=10)
+        self.err_fh.close()
+        samples = max(len(self.path.read_text().splitlines()) - 1, 0) if self.path.exists() else 0
+        error = self.err.read_text(encoding="utf-8").strip().splitlines()
+        self.log(f"gpu clock log: {samples} samples" + (f" | ERROR: {error[-1]}" if error else ""))
+
+
+_order = 0
+
+
 def make_row(exp, impl, device, threads, size, stats, warmup, repeat, flops, nbytes, machine):
+    global _order
+    _order += 1
     seconds = stats["mean_ms"] / 1000.0
     return {
         "exp": exp,
@@ -99,6 +169,7 @@ def make_row(exp, impl, device, threads, size, stats, warmup, repeat, flops, nby
         "repeats": repeat,
         "gflops": round(flops / seconds / 1e9, 3) if flops else "",
         "gbps": round(nbytes / seconds / 1e9, 3) if nbytes else "",
+        "order": _order,
         "machine": machine,
         "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
@@ -148,6 +219,7 @@ def env_info(machine):
         "mkl": torch.backends.mkl.is_available(),
         "mkldnn": torch.backends.mkldnn.is_available(),
         "cuda_available": torch.cuda.is_available(),
+        "malloc_env": {k: v for k, v in os.environ.items() if k.startswith("MALLOC_")},
     }
     if torch.cuda.is_available():
         props = torch.cuda.get_device_properties(0)

@@ -4,7 +4,8 @@
     python run_all.py --machine kaggle            # same on Kaggle (CPU + GPU)
     python run_all.py --machine laptop --quick    # smoke test, a few seconds
 
-Output: <outdir>/<machine>/<tag>/{env.json, conv.csv, fc.csv, log.txt}
+Output: <outdir>/<machine>/<tag>/{env.json, conv.csv, fc.csv, log.txt}, plus gpu_clocks.csv
+when a GPU is measured (NVML, every 20 ms).
 outdir defaults to ../results, or /kaggle/working/results on Kaggle (input is read-only).
 Then plot with:  python plot.py <that run folder>
 """
@@ -15,7 +16,8 @@ from pathlib import Path
 
 import bench_conv
 import bench_fc
-from common import ROOT, available_devices, env_info, parse_ints, resolve_threads, write_json
+from common import (ROOT, GpuClockLog, available_devices, env_info, parse_ints, resolve_threads,
+                    write_json)
 
 QUICK = {
     "batches": "1,4,8",
@@ -45,6 +47,9 @@ def main():
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--repeat", type=int, default=10)
     parser.add_argument("--skip", default="", help="comma list: conv,fc")
+    parser.add_argument("--order-seed", type=int, default=0, help="0 = ascending sizes, else shuffled")
+    parser.add_argument("--warm-seconds", type=float, default=5,
+                        help="GPU busy time before each implementation/op (0 = cold)")
     parser.add_argument("--quick", action="store_true", help="tiny grid for a smoke test")
     args = parser.parse_args()
 
@@ -72,13 +77,17 @@ def main():
     skip = set(filter(None, args.skip.split(",")))
     start = time.perf_counter()
     for device in args.devices.split(","):
-        if "conv" not in skip:
-            bench_conv.run(device, threads, list(bench_conv.IMPLS), parse_ints(args.batches),
-                           args.warmup, args.repeat, args.machine, run_dir / "conv.csv", log)
-        if "fc" not in skip:
-            sizes = {"matvec": parse_ints(args.matvec_sizes), "gemm": parse_ints(args.gemm_sizes)}
-            bench_fc.run(device, threads, list(bench_fc.OPS), sizes,
-                         args.warmup, args.repeat, args.machine, run_dir / "fc.csv", log)
+        # The sampler only runs during GPU work, so it cannot disturb the CPU timings.
+        with GpuClockLog(run_dir / "gpu_clocks.csv", device == "cuda", log):
+            if "conv" not in skip:
+                bench_conv.run(device, threads, list(bench_conv.IMPLS), parse_ints(args.batches),
+                               args.warmup, args.repeat, args.machine, run_dir / "conv.csv", log,
+                               args.order_seed, args.warm_seconds)
+            if "fc" not in skip:
+                sizes = {"matvec": parse_ints(args.matvec_sizes), "gemm": parse_ints(args.gemm_sizes)}
+                bench_fc.run(device, threads, list(bench_fc.OPS), sizes,
+                             args.warmup, args.repeat, args.machine, run_dir / "fc.csv", log,
+                             args.order_seed, args.warm_seconds)
     log(f"done in {time.perf_counter() - start:.1f} s -> {run_dir}")
     log_file.close()
 
