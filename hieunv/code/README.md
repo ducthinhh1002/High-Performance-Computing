@@ -10,6 +10,8 @@
 | `gpu_sampler.py`, `gpu_diag.py` | NVML clock log during GPU work; wall vs host issue time vs SM clock table |
 | `plot.py` | Fig 1–6 + `summary.md` / `summary.csv` for one run or an aggregated folder (error bars) |
 | `analyze.py` | stage 5: compares the official runs with the paper's digitized figures, writes `../results/analysis` (tables, Fig 7–9) |
+| `bench_mem.py` | extra checks (PREDICTIONS.md): memory bandwidth with STREAM-like kernels, FC with B vectors, conv split into im2col/GEMM |
+| `make_bandwidth_notebook.py` | builds `../kaggle/hpc_bandwidth_kaggle.ipynb` for `bench_mem.py` (3 runs, about 10 minutes) |
 
 Every benchmark first checks that its implementations agree (caffe and batched vs conv2d,
 matvec/gemm vs float64), so a wrong kernel is never timed.
@@ -49,5 +51,17 @@ outdir is `../results` locally and `/kaggle/working/results` on Kaggle.
 - Data already on the device; host↔GPU copies are not timed (the paper times forward only).
 - float32, TF32 disabled on GPU (the paper's GPU had plain FP32 only).
 - CPU baseline is 1 thread (the paper's abstract says "single core CPU"); `max` threads is an extension.
+
+## Bandwidth checks (separate from the paper's runs)
+
+Predictions are in `../PREDICTIONS.md`, written before any run. Laptop smoke test and one full run:
+
+```powershell
+python bench_mem.py --machine laptop --quick
+python bench_mem.py --machine laptop
+```
+
+Kaggle: import `../kaggle/hpc_bandwidth_kaggle.ipynb` (Settings -> Accelerator GPU T4 x2, Run All, about 10 minutes),
+download `results_bandwidth.zip` into `results\kaggle\`. A run folder has `bw.csv`, `fcb.csv`, `step.csv`, `env.json`, `gpu_clocks.csv`.
 
 Useful flags: `--threads 1,4,max`, `--batches 1,8,64`, `--skip fc`, `--devices cpu`, `--repeat 20`.
