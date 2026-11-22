@@ -1,0 +1,322 @@
+WAVE=6 QUICK=1 RUN_ID=20261121T235045Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### E7
+  variant=base, precision=fp32, batch=32, step_s=0.007249, fwd_s=0.002476, bwd_s=0.003117, opt_s=0.001603, img_s=4414
+  variant=base, precision=bf16, batch=32, step_s=0.008644, fwd_s=0.001431, bwd_s=0.005542, opt_s=0.0016, img_s=3702
+  variant=no_avgpool, precision=fp32, batch=32, step_s=0.005006, fwd_s=0.001939, bwd_s=0.002608, opt_s=0.0004004, img_s=6392
+  variant=no_avgpool, precision=bf16, batch=32, step_s=0.003112, fwd_s=0.0009934, bwd_s=0.001582, opt_s=0.0004964, img_s=1.028e+04
+  variant=channels_last, precision=fp32, batch=32, step_s=0.007885, fwd_s=0.002842, bwd_s=0.003379, opt_s=0.001599, img_s=4058
+  variant=channels_last, precision=bf16, batch=32, step_s=0.00424, fwd_s=0.001188, bwd_s=0.001406, opt_s=0.0016, img_s=7548
+  variant=base, precision=pure_bf16, batch=32, step_s=0.007011, fwd_s=0.0008591, bwd_s=0.005236, opt_s=0.000894, img_s=4564
+  variant=resnet18, precision=fp32, batch=32, step_s=0.007102, fwd_s=0.003023, bwd_s=0.003857, opt_s=0.0001446, img_s=4506
+  variant=resnet18, precision=bf16, batch=32, step_s=0.003947, fwd_s=0.001572, bwd_s=0.002224, opt_s=0.0001742, img_s=8107
+  variant=base, precision=fp32, rank=1, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.17, calls=14
+  variant=base, precision=fp32, rank=2, kernel=void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, , self_cuda_ms=0.84, calls=7
+  variant=base, precision=fp32, rank=3, kernel=sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_aligna4_align, self_cuda_ms=0.832, calls=6
+  variant=base, precision=fp32, rank=4, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_128x64_8x5_tn_align1>(cutlass_80_simt_sgemm_128x64_8x5_tn_align1::Params), self_cuda_ms=0.4883, calls=1
+  variant=base, precision=fp32, rank=5, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.4007, calls=7
+  variant=base, precision=fp32, rank=6, kernel=sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align, self_cuda_ms=0.3704, calls=6
+  variant=base, precision=fp32, rank=7, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_nt_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel__5x_cubla, self_cuda_ms=0.3231, calls=4
+  variant=base, precision=fp32, rank=8, kernel=sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align, self_cuda_ms=0.2765, calls=3
+  variant=base, precision=fp32, rank=9, kernel=void pointwise_mult_and_sum_complex<float2, 8, 4>(float2*, float2*, float2*, int, int, int, int, int, float2), self_cuda_ms=0.2096, calls=1
+  variant=base, precision=fp32, rank=10, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x128x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl, self_cuda_ms=0.2044, calls=1
+  variant=base, precision=fp32, rank=11, kernel=void sgemm_largek_lds64<true, false, 5, 5, 4, 4, 4, 34>(float*, float const*, float const*, int, int, int, int, int, int, self_cuda_ms=0.1348, calls=2
+  variant=base, precision=fp32, rank=12, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_128x32_8x5_nt_align1>(cutlass_80_simt_sgemm_128x32_8x5_nt_align1::Params), self_cuda_ms=0.1219, calls=4
+  variant=base, precision=bf16, rank=1, kernel=void at::native::(anonymous namespace)::atomic_adaptive_average_gradinput<c10::BFloat16>(c10::BFloat16*, c10::BFloat16 c, self_cuda_ms=3.776, calls=1
+  variant=base, precision=bf16, rank=2, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.162, calls=14
+  variant=base, precision=bf16, rank=3, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.5004, calls=34
+  variant=base, precision=bf16, rank=4, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.4735, calls=33
+  variant=base, precision=bf16, rank=5, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.4022, calls=7
+  variant=base, precision=bf16, rank=6, kernel=void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType, self_cuda_ms=0.3386, calls=72
+  variant=base, precision=bf16, rank=7, kernel=void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType, self_cuda_ms=0.1675, calls=36
+  variant=base, precision=bf16, rank=8, kernel=void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:, self_cuda_ms=0.1013, calls=13
+  variant=base, precision=bf16, rank=9, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_nt_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.0965, calls=2
+  variant=base, precision=bf16, rank=10, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize64x64x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.09451, calls=2
+  variant=base, precision=bf16, rank=11, kernel=sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize64x64x64_warpgroupsize1x1x1_g1_execute_segment_, self_cuda_ms=0.0916, calls=8
+  variant=base, precision=bf16, rank=12, kernel=sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute_segment, self_cuda_ms=0.08365, calls=5
+  variant=no_avgpool, precision=bf16, rank=1, kernel=void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType, self_cuda_ms=0.3379, calls=72
+  variant=no_avgpool, precision=bf16, rank=2, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.2894, calls=4
+  variant=no_avgpool, precision=bf16, rank=3, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.2044, calls=34
+  variant=no_avgpool, precision=bf16, rank=4, kernel=void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType, self_cuda_ms=0.1669, calls=36
+  variant=no_avgpool, precision=bf16, rank=5, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.1629, calls=33
+  variant=no_avgpool, precision=bf16, rank=6, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.1012, calls=2
+  variant=no_avgpool, precision=bf16, rank=7, kernel=void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:, self_cuda_ms=0.101, calls=13
+  variant=no_avgpool, precision=bf16, rank=8, kernel=sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize64x64x64_warpgroupsize1x1x1_g1_execute_segment_, self_cuda_ms=0.09174, calls=8
+  variant=no_avgpool, precision=bf16, rank=9, kernel=sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute_segment, self_cuda_ms=0.08356, calls=5
+  variant=no_avgpool, precision=bf16, rank=10, kernel=void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, , self_cuda_ms=0.08066, calls=5
+  variant=no_avgpool, precision=bf16, rank=11, kernel=void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16, self_cuda_ms=0.0567, calls=13
+  variant=no_avgpool, precision=bf16, rank=12, kernel=sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execut, self_cuda_ms=0.05037, calls=5
+  variant=channels_last, precision=fp32, rank=1, kernel=void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, , self_cuda_ms=2.873, calls=12
+  variant=channels_last, precision=fp32, rank=2, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.163, calls=14
+  variant=channels_last, precision=fp32, rank=3, kernel=void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, , self_cuda_ms=1, calls=9
+  variant=channels_last, precision=fp32, rank=4, kernel=sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_aligna4_align, self_cuda_ms=0.6644, calls=6
+  variant=channels_last, precision=fp32, rank=5, kernel=void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con, self_cuda_ms=0.5018, calls=3
+  variant=channels_last, precision=fp32, rank=6, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_128x64_8x5_tn_align1>(cutlass_80_simt_sgemm_128x64_8x5_tn_align1::Params), self_cuda_ms=0.4931, calls=1
+  variant=channels_last, precision=fp32, rank=7, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.3992, calls=7
+  variant=channels_last, precision=fp32, rank=8, kernel=void cudnn::engines_precompiled::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::eng, self_cuda_ms=0.3261, calls=60
+  variant=channels_last, precision=fp32, rank=9, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_nt_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel__5x_cubla, self_cuda_ms=0.3243, calls=4
+  variant=channels_last, precision=fp32, rank=10, kernel=sm80_xmma_wgrad_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_execu, self_cuda_ms=0.2745, calls=6
+  variant=channels_last, precision=fp32, rank=11, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x128x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl, self_cuda_ms=0.2062, calls=1
+  variant=channels_last, precision=fp32, rank=12, kernel=sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize32x32x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu, self_cuda_ms=0.2007, calls=8
+  variant=channels_last, precision=bf16, rank=1, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.157, calls=14
+  variant=channels_last, precision=bf16, rank=2, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.5028, calls=34
+  variant=channels_last, precision=bf16, rank=3, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.4732, calls=33
+  variant=channels_last, precision=bf16, rank=4, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.4004, calls=7
+  variant=channels_last, precision=bf16, rank=5, kernel=void at::native::reduce_kernel<128, 4, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:, self_cuda_ms=0.1456, calls=15
+  variant=channels_last, precision=bf16, rank=6, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_nt_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.09674, calls=2
+  variant=channels_last, precision=bf16, rank=7, kernel=sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize64x64x64_warpgroupsize1x1x1_g1_execute_segment_, self_cuda_ms=0.0954, calls=8
+  variant=channels_last, precision=bf16, rank=8, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize64x64x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.0949, calls=2
+  variant=channels_last, precision=bf16, rank=9, kernel=sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute_segment, self_cuda_ms=0.08427, calls=5
+  variant=channels_last, precision=bf16, rank=10, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_nn_n_tilesize64x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.08097, calls=1
+  variant=channels_last, precision=bf16, rank=11, kernel=void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16, self_cuda_ms=0.05351, calls=13
+  variant=channels_last, precision=bf16, rank=12, kernel=sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execut, self_cuda_ms=0.05107, calls=5
+
+----- BEGIN FILE e7_kernels.csv -----
+variant,precision,rank,kernel,self_cuda_ms,calls
+base,fp32,1,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1701418000000015,14
+base,fp32,2,"void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, ",0.8400070000000041,7
+base,fp32,3,sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_aligna4_align,0.8319874,6
+base,fp32,4,void cutlass::Kernel2<cutlass_80_simt_sgemm_128x64_8x5_tn_align1>(cutlass_80_simt_sgemm_128x64_8x5_tn_align1::Params),0.4883351999999995,1
+base,fp32,5,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.4006821999999971,7
+base,fp32,6,sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.3704289999999997,6
+base,fp32,7,sm80_xmma_gemm_f32f32_f32f32_f32_nt_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel__5x_cubla,0.32307579999999836,4
+base,fp32,8,sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.27653539999999865,3
+base,fp32,9,"void pointwise_mult_and_sum_complex<float2, 8, 4>(float2*, float2*, float2*, int, int, int, int, int, float2)",0.20956679999999928,1
+base,fp32,10,sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x128x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl,0.20440179999999963,1
+base,fp32,11,"void sgemm_largek_lds64<true, false, 5, 5, 4, 4, 4, 34>(float*, float const*, float const*, int, int, int, int, int, int",0.13483460000000005,2
+base,fp32,12,void cutlass::Kernel2<cutlass_80_simt_sgemm_128x32_8x5_nt_align1>(cutlass_80_simt_sgemm_128x32_8x5_nt_align1::Params),0.12188700000000081,4
+base,bf16,1,"void at::native::(anonymous namespace)::atomic_adaptive_average_gradinput<c10::BFloat16>(c10::BFloat16*, c10::BFloat16 c",3.7764391999999996,1
+base,bf16,2,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1618669999999973,14
+base,bf16,3,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.5004062000000027,34
+base,bf16,4,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.4735184000000029,33
+base,bf16,5,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.4022306000000011,7
+base,bf16,6,"void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType",0.3385607999999998,72
+base,bf16,7,"void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType",0.1675128000000047,36
+base,bf16,8,"void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.10133080000000301,13
+base,bf16,9,sm90_xmma_gemm_bf16bf16_bf16f32_f32_nt_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.09649840000000122,2
+base,bf16,10,sm90_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize64x64x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.0945083999999998,2
+base,bf16,11,sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize64x64x64_warpgroupsize1x1x1_g1_execute_segment_,0.09160340000000179,8
+base,bf16,12,sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute_segment,0.08365400000000081,5
+no_avgpool,bf16,1,"void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType",0.33794859999999793,72
+no_avgpool,bf16,2,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.2893735999999995,4
+no_avgpool,bf16,3,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.2043814000000034,34
+no_avgpool,bf16,4,"void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType",0.16690399999999783,36
+no_avgpool,bf16,5,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.1629418000000013,33
+no_avgpool,bf16,6,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.10117700000000004,2
+no_avgpool,bf16,7,"void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.10096519999999956,13
+no_avgpool,bf16,8,sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize64x64x64_warpgroupsize1x1x1_g1_execute_segment_,0.09173720000000085,8
+no_avgpool,bf16,9,sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute_segment,0.08356459999999948,5
+no_avgpool,bf16,10,"void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, ",0.08066479999999947,5
+no_avgpool,bf16,11,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.0567036000000006,13
+no_avgpool,bf16,12,sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execut,0.05037420000000038,5
+channels_last,fp32,1,"void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, ",2.8729497999999984,12
+channels_last,fp32,2,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.163191000000001,14
+channels_last,fp32,3,"void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, ",1.0000495999999983,9
+channels_last,fp32,4,sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_aligna4_align,0.6643789999999972,6
+channels_last,fp32,5,"void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con",0.5018006000000002,3
+channels_last,fp32,6,void cutlass::Kernel2<cutlass_80_simt_sgemm_128x64_8x5_tn_align1>(cutlass_80_simt_sgemm_128x64_8x5_tn_align1::Params),0.49312259999999924,1
+channels_last,fp32,7,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.39922879999999966,7
+channels_last,fp32,8,"void cudnn::engines_precompiled::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::eng",0.3260790000000073,60
+channels_last,fp32,9,sm80_xmma_gemm_f32f32_f32f32_f32_nt_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel__5x_cubla,0.3243238000000014,4
+channels_last,fp32,10,sm80_xmma_wgrad_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_execu,0.27453900000000064,6
+channels_last,fp32,11,sm80_xmma_gemm_f32f32_f32f32_f32_nn_n_tilesize32x128x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl,0.20621320000000032,1
+channels_last,fp32,12,sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize32x32x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,0.20072180000000092,8
+channels_last,bf16,1,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1569632000000003,14
+channels_last,bf16,2,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.5028051999999988,34
+channels_last,bf16,3,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.4732438000000031,33
+channels_last,bf16,4,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.4003550000000007,7
+channels_last,bf16,5,"void at::native::reduce_kernel<128, 4, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.14559860000000363,15
+channels_last,bf16,6,sm90_xmma_gemm_bf16bf16_bf16f32_f32_nt_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.09673540000000048,2
+channels_last,bf16,7,sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize64x64x64_warpgroupsize1x1x1_g1_execute_segment_,0.09539759999999951,8
+channels_last,bf16,8,sm90_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize64x64x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.09489860000000025,2
+channels_last,bf16,9,sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute_segment,0.08426840000000016,5
+channels_last,bf16,10,sm90_xmma_gemm_bf16bf16_bf16f32_f32_nn_n_tilesize64x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.0809720000000003,1
+channels_last,bf16,11,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.053509799999999816,13
+channels_last,bf16,12,sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execut,0.051065199999999276,5
+----- END FILE e7_kernels.csv -----
+
+----- BEGIN FILE e7_steps.csv -----
+variant,precision,batch,step_s,fwd_s,bwd_s,opt_s,img_s
+base,fp32,32,0.007248899899423122,0.0024764319896697995,0.0031174272060394284,0.0016034144282341006,4414.462945273476
+base,bf16,32,0.008644146844744682,0.0014307487964630126,0.0055423936367034925,0.0016004607915878297,3701.926930990859
+no_avgpool,fp32,32,0.005005986429750919,0.0019392320156097413,0.002608179211616516,0.0004003616005182266,6392.346533306965
+no_avgpool,bf16,32,0.0031124544329941273,0.000993372792005539,0.0015819135904312134,0.0004964287996292114,10281.2750158776
+channels_last,fp32,32,0.00788547983393073,0.002842368006706238,0.0033790368318557737,0.0015989503860473632,4058.09166644571
+channels_last,bf16,32,0.004239597357809544,0.0011884608149528503,0.0014060992121696474,0.0015998496055603026,7547.886579619277
+base,pure_bf16,32,0.00701134093105793,0.0008591327965259552,0.005236236763000488,0.0008940479934215545,4564.034228923392
+resnet18,fp32,32,0.007101533468812704,0.0030227296113967896,0.003856643199920654,0.00014464959800243376,4506.0690258705545
+resnet18,bf16,32,0.003947040997445583,0.0015724928021430967,0.0022237823724746706,0.00017417920231819152,8107.339148670997
+----- END FILE e7_steps.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E7",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-quick-fwt88",
+    "time_utc": "2026-11-21T23:50:48Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "quick": true
+}
+----- END FILE meta.json -----
+##### E6 W=12,16
+=== resnet18_cifar W=1
+  model=resnet18_cifar, extra_ms=0, workers=1, gpus=4, total_updates=8, wall_s=0.7444, updates_per_s=10.75, T_ms_median=30.47, tau_ms_mean=5.367, P_pred=5.678, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.1
+=== resnet18_cifar W=2
+  model=resnet18_cifar, extra_ms=0, workers=2, gpus=4, total_updates=8, wall_s=0.6071, updates_per_s=13.18, T_ms_median=32.22, tau_ms_mean=3.712, P_pred=8.681, stale_mean=0.75, stale_p50=1, stale_p95=2, stale_max=2, test_acc=0.1162
+
+----- BEGIN FILE downpour.csv -----
+model,extra_ms,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,0.0,1,4,8,0.744406133890152,10.746821708995371,30.473084654659033,5.367195582948625,5.6776549659324616,0,0,0,0,0.1
+resnet18_cifar,0.0,2,4,8,0.6070518437772989,13.178446094852575,32.222336158156395,3.7117337342351675,8.681208961988235,0.75,1,2,2,0.1162
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-quick-fwt88",
+    "time_utc": "2026-11-21T23:51:08Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": true,
+    "models": "resnet18_cifar",
+    "workers": "1,2",
+    "updates": 8,
+    "batch": 8,
+    "lr": 0.02,
+    "server_threads": 4,
+    "tau_extra_ms": 0.0
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+##### E6 tau-extra=10ms
+=== resnet18_cifar W=1
+  model=resnet18_cifar, extra_ms=10, workers=1, gpus=4, total_updates=8, wall_s=0.8367, updates_per_s=9.561, T_ms_median=31.68, tau_ms_mean=14.21, P_pred=2.23, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.1
+=== resnet18_cifar W=2
+  model=resnet18_cifar, extra_ms=10, workers=2, gpus=4, total_updates=8, wall_s=0.5791, updates_per_s=13.82, T_ms_median=32.09, tau_ms_mean=13.26, P_pred=2.421, stale_mean=0.875, stale_p50=1, stale_p95=1, stale_max=1, test_acc=0.111
+
+----- BEGIN FILE downpour.csv -----
+model,extra_ms,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,10.0,1,4,8,0.8367419233545661,9.560893002620631,31.679398845881224,14.208229258656502,2.2296514413701654,0,0,0,0,0.1
+resnet18_cifar,10.0,2,4,8,0.5790736945345998,13.815167353491306,32.09407161921263,13.256865669973195,2.420939641253642,0.875,1,1,1,0.111
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-quick-fwt88",
+    "time_utc": "2026-11-21T23:51:24Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": true,
+    "models": "resnet18_cifar",
+    "workers": "1,2",
+    "updates": 8,
+    "batch": 8,
+    "lr": 0.02,
+    "server_threads": 4,
+    "tau_extra_ms": 10.0
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+##### E6 tau-extra=30ms
+=== resnet18_cifar W=1
+  model=resnet18_cifar, extra_ms=30, workers=1, gpus=4, total_updates=8, wall_s=0.8984, updates_per_s=8.905, T_ms_median=26.67, tau_ms_mean=33.9, P_pred=0.7869, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.1
+=== resnet18_cifar W=2
+  model=resnet18_cifar, extra_ms=30, workers=2, gpus=4, total_updates=8, wall_s=0.8, updates_per_s=10, T_ms_median=30.87, tau_ms_mean=33.84, P_pred=0.9122, stale_mean=0.875, stale_p50=1, stale_p95=1, stale_max=1, test_acc=0.1187
+
+----- BEGIN FILE downpour.csv -----
+model,extra_ms,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,30.0,1,4,8,0.8983734976500273,8.904982193849735,26.674519758671522,33.89998897910118,0.7868592457394589,0,0,0,0,0.1
+resnet18_cifar,30.0,2,4,8,0.7999512189999223,10.00060979968427,30.870971735566854,33.84074429050088,0.91224269391239,0.875,1,1,1,0.1187
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-quick-fwt88",
+    "time_utc": "2026-11-21T23:51:42Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": true,
+    "models": "resnet18_cifar",
+    "workers": "1,2",
+    "updates": 8,
+    "batch": 8,
+    "lr": 0.02,
+    "server_threads": 4,
+    "tau_extra_ms": 30.0
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+WAVE6 FINISHED rc=0

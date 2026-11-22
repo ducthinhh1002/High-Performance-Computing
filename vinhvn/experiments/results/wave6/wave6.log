@@ -1,0 +1,388 @@
+WAVE=6 QUICK=0 RUN_ID=20261122T003155Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### E7
+  variant=base, precision=fp32, batch=32, step_s=0.007246, fwd_s=0.002468, bwd_s=0.003102, opt_s=0.001603, img_s=4416
+  variant=base, precision=fp32, batch=128, step_s=0.01534, fwd_s=0.005966, bwd_s=0.0077, opt_s=0.001592, img_s=8343
+  variant=base, precision=fp32, batch=512, step_s=0.04834, fwd_s=0.01659, bwd_s=0.02998, opt_s=0.001596, img_s=1.059e+04
+  variant=base, precision=bf16, batch=32, step_s=0.008624, fwd_s=0.00139, bwd_s=0.005542, opt_s=0.001599, img_s=3711
+  variant=base, precision=bf16, batch=128, step_s=0.0214, fwd_s=0.001782, bwd_s=0.01795, opt_s=0.001597, img_s=5983
+  variant=base, precision=bf16, batch=512, step_s=0.0694, fwd_s=0.003829, bwd_s=0.06382, opt_s=0.001593, img_s=7377
+  variant=no_avgpool, precision=fp32, batch=32, step_s=0.004997, fwd_s=0.001959, bwd_s=0.002589, opt_s=0.0003988, img_s=6404
+  variant=no_avgpool, precision=fp32, batch=128, step_s=0.01197, fwd_s=0.005119, bwd_s=0.006376, opt_s=0.0003983, img_s=1.069e+04
+  variant=no_avgpool, precision=fp32, batch=512, step_s=0.04021, fwd_s=0.01414, bwd_s=0.02557, opt_s=0.0003978, img_s=1.273e+04
+  variant=no_avgpool, precision=bf16, batch=32, step_s=0.003082, fwd_s=0.0009737, bwd_s=0.001566, opt_s=0.0004908, img_s=1.038e+04
+  variant=no_avgpool, precision=bf16, batch=128, step_s=0.003793, fwd_s=0.001203, bwd_s=0.002109, opt_s=0.0003995, img_s=3.375e+04
+  variant=no_avgpool, precision=bf16, batch=512, step_s=0.008024, fwd_s=0.002712, bwd_s=0.004784, opt_s=0.0003976, img_s=6.381e+04
+  variant=channels_last, precision=fp32, batch=32, step_s=0.007921, fwd_s=0.00285, bwd_s=0.003399, opt_s=0.001599, img_s=4040
+  variant=channels_last, precision=fp32, batch=128, step_s=0.01579, fwd_s=0.005581, bwd_s=0.008533, opt_s=0.001596, img_s=8108
+  variant=channels_last, precision=fp32, batch=512, step_s=0.05103, fwd_s=0.0173, bwd_s=0.03203, opt_s=0.001598, img_s=1.003e+04
+  variant=channels_last, precision=bf16, batch=32, step_s=0.004237, fwd_s=0.001182, bwd_s=0.001399, opt_s=0.001597, img_s=7553
+  variant=channels_last, precision=bf16, batch=128, step_s=0.005011, fwd_s=0.001348, bwd_s=0.001998, opt_s=0.001597, img_s=2.554e+04
+  variant=channels_last, precision=bf16, batch=512, step_s=0.008151, fwd_s=0.002611, bwd_s=0.003886, opt_s=0.0016, img_s=6.281e+04
+  variant=base, precision=pure_bf16, batch=32, step_s=0.007101, fwd_s=0.0008161, bwd_s=0.005385, opt_s=0.0008942, img_s=4506
+  variant=base, precision=pure_bf16, batch=128, step_s=0.01974, fwd_s=0.001216, bwd_s=0.01739, opt_s=0.0008925, img_s=6483
+  variant=base, precision=pure_bf16, batch=512, step_s=0.06756, fwd_s=0.003242, bwd_s=0.06335, opt_s=0.000886, img_s=7578
+  variant=resnet18, precision=fp32, batch=32, step_s=0.00712, fwd_s=0.003013, bwd_s=0.003859, opt_s=0.0001447, img_s=4494
+  variant=resnet18, precision=fp32, batch=128, step_s=0.02146, fwd_s=0.00973, bwd_s=0.01155, opt_s=0.0001409, img_s=5965
+  variant=resnet18, precision=fp32, batch=512, step_s=0.07435, fwd_s=0.02425, bwd_s=0.04973, opt_s=0.0001396, img_s=6886
+  variant=resnet18, precision=bf16, batch=32, step_s=0.003923, fwd_s=0.001558, bwd_s=0.002128, opt_s=0.0001859, img_s=8157
+  variant=resnet18, precision=bf16, batch=128, step_s=0.006711, fwd_s=0.002409, bwd_s=0.004051, opt_s=0.0001427, img_s=1.907e+04
+  variant=resnet18, precision=bf16, batch=512, step_s=0.0221, fwd_s=0.008361, bwd_s=0.01349, opt_s=0.0001393, img_s=2.317e+04
+  variant=base, precision=fp32, rank=1, kernel=void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, , self_cuda_ms=8.995, calls=16
+  variant=base, precision=fp32, rank=2, kernel=sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu, self_cuda_ms=3.334, calls=9
+  variant=base, precision=fp32, rank=3, kernel=void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con, self_cuda_ms=2.19, calls=4
+  variant=base, precision=fp32, rank=4, kernel=void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, , self_cuda_ms=2.105, calls=2
+  variant=base, precision=fp32, rank=5, kernel=void pointwise_mult_and_sum_complex<float2, 8, 4>(float2*, float2*, float2*, int, int, int, int, int, float2), self_cuda_ms=1.636, calls=1
+  variant=base, precision=fp32, rank=6, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize128x64x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl, self_cuda_ms=1.368, calls=1
+  variant=base, precision=fp32, rank=7, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nt_align1>(cutlass_80_simt_sgemm_256x128_8x4_nt_align1::Params), self_cuda_ms=1.277, calls=2
+  variant=base, precision=fp32, rank=8, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(cutlass_80_simt_sgemm_256x128_8x4_nn_align1::Params), self_cuda_ms=1.231, calls=2
+  variant=base, precision=fp32, rank=9, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.163, calls=14
+  variant=base, precision=fp32, rank=10, kernel=sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align, self_cuda_ms=0.9814, calls=4
+  variant=base, precision=fp32, rank=11, kernel=sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu, self_cuda_ms=0.7405, calls=5
+  variant=base, precision=fp32, rank=12, kernel=sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align, self_cuda_ms=0.6975, calls=4
+  variant=base, precision=bf16, rank=1, kernel=void at::native::(anonymous namespace)::atomic_adaptive_average_gradinput<c10::BFloat16>(c10::BFloat16*, c10::BFloat16 c, self_cuda_ms=29.36, calls=1
+  variant=base, precision=bf16, rank=2, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.171, calls=14
+  variant=base, precision=bf16, rank=3, kernel=void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType, self_cuda_ms=0.7846, calls=74
+  variant=base, precision=bf16, rank=4, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.5084, calls=34
+  variant=base, precision=bf16, rank=5, kernel=void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, , self_cuda_ms=0.5082, calls=5
+  variant=base, precision=bf16, rank=6, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.4794, calls=33
+  variant=base, precision=bf16, rank=7, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.3975, calls=7
+  variant=base, precision=bf16, rank=8, kernel=void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType, self_cuda_ms=0.3658, calls=37
+  variant=base, precision=bf16, rank=9, kernel=void at::native::(anonymous namespace)::adaptive_average_pool<c10::BFloat16>(c10::BFloat16 const*, c10::BFloat16*, int, , self_cuda_ms=0.3273, calls=1
+  variant=base, precision=bf16, rank=10, kernel=void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:, self_cuda_ms=0.2606, calls=13
+  variant=base, precision=bf16, rank=11, kernel=void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16, self_cuda_ms=0.2263, calls=13
+  variant=base, precision=bf16, rank=12, kernel=void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,, self_cuda_ms=0.1507, calls=15
+  variant=no_avgpool, precision=bf16, rank=1, kernel=void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType, self_cuda_ms=0.784, calls=74
+  variant=no_avgpool, precision=bf16, rank=2, kernel=void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, , self_cuda_ms=0.5086, calls=5
+  variant=no_avgpool, precision=bf16, rank=3, kernel=void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType, self_cuda_ms=0.3659, calls=37
+  variant=no_avgpool, precision=bf16, rank=4, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.2891, calls=4
+  variant=no_avgpool, precision=bf16, rank=5, kernel=void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:, self_cuda_ms=0.262, calls=13
+  variant=no_avgpool, precision=bf16, rank=6, kernel=void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16, self_cuda_ms=0.2262, calls=13
+  variant=no_avgpool, precision=bf16, rank=7, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.2106, calls=34
+  variant=no_avgpool, precision=bf16, rank=8, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.168, calls=33
+  variant=no_avgpool, precision=bf16, rank=9, kernel=void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,, self_cuda_ms=0.1508, calls=15
+  variant=no_avgpool, precision=bf16, rank=10, kernel=sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen, self_cuda_ms=0.1463, calls=5
+  variant=no_avgpool, precision=bf16, rank=11, kernel=sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen, self_cuda_ms=0.1366, calls=5
+  variant=no_avgpool, precision=bf16, rank=12, kernel=sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute, self_cuda_ms=0.1145, calls=3
+  variant=channels_last, precision=fp32, rank=1, kernel=void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, , self_cuda_ms=10.05, calls=20
+  variant=channels_last, precision=fp32, rank=2, kernel=sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu, self_cuda_ms=3.316, calls=8
+  variant=channels_last, precision=fp32, rank=3, kernel=void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con, self_cuda_ms=2.513, calls=5
+  variant=channels_last, precision=fp32, rank=4, kernel=void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, , self_cuda_ms=2.096, calls=2
+  variant=channels_last, precision=fp32, rank=5, kernel=sm80_xmma_wgrad_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_execu, self_cuda_ms=1.988, calls=6
+  variant=channels_last, precision=fp32, rank=6, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize128x64x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl, self_cuda_ms=1.364, calls=1
+  variant=channels_last, precision=fp32, rank=7, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nt_align1>(cutlass_80_simt_sgemm_256x128_8x4_nt_align1::Params), self_cuda_ms=1.271, calls=2
+  variant=channels_last, precision=fp32, rank=8, kernel=sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu, self_cuda_ms=1.257, calls=9
+  variant=channels_last, precision=fp32, rank=9, kernel=void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(cutlass_80_simt_sgemm_256x128_8x4_nn_align1::Params), self_cuda_ms=1.225, calls=2
+  variant=channels_last, precision=fp32, rank=10, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.165, calls=14
+  variant=channels_last, precision=fp32, rank=11, kernel=sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align, self_cuda_ms=0.9042, calls=4
+  variant=channels_last, precision=fp32, rank=12, kernel=sm80_xmma_gemm_f32f32_f32f32_f32_nt_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubla, self_cuda_ms=0.799, calls=2
+  variant=channels_last, precision=bf16, rank=1, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=1.166, calls=14
+  variant=channels_last, precision=bf16, rank=2, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.5091, calls=34
+  variant=channels_last, precision=bf16, rank=3, kernel=void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:, self_cuda_ms=0.4763, calls=33
+  variant=channels_last, precision=bf16, rank=4, kernel=void at::native::reduce_kernel<128, 4, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:, self_cuda_ms=0.4367, calls=15
+  variant=channels_last, precision=bf16, rank=5, kernel=void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<, self_cuda_ms=0.3969, calls=7
+  variant=channels_last, precision=bf16, rank=6, kernel=void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16, self_cuda_ms=0.2078, calls=13
+  variant=channels_last, precision=bf16, rank=7, kernel=void at::native::(anonymous namespace)::max_pool_backward_nhwc<c10::BFloat16, float>(c10::BFloat16 const*, long const*, , self_cuda_ms=0.2001, calls=5
+  variant=channels_last, precision=bf16, rank=8, kernel=sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen, self_cuda_ms=0.1462, calls=5
+  variant=channels_last, precision=bf16, rank=9, kernel=void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,, self_cuda_ms=0.1417, calls=15
+  variant=channels_last, precision=bf16, rank=10, kernel=sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen, self_cuda_ms=0.1358, calls=5
+  variant=channels_last, precision=bf16, rank=11, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_nt_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.1284, calls=2
+  variant=channels_last, precision=bf16, rank=12, kernel=sm90_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas, self_cuda_ms=0.1217, calls=1
+
+----- BEGIN FILE e7_kernels.csv -----
+variant,precision,rank,kernel,self_cuda_ms,calls
+base,fp32,1,"void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, ",8.995058599999997,16
+base,fp32,2,sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,3.3340991999999985,9
+base,fp32,3,"void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con",2.1904255999999944,4
+base,fp32,4,"void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, ",2.105210200000001,2
+base,fp32,5,"void pointwise_mult_and_sum_complex<float2, 8, 4>(float2*, float2*, float2*, int, int, int, int, int, float2)",1.6364259999999962,1
+base,fp32,6,sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize128x64x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl,1.367717400000002,1
+base,fp32,7,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nt_align1>(cutlass_80_simt_sgemm_256x128_8x4_nt_align1::Params),1.2766132000000017,2
+base,fp32,8,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(cutlass_80_simt_sgemm_256x128_8x4_nn_align1::Params),1.2312443999999991,2
+base,fp32,9,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1629617999999957,14
+base,fp32,10,sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.9813772000000016,4
+base,fp32,11,sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,0.7405012000000003,5
+base,fp32,12,sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.6974876,4
+base,bf16,1,"void at::native::(anonymous namespace)::atomic_adaptive_average_gradinput<c10::BFloat16>(c10::BFloat16*, c10::BFloat16 c",29.357460800000002,1
+base,bf16,2,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1708930000000066,14
+base,bf16,3,"void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType",0.7846288000000039,74
+base,bf16,4,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.5084134000000003,34
+base,bf16,5,"void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, ",0.5082274000000049,5
+base,bf16,6,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.47938120000002904,33
+base,bf16,7,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.3975337999999945,7
+base,bf16,8,"void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType",0.36577620000001804,37
+base,bf16,9,"void at::native::(anonymous namespace)::adaptive_average_pool<c10::BFloat16>(c10::BFloat16 const*, c10::BFloat16*, int, ",0.3272559999999961,1
+base,bf16,10,"void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.2605689999999886,13
+base,bf16,11,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.22629619999999423,13
+base,bf16,12,"void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,",0.1507069999999988,15
+no_avgpool,bf16,1,"void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType",0.7840469999999969,74
+no_avgpool,bf16,2,"void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, ",0.5085790000000002,5
+no_avgpool,bf16,3,"void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType",0.36594759999999915,37
+no_avgpool,bf16,4,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.2891312000000014,4
+no_avgpool,bf16,5,"void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.26200139999999855,13
+no_avgpool,bf16,6,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.22624519999999865,13
+no_avgpool,bf16,7,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.2106164000000031,34
+no_avgpool,bf16,8,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.16803179999999493,33
+no_avgpool,bf16,9,"void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,",0.1508462000000002,15
+no_avgpool,bf16,10,sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen,0.14630999999999766,5
+no_avgpool,bf16,11,sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen,0.1366068000000026,5
+no_avgpool,bf16,12,sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute,0.11452700000000049,3
+channels_last,fp32,1,"void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, ",10.050308000000005,20
+channels_last,fp32,2,sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,3.315928399999997,8
+channels_last,fp32,3,"void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con",2.5134696000000014,5
+channels_last,fp32,4,"void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, ",2.0963139999999987,2
+channels_last,fp32,5,sm80_xmma_wgrad_implicit_gemm_indexed_f32f32_f32f32_f32_nhwckrsc_nhwc_tilesize32x32x8_stage3_warpsize1x2x1_g1_ffma_execu,1.987655800000009,6
+channels_last,fp32,6,sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize128x64x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl,1.3636268000000047,1
+channels_last,fp32,7,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nt_align1>(cutlass_80_simt_sgemm_256x128_8x4_nt_align1::Params),1.2706864000000002,2
+channels_last,fp32,8,sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,1.257201600000002,9
+channels_last,fp32,9,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(cutlass_80_simt_sgemm_256x128_8x4_nn_align1::Params),1.2245559999999984,2
+channels_last,fp32,10,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1648892000000066,14
+channels_last,fp32,11,sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.9042305999999899,4
+channels_last,fp32,12,sm80_xmma_gemm_f32f32_f32f32_f32_nt_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubla,0.7989776000000005,2
+channels_last,bf16,1,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.165510600000001,14
+channels_last,bf16,2,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.5091053999999987,34
+channels_last,bf16,3,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.4763368000000067,33
+channels_last,bf16,4,"void at::native::reduce_kernel<128, 4, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.4366942000000015,15
+channels_last,bf16,5,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.3968551999999971,7
+channels_last,bf16,6,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.2078457999999992,13
+channels_last,bf16,7,"void at::native::(anonymous namespace)::max_pool_backward_nhwc<c10::BFloat16, float>(c10::BFloat16 const*, long const*, ",0.2000565999999997,5
+channels_last,bf16,8,sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen,0.14616219999999866,5
+channels_last,bf16,9,"void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,",0.14168899999999984,15
+channels_last,bf16,10,sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen,0.13575580000000068,5
+channels_last,bf16,11,sm90_xmma_gemm_bf16bf16_bf16f32_f32_nt_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.12838300000000036,2
+channels_last,bf16,12,sm90_xmma_gemm_bf16bf16_bf16f32_f32_tn_n_tilesize128x128x64_warpgroupsize1x1x1_execute_segment_k_off_kernel__5x_cublas,0.12166340000000009,1
+----- END FILE e7_kernels.csv -----
+
+----- BEGIN FILE e7_steps.csv -----
+variant,precision,batch,step_s,fwd_s,bwd_s,opt_s,img_s
+base,fp32,32,0.007245644927024841,0.0024678240060806273,0.0031015615701675417,0.0016025727987289428,4416.446061363875
+base,fp32,128,0.015341582708060741,0.005966300868988037,0.007699523210525512,0.001591872000694275,8343.337348939005
+base,fp32,512,0.04833930591121316,0.016590755081176755,0.029980460929870605,0.0015955168128013613,10591.794614105796
+base,bf16,32,0.008623556699603796,0.0013899296164512631,0.005542182397842406,0.001598681616783142,3710.765884042975
+base,bf16,128,0.02139549981802702,0.0017820927858352657,0.017952297782897947,0.0015972607851028442,5982.566478402723
+base,bf16,512,0.06940448936074972,0.0038290175676345822,0.06381883811950684,0.0015931743860244751,7377.044406144008
+no_avgpool,fp32,32,0.004996777046471834,0.001958502388000488,0.0025889663934707645,0.0003988480001688004,6404.12804141318
+no_avgpool,fp32,128,0.011972323525696993,0.005118643236160278,0.006375551939010619,0.0003983199983835221,10691.324848118671
+no_avgpool,fp32,512,0.04020636435598135,0.014142918300628662,0.025573296165466313,0.00039784319698810583,12734.30234743002
+no_avgpool,bf16,32,0.0030819447711110115,0.0009737375974655151,0.0015659584045410156,0.0004908128023147584,10383.054329836128
+no_avgpool,bf16,128,0.0037928642705082893,0.0012027040004730226,0.002109337639808655,0.0003994720041751861,33747.58253156432
+no_avgpool,bf16,512,0.008023695088922977,0.0027122912168502803,0.0047842207431793215,0.0003976319968700409,63810.99908779384
+channels_last,fp32,32,0.007920971605926752,0.0028499711751937867,0.0033988576173782344,0.001599075210094452,4039.9084344724156
+channels_last,fp32,128,0.015786103904247284,0.005581225633621216,0.008533327960968017,0.0015961632013320921,8108.397155903765
+channels_last,fp32,512,0.051030201371759176,0.017300943946838378,0.03203397693634034,0.0015982624173164369,10033.274144266808
+channels_last,bf16,32,0.004236606415361166,0.001182422399520874,0.001398944008350372,0.00159694402217865,7553.215206391089
+channels_last,bf16,128,0.005011012312024832,0.0013478336095809936,0.0019975104093551636,0.0015970175862312318,25543.74087104931
+channels_last,bf16,512,0.008151110261678696,0.00261068480014801,0.003886022400856018,0.0015997120022773741,62813.52890134444
+base,pure_bf16,32,0.007101003080606461,0.0008161088049411774,0.0053846975803375245,0.0008941759884357452,4506.405593231631
+base,pure_bf16,128,0.019743265584111214,0.0012157439827919004,0.017387392044067383,0.0008925056040287018,6483.223327705755
+base,pure_bf16,512,0.06756245298311114,0.0032419424295425416,0.06335032958984375,0.0008860319912433626,7578.173636294507
+resnet18,fp32,32,0.007120373658835888,0.0030133055686950684,0.00385938241481781,0.00014466560035943983,4494.146168900874
+resnet18,fp32,128,0.021459404844790697,0.009729628944396973,0.011549868774414062,0.00014092160016298297,5964.750696759057
+resnet18,fp32,512,0.07435484975576401,0.024252288246154784,0.04973134994506836,0.00013961600065231323,6885.899193956876
+resnet18,bf16,32,0.003923058044165373,0.0015584255933761596,0.0021282399892807004,0.00018594879806041716,8156.9019983256385
+resnet18,bf16,128,0.0067105600610375404,0.0024091327905654907,0.004051308822631836,0.00014270399808883667,19074.413884347163
+resnet18,bf16,512,0.022098476998507977,0.00836111993789673,0.013490220832824706,0.00013927039951086044,23169.01748634391
+----- END FILE e7_steps.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E7",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-htx6x",
+    "time_utc": "2026-11-22T00:31:58Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "quick": false
+}
+----- END FILE meta.json -----
+##### E6 W=12,16
+=== resnet18_cifar W=12
+  model=resnet18_cifar, extra_ms=0, workers=12, gpus=4, total_updates=1596, wall_s=17.78, updates_per_s=89.77, T_ms_median=94.16, tau_ms_mean=7.071, P_pred=13.32, stale_mean=10.62, stale_p50=11, stale_p95=15, stale_max=19, test_acc=0.5226
+=== resnet18_cifar W=16
+  model=resnet18_cifar, extra_ms=0, workers=16, gpus=4, total_updates=1600, wall_s=19.45, updates_per_s=82.28, T_ms_median=117.4, tau_ms_mean=9.86, P_pred=11.9, stale_mean=14.53, stale_p50=15, stale_p95=19, stale_max=28, test_acc=0.4319
+=== vgg16_cifar W=12
+  model=vgg16_cifar, extra_ms=0, workers=12, gpus=4, total_updates=1596, wall_s=80.42, updates_per_s=19.84, T_ms_median=413.4, tau_ms_mean=38.71, P_pred=10.68, stale_mean=10.51, stale_p50=11, stale_p95=13, stale_max=15, test_acc=0.1001
+=== vgg16_cifar W=16
+  model=vgg16_cifar, extra_ms=0, workers=16, gpus=4, total_updates=1600, wall_s=80.99, updates_per_s=19.76, T_ms_median=531, tau_ms_mean=47.82, P_pred=11.1, stale_mean=14.39, stale_p50=15, stale_p95=17, stale_max=19, test_acc=0.1621
+
+----- BEGIN FILE downpour.csv -----
+model,extra_ms,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,0.0,12,4,1596,17.77903915103525,89.76863071405448,94.16409628465772,7.071341309150247,13.316299152865142,10.62468671679198,11,15,19,0.5226
+resnet18_cifar,0.0,16,4,1600,19.44602572079748,82.27902312649951,117.35093872994184,9.86008863139432,11.901610940524293,14.534375,15,19,28,0.4319
+vgg16_cifar,0.0,12,4,1596,80.42397055774927,19.844829706013776,413.3629738353193,38.707516839457,10.679139546713378,10.5062656641604,11,13,15,0.1001
+vgg16_cifar,0.0,16,4,1600,80.98880280833691,19.75581740338181,531.0061774216592,47.81764232146088,11.104817210599697,14.38625,15,17,19,0.1621
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-htx6x",
+    "time_utc": "2026-11-22T00:32:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": false,
+    "models": "resnet18_cifar,vgg16_cifar",
+    "workers": "12,16",
+    "updates": 1600,
+    "batch": 128,
+    "lr": 0.02,
+    "server_threads": 4,
+    "tau_extra_ms": 0.0
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+##### E6 tau-extra=10ms
+=== resnet18_cifar W=1
+  model=resnet18_cifar, extra_ms=10, workers=1, gpus=4, total_updates=1600, wall_s=102.9, updates_per_s=15.55, T_ms_median=43.47, tau_ms_mean=13.96, P_pred=3.114, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.6538
+=== resnet18_cifar W=2
+  model=resnet18_cifar, extra_ms=10, workers=2, gpus=4, total_updates=1600, wall_s=53.3, updates_per_s=30.02, T_ms_median=47.12, tau_ms_mean=12.83, P_pred=3.673, stale_mean=0.9994, stale_p50=1, stale_p95=1, stale_max=1, test_acc=0.6397
+=== resnet18_cifar W=4
+  model=resnet18_cifar, extra_ms=10, workers=4, gpus=4, total_updates=1600, wall_s=27.77, updates_per_s=57.61, T_ms_median=47.69, tau_ms_mean=13.42, P_pred=3.553, stale_mean=2.996, stale_p50=3, stale_p95=3, stale_max=3, test_acc=0.6316
+=== resnet18_cifar W=8
+  model=resnet18_cifar, extra_ms=10, workers=8, gpus=4, total_updates=1600, wall_s=22.27, updates_per_s=71.84, T_ms_median=48.6, tau_ms_mean=13.52, P_pred=3.594, stale_mean=6.974, stale_p50=7, stale_p95=7, stale_max=9, test_acc=0.5386
+=== resnet18_cifar W=12
+  model=resnet18_cifar, extra_ms=10, workers=12, gpus=4, total_updates=1596, wall_s=22.57, updates_per_s=70.72, T_ms_median=48.57, tau_ms_mean=13.75, P_pred=3.531, stale_mean=10.94, stale_p50=11, stale_p95=11, stale_max=15, test_acc=0.4643
+=== resnet18_cifar W=16
+  model=resnet18_cifar, extra_ms=10, workers=16, gpus=4, total_updates=1600, wall_s=21.98, updates_per_s=72.79, T_ms_median=47.74, tau_ms_mean=13.23, P_pred=3.607, stale_mean=14.89, stale_p50=15, stale_p95=15, stale_max=20, test_acc=0.3349
+
+----- BEGIN FILE downpour.csv -----
+model,extra_ms,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,10.0,1,4,1600,102.91565228812397,15.54671193766153,43.47468353807926,13.962076558964327,3.113769169971097,0,0,0,0,0.6538
+resnet18_cifar,10.0,2,4,1600,53.29704695381224,30.02042498501983,47.11551871150732,12.826604853617027,3.6732650026418345,0.999375,1,1,1,0.6397
+resnet18_cifar,10.0,4,4,1600,27.770739161409438,57.61459897413821,47.69064299762249,13.42420383298304,3.5525863277230187,2.99625,3,3,3,0.6316
+resnet18_cifar,10.0,8,4,1600,22.27024254668504,71.84474963152849,48.598355147987604,13.521991830784827,3.5940234069174792,6.97375,7,7,9,0.5386
+resnet18_cifar,10.0,12,4,1596,22.567482450045645,70.72122482128138,48.57114516198635,13.754884726402903,3.5311924547613707,10.943609022556391,11,11,15,0.4643
+resnet18_cifar,10.0,16,4,1600,21.981477357447147,72.78855620038354,47.74196073412895,13.234520169789903,3.607381312025826,14.893125,15,15,20,0.3349
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-htx6x",
+    "time_utc": "2026-11-22T00:37:15Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": false,
+    "models": "resnet18_cifar",
+    "workers": "1,2,4,8,12,16",
+    "updates": 1600,
+    "batch": 128,
+    "lr": 0.02,
+    "server_threads": 4,
+    "tau_extra_ms": 10.0
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+##### E6 tau-extra=30ms
+=== resnet18_cifar W=1
+  model=resnet18_cifar, extra_ms=30, workers=1, gpus=4, total_updates=1600, wall_s=142.8, updates_per_s=11.2, T_ms_median=48.86, tau_ms_mean=33.3, P_pred=1.467, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.656
+=== resnet18_cifar W=2
+  model=resnet18_cifar, extra_ms=30, workers=2, gpus=4, total_updates=1600, wall_s=69.08, updates_per_s=23.16, T_ms_median=43.93, tau_ms_mean=32.93, P_pred=1.334, stale_mean=0.9994, stale_p50=1, stale_p95=1, stale_max=1, test_acc=0.6468
+=== resnet18_cifar W=4
+  model=resnet18_cifar, extra_ms=30, workers=4, gpus=4, total_updates=1600, wall_s=54.32, updates_per_s=29.46, T_ms_median=47.13, tau_ms_mean=33.63, P_pred=1.401, stale_mean=2.996, stale_p50=3, stale_p95=3, stale_max=3, test_acc=0.6393
+=== resnet18_cifar W=8
+  model=resnet18_cifar, extra_ms=30, workers=8, gpus=4, total_updates=1600, wall_s=54.49, updates_per_s=29.37, T_ms_median=46.56, tau_ms_mean=33.71, P_pred=1.381, stale_mean=6.979, stale_p50=7, stale_p95=7, stale_max=9, test_acc=0.5334
+=== resnet18_cifar W=12
+  model=resnet18_cifar, extra_ms=30, workers=12, gpus=4, total_updates=1596, wall_s=54.36, updates_per_s=29.36, T_ms_median=47.9, tau_ms_mean=33.56, P_pred=1.427, stale_mean=10.95, stale_p50=11, stale_p95=11, stale_max=13, test_acc=0.4053
+=== resnet18_cifar W=16
+  model=resnet18_cifar, extra_ms=30, workers=16, gpus=4, total_updates=1600, wall_s=54.85, updates_per_s=29.17, T_ms_median=47.24, tau_ms_mean=33.66, P_pred=1.404, stale_mean=14.92, stale_p50=15, stale_p95=15, stale_max=17, test_acc=0.3452
+
+----- BEGIN FILE downpour.csv -----
+model,extra_ms,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,30.0,1,4,1600,142.80838296655566,11.203824080654316,48.86439489200711,33.30045652226545,1.467379129152036,0,0,0,0,0.656
+resnet18_cifar,30.0,2,4,1600,69.0810604467988,23.161196276542444,43.9265426248312,32.933717314735986,1.3337863504760374,0.999375,1,1,1,0.6468
+resnet18_cifar,30.0,4,4,1600,54.317241329699755,29.456576969514593,47.12797421962023,33.628728016628884,1.4014200654962679,2.99625,3,3,3,0.6393
+resnet18_cifar,30.0,8,4,1600,54.48574970010668,29.36547645589003,46.555809676647186,33.711536126211286,1.3810052885857451,6.97875,7,7,9,0.5334
+resnet18_cifar,30.0,12,4,1596,54.36177018005401,29.35886735685424,47.90337011218071,33.56178706210751,1.4273188142077624,10.954887218045112,11,11,13,0.4053
+resnet18_cifar,30.0,16,4,1600,54.851993434131145,29.169404789661023,47.23829496651888,33.65629462932702,1.4035500784259516,14.91625,15,15,17,0.3452
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave6-htx6x",
+    "time_utc": "2026-11-22T00:42:24Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": false,
+    "models": "resnet18_cifar",
+    "workers": "1,2,4,8,12,16",
+    "updates": 1600,
+    "batch": 128,
+    "lr": 0.02,
+    "server_threads": 4,
+    "tau_extra_ms": 30.0
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+WAVE6 FINISHED rc=0

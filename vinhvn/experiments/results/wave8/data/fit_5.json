@@ -1,0 +1,38 @@
+{
+  "experiment": "E3",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-7rbwf",
+    "time_utc": "2026-11-22T01:53:54Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 1.6688390751095224e-05,
+      "B_GBps": 329.4087946227746,
+      "max_rel_err": 0.23481549126243345
+    },
+    "broadcast": {
+      "alpha_s": 1.4232255385371742e-05,
+      "B_GBps": 362.75506468786796,
+      "max_rel_err": 0.05032210974069536
+    },
+    "reduce": {
+      "alpha_s": 1.5258005867433928e-05,
+      "B_GBps": 355.44197000070375,
+      "max_rel_err": 0.06591589938742638
+    }
+  },
+  "quick": false
+}

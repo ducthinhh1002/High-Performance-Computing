@@ -1,0 +1,12 @@
+# Lưu dataset, checkpoint và kết quả. RWX để nhiều pod cùng gắn được.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hpc-dl-data
+  namespace: hpc-dl-exp
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: storageclass-20k
+  resources:
+    requests:
+      storage: 200Gi

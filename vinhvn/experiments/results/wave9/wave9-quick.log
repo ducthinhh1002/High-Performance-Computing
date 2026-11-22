@@ -1,0 +1,953 @@
+WAVE=9 QUICK=1 RUN_ID=20261122T073711Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### kiểm tra tính đúng (chuẩn gradient phải bằng nhau giữa các S, T)
+CHECK arch=mlp S=1 M=1 global_grad_norm=0.24543583
+CHECK arch=mlp S=1 M=2 global_grad_norm=0.24543584
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:37:16Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+----- END FILE pipeline.csv -----
+CHECK T=1 loss=1.00304365 global_grad_norm=0.18369670
+[mlp] stage split (layer ranges): [(0, 2), (2, 5)]
+CHECK arch=mlp S=2 M=1 global_grad_norm=0.24543583
+CHECK arch=mlp S=2 M=2 global_grad_norm=0.24543584
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:37:28Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+----- END FILE pipeline.csv -----
+CHECK T=2 loss=1.00304365 global_grad_norm=0.18369670
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+CHECK arch=mlp S=4 M=1 global_grad_norm=0.24543583
+CHECK arch=mlp S=4 M=2 global_grad_norm=0.24543584
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:37:47Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+----- END FILE pipeline.csv -----
+CHECK T=4 loss=1.00304365 global_grad_norm=0.18369670
+##### NCCL transport thực sự được chọn (net=native)
+      4  NCCL INFO Using network Socket
+      4  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.214<0>
+      4  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      1  NCCL INFO Channel 23/0 : 3[3] -> 2[2] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 3[3] -> 0[0] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 2[2] -> 3[3] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 2[2] -> 1[1] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 1[1] -> 2[2] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 1[1] -> 0[0] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 0[0] -> 1[1] via P2P/CUMEM
+      1  NCCL INFO Channel 22/0 : 3[3] -> 2[2] via P2P/CUMEM
+      1  NCCL INFO Channel 22/0 : 3[3] -> 0[0] via P2P/CUMEM
+##### NCCL transport thực sự được chọn (net=socket)
+      4  NCCL INFO Using network Socket
+      4  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.214<0>
+      4  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      1  NCCL INFO Channel 01/0 : 3[3] -> 1[1] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 3[3] -> 1[1] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 3[3] -> 0[0] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 3[3] -> 0[0] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 3[3] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 3[3] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 1[1] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 1[1] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 1[1] -> 3[3] [send] via NET/Socket/0
+##### E3/E4 qua stack mạng (NCCL Socket) trong một pod
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=3.497e-05, p25_s=3.295e-05, p75_s=3.529e-05, algbw_GBps=0.1171, busbw_GBps=0.1171, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=5.998e-05, p25_s=5.663e-05, p75_s=6.082e-05, algbw_GBps=0.2731, busbw_GBps=0.2731, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=8.377e-05, p25_s=8.356e-05, p75_s=8.533e-05, algbw_GBps=0.7823, busbw_GBps=0.7823, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=0.0001428, p25_s=0.0001426, p75_s=0.0001467, algbw_GBps=1.835, busbw_GBps=1.835, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=0.0003223, p25_s=0.0003206, p75_s=0.0003411, algbw_GBps=3.253, busbw_GBps=3.253, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=0.001022, p25_s=0.0009836, p75_s=0.001026, algbw_GBps=4.104, busbw_GBps=4.104, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,3.497352823615074e-05,3.294896334409714e-05,3.528812900185585e-05,0.11711715135924228,0.11711715135924228,3
+all_reduce,2,pow4,16384,5.998391658067703e-05,5.663113668560982e-05,6.082039326429367e-05,0.2731398837213953,0.2731398837213953,3
+all_reduce,2,pow4,65536,8.376967161893845e-05,8.35571438074112e-05,8.532892912626267e-05,0.7823356440755556,0.7823356440755556,3
+all_reduce,2,pow4,262144,0.00014283288270235063,0.0001425694115459919,0.00014674078673124313,1.8353196759760269,1.8353196759760269,3
+all_reduce,2,pow4,1048576,0.00032229941338300704,0.00032060205936431887,0.0003410707414150238,3.2534219935235082,3.2534219935235082,3
+all_reduce,2,pow4,4194304,0.0010219033341854812,0.000983578944578767,0.0010263048578053712,4.104403870394566,4.104403870394566,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:38:36Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 4.349292500630815e-05,
+      "B_GBps": 3.73073761262863,
+      "max_rel_err": 0.2749880686087077
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=9.848e-05, p25_s=9.793e-05, p75_s=9.963e-05, algbw_GBps=0.04159, busbw_GBps=0.06239, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=0.0001263, p25_s=0.0001241, p75_s=0.0001267, algbw_GBps=0.1297, busbw_GBps=0.1946, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=0.000259, p25_s=0.0002578, p75_s=0.0003128, algbw_GBps=0.253, busbw_GBps=0.3795, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=0.0004084, p25_s=0.0004029, p75_s=0.0004107, algbw_GBps=0.6418, busbw_GBps=0.9628, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=0.0009013, p25_s=0.0008988, p75_s=0.0009033, algbw_GBps=1.163, busbw_GBps=1.745, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=0.002485, p25_s=0.002478, p75_s=0.00249, algbw_GBps=1.688, busbw_GBps=2.531, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,9.848499670624734e-05,9.793402627110481e-05,9.963171556591988e-05,0.041590091252347805,0.06238513687852171,3
+all_reduce,4,pow4,16384,0.00012630559504032136,0.00012412620708346367,0.00012674467638134956,0.1297171356088353,0.19457570341325295,3
+all_reduce,4,pow4,65536,0.0002590458281338215,0.0002577679976820946,0.00031275730580091474,0.2529899843287362,0.3794849764931043,3
+all_reduce,4,pow4,262144,0.0004084212519228458,0.0004029116593301296,0.0004107058234512806,0.6418471094876355,0.9627706642314532,3
+all_reduce,4,pow4,1048576,0.0009012640453875065,0.0008987828902900219,0.0009032617136836052,1.1634503843423105,1.7451755765134658,3
+all_reduce,4,pow4,4194304,0.002485407330095768,0.002478039264678955,0.0024898374918848275,1.6875720728796535,2.53135810931948,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:38:45Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 0.00011587373503539788,
+      "B_GBps": 2.183728646256116,
+      "max_rel_err": 0.3789117611134457
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=8, b_global=8, step_s=0.003866, p25_s=0.003782, p75_s=0.004698, t_fwd_s=0.001835, t_bwd_s=0.001767, t_comm_s=2.938e-07, t_opt_s=0.0002695, img_s=2069, img_s_per_gpu=2069, steps=4
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=16, b_global=16, step_s=0.00611, p25_s=0.006085, p75_s=0.006137, t_fwd_s=0.003533, t_bwd_s=0.00229, t_comm_s=2.678e-07, t_opt_s=0.0002733, img_s=2619, img_s_per_gpu=2619, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:38:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,8,8,0.0038664969615638256,0.00378155754879117,0.004697545897215605,0.00183499651029706,0.0017668264918029308,2.9383227229118347e-07,0.00026945536956191063,2069.056326573281,2069.056326573281,4
+resnet18_cifar,11173962,1,local,strong,16,16,0.006110044661909342,0.0060851313173770905,0.006137271411716938,0.0035325605422258377,0.002289797645062208,2.6775524020195007e-07,0.00027333712205290794,2618.638796496149,2618.638796496149,4
+----- END FILE scaling.csv -----
+[rank1]:[W1122 07:38:59.506882449 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 07:38:59.567736174 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.004177, p25_s=0.003905, p75_s=0.007671, t_fwd_s=0.00211, t_bwd_s=0.001756, t_comm_s=5.225e-07, t_opt_s=0.0003096, img_s=3831, img_s_per_gpu=1915, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.02, p25_s=0.01667, p75_s=0.02157, t_fwd_s=0.001895, t_bwd_s=0.004601, t_comm_s=0.01324, t_opt_s=0.0002707, img_s=800.2, img_s_per_gpu=400.1, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.01473, p25_s=0.01458, p75_s=0.01709, t_fwd_s=0.002468, t_bwd_s=0.01195, t_comm_s=4.461e-07, t_opt_s=0.0003194, img_s=1086, img_s_per_gpu=543, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.003997, p25_s=0.003805, p75_s=0.005854, t_fwd_s=0.001959, t_bwd_s=0.001739, t_comm_s=2.794e-07, t_opt_s=0.0002822, img_s=4003, img_s_per_gpu=2002, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.01893, p25_s=0.01729, p75_s=0.01907, t_fwd_s=0.001916, t_bwd_s=0.00299, t_comm_s=0.01373, t_opt_s=0.0002697, img_s=845.4, img_s_per_gpu=422.7, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.01517, p25_s=0.01499, p75_s=0.01666, t_fwd_s=0.002482, t_bwd_s=0.01236, t_comm_s=4.508e-07, t_opt_s=0.0003232, img_s=1055, img_s_per_gpu=527.3, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:38:58Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.004176739137619734,0.003904864192008972,0.007670973194763064,0.0021099811419844627,0.001756287645548582,5.224719643592834e-07,0.00030955299735069275,3830.739596803783,1915.3697984018916,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.019995362032204866,0.01666522305458784,0.021573021076619625,0.0018951976671814919,0.004601229913532734,0.013241562061011791,0.00027074385434389114,800.1855617432748,400.0927808716374,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.014733407646417618,0.01457693101838231,0.017089387867599726,0.0024683834053575993,0.011951545253396034,4.461035132408142e-07,0.0003194119781255722,1085.9673731955927,542.9836865977963,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.003996657207608223,0.003804733045399189,0.0058537505101412535,0.001958607230335474,0.0017394386231899261,2.7939677238464355e-07,0.00028223637491464615,4003.3455882935505,2001.6727941467752,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.018925259821116924,0.017293232027441263,0.01906972541473806,0.0019160420633852482,0.0029901559464633465,0.013726864010095596,0.00026970915496349335,845.4309294156743,422.71546470783716,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.01517143752425909,0.014989908318966627,0.016663963440805674,0.0024816389195621014,0.01235990785062313,4.507601261138916e-07,0.00032319407910108566,1054.6133136306985,527.3066568153492,4
+----- END FILE scaling.csv -----
+[rank0]:[W1122 07:39:09.069141823 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank3]:[W1122 07:39:09.152902804 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 07:39:09.244734034 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 07:39:09.277183989 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.004266, p25_s=0.004103, p75_s=0.006438, t_fwd_s=0.002107, t_bwd_s=0.001847, t_comm_s=3.59e-07, t_opt_s=0.000313, img_s=7501, img_s_per_gpu=1875, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.03598, p25_s=0.03579, p75_s=0.04578, t_fwd_s=0.00223, t_bwd_s=0.003802, t_comm_s=0.02969, t_opt_s=0.0003663, img_s=889.5, img_s_per_gpu=222.4, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.03218, p25_s=0.03193, p75_s=0.03227, t_fwd_s=0.003026, t_bwd_s=0.02877, t_comm_s=8.433e-07, t_opt_s=0.0003651, img_s=994.5, img_s_per_gpu=248.6, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.003957, p25_s=0.003896, p75_s=0.004125, t_fwd_s=0.00197, t_bwd_s=0.00168, t_comm_s=3.511e-07, t_opt_s=0.0002944, img_s=4044, img_s_per_gpu=1011, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.03481, p25_s=0.03423, p75_s=0.03595, t_fwd_s=0.002043, t_bwd_s=0.004707, t_comm_s=0.02801, t_opt_s=0.0003164, img_s=459.7, img_s_per_gpu=114.9, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.03115, p25_s=0.03101, p75_s=0.03125, t_fwd_s=0.002826, t_bwd_s=0.02797, t_comm_s=5.509e-07, t_opt_s=0.0003563, img_s=513.6, img_s_per_gpu=128.4, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:39:07Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.004265992436558008,0.004102655686438084,0.006437696749344468,0.002106625121086836,0.0018470436334609985,3.5902485251426697e-07,0.0003130268305540085,7501.185357426236,1875.296339356559,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.03597705578431487,0.0357877891510725,0.045779255451634526,0.002230266109108925,0.003801574930548668,0.029685374349355698,0.0003663185052573681,889.4557740311599,222.36394350778997,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.032176362350583076,0.03193116397596896,0.0322728028986603,0.0030260002240538597,0.02877019438892603,8.433125913143158e-07,0.0003650560975074768,994.5188847433564,248.6297211858391,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.003956683445721865,0.003896077163517475,0.004125499399378896,0.00196964293718338,0.001680352259427309,3.511086106300354e-07,0.00029439618811011314,4043.7907706010405,1010.9476926502601,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.034807569812983274,0.034227969124913216,0.03595121041871607,0.0020425040274858475,0.004707177635282278,0.028006779961287975,0.00031636934727430344,459.67012595151004,114.91753148787751,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.03114981483668089,0.031008169753476977,0.03124863817356527,0.0028263223357498646,0.027972512878477573,5.508773028850555e-07,0.0003562946803867817,513.6467129544212,128.4116782386053,4
+----- END FILE scaling.csv -----
+##### E9 net=native S/T=1
+  arch=vgg16, S=1, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005484, samples_s=2918, peak_mem_GB_max=1.194, peak_mem_GB_min=1.194, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=vgg16, S=1, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.007744, samples_s=2066, peak_mem_GB_max=1.569, peak_mem_GB_min=1.569, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.0005322, samples_s=3.006e+04, peak_mem_GB_max=1.144, peak_mem_GB_min=1.144, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.0009052, samples_s=1.768e+04, peak_mem_GB_max=1.144, peak_mem_GB_min=1.144, sent_MB_per_step=0, bubble_theory=0, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:39:19Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,1,1,16,16,134.301514,0.005484048463404179,2917.552626817621,1.1938897371292114,1.1938897371292114,0.0,0.0,ok
+vgg16,1,2,16,8,134.301514,0.007743923552334308,2066.136099080808,1.5687254667282104,1.5687254667282104,0.0,0.0,ok
+mlp,1,1,16,16,0.01729,0.0005322311073541642,30062.1286108951,1.143891453742981,1.143891453742981,0.0,0.0,ok
+mlp,1,2,16,8,0.01729,0.0009052282199263573,17675.100762216232,1.143891453742981,1.143891453742981,0.0,0.0,ok
+----- END FILE pipeline.csv -----
+  T=1, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.06605, step_s=0.0007832, tokens_s=4.086e+04, allreduce_msg_MB=0.008192, allreduce_per_step=0, comm_GB_per_step_algo=0, peak_mem_GB=0.0685, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:39:25Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+1,2,64,32,0.066048,0.066048,0.0007832002205153307,40858.00688225626,0.008192,0,0.0,0.068503552,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=native S/T=2
+[vgg16] stage split (layer ranges): [(0, 19), (19, 40)]
+  arch=vgg16, S=2, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.004883, samples_s=3277, peak_mem_GB_max=1.16, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.5, status=ok
+  arch=vgg16, S=2, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006234, samples_s=2567, peak_mem_GB_max=1.533, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.3333, status=ok
+[mlp] stage split (layer ranges): [(0, 2), (2, 5)]
+  arch=mlp, S=2, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.0009951, samples_s=1.608e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.5, status=ok
+  arch=mlp, S=2, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.0009132, samples_s=1.752e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.3333, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:39:32Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,2,1,16,16,134.301514,0.004882976971566677,3276.689628717722,1.159879207611084,0.19431321322917938,1.0485759973526,0.5,ok
+vgg16,2,2,16,8,134.301514,0.006233984418213367,2566.5768353950316,1.5327508449554443,0.19431321322917938,1.0485759973526,0.3333333333333333,ok
+mlp,2,1,16,16,0.01729,0.0009950971230864524,16078.832536841679,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.5,ok
+mlp,2,2,16,8,0.01729,0.0009131886065006257,17521.024557361292,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.3333333333333333,ok
+----- END FILE pipeline.csv -----
+  T=2, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.03302, step_s=0.001135, tokens_s=2.819e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=3.277e-05, peak_mem_GB=0.06834, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:39:42Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+2,2,64,32,0.066048,0.033024,0.0011349573420981567,28194.892277486568,0.008192,4,3.2767999999999995e-05,0.0683392,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=native S/T=4
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+  arch=vgg16, S=4, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005259, samples_s=3042, peak_mem_GB_max=1.027, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.005614, samples_s=2850, peak_mem_GB_max=1.438, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.6, status=ok
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+  arch=mlp, S=4, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.001082, samples_s=1.478e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.001403, samples_s=1.14e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.6, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:39:51Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,16,16,134.301514,0.005258911661803723,3042.4546044784206,1.027281403541565,0.04208025708794594,5.30841588973999,0.75,ok
+vgg16,4,2,16,8,134.301514,0.00561442207545042,2849.8035568008827,1.4382110834121704,0.04208025708794594,5.30841588973999,0.6,ok
+mlp,4,1,16,16,0.01729,0.0010822774842381478,14783.639346671753,1.0238285064697266,0.06818559765815735,0.02457599900662899,0.75,ok
+mlp,4,2,16,8,0.01729,0.0014029966667294502,11404.161092768578,1.0238285064697266,0.06818559765815735,0.02457599900662899,0.6,ok
+----- END FILE pipeline.csv -----
+  T=4, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.01651, step_s=0.001056, tokens_s=3.031e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=4.915e-05, peak_mem_GB=0.06826, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:40:08Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+4,2,64,32,0.066048,0.016512,0.0010556445146600406,30313.234763792876,0.008192,4,4.9152e-05,0.06825728,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=socket S/T=2
+[vgg16] stage split (layer ranges): [(0, 19), (19, 40)]
+  arch=vgg16, S=2, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005212, samples_s=3070, peak_mem_GB_max=1.16, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.5, status=ok
+  arch=vgg16, S=2, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006533, samples_s=2449, peak_mem_GB_max=1.533, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.3333, status=ok
+[mlp] stage split (layer ranges): [(0, 2), (2, 5)]
+  arch=mlp, S=2, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.001069, samples_s=1.497e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.5, status=ok
+  arch=mlp, S=2, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.001134, samples_s=1.41e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.3333, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:40:20Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,2,1,16,16,134.301514,0.005212215147912503,3069.7121177754943,1.159879207611084,0.19431321322917938,1.0485759973526,0.5,ok
+vgg16,2,2,16,8,134.301514,0.006533483043313026,2448.923475262691,1.5327508449554443,0.19431321322917938,1.0485759973526,0.3333333333333333,ok
+mlp,2,1,16,16,0.01729,0.0010688776150345803,14968.972850537588,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.5,ok
+mlp,2,2,16,8,0.01729,0.0011344162747263908,14104.170009249057,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.3333333333333333,ok
+----- END FILE pipeline.csv -----
+[rank0]:[E1122 07:40:24.236108283 ProcessGroupNCCL.cpp:542] [Rank 0] Collective WorkNCCL(SeqNum=18, OpType=SEND, NumelIn=512, NumelOut=512, Timeout(ms)=600000) raised the following async exception: NCCL error: unhandled system error (run with NCCL_DEBUG=INFO for details), NCCL version 2.21.5
+ncclSystemError: System call (e.g. socket, malloc) or external library call failed or device error. 
+Last error:
+
+Exception raised from checkForNCCLErrorsInternal at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2027 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f471836c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x220 (0x7f46ce218f80 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x7c (0x7f46ce2191cc in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::WorkNCCL::isCompleted() + 0x90 (0x7f46ce2193e0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::watchdogHandler() + 0x1da (0x7f46ce220b5a in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f46ce22261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: <unknown function> + 0x145c0 (0x7f47188375c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #7: <unknown function> + 0x94ac3 (0x7f471917fac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #8: <unknown function> + 0x126850 (0x7f4719211850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+  T=2, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.03302, step_s=0.001089, tokens_s=2.94e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=3.277e-05, peak_mem_GB=0.06834, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:40:29Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+2,2,64,32,0.066048,0.033024,0.001088592844704787,29395.747138755083,0.008192,4,3.2767999999999995e-05,0.0683392,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=socket S/T=4
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+  arch=vgg16, S=4, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.00703, samples_s=2276, peak_mem_GB_max=1.027, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006861, samples_s=2332, peak_mem_GB_max=1.438, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.6, status=ok
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+  arch=mlp, S=4, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.001421, samples_s=1.126e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.001997, samples_s=8011, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.6, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:40:38Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,16,16,134.301514,0.007029621303081513,2276.082780303716,1.027281403541565,0.04208025708794594,5.30841588973999,0.75,ok
+vgg16,4,2,16,8,134.301514,0.006861484982073307,2331.8567397294432,1.4382110834121704,0.04208025708794594,5.30841588973999,0.6,ok
+mlp,4,1,16,16,0.01729,0.0014210086315870284,11259.607890017305,1.0238285064697266,0.06818559765815735,0.02457599900662899,0.75,ok
+mlp,4,2,16,8,0.01729,0.0019971949979662893,8011.235766308516,1.0238285064697266,0.06818559765815735,0.02457599900662899,0.6,ok
+----- END FILE pipeline.csv -----
+  T=4, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.01651, step_s=0.001161, tokens_s=2.756e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=4.915e-05, peak_mem_GB=0.06826, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:40:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+4,2,64,32,0.066048,0.016512,0.0011609101978441079,27564.578258875026,0.008192,4,4.9152e-05,0.06825728,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 mlp_big (không vừa một GPU) S=1
+  arch=mlp_big, S=1, M=2, b_global=16, b_micro=8, params_M=0.02561, step_s=0.001449, samples_s=1.105e+04, peak_mem_GB_max=0.06829, peak_mem_GB_min=0.06829, sent_MB_per_step=0, bubble_theory=0, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:41:02Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp_big",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,1,2,16,8,0.02561,0.0014485822990536689,11045.282004655513,0.06829311698675156,0.06829311698675156,0.0,0.0,ok
+----- END FILE pipeline.csv -----
+##### E9 mlp_big (không vừa một GPU) S=2
+[mlp_big] stage split (layer ranges): [(0, 3), (3, 7)]
+  arch=mlp_big, S=2, M=2, b_global=16, b_micro=8, params_M=0.02561, step_s=0.001717, samples_s=9320, peak_mem_GB_max=0.06823, peak_mem_GB_min=0.06823, sent_MB_per_step=0.008192, bubble_theory=0.3333, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:41:08Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp_big",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,2,2,16,8,0.02561,0.0017167437821626664,9319.969681115732,0.06823065876960754,0.06822553277015686,0.008191999979317188,0.3333333333333333,ok
+----- END FILE pipeline.csv -----
+##### E9 mlp_big (không vừa một GPU) S=4
+[mlp_big] stage split (layer ranges): [(0, 1), (1, 3), (3, 5), (5, 7)]
+  arch=mlp_big, S=4, M=2, b_global=16, b_micro=8, params_M=0.02561, step_s=0.001446, samples_s=1.106e+04, peak_mem_GB_max=0.0682, peak_mem_GB_min=0.06818, sent_MB_per_step=0.02458, bubble_theory=0.6, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-quick-f5pvr",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:41:19Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp_big",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,4,2,16,8,0.02561,0.0014464078471064568,11061.886888962921,0.06820454448461533,0.0681835487484932,0.02457599900662899,0.6,ok
+----- END FILE pipeline.csv -----
+WAVE9 FINISHED rc=0

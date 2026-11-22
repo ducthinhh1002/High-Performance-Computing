@@ -1,0 +1,2 @@
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,1,4,256,64,12080.49665,nan,nan,83.39752197265625,83.39752197265625,0.0,0.0,OOM(step)

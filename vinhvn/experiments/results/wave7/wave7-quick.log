@@ -1,0 +1,120 @@
+WAVE=7 QUICK=1 RUN_ID=20261121T235440Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### E5 GN seeds 0,1,2
+=== layout=shuffled alg=sync seed=0
+  model=resnet18_gn_cifar, layout=shuffled, alg=sync, seed=0, epoch=1, steps=15, test_acc=0.082, train_loss=4.866, wall_s=0.616, comm_calls=15, comm_MB=670.4
+=== layout=shuffled alg=avg_epoch seed=0
+  model=resnet18_gn_cifar, layout=shuffled, alg=avg_epoch, seed=0, epoch=1, steps=15, test_acc=0.082, train_loss=7.833, wall_s=0.1479, comm_calls=1, comm_MB=44.7
+=== layout=sorted alg=sync seed=0
+  model=resnet18_gn_cifar, layout=sorted, alg=sync, seed=0, epoch=1, steps=15, test_acc=0.102, train_loss=3.445, wall_s=0.1593, comm_calls=15, comm_MB=670.4
+=== layout=sorted alg=avg_epoch seed=0
+  model=resnet18_gn_cifar, layout=sorted, alg=avg_epoch, seed=0, epoch=1, steps=15, test_acc=0.096, train_loss=7.833, wall_s=0.1478, comm_calls=1, comm_MB=44.7
+
+----- BEGIN FILE convergence.csv -----
+model,layout,alg,seed,epoch,steps,test_acc,train_loss,wall_s,comm_calls,comm_MB
+resnet18_gn_cifar,shuffled,sync,0,1,15,0.082,4.865952014923096,0.6159885628148913,15,670.43772
+resnet18_gn_cifar,shuffled,avg_epoch,0,1,15,0.082,7.833070755004883,0.14785968512296677,1,44.695848
+resnet18_gn_cifar,sorted,sync,0,1,15,0.102,3.444605588912964,0.15925242099910975,15,670.43772
+resnet18_gn_cifar,sorted,avg_epoch,0,1,15,0.096,7.833021640777588,0.14776015561074018,1,44.695848
+----- END FILE convergence.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E5",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave7-quick-7fx65",
+    "time_utc": "2026-11-21T23:54:46Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "args": {
+    "out": "/data/results/e5",
+    "quick": true,
+    "epochs": 1,
+    "batch": 32,
+    "lr": 0.05,
+    "seeds": "0",
+    "layouts": "shuffled,sorted",
+    "algs": "sync,avg_epoch",
+    "model": "resnet18_gn_cifar"
+  },
+  "params": 11173962
+}
+----- END FILE meta.json -----
+##### E5 BN seed 2
+=== layout=shuffled alg=sync seed=0
+  model=resnet18_cifar, layout=shuffled, alg=sync, seed=0, epoch=1, steps=15, test_acc=0.21, train_loss=2.225, wall_s=0.6618, comm_calls=16, comm_MB=670.5
+=== layout=shuffled alg=avg_epoch seed=0
+  model=resnet18_cifar, layout=shuffled, alg=avg_epoch, seed=0, epoch=1, steps=15, test_acc=0.144, train_loss=2.835, wall_s=0.1394, comm_calls=1, comm_MB=44.73
+=== layout=sorted alg=sync seed=0
+  model=resnet18_cifar, layout=sorted, alg=sync, seed=0, epoch=1, steps=15, test_acc=0.222, train_loss=2.359, wall_s=0.149, comm_calls=16, comm_MB=670.5
+=== layout=sorted alg=avg_epoch seed=0
+  model=resnet18_cifar, layout=sorted, alg=avg_epoch, seed=0, epoch=1, steps=15, test_acc=0.11, train_loss=2.096, wall_s=0.1396, comm_calls=1, comm_MB=44.73
+
+----- BEGIN FILE convergence.csv -----
+model,layout,alg,seed,epoch,steps,test_acc,train_loss,wall_s,comm_calls,comm_MB
+resnet18_cifar,shuffled,sync,0,1,15,0.21,2.224919080734253,0.6617960445582867,16,670.47612
+resnet18_cifar,shuffled,avg_epoch,0,1,15,0.144,2.8346545696258545,0.13941449578851461,1,44.734248
+resnet18_cifar,sorted,sync,0,1,15,0.222,2.3588900566101074,0.1490260073915124,16,670.47612
+resnet18_cifar,sorted,avg_epoch,0,1,15,0.11,2.0961899757385254,0.13962658029049635,1,44.734248
+----- END FILE convergence.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E5",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave7-quick-7fx65",
+    "time_utc": "2026-11-21T23:55:00Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "args": {
+    "out": "/data/results/e5",
+    "quick": true,
+    "epochs": 1,
+    "batch": 32,
+    "lr": 0.05,
+    "seeds": "0",
+    "layouts": "shuffled,sorted",
+    "algs": "sync,avg_epoch",
+    "model": "resnet18_cifar"
+  },
+  "params": 11173962
+}
+----- END FILE meta.json -----
+WAVE7 FINISHED rc=0

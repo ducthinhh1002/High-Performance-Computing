@@ -1,0 +1,22 @@
+# Namespace riêng cho thực nghiệm, kèm quota để không thể xin quá 4 GPU.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hpc-dl-exp
+  labels:
+    purpose: research-parallel-distributed-dl
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: hpc-dl-exp-quota
+  namespace: hpc-dl-exp
+spec:
+  hard:
+    requests.nvidia.com/gpu: "4"
+    requests.cpu: "64"
+    requests.memory: 512Gi
+    limits.cpu: "64"
+    limits.memory: 512Gi
+    persistentvolumeclaims: "4"
+    requests.storage: 500Gi

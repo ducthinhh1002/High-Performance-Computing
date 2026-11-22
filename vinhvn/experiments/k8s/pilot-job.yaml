@@ -1,0 +1,54 @@
+# Pilot 1 GPU: kiểm tra image, GPU, Internet, PVC và chạy benchmark nhỏ.
+# Script lấy từ ConfigMap hpc-pilot-script (tạo từ experiments/pilot/pilot.py).
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pilot-1gpu
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 2700        # gồm cả thời gian kéo image
+  ttlSecondsAfterFinished: 21600     # pod tự xoá sau 6 giờ; kết quả nằm trên PVC
+  template:
+    metadata:
+      labels:
+        app: hpc-pilot
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: pilot
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          command: ["python", "-u", "/scripts/pilot.py"]
+          env:
+            - name: OUT_DIR
+              value: /data/results/pilot
+            - name: DATA_DIR
+              value: /data/datasets
+            # Số luồng = giới hạn CPU của container (PyTorch tự đoán theo số lõi của node → sai).
+            - name: OMP_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+            - name: MKL_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+          resources:
+            requests: {cpu: "16", memory: 64Gi, nvidia.com/gpu: "1"}
+            limits:   {cpu: "16", memory: 64Gi, nvidia.com/gpu: "1"}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+            - {name: datasets, mountPath: /data/datasets, readOnly: true}
+            - {name: results, mountPath: /data/results}
+            - {name: dshm, mountPath: /dev/shm}
+      volumes:
+        - name: scripts
+          configMap:
+            name: hpc-pilot-script
+        # Tạm dùng hostPath vì PVC hpc-dl-data chưa được VAST CSI cấp (20/11).
+        # Dataset do Job dataset-prep chuẩn bị sẵn; Job GPU chỉ đọc.
+        # Khi PVC Bound, chuyển cả hai sang persistentVolumeClaim {claimName: hpc-dl-data}.
+        - name: datasets
+          hostPath: {path: /var/lib/hpc-dl-exp/datasets, type: Directory}
+        - name: results
+          hostPath: {path: /var/lib/hpc-dl-exp/results, type: Directory}
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Gi

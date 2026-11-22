@@ -1,0 +1,122 @@
+===== topology =====
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+NIC7	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	PXB	 X 	SYS				
+NIC8	NODE	NODE	NODE	SYS	NODE	NODE	NODE	NODE	SYS	SYS	SYS	SYS	 X 				
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_4
+  NIC3: mlx5_5
+  NIC4: mlx5_6
+  NIC5: mlx5_7
+  NIC6: mlx5_8
+  NIC7: mlx5_9
+  NIC8: mlx5_bond_0
+
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+	 Link 0: 26.562 GB/s
+	 Link 1: 26.562 GB/s
+	 Link 2: 26.562 GB/s
+	 Link 3: 26.562 GB/s
+	 Link 4: 26.562 GB/s
+	 Link 5: 26.562 GB/s
+	 Link 6: 26.562 GB/s
+	 Link 7: 26.562 GB/s
+	 Link 8: 26.562 GB/s
+	 Link 9: 26.562 GB/s
+	 Link 10: 26.562 GB/s
+	 Link 11: 26.562 GB/s
+	 Link 12: 26.562 GB/s
+	 Link 13: 26.562 GB/s
+	 Link 14: 26.562 GB/s
+	 Link 15: 26.562 GB/s
+	 Link 16: 26.562 GB/s
+	 Link 17: 26.562 GB/s
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+	 Link 0: 26.562 GB/s
+	 Link 1: 26.562 GB/s
+	 Link 2: 26.562 GB/s
+	 Link 3: 26.562 GB/s
+	 Link 4: 26.562 GB/s
+	 Link 5: 26.562 GB/s
+	 Link 6: 26.562 GB/s
+	 Link 7: 26.562 GB/s
+	 Link 8: 26.562 GB/s
+	 Link 9: 26.562 GB/s
+	 Link 10: 26.562 GB/s
+	 Link 11: 26.562 GB/s
+	 Link 12: 26.562 GB/s
+	 Link 13: 26.562 GB/s
+	 Link 14: 26.562 GB/s
+	 Link 15: 26.562 GB/s
+	 Link 16: 26.562 GB/s
+	 Link 17: 26.562 GB/s
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+	 Link 0: 26.562 GB/s
+nccl-tests commit: afd59abab774a6a4b492eb344bd0c845a0b7bb4d
+built: 2026-11-20T16:01:43Z
+NCCL from: /opt/conda/lib/python3.11/site-packages/nvidia/nccl (pip nvidia-nccl-cu12, same as torch)
+gencode: sm_90 (H100)
+run with: LD_LIBRARY_PATH=<site-packages>/nvidia/nccl/lib
+
+===== all_reduce_g4_debug =====
++ /hostdata/tools/nccl-tests/all_reduce_perf -b 1M -e 1M -g 4 -n 5
+/hostdata/tools/nccl-tests/all_reduce_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== all_reduce_g4 =====
++ /hostdata/tools/nccl-tests/all_reduce_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 4
+/hostdata/tools/nccl-tests/all_reduce_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== all_reduce_g2 =====
++ env CUDA_VISIBLE_DEVICES=0,1 /hostdata/tools/nccl-tests/all_reduce_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 2
+/hostdata/tools/nccl-tests/all_reduce_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== reduce_g4 =====
++ /hostdata/tools/nccl-tests/reduce_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 4
+/hostdata/tools/nccl-tests/reduce_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== broadcast_g4 =====
++ /hostdata/tools/nccl-tests/broadcast_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 4
+/hostdata/tools/nccl-tests/broadcast_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== all_gather_g4 =====
++ /hostdata/tools/nccl-tests/all_gather_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 4
+/hostdata/tools/nccl-tests/all_gather_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== all_reduce_g4_nop2p =====
++ env NCCL_P2P_DISABLE=1 /hostdata/tools/nccl-tests/all_reduce_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 4
+/hostdata/tools/nccl-tests/all_reduce_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== all_reduce_g2_nop2p =====
++ env NCCL_P2P_DISABLE=1 CUDA_VISIBLE_DEVICES=0,1 /hostdata/tools/nccl-tests/all_reduce_perf -b 8 -e 1G -f 2 -w 5 -n 20 -g 2
+/hostdata/tools/nccl-tests/all_reduce_perf: error while loading shared libraries: libcudart.so.12: cannot open shared object file: No such file or directory
+
+===== SUMMARY (avg busbw, GB/s) =====
+results in /hostdata/results/nccl-tests/20261120T160209Z

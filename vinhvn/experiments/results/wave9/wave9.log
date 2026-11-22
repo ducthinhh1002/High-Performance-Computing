@@ -1,0 +1,1098 @@
+WAVE=9 QUICK=0 RUN_ID=20261122T074245Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### kiểm tra tính đúng (chuẩn gradient phải bằng nhau giữa các S, T)
+CHECK arch=mlp S=1 M=1 global_grad_norm=0.24543583
+CHECK arch=mlp S=1 M=2 global_grad_norm=0.24543584
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:42:51Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+----- END FILE pipeline.csv -----
+CHECK T=1 loss=1.00304365 global_grad_norm=0.18369670
+[mlp] stage split (layer ranges): [(0, 2), (2, 5)]
+CHECK arch=mlp S=2 M=1 global_grad_norm=0.24543583
+CHECK arch=mlp S=2 M=2 global_grad_norm=0.24543584
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:43:03Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+----- END FILE pipeline.csv -----
+CHECK T=2 loss=1.00304365 global_grad_norm=0.18369670
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+CHECK arch=mlp S=4 M=1 global_grad_norm=0.24543583
+CHECK arch=mlp S=4 M=2 global_grad_norm=0.24543584
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:43:22Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+----- END FILE pipeline.csv -----
+CHECK T=4 loss=1.00304365 global_grad_norm=0.18369670
+##### NCCL transport thực sự được chọn (net=native)
+      4  NCCL INFO Using network Socket
+      4  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.215<0>
+      4  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      1  NCCL INFO Channel 23/0 : 3[3] -> 2[2] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 3[3] -> 0[0] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 2[2] -> 3[3] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 2[2] -> 1[1] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 1[1] -> 2[2] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 1[1] -> 0[0] via P2P/CUMEM
+      1  NCCL INFO Channel 23/0 : 0[0] -> 1[1] via P2P/CUMEM
+      1  NCCL INFO Channel 22/0 : 3[3] -> 2[2] via P2P/CUMEM
+      1  NCCL INFO Channel 22/0 : 3[3] -> 0[0] via P2P/CUMEM
+##### NCCL transport thực sự được chọn (net=socket)
+      4  NCCL INFO Using network Socket
+      4  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.215<0>
+      4  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      1  NCCL INFO Channel 01/0 : 3[3] -> 1[1] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 3[3] -> 1[1] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 3[3] -> 0[0] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 3[3] -> 0[0] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 3[3] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 3[3] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 1[1] [send] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 2[2] -> 1[1] [receive] via NET/Socket/0
+      1  NCCL INFO Channel 01/0 : 1[1] -> 3[3] [send] via NET/Socket/0
+##### E3/E4 qua stack mạng (NCCL Socket) trong một pod
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=3.364e-05, p25_s=3.305e-05, p75_s=3.458e-05, algbw_GBps=0.1218, busbw_GBps=0.1218, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=5.528e-05, p25_s=5.417e-05, p75_s=5.677e-05, algbw_GBps=0.2964, busbw_GBps=0.2964, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=8.066e-05, p25_s=7.979e-05, p75_s=8.149e-05, algbw_GBps=0.8125, busbw_GBps=0.8125, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=0.0001449, p25_s=0.0001439, p75_s=0.0001476, algbw_GBps=1.809, busbw_GBps=1.809, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=0.000327, p25_s=0.0003244, p75_s=0.000328, algbw_GBps=3.206, busbw_GBps=3.206, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=0.001011, p25_s=0.001003, p75_s=0.001018, algbw_GBps=4.148, busbw_GBps=4.148, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=16777216, median_s=0.00377, p25_s=0.003742, p75_s=0.003782, algbw_GBps=4.45, busbw_GBps=4.45, trials=5
+  op=all_reduce, k=2, label=grad_resnet18_cifar, bytes=44695848, median_s=0.009848, p25_s=0.00982, p75_s=0.009962, algbw_GBps=4.539, busbw_GBps=4.539, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=67108864, median_s=0.01487, p25_s=0.01474, p75_s=0.01499, algbw_GBps=4.513, busbw_GBps=4.513, trials=5
+  op=all_reduce, k=2, label=grad_alexnet_gray, bytes=233687968, median_s=0.04265, p25_s=0.04175, p75_s=0.05075, algbw_GBps=5.479, busbw_GBps=5.479, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=268435456, median_s=0.04807, p25_s=0.04793, p75_s=0.0483, algbw_GBps=5.584, busbw_GBps=5.584, trials=5
+  op=all_reduce, k=2, label=grad_vgg16_cifar, bytes=537206056, median_s=0.09837, p25_s=0.09254, p75_s=0.1093, algbw_GBps=5.461, busbw_GBps=5.461, trials=5
+  op=all_reduce, k=2, label=pow4, bytes=1073741824, median_s=0.1928, p25_s=0.1916, p75_s=0.2151, algbw_GBps=5.569, busbw_GBps=5.569, trials=5
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,3.363626077771187e-05,3.304808400571346e-05,3.458432853221893e-05,0.12177334535098205,0.12177334535098205,5
+all_reduce,2,pow4,16384,5.527941510081291e-05,5.416523665189743e-05,5.676894448697567e-05,0.29638519094531923,0.29638519094531923,5
+all_reduce,2,pow4,65536,8.06603766977787e-05,7.978735491633414e-05,8.148587308824063e-05,0.8124931060705645,0.8124931060705645,5
+all_reduce,2,pow4,262144,0.0001448981650173664,0.000143866166472435,0.00014760101214051247,1.8091602469125911,1.8091602469125911,5
+all_reduce,2,pow4,1048576,0.0003270483389496803,0.00032438845373690124,0.0003279908932745457,3.2061804789087587,3.2061804789087587,5
+all_reduce,2,pow4,4194304,0.0010112675372511148,0.0010027317563071846,0.0010183863574638962,4.147571088261368,4.147571088261368,5
+all_reduce,2,pow4,16777216,0.0037700296845287083,0.003742045839317143,0.0037823634454980494,4.450154880437585,4.450154880437585,5
+all_reduce,2,grad_resnet18_cifar,44695848,0.009847817430272698,0.009820351796224713,0.009961944562382995,4.538655221470969,4.538655221470969,5
+all_reduce,2,pow4,67108864,0.014868821389973164,0.014737062435597182,0.01498871531803161,4.5133949921044225,4.5133949921044225,5
+all_reduce,2,grad_alexnet_gray,233687968,0.042648082599043846,0.04175329245626927,0.05075423438102007,5.479448400928561,5.479448400928561,5
+all_reduce,2,pow4,268435456,0.04807012863457203,0.047932383324950936,0.04829841256141663,5.584246675115849,5.584246675115849,5
+all_reduce,2,grad_vgg16_cifar,537206056,0.09837129544466734,0.09253997895866634,0.1092804791405797,5.461004183910253,5.461004183910253,5
+all_reduce,2,pow4,1073741824,0.19281222224235534,0.19160454226657747,0.21510010994970796,5.568847303934707,5.568847303934707,5
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:44:27Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 4.349152558849702e-05,
+      "B_GBps": 4.8807885036797565,
+      "max_rel_err": 0.3291779776493722
+    }
+  },
+  "quick": false
+}
+----- END FILE fit.json -----
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=0.0001002, p25_s=9.566e-05, p75_s=0.0001068, algbw_GBps=0.04087, busbw_GBps=0.06131, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=0.000117, p25_s=0.0001167, p75_s=0.0001189, algbw_GBps=0.14, busbw_GBps=0.21, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=0.0002468, p25_s=0.0002393, p75_s=0.0002792, algbw_GBps=0.2655, busbw_GBps=0.3983, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=0.0003933, p25_s=0.0003911, p75_s=0.0004, algbw_GBps=0.6666, busbw_GBps=0.9998, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=0.0008781, p25_s=0.000874, p75_s=0.0008815, algbw_GBps=1.194, busbw_GBps=1.791, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=0.002448, p25_s=0.002422, p75_s=0.002494, algbw_GBps=1.713, busbw_GBps=2.57, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=16777216, median_s=0.008246, p25_s=0.008124, p75_s=0.009236, algbw_GBps=2.035, busbw_GBps=3.052, trials=5
+  op=all_reduce, k=4, label=grad_resnet18_cifar, bytes=44695848, median_s=0.02195, p25_s=0.02165, p75_s=0.02205, algbw_GBps=2.037, busbw_GBps=3.055, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=67108864, median_s=0.03283, p25_s=0.03272, p75_s=0.033, algbw_GBps=2.044, busbw_GBps=3.067, trials=5
+  op=all_reduce, k=4, label=grad_alexnet_gray, bytes=233687968, median_s=0.1191, p25_s=0.1156, p75_s=0.1209, algbw_GBps=1.962, busbw_GBps=2.942, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=268435456, median_s=0.1354, p25_s=0.1325, p75_s=0.1424, algbw_GBps=1.982, busbw_GBps=2.973, trials=5
+  op=all_reduce, k=4, label=grad_vgg16_cifar, bytes=537206056, median_s=0.2661, p25_s=0.2648, p75_s=0.2767, algbw_GBps=2.019, busbw_GBps=3.028, trials=5
+  op=all_reduce, k=4, label=pow4, bytes=1073741824, median_s=0.5242, p25_s=0.5213, p75_s=0.5317, algbw_GBps=2.049, busbw_GBps=3.073, trials=5
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,0.00010021863505244255,9.565788321197032e-05,0.00010683076456189156,0.04087064244944704,0.06130596367417056,5
+all_reduce,4,pow4,16384,0.00011702442541718483,0.00011674989014863967,0.00011888738721609116,0.14000496000379456,0.21000744000569183,5
+all_reduce,4,pow4,65536,0.00024682864546775817,0.00023925656452775001,0.00027924273163080213,0.2655121324180365,0.39826819862705476,5
+all_reduce,4,pow4,262144,0.0003932845778763294,0.00039106830023229123,0.00040002964437007904,0.6665504185684918,0.9998256278527378,5
+all_reduce,4,pow4,1048576,0.0008780570328235627,0.0008740326296538115,0.0008815419673919678,1.1942003318714964,1.7913004978072447,5
+all_reduce,4,pow4,4194304,0.002448402950540185,0.002421696321107447,0.0024937425972893835,1.7130774977520025,2.5696162466280037,5
+all_reduce,4,pow4,16777216,0.008246319368481636,0.008124426682479681,0.009236367745324969,2.034509609720479,3.0517644145807186,5
+all_reduce,4,grad_resnet18_cifar,44695848,0.021945101441815495,0.021645850432105363,0.022049423051066698,2.0367118428914566,3.055067764337185,5
+all_reduce,4,pow4,67108864,0.032826480688527226,0.03271997550036758,0.03300232037436217,2.0443514684610826,3.066527202691624,5
+all_reduce,4,grad_alexnet_gray,233687968,0.1191354500129819,0.11563271572813391,0.12094995742663742,1.9615317520900422,2.942297628135063,5
+all_reduce,4,pow4,268435456,0.1354428216814995,0.13254276476800442,0.14237904623150827,1.981909802730183,2.9728647040952745,5
+all_reduce,4,grad_vgg16_cifar,537206056,0.26610192377120256,0.26483346177265044,0.27666992591693995,2.0187980920494804,3.0281971380742205,5
+all_reduce,4,pow4,1073741824,0.5241515705361962,0.5213389857672155,0.5316529068164528,2.0485330663067254,3.072799599460088,5
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:45:15Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 0.00011838340932912967,
+      "B_GBps": 2.8915401348949765,
+      "max_rel_err": 0.3826465471160786
+    }
+  },
+  "quick": false
+}
+----- END FILE fit.json -----
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=128, b_global=128, step_s=0.02272, p25_s=0.02263, p75_s=0.02274, t_fwd_s=0.009812, t_bwd_s=0.01261, t_comm_s=3.981e-07, t_opt_s=0.0002952, img_s=5634, img_s_per_gpu=5634, steps=40
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=512, b_global=512, step_s=0.07569, p25_s=0.07554, p75_s=0.07587, t_fwd_s=0.02444, t_bwd_s=0.0509, t_comm_s=4.489e-07, t_opt_s=0.0002997, img_s=6765, img_s_per_gpu=6765, steps=40
+  model=vgg16_cifar, params=134301514, k=1, mode=local, scaling=weak, b_gpu=128, b_global=128, step_s=0.01589, p25_s=0.01583, p75_s=0.0161, t_fwd_s=0.006059, t_bwd_s=0.008092, t_comm_s=3.879e-07, t_opt_s=0.001729, img_s=8057, img_s_per_gpu=8057, steps=40
+  model=vgg16_cifar, params=134301514, k=1, mode=local, scaling=strong, b_gpu=512, b_global=512, step_s=0.04902, p25_s=0.04893, p75_s=0.04923, t_fwd_s=0.01673, t_bwd_s=0.03051, t_comm_s=4.028e-07, t_opt_s=0.001732, img_s=1.045e+04, img_s_per_gpu=1.045e+04, steps=40
+  model=alexnet_gray, params=58421992, k=1, mode=local, scaling=weak, b_gpu=128, b_global=128, step_s=0.01436, p25_s=0.01434, p75_s=0.01444, t_fwd_s=0.007083, t_bwd_s=0.006474, t_comm_s=3.93e-07, t_opt_s=0.0007966, img_s=8912, img_s_per_gpu=8912, steps=40
+  model=alexnet_gray, params=58421992, k=1, mode=local, scaling=strong, b_gpu=512, b_global=512, step_s=0.04791, p25_s=0.04788, p75_s=0.04817, t_fwd_s=0.02464, t_bwd_s=0.02245, t_comm_s=4.014e-07, t_opt_s=0.0008068, img_s=1.069e+04, img_s_per_gpu=1.069e+04, steps=40
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:45:22Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 128,
+      "vgg16_cifar": 128,
+      "alexnet_gray": 128
+    },
+    "strong_global": {
+      "resnet18_cifar": 512,
+      "vgg16_cifar": 512,
+      "alexnet_gray": 512
+    },
+    "warmup": 10,
+    "steps": 40
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,128,128,0.022718168795108795,0.022629250772297382,0.022737364284694195,0.00981201883405447,0.012613701168447733,3.9814040064811707e-07,0.0002951524220407009,5634.25693128745,5634.25693128745,40
+resnet18_cifar,11173962,1,local,strong,512,512,0.07568735675886273,0.07554016029462218,0.07587158610112965,0.02443977491930127,0.05089631350710988,4.4889748096466064e-07,0.00029968516901135445,6764.670110375423,6764.670110375423,40
+vgg16_cifar,134301514,1,local,weak,128,128,0.015885838773101568,0.015828200383111835,0.016098456224426627,0.006059091538190842,0.008092415519058704,3.878958523273468e-07,0.0017292960546910763,8057.490814821429,8057.490814821429,40
+vgg16_cifar,134301514,1,local,strong,512,512,0.04901744844391942,0.048928596545010805,0.049234315287321806,0.016732099000364542,0.030506996903568506,4.0279701352119446e-07,0.0017317645251750946,10445.260131925803,10445.260131925803,40
+alexnet_gray,58421992,1,local,weak,128,128,0.014362674672156572,0.014335406012833118,0.014438804937526584,0.0070825074799358845,0.006474388297647238,3.9301812648773193e-07,0.0007965783588588238,8911.989091289544,8911.989091289544,40
+alexnet_gray,58421992,1,local,strong,512,512,0.04790902556851506,0.04787837830372155,0.04816798120737076,0.024644439108669758,0.02244915720075369,4.0140002965927124e-07,0.0008067972958087921,10686.921596177841,10686.921596177841,40
+----- END FILE scaling.csv -----
+[rank1]:[W1122 07:45:43.918700014 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 07:45:44.016946352 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=128, b_global=256, step_s=0.02279, p25_s=0.02269, p75_s=0.02284, t_fwd_s=0.009845, t_bwd_s=0.01265, t_comm_s=4.335e-07, t_opt_s=0.0003029, img_s=1.123e+04, img_s_per_gpu=5616, steps=40
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=128, b_global=256, step_s=0.03572, p25_s=0.03528, p75_s=0.03622, t_fwd_s=0.009833, t_bwd_s=0.01227, t_comm_s=0.01334, t_opt_s=0.0002698, img_s=7167, img_s_per_gpu=3584, steps=40
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=128, b_global=256, step_s=0.02614, p25_s=0.02603, p75_s=0.02625, t_fwd_s=0.0104, t_bwd_s=0.01544, t_comm_s=4.228e-07, t_opt_s=0.0003095, img_s=9795, img_s_per_gpu=4898, steps=40
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=256, b_global=512, step_s=0.04165, p25_s=0.04161, p75_s=0.04171, t_fwd_s=0.01723, t_bwd_s=0.02411, t_comm_s=4.387e-07, t_opt_s=0.0003031, img_s=1.229e+04, img_s_per_gpu=6147, steps=40
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=256, b_global=512, step_s=0.05468, p25_s=0.05424, p75_s=0.0551, t_fwd_s=0.01721, t_bwd_s=0.02413, t_comm_s=0.01309, t_opt_s=0.0002663, img_s=9363, img_s_per_gpu=4682, steps=40
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=256, b_global=512, step_s=0.04484, p25_s=0.04479, p75_s=0.04493, t_fwd_s=0.01779, t_bwd_s=0.02673, t_comm_s=4.251e-07, t_opt_s=0.0003096, img_s=1.142e+04, img_s_per_gpu=5710, steps=40
+  model=vgg16_cifar, params=134301514, k=2, mode=local, scaling=weak, b_gpu=128, b_global=256, step_s=0.01585, p25_s=0.01582, p75_s=0.01588, t_fwd_s=0.006059, t_bwd_s=0.008058, t_comm_s=4.34e-07, t_opt_s=0.001736, img_s=1.615e+04, img_s_per_gpu=8076, steps=40
+  model=vgg16_cifar, params=134301514, k=2, mode=manual, scaling=weak, b_gpu=128, b_global=256, step_s=0.1355, p25_s=0.1344, p75_s=0.1363, t_fwd_s=0.00605, t_bwd_s=0.00868, t_comm_s=0.119, t_opt_s=0.001709, img_s=1890, img_s_per_gpu=945, steps=40
+  model=vgg16_cifar, params=134301514, k=2, mode=ddp, scaling=weak, b_gpu=128, b_global=256, step_s=0.1293, p25_s=0.1282, p75_s=0.1305, t_fwd_s=0.006103, t_bwd_s=0.1215, t_comm_s=4.778e-07, t_opt_s=0.001735, img_s=1980, img_s_per_gpu=989.9, steps=40
+  model=vgg16_cifar, params=134301514, k=2, mode=local, scaling=strong, b_gpu=256, b_global=512, step_s=0.02684, p25_s=0.02681, p75_s=0.02687, t_fwd_s=0.00971, t_bwd_s=0.01541, t_comm_s=4.326e-07, t_opt_s=0.00173, img_s=1.908e+04, img_s_per_gpu=9538, steps=40
+  model=vgg16_cifar, params=134301514, k=2, mode=manual, scaling=strong, b_gpu=256, b_global=512, step_s=0.1465, p25_s=0.1451, p75_s=0.1485, t_fwd_s=0.009712, t_bwd_s=0.01543, t_comm_s=0.1196, t_opt_s=0.001704, img_s=3496, img_s_per_gpu=1748, steps=40
+  model=vgg16_cifar, params=134301514, k=2, mode=ddp, scaling=strong, b_gpu=256, b_global=512, step_s=0.1316, p25_s=0.1306, p75_s=0.1331, t_fwd_s=0.009761, t_bwd_s=0.12, t_comm_s=4.908e-07, t_opt_s=0.001745, img_s=3892, img_s_per_gpu=1946, steps=40
+  model=alexnet_gray, params=58421992, k=2, mode=local, scaling=weak, b_gpu=128, b_global=256, step_s=0.0146, p25_s=0.01437, p75_s=0.01482, t_fwd_s=0.007091, t_bwd_s=0.006703, t_comm_s=4.452e-07, t_opt_s=0.0008042, img_s=1.754e+04, img_s_per_gpu=8768, steps=40
+  model=alexnet_gray, params=58421992, k=2, mode=manual, scaling=weak, b_gpu=128, b_global=256, step_s=0.06888, p25_s=0.0681, p75_s=0.06998, t_fwd_s=0.007073, t_bwd_s=0.006991, t_comm_s=0.0541, t_opt_s=0.0007755, img_s=3717, img_s_per_gpu=1858, steps=40
+  model=alexnet_gray, params=58421992, k=2, mode=ddp, scaling=weak, b_gpu=128, b_global=256, step_s=0.06316, p25_s=0.06229, p75_s=0.06425, t_fwd_s=0.007123, t_bwd_s=0.05523, t_comm_s=4.377e-07, t_opt_s=0.0008098, img_s=4053, img_s_per_gpu=2027, steps=40
+  model=alexnet_gray, params=58421992, k=2, mode=local, scaling=strong, b_gpu=256, b_global=512, step_s=0.02572, p25_s=0.0257, p75_s=0.02575, t_fwd_s=0.01301, t_bwd_s=0.0119, t_comm_s=4.419e-07, t_opt_s=0.0008039, img_s=1.991e+04, img_s_per_gpu=9954, steps=40
+  model=alexnet_gray, params=58421992, k=2, mode=manual, scaling=strong, b_gpu=256, b_global=512, step_s=0.07923, p25_s=0.0787, p75_s=0.07982, t_fwd_s=0.013, t_bwd_s=0.01224, t_comm_s=0.05317, t_opt_s=0.0007773, img_s=6462, img_s_per_gpu=3231, steps=40
+  model=alexnet_gray, params=58421992, k=2, mode=ddp, scaling=strong, b_gpu=256, b_global=512, step_s=0.06829, p25_s=0.06763, p75_s=0.06902, t_fwd_s=0.01304, t_bwd_s=0.05444, t_comm_s=4.023e-07, t_opt_s=0.0008034, img_s=7498, img_s_per_gpu=3749, steps=40
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:45:42Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 128,
+      "vgg16_cifar": 128,
+      "alexnet_gray": 128
+    },
+    "strong_global": {
+      "resnet18_cifar": 512,
+      "vgg16_cifar": 512,
+      "alexnet_gray": 512
+    },
+    "warmup": 10,
+    "steps": 40
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,128,256,0.022791412193328142,0.02269066753797233,0.022836637683212757,0.009844597429037094,0.012651149183511734,4.3353065848350525e-07,0.00030285026878118515,11232.300913540597,5616.150456770299,40
+resnet18_cifar,11173962,2,manual,weak,128,256,0.03571848897263408,0.035284602316096425,0.03621562453918159,0.009833174291998148,0.012265913654118776,0.013338674325495958,0.00026983674615621567,7167.156488510358,3583.578244255179,40
+resnet18_cifar,11173962,2,ddp,weak,128,256,0.026135174091905355,0.026034864131361246,0.026251669507473707,0.010399365797638893,0.015435092616826296,4.2282044887542725e-07,0.00030951108783483505,9795.22841897919,4897.614209489595,40
+resnet18_cifar,11173962,2,local,strong,256,512,0.04164549522101879,0.04161066724918783,0.041707047494128346,0.017227828036993742,0.02411419292911887,4.386529326438904e-07,0.00030308542773127556,12294.246887514253,6147.123443757127,40
+resnet18_cifar,11173962,2,manual,strong,256,512,0.05468205455690622,0.05424439371563494,0.05510004237294197,0.017207613214850426,0.024129473604261875,0.013087352737784386,0.0002662953920662403,9363.218045641914,4681.609022820957,40
+resnet18_cifar,11173962,2,ddp,strong,256,512,0.04483601450920105,0.0447935457341373,0.04492811323143542,0.017786625307053328,0.026730685494840145,4.2514875531196594e-07,0.00030955858528614044,11419.391433530061,5709.695716765031,40
+vgg16_cifar,134301514,2,local,weak,128,256,0.01584949530661106,0.01581583684310317,0.01587696699425578,0.006058927625417709,0.008057973813265562,4.33996319770813e-07,0.0017358409240841866,16151.933865882693,8075.966932941346,40
+vgg16_cifar,134301514,2,manual,weak,128,256,0.13545367773622274,0.1344230859540403,0.1362616433762014,0.00604991614818573,0.008680353406816721,0.11898956168442965,0.0017094328068196774,1889.9449928448935,944.9724964224467,40
+vgg16_cifar,134301514,2,ddp,weak,128,256,0.12929973797872663,0.12820366863161325,0.13054859964177012,0.00610304856672883,0.1214646645821631,4.777684807777405e-07,0.0017346865497529507,1979.895736850751,989.9478684253755,40
+vgg16_cifar,134301514,2,local,strong,256,512,0.026840553153306246,0.02681322582066059,0.026867761509492993,0.009709556121379137,0.01540678646415472,4.3259933590888977e-07,0.0017295372672379017,19075.612826441742,9537.806413220871,40
+vgg16_cifar,134301514,2,manual,strong,256,512,0.1464621932245791,0.14510876475833356,0.14848373644053936,0.009711816441267729,0.015430321916937828,0.11964352568611503,0.001704290509223938,3495.7826912705063,1747.8913456352532,40
+vgg16_cifar,134301514,2,ddp,strong,256,512,0.13155417749658227,0.13061983650550246,0.13314853236079216,0.009760678745806217,0.11996613536030054,4.908069968223572e-07,0.001744681503623724,3891.932660316329,1945.9663301581645,40
+alexnet_gray,58421992,2,local,weak,128,256,0.014599149115383625,0.014370907796546817,0.014818489085882902,0.007090848404914141,0.0067026144824922085,4.4517219066619873e-07,0.0008041705004870892,17535.268526728316,8767.634263364158,40
+alexnet_gray,58421992,2,manual,weak,128,256,0.06887873401865363,0.06810436677187681,0.06997607997618616,0.007073031738400459,0.00699113542214036,0.054098866414278746,0.0007755300030112267,3716.6769053953644,1858.3384526976822,40
+alexnet_gray,58421992,2,ddp,weak,128,256,0.06316304253414273,0.06229063309729099,0.06425449275411665,0.007123137358576059,0.05522559257224202,4.377216100692749e-07,0.0008097905665636063,4053.002986067674,2026.501493033837,40
+alexnet_gray,58421992,2,local,strong,256,512,0.02571851760149002,0.0256984937004745,0.02575079002417624,0.013013133313506842,0.011904181446880102,4.4191256165504456e-07,0.0008038720116019249,19907.834811223212,9953.917405611606,40
+alexnet_gray,58421992,2,manual,strong,256,512,0.07923035090789199,0.07870270451530814,0.07982153864577413,0.01299986895173788,0.012244847603142262,0.053171854466199875,0.0007772874087095261,6462.170041316838,3231.085020658419,40
+alexnet_gray,58421992,2,ddp,strong,256,512,0.06828893488273025,0.06763331848196685,0.06902067014016211,0.01304438291117549,0.05443501379340887,4.023313522338867e-07,0.0008033821359276772,7497.554338477183,3748.7771692385913,40
+----- END FILE scaling.csv -----
+[rank3]:[W1122 07:46:58.700396683 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 07:46:58.757667958 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 07:46:58.758964163 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 07:46:58.979461001 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=128, b_global=512, step_s=0.02288, p25_s=0.02229, p75_s=0.02295, t_fwd_s=0.009908, t_bwd_s=0.01262, t_comm_s=4.484e-07, t_opt_s=0.0003306, img_s=2.237e+04, img_s_per_gpu=5594, steps=40
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=128, b_global=512, step_s=0.05157, p25_s=0.05042, p75_s=0.05254, t_fwd_s=0.009899, t_bwd_s=0.01197, t_comm_s=0.02944, t_opt_s=0.0002966, img_s=9927, img_s_per_gpu=2482, steps=40
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=128, b_global=512, step_s=0.04186, p25_s=0.0415, p75_s=0.0424, t_fwd_s=0.01047, t_bwd_s=0.03097, t_comm_s=4.82e-07, t_opt_s=0.000335, img_s=1.223e+04, img_s_per_gpu=3058, steps=40
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=128, b_global=512, step_s=0.02209, p25_s=0.02205, p75_s=0.02218, t_fwd_s=0.009855, t_bwd_s=0.01194, t_comm_s=3.474e-07, t_opt_s=0.0002921, img_s=2.318e+04, img_s_per_gpu=5794, steps=40
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=128, b_global=512, step_s=0.05119, p25_s=0.04991, p75_s=0.05265, t_fwd_s=0.009883, t_bwd_s=0.01197, t_comm_s=0.02912, t_opt_s=0.0002896, img_s=1e+04, img_s_per_gpu=2500, steps=40
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=128, b_global=512, step_s=0.03933, p25_s=0.03878, p75_s=0.03983, t_fwd_s=0.0106, t_bwd_s=0.02846, t_comm_s=5.146e-07, t_opt_s=0.0003431, img_s=1.302e+04, img_s_per_gpu=3255, steps=40
+  model=vgg16_cifar, params=134301514, k=4, mode=local, scaling=weak, b_gpu=128, b_global=512, step_s=0.01641, p25_s=0.01627, p75_s=0.01644, t_fwd_s=0.006062, t_bwd_s=0.008624, t_comm_s=3.795e-07, t_opt_s=0.001727, img_s=3.12e+04, img_s_per_gpu=7799, steps=40
+  model=vgg16_cifar, params=134301514, k=4, mode=manual, scaling=weak, b_gpu=128, b_global=512, step_s=0.3001, p25_s=0.2865, p75_s=0.3061, t_fwd_s=0.006181, t_bwd_s=0.00869, t_comm_s=0.2833, t_opt_s=0.001836, img_s=1706, img_s_per_gpu=426.6, steps=40
+  model=vgg16_cifar, params=134301514, k=4, mode=ddp, scaling=weak, b_gpu=128, b_global=512, step_s=0.2967, p25_s=0.2796, p75_s=0.3013, t_fwd_s=0.006224, t_bwd_s=0.2887, t_comm_s=7.753e-07, t_opt_s=0.00186, img_s=1726, img_s_per_gpu=431.4, steps=40
+  model=vgg16_cifar, params=134301514, k=4, mode=local, scaling=strong, b_gpu=128, b_global=512, step_s=0.01621, p25_s=0.01592, p75_s=0.01643, t_fwd_s=0.006066, t_bwd_s=0.008421, t_comm_s=3.679e-07, t_opt_s=0.001729, img_s=3.158e+04, img_s_per_gpu=7895, steps=40
+  model=vgg16_cifar, params=134301514, k=4, mode=manual, scaling=strong, b_gpu=128, b_global=512, step_s=0.2959, p25_s=0.2853, p75_s=0.307, t_fwd_s=0.006185, t_bwd_s=0.00867, t_comm_s=0.279, t_opt_s=0.001817, img_s=1730, img_s_per_gpu=432.5, steps=40
+  model=vgg16_cifar, params=134301514, k=4, mode=ddp, scaling=strong, b_gpu=128, b_global=512, step_s=0.2909, p25_s=0.2755, p75_s=0.301, t_fwd_s=0.006221, t_bwd_s=0.2828, t_comm_s=7.683e-07, t_opt_s=0.001857, img_s=1760, img_s_per_gpu=440, steps=40
+  model=alexnet_gray, params=58421992, k=4, mode=local, scaling=weak, b_gpu=128, b_global=512, step_s=0.0149, p25_s=0.01488, p75_s=0.01492, t_fwd_s=0.007092, t_bwd_s=0.007014, t_comm_s=3.772e-07, t_opt_s=0.0007958, img_s=3.435e+04, img_s_per_gpu=8588, steps=40
+  model=alexnet_gray, params=58421992, k=4, mode=manual, scaling=weak, b_gpu=128, b_global=512, step_s=0.1427, p25_s=0.1371, p75_s=0.1446, t_fwd_s=0.007127, t_bwd_s=0.006995, t_comm_s=0.1276, t_opt_s=0.0008343, img_s=3589, img_s_per_gpu=897.3, steps=40
+  model=alexnet_gray, params=58421992, k=4, mode=ddp, scaling=weak, b_gpu=128, b_global=512, step_s=0.1236, p25_s=0.1217, p75_s=0.1251, t_fwd_s=0.007176, t_bwd_s=0.1156, t_comm_s=5.253e-07, t_opt_s=0.0008671, img_s=4143, img_s_per_gpu=1036, steps=40
+  model=alexnet_gray, params=58421992, k=4, mode=local, scaling=strong, b_gpu=128, b_global=512, step_s=0.01488, p25_s=0.01446, p75_s=0.0149, t_fwd_s=0.007088, t_bwd_s=0.007004, t_comm_s=3.707e-07, t_opt_s=0.0007969, img_s=3.44e+04, img_s_per_gpu=8601, steps=40
+  model=alexnet_gray, params=58421992, k=4, mode=manual, scaling=strong, b_gpu=128, b_global=512, step_s=0.1445, p25_s=0.1412, p75_s=0.1455, t_fwd_s=0.007135, t_bwd_s=0.007047, t_comm_s=0.1294, t_opt_s=0.0008485, img_s=3544, img_s_per_gpu=886, steps=40
+  model=alexnet_gray, params=58421992, k=4, mode=ddp, scaling=strong, b_gpu=128, b_global=512, step_s=0.1378, p25_s=0.1369, p75_s=0.1405, t_fwd_s=0.007186, t_bwd_s=0.1298, t_comm_s=5.611e-07, t_opt_s=0.0008818, img_s=3716, img_s_per_gpu=928.9, steps=40
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:46:57Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 128,
+      "vgg16_cifar": 128,
+      "alexnet_gray": 128
+    },
+    "strong_global": {
+      "resnet18_cifar": 512,
+      "vgg16_cifar": 512,
+      "alexnet_gray": 512
+    },
+    "warmup": 10,
+    "steps": 40
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,128,512,0.022883464116603136,0.02228528051637113,0.02295497222803533,0.009908381849527359,0.012623760383576155,4.484318196773529e-07,0.0003305785357952118,22374.234835735275,5593.558708933819,40
+resnet18_cifar,11173962,4,manual,weak,128,512,0.05157438525930047,0.05041957669891417,0.05253777978941798,0.009898933116346598,0.011968543753027916,0.029436531011015177,0.0002965782769024372,9927.408682155265,2481.852170538816,40
+resnet18_cifar,11173962,4,ddp,weak,128,512,0.04186220746487379,0.04150033229961991,0.04240392963401973,0.010471104644238949,0.030973846558481455,4.819594323635101e-07,0.0003350493498146534,12230.602039551179,3057.6505098877947,40
+resnet18_cifar,11173962,4,local,strong,128,512,0.022090778220444918,0.022052210988476872,0.022179474122822285,0.009855376090854406,0.011942362878471613,3.473833203315735e-07,0.00029212795197963715,23177.092037714916,5794.273009428729,40
+resnet18_cifar,11173962,4,manual,strong,128,512,0.05119151761755347,0.04990867548622191,0.05265334993600845,0.009882916696369648,0.011972082313150167,0.02911915211006999,0.0002895737998187542,10001.656989837633,2500.414247459408,40
+resnet18_cifar,11173962,4,ddp,strong,128,512,0.03932687779888511,0.03877500561065972,0.039834978291764855,0.010600075591355562,0.028458680491894484,5.145557224750519e-07,0.00034314487129449844,13019.085893834035,3254.771473458509,40
+vgg16_cifar,134301514,4,local,weak,128,512,0.016411498188972473,0.01626519486308098,0.016437303507700562,0.006061824969947338,0.008623512461781502,3.795139491558075e-07,0.0017266063950955868,31197.63924685638,7799.409811714095,40
+vgg16_cifar,134301514,4,manual,weak,128,512,0.3000803580507636,0.28646982437931,0.3060966490302235,0.006181163247674704,0.008689877111464739,0.283287035766989,0.0018362924456596375,1706.2096410635002,426.55241026587504,40
+vgg16_cifar,134301514,4,ddp,weak,128,512,0.2967250351794064,0.2795920551288873,0.3013141874689609,0.006224292330443859,0.2886676308698952,7.753260433673859e-07,0.0018602851778268814,1725.5032076765403,431.3758019191351,40
+vgg16_cifar,134301514,4,local,strong,128,512,0.016213384456932545,0.01592370099388063,0.01643020799383521,0.006066241301596165,0.008420778438448906,3.67872416973114e-07,0.0017293505370616913,31578.847794550275,7894.711948637569,40
+vgg16_cifar,134301514,4,manual,strong,128,512,0.29594254959374666,0.28532675723545253,0.30698090186342597,0.006185358390212059,0.008669683709740639,0.27897515147924423,0.0018172655254602432,1730.0655167796754,432.51637919491884,40
+vgg16_cifar,134301514,4,ddp,strong,128,512,0.2909388653934002,0.2755228294990957,0.3009700016118586,0.006221051327884197,0.28275941452011466,7.683411240577698e-07,0.0018570628017187119,1759.819882804886,439.9549707012215,40
+alexnet_gray,58421992,4,local,weak,128,512,0.014904271811246872,0.014884145930409431,0.014918393455445766,0.007092166226357222,0.007014361675828695,3.771856427192688e-07,0.0007958319038152695,34352.567269582476,8588.141817395619,40
+alexnet_gray,58421992,4,manual,weak,128,512,0.14265052881091833,0.13707794528454542,0.14461156260222197,0.007127373944967985,0.006994951982051134,0.1276495261117816,0.0008343355730175972,3589.191040985556,897.297760246389,40
+alexnet_gray,58421992,4,ddp,weak,128,512,0.123590515460819,0.12174458662047982,0.1251112485770136,0.007175834849476814,0.11555857537314296,5.252659320831299e-07,0.0008670929819345474,4142.712716189905,1035.6781790474763,40
+alexnet_gray,58421992,4,local,strong,128,512,0.01488281274214387,0.014462144114077091,0.014903280418366194,0.007087502628564835,0.007004421669989824,3.7066638469696045e-07,0.0007968931458890438,34402.099177809476,8600.524794452369,40
+alexnet_gray,58421992,4,manual,strong,128,512,0.14447155594825745,0.1412434009835124,0.1454878926742822,0.007134739775210619,0.007047274149954319,0.1294039124622941,0.0008484986610710621,3543.95020278852,885.98755069713,40
+alexnet_gray,58421992,4,ddp,strong,128,512,0.137797431088984,0.13694119965657592,0.14051622268743813,0.007186128757894039,0.1297516943886876,5.611218512058258e-07,0.0008817953057587147,3715.599020633201,928.8997551583002,40
+----- END FILE scaling.csv -----
+##### E9 net=native S/T=1
+  arch=vgg16, S=1, M=1, b_global=512, b_micro=512, params_M=134.3, step_s=0.04772, samples_s=1.073e+04, peak_mem_GB_max=3.084, peak_mem_GB_min=3.084, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=vgg16, S=1, M=2, b_global=512, b_micro=256, params_M=134.3, step_s=0.04992, samples_s=1.026e+04, peak_mem_GB_max=3.084, peak_mem_GB_min=3.084, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=vgg16, S=1, M=4, b_global=512, b_micro=128, params_M=134.3, step_s=0.05816, samples_s=8803, peak_mem_GB_max=3.084, peak_mem_GB_min=3.084, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=vgg16, S=1, M=8, b_global=512, b_micro=64, params_M=134.3, step_s=0.07554, samples_s=6778, peak_mem_GB_max=3.084, peak_mem_GB_min=3.084, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=vgg16, S=1, M=16, b_global=512, b_micro=32, params_M=134.3, step_s=0.1002, samples_s=5109, peak_mem_GB_max=3.084, peak_mem_GB_min=3.084, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=1, b_global=4096, b_micro=4096, params_M=1074, step_s=0.5079, samples_s=8064, peak_mem_GB_max=9.067, peak_mem_GB_min=9.067, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=2, b_global=4096, b_micro=2048, params_M=1074, step_s=0.5103, samples_s=8027, peak_mem_GB_max=10.34, peak_mem_GB_min=10.34, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=4, b_global=4096, b_micro=1024, params_M=1074, step_s=0.5215, samples_s=7854, peak_mem_GB_max=10.77, peak_mem_GB_min=10.77, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=8, b_global=4096, b_micro=512, params_M=1074, step_s=0.5466, samples_s=7493, peak_mem_GB_max=10.96, peak_mem_GB_min=10.96, sent_MB_per_step=0, bubble_theory=0, status=ok
+  arch=mlp, S=1, M=16, b_global=4096, b_micro=256, params_M=1074, step_s=0.624, samples_s=6564, peak_mem_GB_max=11.09, peak_mem_GB_min=11.09, sent_MB_per_step=0, bubble_theory=0, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:48:58Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,1,1,512,512,134.301514,0.047722806222736835,10728.623074056886,3.084296703338623,3.084296703338623,0.0,0.0,ok
+vgg16,1,2,512,256,134.301514,0.049920532293617724,10256.300894160508,3.084296703338623,3.084296703338623,0.0,0.0,ok
+vgg16,1,4,512,128,134.301514,0.058164328522980216,8802.646106328095,3.084296703338623,3.084296703338623,0.0,0.0,ok
+vgg16,1,8,512,64,134.301514,0.07553683929145336,6778.149639336715,3.084296703338623,3.084296703338623,0.0,0.0,ok
+vgg16,1,16,512,32,134.301514,0.10021937321871519,5108.792677066833,3.084296703338623,3.084296703338623,0.0,0.0,ok
+mlp,1,1,4096,4096,1073.954826,0.5079329876229167,8064.055888885919,9.066844940185547,9.066844940185547,0.0,0.0,ok
+mlp,1,2,4096,2048,1073.954826,0.5102967808023096,8026.701625591485,10.337752342224121,10.337752342224121,0.0,0.0,ok
+mlp,1,4,4096,1024,1073.954826,0.5214945470914245,7854.348665474962,10.77396011352539,10.77396011352539,0.0,0.0,ok
+mlp,1,8,4096,512,1073.954826,0.5466316709294915,7493.16261356604,10.95955753326416,10.95955753326416,0.0,0.0,ok
+mlp,1,16,4096,256,1073.954826,0.623997900635004,6564.124648226788,11.085386276245117,11.085386276245117,0.0,0.0,ok
+----- END FILE pipeline.csv -----
+  T=1, L=8, H=8192, tokens=4096, params_M_total=4295, params_M_per_rank=4295, step_s=1.999, tokens_s=2049, allreduce_msg_MB=134.2, allreduce_per_step=0, comm_GB_per_step_algo=0, peak_mem_GB=35.25, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:49:27Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 8,
+    "H": 8192,
+    "tokens": 4096
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+1,8,8192,4096,4295.22944,4295.22944,1.9991382939430575,2048.8827673452934,134.217728,0,0.0,35.251030016,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=native S/T=2
+[vgg16] stage split (layer ranges): [(0, 19), (19, 40)]
+  arch=vgg16, S=2, M=1, b_global=512, b_micro=512, params_M=134.3, step_s=0.04716, samples_s=1.086e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.5, status=ok
+  arch=vgg16, S=2, M=2, b_global=512, b_micro=256, params_M=134.3, step_s=0.03766, samples_s=1.36e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.3333, status=ok
+  arch=vgg16, S=2, M=4, b_global=512, b_micro=128, params_M=134.3, step_s=0.03689, samples_s=1.388e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.2, status=ok
+  arch=vgg16, S=2, M=8, b_global=512, b_micro=64, params_M=134.3, step_s=0.04516, samples_s=1.134e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.1111, status=ok
+  arch=vgg16, S=2, M=16, b_global=512, b_micro=32, params_M=134.3, step_s=0.06597, samples_s=7761, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.05882, status=ok
+[mlp] stage split (layer ranges): [(0, 8), (8, 17)]
+  arch=mlp, S=2, M=1, b_global=4096, b_micro=4096, params_M=1074, step_s=0.5064, samples_s=8088, peak_mem_GB_max=5.038, peak_mem_GB_min=4.905, sent_MB_per_step=268.4, bubble_theory=0.5, status=ok
+  arch=mlp, S=2, M=2, b_global=4096, b_micro=2048, params_M=1074, step_s=0.3866, samples_s=1.059e+04, peak_mem_GB_max=5.705, peak_mem_GB_min=5.571, sent_MB_per_step=268.4, bubble_theory=0.3333, status=ok
+  arch=mlp, S=2, M=4, b_global=4096, b_micro=1024, params_M=1074, step_s=0.3315, samples_s=1.236e+04, peak_mem_GB_max=5.772, peak_mem_GB_min=5.706, sent_MB_per_step=268.4, bubble_theory=0.2, status=ok
+  arch=mlp, S=2, M=8, b_global=4096, b_micro=512, params_M=1074, step_s=0.3141, samples_s=1.304e+04, peak_mem_GB_max=5.773, peak_mem_GB_min=5.739, sent_MB_per_step=268.4, bubble_theory=0.1111, status=ok
+  arch=mlp, S=2, M=16, b_global=4096, b_micro=256, params_M=1074, step_s=0.3402, samples_s=1.204e+04, peak_mem_GB_max=5.807, peak_mem_GB_min=5.79, sent_MB_per_step=268.4, bubble_theory=0.05882, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:49:49Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,2,1,512,512,134.301514,0.04716237224638462,10856.11209981595,2.384899139404297,1.8416311740875244,33.5544319152832,0.5,ok
+vgg16,2,2,512,256,134.301514,0.03765588235110044,13596.813247559912,2.384899139404297,1.8416311740875244,33.5544319152832,0.3333333333333333,ok
+vgg16,2,4,512,128,134.301514,0.03688687141984701,13880.277190559402,2.384899139404297,1.8416311740875244,33.5544319152832,0.2,ok
+vgg16,2,8,512,64,134.301514,0.04515621066093445,11338.41818226217,2.384899139404297,1.8416311740875244,33.5544319152832,0.1111111111111111,ok
+vgg16,2,16,512,32,134.301514,0.06596892327070236,7761.230206820515,2.384899139404297,1.8416311740875244,33.5544319152832,0.058823529411764705,ok
+mlp,2,1,4096,4096,1073.954826,0.506446136534214,8087.730766454936,5.037887096405029,4.9045233726501465,268.4354553222656,0.5,ok
+mlp,2,2,4096,2048,1073.954826,0.38661717269569634,10594.459556570015,5.7048139572143555,5.571450233459473,268.4354553222656,0.3333333333333333,ok
+mlp,2,4,4096,1024,1073.954826,0.33145554456859827,12357.614971658104,5.771923065185547,5.705667972564697,268.4354553222656,0.2,ok
+mlp,2,8,4096,512,1073.954826,0.31411116346716883,13039.969527947444,5.772971153259277,5.739222049713135,268.4354553222656,0.1111111111111111,ok
+mlp,2,16,4096,256,1073.954826,0.34022706337273123,12039.018764103083,5.806525230407715,5.789553642272949,268.4354553222656,0.058823529411764705,ok
+----- END FILE pipeline.csv -----
+  T=2, L=8, H=8192, tokens=4096, params_M_total=4295, params_M_per_rank=2148, step_s=1.02, tokens_s=4015, allreduce_msg_MB=134.2, allreduce_per_step=16, comm_GB_per_step_algo=2.147, peak_mem_GB=17.79, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:50:15Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 8,
+    "H": 8192,
+    "tokens": 4096
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+2,8,8192,4096,4295.22944,2147.61472,1.0202592986946304,4014.665688654465,134.217728,16,2.1474836479999997,17.793288192,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=native S/T=4
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+  arch=vgg16, S=4, M=1, b_global=512, b_micro=512, params_M=134.3, step_s=0.04766, samples_s=1.074e+04, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=512, b_micro=256, params_M=134.3, step_s=0.03283, samples_s=1.56e+04, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.6, status=ok
+  arch=vgg16, S=4, M=4, b_global=512, b_micro=128, params_M=134.3, step_s=0.02731, samples_s=1.875e+04, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.4286, status=ok
+  arch=vgg16, S=4, M=8, b_global=512, b_micro=64, params_M=134.3, step_s=0.02932, samples_s=1.746e+04, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.2727, status=ok
+  arch=vgg16, S=4, M=16, b_global=512, b_micro=32, params_M=134.3, step_s=0.03853, samples_s=1.329e+04, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.1579, status=ok
+[mlp] stage split (layer ranges): [(0, 4), (4, 8), (8, 12), (12, 17)]
+  arch=mlp, S=4, M=1, b_global=4096, b_micro=4096, params_M=1074, step_s=0.5059, samples_s=8097, peak_mem_GB_max=3.024, peak_mem_GB_min=2.757, sent_MB_per_step=805.3, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=4096, b_micro=2048, params_M=1074, step_s=0.3218, samples_s=1.273e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.6, status=ok
+  arch=mlp, S=4, M=4, b_global=4096, b_micro=1024, params_M=1074, step_s=0.2319, samples_s=1.766e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.4286, status=ok
+  arch=mlp, S=4, M=8, b_global=4096, b_micro=512, params_M=1074, step_s=0.1924, samples_s=2.129e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.2727, status=ok
+  arch=mlp, S=4, M=16, b_global=4096, b_micro=256, params_M=1074, step_s=0.1913, samples_s=2.142e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.1579, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:50:33Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,512,512,134.301514,0.04766315948218107,10742.049112195591,1.8198630809783936,1.1058605909347534,169.8693084716797,0.75,ok
+vgg16,4,2,512,256,134.301514,0.032826711796224116,15597.05410576312,1.8198630809783936,1.1058605909347534,169.8693084716797,0.6,ok
+vgg16,4,4,512,128,134.301514,0.027307930402457714,18749.132301652564,1.8198630809783936,1.1058605909347534,169.8693084716797,0.42857142857142855,ok
+vgg16,4,8,512,64,134.301514,0.0293208759278059,17461.96127498546,1.8198630809783936,1.1058605909347534,169.8693084716797,0.2727272727272727,ok
+vgg16,4,16,512,32,134.301514,0.03853335659950972,13287.18920911537,1.8198630809783936,1.1058605909347534,169.8693084716797,0.15789473684210525,ok
+mlp,4,1,4096,4096,1073.954826,0.5058865919709206,8096.676340130095,3.0243589878082275,2.75677752494812,805.3063354492188,0.75,ok
+mlp,4,2,4096,2048,1073.954826,0.321785026602447,12728.995016478657,3.3557417392730713,3.155269145965576,805.3063354492188,0.6,ok
+mlp,4,4,4096,1024,1073.954826,0.23190023005008698,17662.76816161556,3.3557417392730713,3.155269145965576,805.3063354492188,0.42857142857142855,ok
+mlp,4,8,4096,512,1073.954826,0.19239590559154748,21289.43434324285,3.3557417392730713,3.155269145965576,805.3063354492188,0.2727272727272727,ok
+mlp,4,16,4096,256,1073.954826,0.19126136936247348,21415.720349870386,3.3557417392730713,3.155269145965576,805.3063354492188,0.15789473684210525,ok
+----- END FILE pipeline.csv -----
+  T=4, L=8, H=8192, tokens=4096, params_M_total=4295, params_M_per_rank=1074, step_s=0.5183, tokens_s=7903, allreduce_msg_MB=134.2, allreduce_per_step=16, comm_GB_per_step_algo=3.221, peak_mem_GB=9.064, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:51:02Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 8,
+    "H": 8192,
+    "tokens": 4096
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+4,8,8192,4096,4295.22944,1073.80736,0.5182730943585435,7903.169283887945,134.217728,16,3.221225472,9.06441728,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=socket S/T=2
+[vgg16] stage split (layer ranges): [(0, 19), (19, 40)]
+  arch=vgg16, S=2, M=1, b_global=512, b_micro=512, params_M=134.3, step_s=0.05485, samples_s=9335, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.5, status=ok
+  arch=vgg16, S=2, M=2, b_global=512, b_micro=256, params_M=134.3, step_s=0.04337, samples_s=1.181e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.3333, status=ok
+  arch=vgg16, S=2, M=4, b_global=512, b_micro=128, params_M=134.3, step_s=0.0406, samples_s=1.261e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.2, status=ok
+  arch=vgg16, S=2, M=8, b_global=512, b_micro=64, params_M=134.3, step_s=0.04636, samples_s=1.104e+04, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.1111, status=ok
+  arch=vgg16, S=2, M=16, b_global=512, b_micro=32, params_M=134.3, step_s=0.06614, samples_s=7742, peak_mem_GB_max=2.385, peak_mem_GB_min=1.842, sent_MB_per_step=33.55, bubble_theory=0.05882, status=ok
+[mlp] stage split (layer ranges): [(0, 8), (8, 17)]
+  arch=mlp, S=2, M=1, b_global=4096, b_micro=4096, params_M=1074, step_s=0.5579, samples_s=7342, peak_mem_GB_max=5.038, peak_mem_GB_min=4.905, sent_MB_per_step=268.4, bubble_theory=0.5, status=ok
+  arch=mlp, S=2, M=2, b_global=4096, b_micro=2048, params_M=1074, step_s=0.4354, samples_s=9408, peak_mem_GB_max=5.705, peak_mem_GB_min=5.571, sent_MB_per_step=268.4, bubble_theory=0.3333, status=ok
+  arch=mlp, S=2, M=4, b_global=4096, b_micro=1024, params_M=1074, step_s=0.3811, samples_s=1.075e+04, peak_mem_GB_max=5.772, peak_mem_GB_min=5.706, sent_MB_per_step=268.4, bubble_theory=0.2, status=ok
+  arch=mlp, S=2, M=8, b_global=4096, b_micro=512, params_M=1074, step_s=0.3548, samples_s=1.155e+04, peak_mem_GB_max=5.773, peak_mem_GB_min=5.739, sent_MB_per_step=268.4, bubble_theory=0.1111, status=ok
+  arch=mlp, S=2, M=16, b_global=4096, b_micro=256, params_M=1074, step_s=0.3834, samples_s=1.068e+04, peak_mem_GB_max=5.807, peak_mem_GB_min=5.79, sent_MB_per_step=268.4, bubble_theory=0.05882, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:51:18Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,2,1,512,512,134.301514,0.054845808260142806,9335.262187613294,2.384899139404297,1.8416311740875244,33.5544319152832,0.5,ok
+vgg16,2,2,512,256,134.301514,0.043366688676178454,11806.296852017762,2.384899139404297,1.8416311740875244,33.5544319152832,0.3333333333333333,ok
+vgg16,2,4,512,128,134.301514,0.04059541616588831,12612.261391970296,2.384899139404297,1.8416311740875244,33.5544319152832,0.2,ok
+vgg16,2,8,512,64,134.301514,0.04636048544198275,11043.8878091718,2.384899139404297,1.8416311740875244,33.5544319152832,0.1111111111111111,ok
+vgg16,2,16,512,32,134.301514,0.06613560896366835,7741.669095105295,2.384899139404297,1.8416311740875244,33.5544319152832,0.058823529411764705,ok
+mlp,2,1,4096,4096,1073.954826,0.5578736079856753,7342.164858433623,5.037887096405029,4.9045233726501465,268.4354553222656,0.5,ok
+mlp,2,2,4096,2048,1073.954826,0.4353695144876838,9408.100162502013,5.7048139572143555,5.571450233459473,268.4354553222656,0.3333333333333333,ok
+mlp,2,4,4096,1024,1073.954826,0.3810852473601699,10748.251285961756,5.771923065185547,5.705667972564697,268.4354553222656,0.2,ok
+mlp,2,8,4096,512,1073.954826,0.35475101675838233,11546.126174431089,5.772971153259277,5.739222049713135,268.4354553222656,0.1111111111111111,ok
+mlp,2,16,4096,256,1073.954826,0.3833803903311491,10683.905862952546,5.806525230407715,5.789553642272949,268.4354553222656,0.058823529411764705,ok
+----- END FILE pipeline.csv -----
+  T=2, L=8, H=8192, tokens=4096, params_M_total=4295, params_M_per_rank=2148, step_s=1.381, tokens_s=2966, allreduce_msg_MB=134.2, allreduce_per_step=16, comm_GB_per_step_algo=2.147, peak_mem_GB=17.79, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:51:45Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 8,
+    "H": 8192,
+    "tokens": 4096
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+2,8,8192,4096,4295.22944,2147.61472,1.3811573958955705,2965.6286909603596,134.217728,16,2.1474836479999997,17.793288192,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 net=socket S/T=4
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+  arch=vgg16, S=4, M=1, b_global=512, b_micro=512, params_M=134.3, step_s=0.1004, samples_s=5101, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=512, b_micro=256, params_M=134.3, step_s=0.07285, samples_s=7028, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.6, status=ok
+  arch=vgg16, S=4, M=4, b_global=512, b_micro=128, params_M=134.3, step_s=0.06199, samples_s=8260, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.4286, status=ok
+  arch=vgg16, S=4, M=8, b_global=512, b_micro=64, params_M=134.3, step_s=0.05425, samples_s=9437, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.2727, status=ok
+  arch=vgg16, S=4, M=16, b_global=512, b_micro=32, params_M=134.3, step_s=0.05766, samples_s=8880, peak_mem_GB_max=1.82, peak_mem_GB_min=1.106, sent_MB_per_step=169.9, bubble_theory=0.1579, status=ok
+[mlp] stage split (layer ranges): [(0, 4), (4, 8), (8, 12), (12, 17)]
+  arch=mlp, S=4, M=1, b_global=4096, b_micro=4096, params_M=1074, step_s=0.6883, samples_s=5951, peak_mem_GB_max=3.024, peak_mem_GB_min=2.757, sent_MB_per_step=805.3, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=4096, b_micro=2048, params_M=1074, step_s=0.4646, samples_s=8816, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.6, status=ok
+  arch=mlp, S=4, M=4, b_global=4096, b_micro=1024, params_M=1074, step_s=0.3493, samples_s=1.173e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.4286, status=ok
+  arch=mlp, S=4, M=8, b_global=4096, b_micro=512, params_M=1074, step_s=0.287, samples_s=1.427e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.2727, status=ok
+  arch=mlp, S=4, M=16, b_global=4096, b_micro=256, params_M=1074, step_s=0.2696, samples_s=1.519e+04, peak_mem_GB_max=3.356, peak_mem_GB_min=3.155, sent_MB_per_step=805.3, bubble_theory=0.1579, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:52:05Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,512,512,134.301514,0.10037258733063936,5100.994341347508,1.8198630809783936,1.1058605909347534,169.8693084716797,0.75,ok
+vgg16,4,2,512,256,134.301514,0.07285014167428017,7028.126345851188,1.8198630809783936,1.1058605909347534,169.8693084716797,0.6,ok
+vgg16,4,4,512,128,134.301514,0.06198562141507864,8259.98011008809,1.8198630809783936,1.1058605909347534,169.8693084716797,0.42857142857142855,ok
+vgg16,4,8,512,64,134.301514,0.05425242558121681,9437.366062712297,1.8198630809783936,1.1058605909347534,169.8693084716797,0.2727272727272727,ok
+vgg16,4,16,512,32,134.301514,0.05765515323728323,8880.385728797448,1.8198630809783936,1.1058605909347534,169.8693084716797,0.15789473684210525,ok
+mlp,4,1,4096,4096,1073.954826,0.6882882567122579,5950.995037406765,3.0243589878082275,2.75677752494812,805.3063354492188,0.75,ok
+mlp,4,2,4096,2048,1073.954826,0.4646324884146452,8815.569513823291,3.3557417392730713,3.155269145965576,805.3063354492188,0.6,ok
+mlp,4,4,4096,1024,1073.954826,0.349331197142601,11725.262540259082,3.3557417392730713,3.155269145965576,805.3063354492188,0.42857142857142855,ok
+mlp,4,8,4096,512,1073.954826,0.28703396394848824,14270.088262917476,3.3557417392730713,3.155269145965576,805.3063354492188,0.2727272727272727,ok
+mlp,4,16,4096,256,1073.954826,0.2695978172123432,15193.001346794545,3.3557417392730713,3.155269145965576,805.3063354492188,0.15789473684210525,ok
+----- END FILE pipeline.csv -----
+  T=4, L=8, H=8192, tokens=4096, params_M_total=4295, params_M_per_rank=1074, step_s=1.492, tokens_s=2745, allreduce_msg_MB=134.2, allreduce_per_step=16, comm_GB_per_step_algo=3.221, peak_mem_GB=9.064, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "NET_LABEL": "socket",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:52:37Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 8,
+    "H": 8192,
+    "tokens": 4096
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+4,8,8192,4096,4295.22944,1073.80736,1.4919082781610389,2745.477091291983,134.217728,16,3.221225472,9.06441728,ok
+----- END FILE tensor_parallel.csv -----
+##### E9 mlp_big (không vừa một GPU) S=1
+  arch=mlp_big, S=1, M=4, b_global=256, b_micro=64, params_M=1.208e+04, step_s=nan, samples_s=nan, peak_mem_GB_max=83.4, peak_mem_GB_min=83.4, sent_MB_per_step=0, bubble_theory=0, status=OOM(step)
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:52:59Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp_big",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,1,4,256,64,12080.49665,nan,nan,83.39752197265625,83.39752197265625,0.0,0.0,OOM(step)
+----- END FILE pipeline.csv -----
+##### E9 mlp_big (không vừa một GPU) S=2
+[mlp_big] stage split (layer ranges): [(0, 23), (23, 46)]
+  arch=mlp_big, S=2, M=4, b_global=256, b_micro=64, params_M=1.208e+04, step_s=0.4269, samples_s=599.7, peak_mem_GB_max=50.86, peak_mem_GB_min=48.69, sent_MB_per_step=33.55, bubble_theory=0.2, status=ok
+  arch=mlp_big, S=2, M=8, b_global=256, b_micro=32, params_M=1.208e+04, step_s=0.6012, samples_s=425.8, peak_mem_GB_max=50.9, peak_mem_GB_min=48.73, sent_MB_per_step=33.55, bubble_theory=0.1111, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:53:06Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp_big",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,2,4,256,64,12080.49665,0.4268923198804259,599.6828429045211,50.85901641845703,48.69175720214844,33.5544319152832,0.2,ok
+mlp_big,2,8,256,32,12080.49665,0.6011798599734902,425.8293017522055,50.89886474609375,48.73370361328125,33.5544319152832,0.1111111111111111,ok
+----- END FILE pipeline.csv -----
+##### E9 mlp_big (không vừa một GPU) S=4
+[mlp_big] stage split (layer ranges): [(0, 11), (11, 22), (22, 34), (34, 46)]
+  arch=mlp_big, S=4, M=4, b_global=256, b_micro=64, params_M=1.208e+04, step_s=0.3022, samples_s=847, peak_mem_GB_max=27.1, peak_mem_GB_min=24.93, sent_MB_per_step=100.7, bubble_theory=0.4286, status=ok
+  arch=mlp_big, S=4, M=8, b_global=256, b_micro=32, params_M=1.208e+04, step_s=0.377, samples_s=679, peak_mem_GB_max=27.12, peak_mem_GB_min=24.95, sent_MB_per_step=100.7, bubble_theory=0.2727, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave9-sn5bk",
+    "net_env": {
+      "NET_LABEL": "native",
+      "MASTER_ADDR": "localhost"
+    },
+    "time_utc": "2026-11-22T07:53:23Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "archs": "mlp_big",
+  "quick": false
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+mlp_big,4,4,256,64,12080.49665,0.3022389018908143,847.0120768652131,27.101037979125977,24.929582595825195,100.66329193115234,0.42857142857142855,ok
+mlp_big,4,8,256,32,12080.49665,0.3770201051607728,679.0088817434122,27.115718841552734,24.948463439941406,100.66329193115234,0.2727272727272727,ok
+----- END FILE pipeline.csv -----
+WAVE9 FINISHED rc=0

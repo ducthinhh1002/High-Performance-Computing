@@ -1,0 +1,2233 @@
+WAVE=8 QUICK=1 RUN_ID=20261122T001026Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### E3 rep=1 k=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=2.067e-05, p25_s=2.065e-05, p75_s=2.127e-05, algbw_GBps=0.1982, busbw_GBps=0.1982, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=2.052e-05, p25_s=2.038e-05, p75_s=2.059e-05, algbw_GBps=0.7986, busbw_GBps=0.7986, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=2.143e-05, p25_s=2.117e-05, p75_s=5.443e-05, algbw_GBps=3.058, busbw_GBps=3.058, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=2.301e-05, p25_s=2.288e-05, p75_s=2.306e-05, algbw_GBps=11.39, busbw_GBps=11.39, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=2.327e-05, p25_s=2.319e-05, p75_s=2.36e-05, algbw_GBps=45.06, busbw_GBps=45.06, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=3.375e-05, p25_s=3.364e-05, p75_s=3.388e-05, algbw_GBps=124.3, busbw_GBps=124.3, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4096, median_s=1.972e-05, p25_s=1.967e-05, p75_s=9.347e-05, algbw_GBps=0.2077, busbw_GBps=0.2077, trials=3
+  op=broadcast, k=2, label=pow4, bytes=16384, median_s=1.946e-05, p25_s=1.934e-05, p75_s=1.961e-05, algbw_GBps=0.8419, busbw_GBps=0.8419, trials=3
+  op=broadcast, k=2, label=pow4, bytes=65536, median_s=2.059e-05, p25_s=2.05e-05, p75_s=2.356e-05, algbw_GBps=3.183, busbw_GBps=3.183, trials=3
+  op=broadcast, k=2, label=pow4, bytes=262144, median_s=2.181e-05, p25_s=2.181e-05, p75_s=2.229e-05, algbw_GBps=12.02, busbw_GBps=12.02, trials=3
+  op=broadcast, k=2, label=pow4, bytes=1048576, median_s=2.22e-05, p25_s=2.196e-05, p75_s=2.228e-05, algbw_GBps=47.24, busbw_GBps=47.24, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4194304, median_s=2.627e-05, p25_s=2.612e-05, p75_s=2.635e-05, algbw_GBps=159.7, busbw_GBps=159.7, trials=3
+  op=reduce, k=2, label=pow4, bytes=4096, median_s=2.008e-05, p25_s=2e-05, p75_s=2.041e-05, algbw_GBps=0.2039, busbw_GBps=0.2039, trials=3
+  op=reduce, k=2, label=pow4, bytes=16384, median_s=2.009e-05, p25_s=2.003e-05, p75_s=2.026e-05, algbw_GBps=0.8155, busbw_GBps=0.8155, trials=3
+  op=reduce, k=2, label=pow4, bytes=65536, median_s=2.097e-05, p25_s=2.083e-05, p75_s=2.149e-05, algbw_GBps=3.126, busbw_GBps=3.126, trials=3
+  op=reduce, k=2, label=pow4, bytes=262144, median_s=2.299e-05, p25_s=2.271e-05, p75_s=2.305e-05, algbw_GBps=11.4, busbw_GBps=11.4, trials=3
+  op=reduce, k=2, label=pow4, bytes=1048576, median_s=2.337e-05, p25_s=2.317e-05, p75_s=2.341e-05, algbw_GBps=44.86, busbw_GBps=44.86, trials=3
+  op=reduce, k=2, label=pow4, bytes=4194304, median_s=2.479e-05, p25_s=2.471e-05, p75_s=2.482e-05, algbw_GBps=169.2, busbw_GBps=169.2, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,2.0669959485530854e-05,2.064533531665802e-05,2.1267645061016082e-05,0.19816197525047086,0.19816197525047086,3
+all_reduce,2,pow4,16384,2.0516756922006608e-05,2.0380541682243346e-05,2.0589660853147506e-05,0.7985667550813673,0.7985667550813673,3
+all_reduce,2,pow4,65536,2.143418416380882e-05,2.1172184497117995e-05,5.443230271339416e-05,3.057545810894738,3.057545810894738,3
+all_reduce,2,pow4,262144,2.301311120390892e-05,2.2884756326675415e-05,2.3062396794557573e-05,11.391071710263722,11.391071710263722,3
+all_reduce,2,pow4,1048576,2.3270491510629654e-05,2.3187864571809768e-05,2.3603588342666626e-05,45.06032885128465,45.06032885128465,3
+all_reduce,2,pow4,4194304,3.374693915247917e-05,3.3638020977377894e-05,3.3882260322570803e-05,124.28694587822703,124.28694587822703,3
+broadcast,2,pow4,4096,1.971844583749771e-05,1.967448741197586e-05,9.346587583422661e-05,0.20772428180981764,0.20772428180981764,3
+broadcast,2,pow4,16384,1.946033909916878e-05,1.9339490681886672e-05,1.9607283174991608e-05,0.8419174977634291,0.8419174977634291,3
+broadcast,2,pow4,65536,2.0589865744113923e-05,2.050066366791725e-05,2.355555072426796e-05,3.1829250765627233,3.1829250765627233,3
+broadcast,2,pow4,262144,2.180909737944603e-05,2.180514857172966e-05,2.2288747131824494e-05,12.019938076256997,12.019938076256997,3
+broadcast,2,pow4,1048576,2.2199060767889024e-05,2.195797860622406e-05,2.2276490926742554e-05,47.23515156626657,47.23515156626657,3
+broadcast,2,pow4,4194304,2.6265764608979227e-05,2.611977979540825e-05,2.635461278259754e-05,159.68710838770457,159.68710838770457,3
+reduce,2,pow4,4096,2.0083971321582794e-05,1.999674364924431e-05,2.0414572209119796e-05,0.20394372877829817,0.20394372877829817,3
+reduce,2,pow4,16384,2.009175717830658e-05,2.0028259605169297e-05,2.0256265997886658e-05,0.8154587901196662,0.8154587901196662,3
+reduce,2,pow4,65536,2.09670327603817e-05,2.083064988255501e-05,2.148684114217758e-05,3.1256687939093455,3.1256687939093455,3
+reduce,2,pow4,262144,2.298915758728981e-05,2.271462231874466e-05,2.3047812283039094e-05,11.402940669080174,11.402940669080174,3
+reduce,2,pow4,1048576,2.3371968418359756e-05,2.31662392616272e-05,2.3405663669109344e-05,44.86468496065122,44.86468496065122,3
+reduce,2,pow4,4194304,2.4786964058876037e-05,2.470589242875576e-05,2.482449635863304e-05,169.21410746541386,169.21410746541386,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:10:34Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.0942110829288062e-05,
+      "B_GBps": 334.019676339225,
+      "max_rel_err": 0.05588919821516105
+    },
+    "broadcast": {
+      "alpha_s": 2.0242978361142254e-05,
+      "B_GBps": 669.4459087444586,
+      "max_rel_err": 0.05385529974272534
+    },
+    "reduce": {
+      "alpha_s": 2.1006366317541383e-05,
+      "B_GBps": 984.1909236222623,
+      "max_rel_err": 0.0746628683316837
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=1 k=3
+  op=all_reduce, k=3, label=pow4, bytes=4096, median_s=2.33e-05, p25_s=2.32e-05, p75_s=2.4e-05, algbw_GBps=0.1758, busbw_GBps=0.2344, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=16384, median_s=2.319e-05, p25_s=2.311e-05, p75_s=2.322e-05, algbw_GBps=0.7064, busbw_GBps=0.9418, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=65536, median_s=2.322e-05, p25_s=2.314e-05, p75_s=2.34e-05, algbw_GBps=2.823, busbw_GBps=3.764, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=262144, median_s=2.53e-05, p25_s=2.521e-05, p75_s=2.543e-05, algbw_GBps=10.36, busbw_GBps=13.82, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=1048576, median_s=2.669e-05, p25_s=2.603e-05, p75_s=2.717e-05, algbw_GBps=39.29, busbw_GBps=52.38, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=4194304, median_s=4.41e-05, p25_s=4.397e-05, p75_s=4.454e-05, algbw_GBps=95.1, busbw_GBps=126.8, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4096, median_s=2.116e-05, p25_s=2.112e-05, p75_s=2.139e-05, algbw_GBps=0.1936, busbw_GBps=0.1936, trials=3
+  op=broadcast, k=3, label=pow4, bytes=16384, median_s=2.081e-05, p25_s=2.068e-05, p75_s=2.115e-05, algbw_GBps=0.7874, busbw_GBps=0.7874, trials=3
+  op=broadcast, k=3, label=pow4, bytes=65536, median_s=2.123e-05, p25_s=2.096e-05, p75_s=2.154e-05, algbw_GBps=3.087, busbw_GBps=3.087, trials=3
+  op=broadcast, k=3, label=pow4, bytes=262144, median_s=2.278e-05, p25_s=2.248e-05, p75_s=0.0001278, algbw_GBps=11.51, busbw_GBps=11.51, trials=3
+  op=broadcast, k=3, label=pow4, bytes=1048576, median_s=2.421e-05, p25_s=2.418e-05, p75_s=2.515e-05, algbw_GBps=43.32, busbw_GBps=43.32, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4194304, median_s=2.652e-05, p25_s=2.648e-05, p75_s=2.656e-05, algbw_GBps=158.1, busbw_GBps=158.1, trials=3
+  op=reduce, k=3, label=pow4, bytes=4096, median_s=2.07e-05, p25_s=2.063e-05, p75_s=2.084e-05, algbw_GBps=0.1979, busbw_GBps=0.1979, trials=3
+  op=reduce, k=3, label=pow4, bytes=16384, median_s=2.055e-05, p25_s=2.043e-05, p75_s=0.0001617, algbw_GBps=0.7974, busbw_GBps=0.7974, trials=3
+  op=reduce, k=3, label=pow4, bytes=65536, median_s=2.632e-05, p25_s=2.142e-05, p75_s=2.703e-05, algbw_GBps=2.49, busbw_GBps=2.49, trials=3
+  op=reduce, k=3, label=pow4, bytes=262144, median_s=2.448e-05, p25_s=2.431e-05, p75_s=2.52e-05, algbw_GBps=10.71, busbw_GBps=10.71, trials=3
+  op=reduce, k=3, label=pow4, bytes=1048576, median_s=2.47e-05, p25_s=2.461e-05, p75_s=2.496e-05, algbw_GBps=42.46, busbw_GBps=42.46, trials=3
+  op=reduce, k=3, label=pow4, bytes=4194304, median_s=2.688e-05, p25_s=2.679e-05, p75_s=2.7e-05, algbw_GBps=156, busbw_GBps=156, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,3,pow4,4096,2.3301206529140472e-05,2.3195799440145492e-05,2.400154247879982e-05,0.17578488885876126,0.23437985181168167,3
+all_reduce,3,pow4,16384,2.3194532841444014e-05,2.3105572909116743e-05,2.3221764713525772e-05,0.7063733558248284,0.9418311410997712,3
+all_reduce,3,pow4,65536,2.321610227227211e-05,2.3144781589508057e-05,2.340279519557953e-05,2.8228683364421676,3.7638244485895567,3
+all_reduce,3,pow4,262144,2.529557794332504e-05,2.520635724067688e-05,2.5430191308259963e-05,10.363234261234744,13.817645681646326,3
+all_reduce,3,pow4,1048576,2.6689004153013228e-05,2.603130415081978e-05,2.717072144150734e-05,39.288689603715106,52.38491947162014,3
+all_reduce,3,pow4,4194304,4.4103944674134254e-05,4.397043958306313e-05,4.4538313522934915e-05,95.10042765992866,126.8005702132382,3
+broadcast,3,pow4,4096,2.11557000875473e-05,2.1119453012943268e-05,2.1389946341514586e-05,0.1936121226454233,0.1936121226454233,3
+broadcast,3,pow4,16384,2.0806621760129927e-05,2.0683538168668746e-05,2.1151043474674223e-05,0.7874416226182068,0.7874416226182068,3
+broadcast,3,pow4,65536,2.1230671554803847e-05,2.095622941851616e-05,2.1538734436035157e-05,3.0868547813397464,3.0868547813397464,3
+broadcast,3,pow4,262144,2.278245985507965e-05,2.247661352157593e-05,0.00012779859825968743,11.506395782874671,11.506395782874671,3
+broadcast,3,pow4,1048576,2.4207979440689086e-05,2.4182088673114776e-05,2.514645457267761e-05,43.315304466821374,43.315304466821374,3
+broadcast,3,pow4,4194304,2.6524113491177558e-05,2.6475964114069937e-05,2.6559177786111832e-05,158.13173176909788,158.13173176909788,3
+reduce,3,pow4,4096,2.070203423500061e-05,2.063043415546417e-05,2.0842868834733964e-05,0.19785495248940108,0.19785495248940108,3
+reduce,3,pow4,16384,2.0546112209558488e-05,2.042589709162712e-05,0.00016172008588910102,0.7974258016744313,0.7974258016744313,3
+reduce,3,pow4,65536,2.6321113109588625e-05,2.1416079252958298e-05,2.7028732001781465e-05,2.489864305021569,2.489864305021569,3
+reduce,3,pow4,262144,2.4479757994413375e-05,2.4312790483236313e-05,2.519579604268074e-05,10.708602595655764,10.708602595655764,3
+reduce,3,pow4,1048576,2.4697761982679367e-05,2.460744231939316e-05,2.496318891644478e-05,42.45631651707431,42.45631651707431,3
+reduce,3,pow4,4194304,2.6884209364652634e-05,2.6790332049131395e-05,2.70024873316288e-05,156.01366374994356,156.01366374994356,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:10:43Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.307781752375924e-05,
+      "B_GBps": 276.6597444735577,
+      "max_rel_err": 0.05404166128840753
+    },
+    "broadcast": {
+      "alpha_s": 2.1522308907808565e-05,
+      "B_GBps": 767.9825236016324,
+      "max_rel_err": 0.05454012107546354
+    },
+    "reduce": {
+      "alpha_s": 2.253595724045991e-05,
+      "B_GBps": 873.6296962074048,
+      "max_rel_err": 0.14095680865271126
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=1 k=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=2.286e-05, p25_s=2.283e-05, p75_s=2.436e-05, algbw_GBps=0.1792, busbw_GBps=0.2688, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=2.228e-05, p25_s=2.224e-05, p75_s=2.247e-05, algbw_GBps=0.7354, busbw_GBps=1.103, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=2.302e-05, p25_s=2.282e-05, p75_s=2.308e-05, algbw_GBps=2.847, busbw_GBps=4.27, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=2.463e-05, p25_s=2.422e-05, p75_s=2.473e-05, algbw_GBps=10.64, busbw_GBps=15.96, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=2.542e-05, p25_s=2.497e-05, p75_s=2.571e-05, algbw_GBps=41.25, busbw_GBps=61.88, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=4.243e-05, p25_s=4.236e-05, p75_s=4.247e-05, algbw_GBps=98.85, busbw_GBps=148.3, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4096, median_s=2.114e-05, p25_s=2.111e-05, p75_s=2.163e-05, algbw_GBps=0.1938, busbw_GBps=0.1938, trials=3
+  op=broadcast, k=4, label=pow4, bytes=16384, median_s=2.086e-05, p25_s=2.06e-05, p75_s=9.168e-05, algbw_GBps=0.7855, busbw_GBps=0.7855, trials=3
+  op=broadcast, k=4, label=pow4, bytes=65536, median_s=2.113e-05, p25_s=2.093e-05, p75_s=2.138e-05, algbw_GBps=3.101, busbw_GBps=3.101, trials=3
+  op=broadcast, k=4, label=pow4, bytes=262144, median_s=2.3e-05, p25_s=2.229e-05, p75_s=2.31e-05, algbw_GBps=11.4, busbw_GBps=11.4, trials=3
+  op=broadcast, k=4, label=pow4, bytes=1048576, median_s=2.365e-05, p25_s=2.363e-05, p75_s=2.378e-05, algbw_GBps=44.34, busbw_GBps=44.34, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4194304, median_s=2.659e-05, p25_s=2.657e-05, p75_s=2.69e-05, algbw_GBps=157.8, busbw_GBps=157.8, trials=3
+  op=reduce, k=4, label=pow4, bytes=4096, median_s=2.164e-05, p25_s=2.149e-05, p75_s=2.166e-05, algbw_GBps=0.1892, busbw_GBps=0.1892, trials=3
+  op=reduce, k=4, label=pow4, bytes=16384, median_s=2.137e-05, p25_s=2.134e-05, p75_s=0.0001698, algbw_GBps=0.7666, busbw_GBps=0.7666, trials=3
+  op=reduce, k=4, label=pow4, bytes=65536, median_s=2.23e-05, p25_s=2.189e-05, p75_s=2.253e-05, algbw_GBps=2.939, busbw_GBps=2.939, trials=3
+  op=reduce, k=4, label=pow4, bytes=262144, median_s=2.323e-05, p25_s=2.303e-05, p75_s=2.351e-05, algbw_GBps=11.28, busbw_GBps=11.28, trials=3
+  op=reduce, k=4, label=pow4, bytes=1048576, median_s=3.196e-05, p25_s=2.445e-05, p75_s=0.0001875, algbw_GBps=32.81, busbw_GBps=32.81, trials=3
+  op=reduce, k=4, label=pow4, bytes=4194304, median_s=2.802e-05, p25_s=2.788e-05, p75_s=2.818e-05, algbw_GBps=149.7, busbw_GBps=149.7, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,2.286059781908989e-05,2.2831577807664872e-05,2.435851842164993e-05,0.17917291719202588,0.2687593757880388,3
+all_reduce,4,pow4,16384,2.2279508411884307e-05,2.2238902747631073e-05,2.2473465651273728e-05,0.7353842686789475,1.1030764030184212,3
+all_reduce,4,pow4,65536,2.302262932062149e-05,2.2815465927124022e-05,2.308173105120659e-05,2.8465905908192277,4.269885886228842,3
+all_reduce,4,pow4,262144,2.4632047861814498e-05,2.4224072694778444e-05,2.472981810569763e-05,10.642395689981798,15.963593534972699,3
+all_reduce,4,pow4,1048576,2.541759982705116e-05,2.497440204024315e-05,2.570735290646553e-05,41.253934562461446,61.88090184369217,3
+all_reduce,4,pow4,4194304,4.243087023496628e-05,4.236246459186077e-05,4.247413016855717e-05,98.85029406122273,148.2754410918341,3
+broadcast,4,pow4,4096,2.114051952958107e-05,2.1111909300088884e-05,2.162942662835121e-05,0.19375115139761034,0.19375115139761034,3
+broadcast,4,pow4,16384,2.0859241485595702e-05,2.0601488649845124e-05,9.1681107878685e-05,0.7854552147216826,0.7854552147216826,3
+broadcast,4,pow4,65536,2.1133925765752793e-05,2.0926576107740404e-05,2.1377522498369216e-05,3.1009856250276084,3.1009856250276084,3
+broadcast,4,pow4,262144,2.299942076206207e-05,2.2289752960205077e-05,2.3100879043340684e-05,11.39785226384531,11.39785226384531,3
+broadcast,4,pow4,1048576,2.364788204431534e-05,2.3630391806364058e-05,2.378024160861969e-05,44.34122252618665,44.34122252618665,3
+broadcast,4,pow4,4194304,2.6585161685943602e-05,2.6571238413453103e-05,2.690460532903671e-05,157.7686097812096,157.7686097812096,3
+reduce,4,pow4,4096,2.1643377840518953e-05,2.1487809717655182e-05,2.166394144296646e-05,0.1892495723256194,0.1892495723256194,3
+reduce,4,pow4,16384,2.137204632163048e-05,2.1335557103157044e-05,0.0001698104664683342,0.7666088568888175,0.7666088568888175,3
+reduce,4,pow4,65536,2.2298730909824373e-05,2.1890010684728624e-05,2.2531431168317794e-05,2.9390013389114515,2.9390013389114515,3
+reduce,4,pow4,262144,2.323225140571594e-05,2.3028068244457246e-05,2.351386472582817e-05,11.283624450426851,11.283624450426851,3
+reduce,4,pow4,1048576,3.195580095052719e-05,2.4446137249469757e-05,0.000187459122389555,32.81332242691608,32.81332242691608,3
+reduce,4,pow4,4194304,2.8021493926644324e-05,2.7883006259799005e-05,2.818247303366661e-05,149.68166975608082,149.68166975608082,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:10:54Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.2483538596006646e-05,
+      "B_GBps": 333.0415146495473,
+      "max_rel_err": 0.07037113341362002
+    },
+    "broadcast": {
+      "alpha_s": 2.147799624710983e-05,
+      "B_GBps": 770.1611552198326,
+      "max_rel_err": 0.05135124975381463
+    },
+    "reduce": {
+      "alpha_s": 2.2642738289800552e-05,
+      "B_GBps": 613.7517168904931,
+      "max_rel_err": 0.23797223287609406
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E4 rep=1 k=1
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=8, b_global=8, step_s=0.003954, p25_s=0.003837, p75_s=0.004508, t_fwd_s=0.001875, t_bwd_s=0.001783, t_comm_s=3.171e-07, t_opt_s=0.0002858, img_s=2023, img_s_per_gpu=2023, steps=4
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=16, b_global=16, step_s=0.006209, p25_s=0.006145, p75_s=0.006256, t_fwd_s=0.003583, t_bwd_s=0.002336, t_comm_s=3.469e-07, t_opt_s=0.0002774, img_s=2577, img_s_per_gpu=2577, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:11:01Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,8,8,0.003953820560127497,0.00383728533051908,0.004508232697844505,0.0018751174211502075,0.0017828498966991901,3.1711533665657043e-07,0.00028581125661730766,2023.359400949149,2023.359400949149,4
+resnet18_cifar,11173962,1,local,strong,16,16,0.0062088496051728725,0.006144713843241334,0.006256210384890437,0.003582553006708622,0.002335593570023775,3.4691765904426575e-07,0.00027742842212319374,2576.96691294788,2576.96691294788,4
+----- END FILE scaling.csv -----
+##### E4 rep=1 k=2
+[rank1]:[W1122 00:11:08.455713302 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:11:08.558458962 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.003875, p25_s=0.003761, p75_s=0.006766, t_fwd_s=0.001838, t_bwd_s=0.001765, t_comm_s=2.645e-07, t_opt_s=0.0002718, img_s=4129, img_s_per_gpu=2064, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.004794, p25_s=0.004774, p75_s=0.004904, t_fwd_s=0.001833, t_bwd_s=0.001697, t_comm_s=0.0009954, t_opt_s=0.0002535, img_s=3337, img_s_per_gpu=1669, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.006868, p25_s=0.005424, p75_s=0.008234, t_fwd_s=0.002409, t_bwd_s=0.004191, t_comm_s=2.92e-07, t_opt_s=0.0002676, img_s=2330, img_s_per_gpu=1165, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.005122, p25_s=0.004175, p75_s=0.006587, t_fwd_s=0.002042, t_bwd_s=0.002164, t_comm_s=4.116e-07, t_opt_s=0.0003095, img_s=3124, img_s_per_gpu=1562, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.004779, p25_s=0.004715, p75_s=0.005008, t_fwd_s=0.002057, t_bwd_s=0.001735, t_comm_s=0.0006684, t_opt_s=0.0002869, img_s=3348, img_s_per_gpu=1674, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.005926, p25_s=0.005686, p75_s=0.007752, t_fwd_s=0.002831, t_bwd_s=0.002801, t_comm_s=3.465e-07, t_opt_s=0.0002972, img_s=2700, img_s_per_gpu=1350, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:11:07Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.0038751233369112015,0.0037606055848300457,0.006765649188309908,0.0018380270339548588,0.001765198539942503,2.644956111907959e-07,0.0002718241885304451,4128.900839773875,2064.4504198869377,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.0047943126410245895,0.00477358722127974,0.004903831053525209,0.0018332498148083687,0.0016968846321105957,0.0009953840635716915,0.0002534724771976471,3337.2875734237996,1668.6437867118998,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.006867651827633381,0.005423781927675009,0.008234215434640646,0.0024092369712889194,0.004191277548670769,2.919696271419525e-07,0.0002675815485417843,2329.762836202729,1164.8814181013645,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.005121627822518349,0.004175383131951094,0.006586999399587512,0.002041848376393318,0.0021638371981680393,4.116445779800415e-07,0.0003095190040767193,3124.0067717635643,1562.0033858817822,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.004778540227562189,0.0047145567368716,0.005008148727938533,0.002056846860796213,0.0017345268279314041,0.0006683855317533016,0.0002868780866265297,3348.3028787146004,1674.1514393573002,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.0059255859814584255,0.005686231190338731,0.0077520261984318495,0.0028305896557867527,0.0028008786030113697,3.46451997756958e-07,0.0002972409129142761,2700.1548960837163,1350.0774480418581,4
+----- END FILE scaling.csv -----
+##### E4 rep=1 k=3
+[rank0]:[W1122 00:11:17.533880076 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:11:17.559806871 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 00:11:17.615237098 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=weak, b_gpu=8, b_global=24, step_s=0.004419, p25_s=0.004311, p75_s=0.005423, t_fwd_s=0.002154, t_bwd_s=0.001953, t_comm_s=6.547e-07, t_opt_s=0.0003143, img_s=5431, img_s_per_gpu=1810, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=weak, b_gpu=8, b_global=24, step_s=0.004949, p25_s=0.004923, p75_s=0.005169, t_fwd_s=0.002083, t_bwd_s=0.001891, t_comm_s=0.0006899, t_opt_s=0.0002885, img_s=4849, img_s_per_gpu=1616, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=weak, b_gpu=8, b_global=24, step_s=0.006203, p25_s=0.00592, p75_s=0.006725, t_fwd_s=0.002846, t_bwd_s=0.003046, t_comm_s=5.113e-07, t_opt_s=0.0003063, img_s=3869, img_s_per_gpu=1290, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=strong, b_gpu=5, b_global=15, step_s=0.004143, p25_s=0.004122, p75_s=0.004181, t_fwd_s=0.001955, t_bwd_s=0.001883, t_comm_s=4.768e-07, t_opt_s=0.0003064, img_s=3620, img_s_per_gpu=1207, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=strong, b_gpu=5, b_global=15, step_s=0.004918, p25_s=0.004814, p75_s=0.00603, t_fwd_s=0.00195, t_bwd_s=0.001905, t_comm_s=0.0007786, t_opt_s=0.000284, img_s=3050, img_s_per_gpu=1017, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=strong, b_gpu=5, b_global=15, step_s=0.005849, p25_s=0.005788, p75_s=0.007117, t_fwd_s=0.002712, t_bwd_s=0.002837, t_comm_s=4.773e-07, t_opt_s=0.0003062, img_s=2564, img_s_per_gpu=854.8, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:11:16Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,3,local,weak,8,24,0.004418761935085058,0.004311328520998359,0.005423020571470261,0.002154021989554167,0.0019526984542608261,6.547197699546814e-07,0.0003142617642879486,5431.385612662117,1810.4618708873722,4
+resnet18_cifar,11173962,3,manual,weak,8,24,0.00494933919981122,0.004923123866319656,0.005168913165107369,0.002083033788949251,0.0018914677202701569,0.000689877662807703,0.0002884534187614918,4849.132183325689,1616.3773944418963,4
+resnet18_cifar,11173962,3,ddp,weak,8,24,0.006202826276421547,0.0059198730159550905,0.006724785314872861,0.0028464999049901962,0.0030461549758911133,5.112960934638977e-07,0.00030631478875875473,3869.2039613022607,1289.7346537674202,4
+resnet18_cifar,11173962,3,local,strong,5,15,0.004143344238400459,0.004122051876038313,0.004180611111223698,0.0019550779834389687,0.0018833233043551445,4.76837158203125e-07,0.00030644284561276436,3620.2640034057995,1206.7546678019332,4
+resnet18_cifar,11173962,3,manual,strong,5,15,0.004917735233902931,0.004814468557015061,0.006029778625816107,0.0019501978531479836,0.0019049113616347313,0.0007785782217979431,0.00028404779732227325,3050.1845436065373,1016.728181202179,4
+resnet18_cifar,11173962,3,ddp,strong,5,15,0.005849409382790327,0.005788034992292523,0.007117175729945302,0.0027116271667182446,0.0028371894732117653,4.773028194904327e-07,0.0003062044270336628,2564.361462566088,854.7871541886959,4
+----- END FILE scaling.csv -----
+##### E4 rep=1 k=4
+[rank3]:[W1122 00:11:28.608856810 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 00:11:28.639630320 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:11:28.805720770 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:11:28.951250698 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.004493, p25_s=0.004306, p75_s=0.006086, t_fwd_s=0.002178, t_bwd_s=0.001978, t_comm_s=6.733e-07, t_opt_s=0.0003366, img_s=7121, img_s_per_gpu=1780, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.005282, p25_s=0.005249, p75_s=0.005501, t_fwd_s=0.002102, t_bwd_s=0.001931, t_comm_s=0.0009549, t_opt_s=0.0002933, img_s=6059, img_s_per_gpu=1515, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.009185, p25_s=0.008421, p75_s=0.009611, t_fwd_s=0.002848, t_bwd_s=0.006015, t_comm_s=4.913e-07, t_opt_s=0.0003205, img_s=3484, img_s_per_gpu=870.9, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.004147, p25_s=0.004132, p75_s=0.004217, t_fwd_s=0.001972, t_bwd_s=0.001875, t_comm_s=4.247e-07, t_opt_s=0.0003051, img_s=3858, img_s_per_gpu=964.6, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.005242, p25_s=0.005177, p75_s=0.005296, t_fwd_s=0.001992, t_bwd_s=0.001916, t_comm_s=0.001004, t_opt_s=0.0002885, img_s=3052, img_s_per_gpu=763.1, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.006225, p25_s=0.006152, p75_s=0.006669, t_fwd_s=0.002752, t_bwd_s=0.00313, t_comm_s=5.858e-07, t_opt_s=0.0003427, img_s=2570, img_s_per_gpu=642.6, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:11:27Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.004493472166359425,0.004306096816435456,0.006086335517466068,0.0021779872477054596,0.0019782590679824352,6.73346221446991e-07,0.0003365897573530674,7121.4416859125995,1780.3604214781499,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.0052817100659012794,0.005249126814305782,0.005500845843926072,0.0021020681597292423,0.001930764876306057,0.0009548957459628582,0.00029333168640732765,6058.643810570368,1514.660952642592,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.009185403119772673,0.008421161444857717,0.009610517183318734,0.0028475197032094,0.00601485138759017,4.912726581096649e-07,0.00032048067077994347,3483.788308769617,870.9470771924042,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.004146995022892952,0.00413156533613801,0.004216691246256232,0.0019718524999916553,0.0018746615387499332,4.246830940246582e-07,0.0003050863742828369,3858.2153852787524,964.5538463196881,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.005241647828370333,0.005176556762307882,0.005296006565913558,0.0019919569604098797,0.0019159861840307713,0.001003677025437355,0.000288467388600111,3052.475199382962,763.1187998457405,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.006224714685231447,0.006151561858132482,0.006669026566669345,0.002751823514699936,0.0031297141686081886,5.85801899433136e-07,0.00034265080466866493,2570.398935385918,642.5997338464795,4
+----- END FILE scaling.csv -----
+##### E3 rep=2 k=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=2.176e-05, p25_s=2.165e-05, p75_s=2.477e-05, algbw_GBps=0.1882, busbw_GBps=0.1882, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=2.172e-05, p25_s=2.172e-05, p75_s=2.201e-05, algbw_GBps=0.7544, busbw_GBps=0.7544, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=2.246e-05, p25_s=2.241e-05, p75_s=2.277e-05, algbw_GBps=2.918, busbw_GBps=2.918, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=2.527e-05, p25_s=2.491e-05, p75_s=3.885e-05, algbw_GBps=10.37, busbw_GBps=10.37, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=2.53e-05, p25_s=2.526e-05, p75_s=2.555e-05, algbw_GBps=41.44, busbw_GBps=41.44, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=3.426e-05, p25_s=3.416e-05, p75_s=3.429e-05, algbw_GBps=122.4, busbw_GBps=122.4, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4096, median_s=1.757e-05, p25_s=1.751e-05, p75_s=1.81e-05, algbw_GBps=0.2331, busbw_GBps=0.2331, trials=3
+  op=broadcast, k=2, label=pow4, bytes=16384, median_s=1.758e-05, p25_s=1.734e-05, p75_s=1.765e-05, algbw_GBps=0.9322, busbw_GBps=0.9322, trials=3
+  op=broadcast, k=2, label=pow4, bytes=65536, median_s=1.827e-05, p25_s=1.798e-05, p75_s=1.845e-05, algbw_GBps=3.587, busbw_GBps=3.587, trials=3
+  op=broadcast, k=2, label=pow4, bytes=262144, median_s=1.953e-05, p25_s=1.942e-05, p75_s=1.961e-05, algbw_GBps=13.42, busbw_GBps=13.42, trials=3
+  op=broadcast, k=2, label=pow4, bytes=1048576, median_s=2.164e-05, p25_s=2.162e-05, p75_s=2.194e-05, algbw_GBps=48.45, busbw_GBps=48.45, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4194304, median_s=2.605e-05, p25_s=2.599e-05, p75_s=2.612e-05, algbw_GBps=161, busbw_GBps=161, trials=3
+  op=reduce, k=2, label=pow4, bytes=4096, median_s=2.12e-05, p25_s=2.113e-05, p75_s=2.148e-05, algbw_GBps=0.1932, busbw_GBps=0.1932, trials=3
+  op=reduce, k=2, label=pow4, bytes=16384, median_s=2.135e-05, p25_s=2.121e-05, p75_s=2.142e-05, algbw_GBps=0.7675, busbw_GBps=0.7675, trials=3
+  op=reduce, k=2, label=pow4, bytes=65536, median_s=2.234e-05, p25_s=2.202e-05, p75_s=2.24e-05, algbw_GBps=2.934, busbw_GBps=2.934, trials=3
+  op=reduce, k=2, label=pow4, bytes=262144, median_s=2.389e-05, p25_s=2.359e-05, p75_s=2.393e-05, algbw_GBps=10.98, busbw_GBps=10.98, trials=3
+  op=reduce, k=2, label=pow4, bytes=1048576, median_s=2.427e-05, p25_s=2.416e-05, p75_s=2.438e-05, algbw_GBps=43.21, busbw_GBps=43.21, trials=3
+  op=reduce, k=2, label=pow4, bytes=4194304, median_s=2.612e-05, p25_s=2.575e-05, p75_s=2.634e-05, algbw_GBps=160.6, busbw_GBps=160.6, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,2.1764542907476425e-05,2.1653566509485245e-05,2.4769380688667296e-05,0.18819600381283294,0.18819600381283294,3
+all_reduce,2,pow4,16384,2.1718684583902358e-05,2.171611413359642e-05,2.201475203037262e-05,0.7543734951675496,0.7543734951675496,3
+all_reduce,2,pow4,65536,2.2456292062997817e-05,2.240680158138275e-05,2.277057617902756e-05,2.918380283626006,2.918380283626006,3
+all_reduce,2,pow4,262144,2.5271587073802948e-05,2.4912264198064804e-05,3.8848277181386945e-05,10.373072305844374,10.373072305844374,3
+all_reduce,2,pow4,1048576,2.530314028263092e-05,2.526434138417244e-05,2.555485814809799e-05,41.44054802240433,41.44054802240433,3
+all_reduce,2,pow4,4194304,3.426480107009411e-05,3.416151739656925e-05,3.428691998124123e-05,122.40853205071534,122.40853205071534,3
+broadcast,2,pow4,4096,1.7568152397871017e-05,1.7505548894405364e-05,1.8096081912517548e-05,0.23314916146198564,0.23314916146198564,3
+broadcast,2,pow4,16384,1.7576199024915695e-05,1.7340406775474547e-05,1.7651822417974472e-05,0.9321696902028901,0.9321696902028901,3
+broadcast,2,pow4,65536,1.8271356821060182e-05,1.798182725906372e-05,1.8446017056703566e-05,3.5868162743371634,3.5868162743371634,3
+broadcast,2,pow4,262144,1.9527412950992586e-05,1.9416678696870804e-05,1.960957422852516e-05,13.424410118119365,13.424410118119365,3
+broadcast,2,pow4,1048576,2.164255827665329e-05,2.162490040063858e-05,2.1940208971500396e-05,48.449725147841775,48.449725147841775,3
+broadcast,2,pow4,4194304,2.6047183200716973e-05,2.599470317363739e-05,2.6123784482479096e-05,161.0271624259374,161.0271624259374,3
+reduce,2,pow4,4096,2.1199360489845275e-05,2.1128728985786437e-05,2.1480247378349306e-05,0.19321337556206133,0.19321337556206133,3
+reduce,2,pow4,16384,2.1346714347600937e-05,2.1213237196207047e-05,2.1415650844573976e-05,0.7675185854464449,0.7675185854464449,3
+reduce,2,pow4,65536,2.2339317947626114e-05,2.201942726969719e-05,2.2398363798856736e-05,2.9336616343277475,2.9336616343277475,3
+reduce,2,pow4,262144,2.388525754213333e-05,2.3586899042129518e-05,2.3933444172143936e-05,10.975138096693364,10.975138096693364,3
+reduce,2,pow4,1048576,2.4268273264169694e-05,2.415614202618599e-05,2.438332885503769e-05,43.207688844848505,43.207688844848505,3
+reduce,2,pow4,4194304,2.612164244055748e-05,2.574608661234379e-05,2.63359397649765e-05,160.5681575936343,160.5681575936343,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:11:42Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.2378397282161512e-05,
+      "B_GBps": 347.31339945429005,
+      "max_rel_err": 0.08461729223759837
+    },
+    "broadcast": {
+      "alpha_s": 1.818013193552837e-05,
+      "B_GBps": 496.96307984903297,
+      "max_rel_err": 0.06249070546808016
+    },
+    "reduce": {
+      "alpha_s": 2.215343175080128e-05,
+      "B_GBps": 959.8687042081131,
+      "max_rel_err": 0.061072055456182876
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=2 k=3
+  op=all_reduce, k=3, label=pow4, bytes=4096, median_s=2.196e-05, p25_s=2.181e-05, p75_s=2.239e-05, algbw_GBps=0.1865, busbw_GBps=0.2487, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=16384, median_s=2.179e-05, p25_s=2.145e-05, p75_s=3.841e-05, algbw_GBps=0.7521, busbw_GBps=1.003, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=65536, median_s=2.22e-05, p25_s=2.217e-05, p75_s=2.225e-05, algbw_GBps=2.952, busbw_GBps=3.935, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=262144, median_s=2.393e-05, p25_s=2.375e-05, p75_s=2.413e-05, algbw_GBps=10.95, busbw_GBps=14.6, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=1048576, median_s=2.481e-05, p25_s=2.471e-05, p75_s=2.516e-05, algbw_GBps=42.26, busbw_GBps=56.35, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=4194304, median_s=4.435e-05, p25_s=4.432e-05, p75_s=4.456e-05, algbw_GBps=94.56, busbw_GBps=126.1, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4096, median_s=2.065e-05, p25_s=2.038e-05, p75_s=2.084e-05, algbw_GBps=0.1984, busbw_GBps=0.1984, trials=3
+  op=broadcast, k=3, label=pow4, bytes=16384, median_s=2.022e-05, p25_s=2.003e-05, p75_s=2.032e-05, algbw_GBps=0.8104, busbw_GBps=0.8104, trials=3
+  op=broadcast, k=3, label=pow4, bytes=65536, median_s=2.074e-05, p25_s=2.058e-05, p75_s=2.082e-05, algbw_GBps=3.161, busbw_GBps=3.161, trials=3
+  op=broadcast, k=3, label=pow4, bytes=262144, median_s=2.228e-05, p25_s=2.2e-05, p75_s=0.0001337, algbw_GBps=11.77, busbw_GBps=11.77, trials=3
+  op=broadcast, k=3, label=pow4, bytes=1048576, median_s=2.314e-05, p25_s=2.284e-05, p75_s=2.323e-05, algbw_GBps=45.31, busbw_GBps=45.31, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4194304, median_s=2.614e-05, p25_s=2.612e-05, p75_s=2.625e-05, algbw_GBps=160.5, busbw_GBps=160.5, trials=3
+  op=reduce, k=3, label=pow4, bytes=4096, median_s=2.089e-05, p25_s=2.088e-05, p75_s=2.124e-05, algbw_GBps=0.1961, busbw_GBps=0.1961, trials=3
+  op=reduce, k=3, label=pow4, bytes=16384, median_s=2.088e-05, p25_s=2.083e-05, p75_s=2.118e-05, algbw_GBps=0.7848, busbw_GBps=0.7848, trials=3
+  op=reduce, k=3, label=pow4, bytes=65536, median_s=2.141e-05, p25_s=2.137e-05, p75_s=2.16e-05, algbw_GBps=3.062, busbw_GBps=3.062, trials=3
+  op=reduce, k=3, label=pow4, bytes=262144, median_s=2.318e-05, p25_s=2.29e-05, p75_s=2.333e-05, algbw_GBps=11.31, busbw_GBps=11.31, trials=3
+  op=reduce, k=3, label=pow4, bytes=1048576, median_s=2.398e-05, p25_s=2.394e-05, p75_s=2.43e-05, algbw_GBps=43.73, busbw_GBps=43.73, trials=3
+  op=reduce, k=3, label=pow4, bytes=4194304, median_s=2.719e-05, p25_s=2.709e-05, p75_s=2.719e-05, algbw_GBps=154.3, busbw_GBps=154.3, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,3,pow4,4096,2.195844426751137e-05,2.1806322038173676e-05,2.2393260151147844e-05,0.18653416198798015,0.24871221598397353,3
+all_reduce,3,pow4,16384,2.1785460412502288e-05,2.145238220691681e-05,3.84090282022953e-05,0.7520612229336917,1.0027482972449222,3
+all_reduce,3,pow4,65536,2.2203493863344192e-05,2.2170227020978926e-05,2.2251233458518984e-05,2.9516075444411727,3.9354767259215633,3
+all_reduce,3,pow4,262144,2.3932475596666335e-05,2.3751966655254364e-05,2.412565052509308e-05,10.953484479328802,14.604645972438401,3
+all_reduce,3,pow4,1048576,2.4811476469039916e-05,2.4706125259399414e-05,2.515604719519615e-05,42.26173324704907,56.348977662732096,3
+all_reduce,3,pow4,4194304,4.435400478541851e-05,4.432406276464462e-05,4.456355236470699e-05,94.564268103675,126.0856908049,3
+broadcast,3,pow4,4096,2.064581960439682e-05,2.0378325134515764e-05,2.08398699760437e-05,0.19839367380347056,0.19839367380347056,3
+broadcast,3,pow4,16384,2.0216871052980424e-05,2.0027868449687956e-05,2.032315358519554e-05,0.8104122520771893,0.8104122520771893,3
+broadcast,3,pow4,65536,2.0735450088977814e-05,2.057977020740509e-05,2.0819194614887236e-05,3.1605776445063265,3.1605776445063265,3
+broadcast,3,pow4,262144,2.228107303380966e-05,2.2002514451742173e-05,0.00013365957885980607,11.765322056178285,11.765322056178285,3
+broadcast,3,pow4,1048576,2.3143440485000612e-05,2.283753827214241e-05,2.3226533085107803e-05,45.30769747391654,45.30769747391654,3
+broadcast,3,pow4,4194304,2.6138126850128172e-05,2.6118522509932517e-05,2.6251468807458877e-05,160.46689282860498,160.46689282860498,3
+reduce,3,pow4,4096,2.088744193315506e-05,2.0882729440927505e-05,2.1239519119262694e-05,0.19609868997401428,0.19609868997401428,3
+reduce,3,pow4,16384,2.0876526832580566e-05,2.0832307636737824e-05,2.118300646543503e-05,0.7848048735017844,0.7848048735017844,3
+reduce,3,pow4,65536,2.140512689948082e-05,2.136858180165291e-05,2.1599680185317993e-05,3.0616964014163153,3.0616964014163153,3
+reduce,3,pow4,262144,2.317875623703003e-05,2.2900477051734925e-05,2.3334790021181107e-05,11.309666373780777,11.309666373780777,3
+reduce,3,pow4,1048576,2.3976881057024e-05,2.393830567598343e-05,2.430278807878494e-05,43.73279399877662,43.73279399877662,3
+reduce,3,pow4,4194304,2.7191080152988435e-05,2.7087517082691193e-05,2.719312906265259e-05,154.25293796351906,154.25293796351906,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:11:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.1662852390988847e-05,
+      "B_GBps": 263.8955987121853,
+      "max_rel_err": 0.08662561561774597
+    },
+    "broadcast": {
+      "alpha_s": 2.0923947729296404e-05,
+      "B_GBps": 755.1856298155569,
+      "max_rel_err": 0.045329955774744024
+    },
+    "reduce": {
+      "alpha_s": 2.152213447651166e-05,
+      "B_GBps": 691.0615850651778,
+      "max_rel_err": 0.05510591358515883
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=2 k=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=2.169e-05, p25_s=2.15e-05, p75_s=2.239e-05, algbw_GBps=0.1888, busbw_GBps=0.2832, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=2.142e-05, p25_s=2.142e-05, p75_s=2.18e-05, algbw_GBps=0.7648, busbw_GBps=1.147, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=2.334e-05, p25_s=2.332e-05, p75_s=2.342e-05, algbw_GBps=2.808, busbw_GBps=4.212, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=2.386e-05, p25_s=2.366e-05, p75_s=2.57e-05, algbw_GBps=10.99, busbw_GBps=16.48, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=2.518e-05, p25_s=2.495e-05, p75_s=2.581e-05, algbw_GBps=41.64, busbw_GBps=62.46, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=4.233e-05, p25_s=4.22e-05, p75_s=4.256e-05, algbw_GBps=99.08, busbw_GBps=148.6, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4096, median_s=1.985e-05, p25_s=1.981e-05, p75_s=2.042e-05, algbw_GBps=0.2063, busbw_GBps=0.2063, trials=3
+  op=broadcast, k=4, label=pow4, bytes=16384, median_s=1.992e-05, p25_s=1.989e-05, p75_s=2.01e-05, algbw_GBps=0.8227, busbw_GBps=0.8227, trials=3
+  op=broadcast, k=4, label=pow4, bytes=65536, median_s=2.031e-05, p25_s=2.024e-05, p75_s=2.04e-05, algbw_GBps=3.226, busbw_GBps=3.226, trials=3
+  op=broadcast, k=4, label=pow4, bytes=262144, median_s=0.000117, p25_s=2.246e-05, p75_s=0.0001225, algbw_GBps=2.24, busbw_GBps=2.24, trials=3
+  op=broadcast, k=4, label=pow4, bytes=1048576, median_s=2.287e-05, p25_s=2.273e-05, p75_s=2.296e-05, algbw_GBps=45.84, busbw_GBps=45.84, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4194304, median_s=2.637e-05, p25_s=2.634e-05, p75_s=2.662e-05, algbw_GBps=159, busbw_GBps=159, trials=3
+  op=reduce, k=4, label=pow4, bytes=4096, median_s=2.08e-05, p25_s=2.076e-05, p75_s=2.087e-05, algbw_GBps=0.197, busbw_GBps=0.197, trials=3
+  op=reduce, k=4, label=pow4, bytes=16384, median_s=2.068e-05, p25_s=2.06e-05, p75_s=2.076e-05, algbw_GBps=0.7921, busbw_GBps=0.7921, trials=3
+  op=reduce, k=4, label=pow4, bytes=65536, median_s=2.131e-05, p25_s=2.113e-05, p75_s=2.137e-05, algbw_GBps=3.076, busbw_GBps=3.076, trials=3
+  op=reduce, k=4, label=pow4, bytes=262144, median_s=2.317e-05, p25_s=2.313e-05, p75_s=2.32e-05, algbw_GBps=11.31, busbw_GBps=11.31, trials=3
+  op=reduce, k=4, label=pow4, bytes=1048576, median_s=2.482e-05, p25_s=2.475e-05, p75_s=2.501e-05, algbw_GBps=42.24, busbw_GBps=42.24, trials=3
+  op=reduce, k=4, label=pow4, bytes=4194304, median_s=2.786e-05, p25_s=2.772e-05, p75_s=2.807e-05, algbw_GBps=150.5, busbw_GBps=150.5, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,2.169366925954819e-05,2.1499525755643843e-05,2.2393632680177688e-05,0.1888108438915744,0.2832162658373616,3
+all_reduce,4,pow4,16384,2.1423865109682084e-05,2.1422654390335084e-05,2.1803975105285645e-05,0.7647546283604811,1.1471319425407218,3
+all_reduce,4,pow4,65536,2.333851531147957e-05,2.3323241621255874e-05,2.3420024663209916e-05,2.8080620864414905,4.212093129662236,3
+all_reduce,4,pow4,262144,2.3856684565544127e-05,2.3655444383621216e-05,2.570265904068947e-05,10.988282939307119,16.48242440896068,3
+all_reduce,4,pow4,1048576,2.5180745869874953e-05,2.4950802326202394e-05,2.5811698287725447e-05,41.641975397339856,62.46296309600979,3
+all_reduce,4,pow4,4194304,4.233261570334435e-05,4.220386035740376e-05,4.255804233253002e-05,99.0797268326758,148.6195902490137,3
+broadcast,4,pow4,4096,1.9852370023727417e-05,1.9813291728496552e-05,2.0416900515556335e-05,0.2063229727787911,0.2063229727787911,3
+broadcast,4,pow4,16384,1.991603523492813e-05,1.988772302865982e-05,2.0100157707929612e-05,0.8226536962169179,0.8226536962169179,3
+broadcast,4,pow4,65536,2.0314864814281462e-05,2.0235683768987657e-05,2.0396262407302856e-05,3.2260121147312697,3.2260121147312697,3
+broadcast,4,pow4,262144,0.00011700455099344253,2.2457316517829896e-05,0.0001225307770073414,2.240459860528773,2.240459860528773,3
+broadcast,4,pow4,1048576,2.2874940186738967e-05,2.272730693221092e-05,2.295946702361107e-05,45.83950783870811,45.83950783870811,3
+broadcast,4,pow4,4194304,2.6371842250227927e-05,2.634474076330662e-05,2.6620179414749146e-05,159.0447857302707,159.0447857302707,3
+reduce,4,pow4,4096,2.0795706659555436e-05,2.075914293527603e-05,2.0874254405498506e-05,0.1969637323249088,0.1969637323249088,3
+reduce,4,pow4,16384,2.0683370530605315e-05,2.059848979115486e-05,2.07575224339962e-05,0.7921339501101375,0.7921339501101375,3
+reduce,4,pow4,65536,2.1307189017534254e-05,2.1130852401256563e-05,2.136923372745514e-05,3.075769400931708,3.075769400931708,3
+reduce,4,pow4,262144,2.3169424384832382e-05,2.3134183138608932e-05,2.3196414113044738e-05,11.314221520825082,11.314221520825082,3
+reduce,4,pow4,1048576,2.4821888655424117e-05,2.47461162507534e-05,2.5007743388414383e-05,42.244005464542425,42.244005464542425,3
+reduce,4,pow4,4194304,2.7862098067998887e-05,2.7715228497982025e-05,2.8072018176317214e-05,150.5379813739649,150.5379813739649,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:03Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.1863640703656197e-05,
+      "B_GBps": 321.63815963105947,
+      "max_rel_err": 0.062470780855099814
+    },
+    "broadcast": {
+      "alpha_s": 2.095374401297632e-05,
+      "B_GBps": 717.4367372668889,
+      "max_rel_err": 0.8177922692745774
+    },
+    "reduce": {
+      "alpha_s": 2.148051774102011e-05,
+      "B_GBps": 600.6621585118818,
+      "max_rel_err": 0.06428482619542225
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E4 rep=2 k=1
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=8, b_global=8, step_s=0.00384, p25_s=0.003788, p75_s=0.004124, t_fwd_s=0.001822, t_bwd_s=0.001739, t_comm_s=2.771e-07, t_opt_s=0.0002784, img_s=2083, img_s_per_gpu=2083, steps=4
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=16, b_global=16, step_s=0.006175, p25_s=0.006171, p75_s=0.006203, t_fwd_s=0.003564, t_bwd_s=0.002334, t_comm_s=2.882e-07, t_opt_s=0.0002873, img_s=2591, img_s_per_gpu=2591, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:10Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,8,8,0.0038397060707211494,0.003787643276154995,0.004124305909499526,0.0018215193413197994,0.0017394744791090488,2.7706846594810486e-07,0.000278424471616745,2083.492812380165,2083.492812380165,4
+resnet18_cifar,11173962,1,local,strong,16,16,0.006175346672534943,0.006171355256810784,0.006203074241057038,0.0035641398280858994,0.0023343744687736034,2.882443368434906e-07,0.0002872939221560955,2590.947658236019,2590.947658236019,4
+----- END FILE scaling.csv -----
+##### E4 rep=2 k=2
+[rank1]:[W1122 00:12:17.409493381 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:12:17.604856067 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.004967, p25_s=0.004811, p75_s=0.009332, t_fwd_s=0.001946, t_bwd_s=0.002759, t_comm_s=3.004e-07, t_opt_s=0.0002708, img_s=3221, img_s_per_gpu=1611, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.005887, p25_s=0.005867, p75_s=0.007126, t_fwd_s=0.001826, t_bwd_s=0.003175, t_comm_s=0.0006446, t_opt_s=0.0002461, img_s=2718, img_s_per_gpu=1359, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.007788, p25_s=0.007495, p75_s=0.008199, t_fwd_s=0.00274, t_bwd_s=0.004772, t_comm_s=3.059e-07, t_opt_s=0.0002724, img_s=2054, img_s_per_gpu=1027, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.005261, p25_s=0.005123, p75_s=0.005361, t_fwd_s=0.00185, t_bwd_s=0.003129, t_comm_s=2.771e-07, t_opt_s=0.0002604, img_s=3041, img_s_per_gpu=1521, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.005273, p25_s=0.005267, p75_s=0.005648, t_fwd_s=0.002516, t_bwd_s=0.001701, t_comm_s=0.0007616, t_opt_s=0.0003105, img_s=3034, img_s_per_gpu=1517, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.006256, p25_s=0.006166, p75_s=0.007594, t_fwd_s=0.003417, t_bwd_s=0.002556, t_comm_s=2.696e-07, t_opt_s=0.0002762, img_s=2558, img_s_per_gpu=1279, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:16Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.004966979380697012,0.00481058657169342,0.00933228270150721,0.0019456567242741585,0.0027590147219598293,3.003515303134918e-07,0.00027078716084361076,3221.2736904405538,1610.6368452202769,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.0058873300440609455,0.0058673841413110495,0.007126361597329378,0.0018261908553540707,0.0031753922812640667,0.0006445907056331635,0.00024608615785837173,2717.7005332222834,1358.8502666111417,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.007788199000060558,0.007494913646951318,0.008198712952435017,0.002740190364420414,0.004771667532622814,3.059394657611847e-07,0.00027242954820394516,2054.390238343369,1027.1951191716846,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.005260695703327656,0.005123281618580222,0.0053605930879712105,0.0018497025594115257,0.0031291968189179897,2.7706846594810486e-07,0.0002603926695883274,3041.4228273798826,1520.7114136899413,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.005273132119327784,0.00526709551922977,0.005647518439218402,0.0025158566422760487,0.0017010732553899288,0.0007615755312144756,0.00031050993129611015,3034.24978512385,1517.124892561925,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.00625551026314497,0.006166266743093729,0.007593848742544651,0.0034166108816862106,0.0025556408800184727,2.6961788535118103e-07,0.00027615856379270554,2557.744984332576,1278.872492166288,4
+----- END FILE scaling.csv -----
+##### E4 rep=2 k=3
+[rank1]:[W1122 00:12:26.758129187 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:12:26.799844172 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:12:26.968467241 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=weak, b_gpu=8, b_global=24, step_s=0.003925, p25_s=0.003757, p75_s=0.007094, t_fwd_s=0.001975, t_bwd_s=0.001684, t_comm_s=2.873e-07, t_opt_s=0.0002674, img_s=6115, img_s_per_gpu=2038, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=weak, b_gpu=8, b_global=24, step_s=0.004868, p25_s=0.004805, p75_s=0.005459, t_fwd_s=0.001854, t_bwd_s=0.0017, t_comm_s=0.00108, t_opt_s=0.0002516, img_s=4930, img_s_per_gpu=1643, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=weak, b_gpu=8, b_global=24, step_s=0.00589, p25_s=0.005636, p75_s=0.006863, t_fwd_s=0.00244, t_bwd_s=0.003086, t_comm_s=3.455e-07, t_opt_s=0.0002671, img_s=4075, img_s_per_gpu=1358, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=strong, b_gpu=5, b_global=15, step_s=0.003406, p25_s=0.003344, p75_s=0.005408, t_fwd_s=0.001692, t_bwd_s=0.001449, t_comm_s=2.37e-07, t_opt_s=0.0002641, img_s=4405, img_s_per_gpu=1468, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=strong, b_gpu=5, b_global=15, step_s=0.004925, p25_s=0.004721, p75_s=0.006181, t_fwd_s=0.001686, t_bwd_s=0.001468, t_comm_s=0.001494, t_opt_s=0.0002532, img_s=3046, img_s_per_gpu=1015, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=strong, b_gpu=5, b_global=15, step_s=0.005569, p25_s=0.005503, p75_s=0.005599, t_fwd_s=0.002255, t_bwd_s=0.003046, t_comm_s=2.356e-07, t_opt_s=0.0002664, img_s=2693, img_s_per_gpu=897.8, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:25Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,3,local,weak,8,24,0.003924989141523838,0.0037565480452030897,0.007093825377523899,0.001974666491150856,0.0016835518181324005,2.873130142688751e-07,0.00026739761233329773,6114.666597697194,2038.2221992323982,4
+resnet18_cifar,11173962,3,manual,weak,8,24,0.004867974668741226,0.004805117612704635,0.005459145875647664,0.0018541961908340454,0.0016998564824461937,0.001080384012311697,0.0002516484819352627,4930.181776440095,1643.3939254800316,4
+resnet18_cifar,11173962,3,ddp,weak,8,24,0.005889507941901684,0.0056359979789704084,0.0068629535380750895,0.0024404670111835003,0.003085522912442684,3.4552067518234253e-07,0.00026712147518992424,4075.0433205546465,1358.3477735182155,4
+resnet18_cifar,11173962,3,local,strong,5,15,0.0034055793657898903,0.0033442943822592497,0.00540816062130034,0.0016921311616897583,0.0014494634233415127,2.3702159523963928e-07,0.00026407837867736816,4404.536905138577,1468.1789683795255,4
+resnet18_cifar,11173962,3,manual,strong,5,15,0.0049252500757575035,0.0047208573669195175,0.006180682452395558,0.0016855462454259396,0.0014681732282042503,0.0014937743544578552,0.0002532145008444786,3045.5306368769507,1015.1768789589836,4
+resnet18_cifar,11173962,3,ddp,strong,5,15,0.005569320172071457,0.00550285424105823,0.005598817020654678,0.0022551738657057285,0.0030460068956017494,2.3562461137771606e-07,0.0002664090134203434,2693.326929778736,897.7756432595787,4
+----- END FILE scaling.csv -----
+##### E4 rep=2 k=4
+[rank3]:[W1122 00:12:37.826707288 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:12:37.830776944 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 00:12:37.856472772 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:12:38.997095500 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.004347, p25_s=0.004107, p75_s=0.007755, t_fwd_s=0.002233, t_bwd_s=0.001798, t_comm_s=4.172e-07, t_opt_s=0.0003193, img_s=7361, img_s_per_gpu=1840, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.005188, p25_s=0.004821, p75_s=0.01292, t_fwd_s=0.002084, t_bwd_s=0.002006, t_comm_s=0.0007335, t_opt_s=0.0002883, img_s=6168, img_s_per_gpu=1542, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.00592, p25_s=0.00579, p75_s=0.006725, t_fwd_s=0.002824, t_bwd_s=0.002798, t_comm_s=3.576e-07, t_opt_s=0.0003036, img_s=5405, img_s_per_gpu=1351, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.003935, p25_s=0.003887, p75_s=0.004466, t_fwd_s=0.001947, t_bwd_s=0.001691, t_comm_s=3.329e-07, t_opt_s=0.0002964, img_s=4066, img_s_per_gpu=1017, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.005133, p25_s=0.004809, p75_s=0.005445, t_fwd_s=0.001981, t_bwd_s=0.00192, t_comm_s=0.0009206, t_opt_s=0.0002856, img_s=3117, img_s_per_gpu=779.3, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.0056, p25_s=0.005566, p75_s=0.006085, t_fwd_s=0.002702, t_bwd_s=0.002601, t_comm_s=3.935e-07, t_opt_s=0.0002975, img_s=2857, img_s_per_gpu=714.3, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:36Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.004347181413322687,0.0041071041487157345,0.007755027152597904,0.002233254723250866,0.0017975158989429474,4.172325134277344e-07,0.00031929323449730873,7361.091465364312,1840.272866341078,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.005187745671719313,0.004820785718038678,0.012917974265292287,0.002084219828248024,0.0020061563700437546,0.0007335226982831955,0.00028828950598835945,6168.382574042922,1542.0956435107305,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.00592010235413909,0.005790127441287041,0.006724599748849869,0.002824212424457073,0.0027977321296930313,3.5762786865234375e-07,0.0003036041744053364,5405.311949991359,1351.3279874978398,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.003934596665203571,0.0038867683615535498,0.004465807927772403,0.0019471105188131332,0.001690723467618227,3.3294782042503357e-07,0.00029642973095178604,4066.490510069138,1016.6226275172845,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.00513257272541523,0.004809294594451785,0.00544454506598413,0.001981064211577177,0.0019202455878257751,0.000920567661523819,0.00028561800718307495,3117.3450150588146,779.3362537647037,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.005599753465503454,0.005566074745729566,0.006084913620725274,0.002702190075069666,0.0026005543768405914,3.9348378777503967e-07,0.0002974811941385269,2857.2686455869707,714.3171613967427,4
+----- END FILE scaling.csv -----
+##### E3 rep=3 k=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=2.239e-05, p25_s=2.179e-05, p75_s=2.294e-05, algbw_GBps=0.1829, busbw_GBps=0.1829, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=2.173e-05, p25_s=2.125e-05, p75_s=2.23e-05, algbw_GBps=0.754, busbw_GBps=0.754, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=2.241e-05, p25_s=2.218e-05, p75_s=2.246e-05, algbw_GBps=2.924, busbw_GBps=2.924, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=2.442e-05, p25_s=2.405e-05, p75_s=2.453e-05, algbw_GBps=10.73, busbw_GBps=10.73, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=2.483e-05, p25_s=2.471e-05, p75_s=2.487e-05, algbw_GBps=42.22, busbw_GBps=42.22, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=3.358e-05, p25_s=3.342e-05, p75_s=3.377e-05, algbw_GBps=124.9, busbw_GBps=124.9, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4096, median_s=2.037e-05, p25_s=2.037e-05, p75_s=2.055e-05, algbw_GBps=0.2011, busbw_GBps=0.2011, trials=3
+  op=broadcast, k=2, label=pow4, bytes=16384, median_s=1.998e-05, p25_s=1.986e-05, p75_s=2.078e-05, algbw_GBps=0.8202, busbw_GBps=0.8202, trials=3
+  op=broadcast, k=2, label=pow4, bytes=65536, median_s=2.111e-05, p25_s=2.091e-05, p75_s=2.115e-05, algbw_GBps=3.105, busbw_GBps=3.105, trials=3
+  op=broadcast, k=2, label=pow4, bytes=262144, median_s=2.251e-05, p25_s=2.233e-05, p75_s=2.261e-05, algbw_GBps=11.65, busbw_GBps=11.65, trials=3
+  op=broadcast, k=2, label=pow4, bytes=1048576, median_s=2.28e-05, p25_s=2.266e-05, p75_s=2.312e-05, algbw_GBps=45.99, busbw_GBps=45.99, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4194304, median_s=2.608e-05, p25_s=2.596e-05, p75_s=2.611e-05, algbw_GBps=160.8, busbw_GBps=160.8, trials=3
+  op=reduce, k=2, label=pow4, bytes=4096, median_s=2.107e-05, p25_s=2.089e-05, p75_s=2.126e-05, algbw_GBps=0.1944, busbw_GBps=0.1944, trials=3
+  op=reduce, k=2, label=pow4, bytes=16384, median_s=2.102e-05, p25_s=2.093e-05, p75_s=2.115e-05, algbw_GBps=0.7796, busbw_GBps=0.7796, trials=3
+  op=reduce, k=2, label=pow4, bytes=65536, median_s=2.172e-05, p25_s=2.169e-05, p75_s=2.211e-05, algbw_GBps=3.017, busbw_GBps=3.017, trials=3
+  op=reduce, k=2, label=pow4, bytes=262144, median_s=2.352e-05, p25_s=2.351e-05, p75_s=2.353e-05, algbw_GBps=11.15, busbw_GBps=11.15, trials=3
+  op=reduce, k=2, label=pow4, bytes=1048576, median_s=2.381e-05, p25_s=2.357e-05, p75_s=2.396e-05, algbw_GBps=44.05, busbw_GBps=44.05, trials=3
+  op=reduce, k=2, label=pow4, bytes=4194304, median_s=2.492e-05, p25_s=2.472e-05, p75_s=2.506e-05, algbw_GBps=168.3, busbw_GBps=168.3, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,2.238938584923744e-05,2.179274335503578e-05,2.2937897592782975e-05,0.18294383006220358,0.18294383006220358,3
+all_reduce,2,pow4,16384,2.1729227155447008e-05,2.125035971403122e-05,2.2301338613033296e-05,0.7540074887519833,0.7540074887519833,3
+all_reduce,2,pow4,65536,2.2413991391658783e-05,2.2181663662195207e-05,2.2462718188762665e-05,2.923887979380093,2.923887979380093,3
+all_reduce,2,pow4,262144,2.4421326816082e-05,2.4053193628787993e-05,2.453302964568138e-05,10.734224310342228,10.734224310342228,3
+all_reduce,2,pow4,1048576,2.483407035470009e-05,2.4706181138753892e-05,2.4871379137039183e-05,42.22328378004079,42.22328378004079,3
+all_reduce,2,pow4,4194304,3.3575110137462616e-05,3.342465497553348e-05,3.3774878829717636e-05,124.9230153773958,124.9230153773958,3
+broadcast,2,pow4,4096,2.0371749997138977e-05,2.0369607955217362e-05,2.0553786307573318e-05,0.2010627462331535,0.2010627462331535,3
+broadcast,2,pow4,16384,1.9976086914539337e-05,1.9864756613969802e-05,2.0781457424163817e-05,0.8201806525018229,0.8201806525018229,3
+broadcast,2,pow4,65536,2.1107867360115053e-05,2.090727910399437e-05,2.1149590611457825e-05,3.104813900992923,3.104813900992923,3
+broadcast,2,pow4,262144,2.250632271170616e-05,2.2329669445753097e-05,2.2607706487178803e-05,11.647571367296338,11.647571367296338,3
+broadcast,2,pow4,1048576,2.2801067680120467e-05,2.2664833813905716e-05,2.3117903620004654e-05,45.988021908036366,45.988021908036366,3
+broadcast,2,pow4,4194304,2.607782371342182e-05,2.5961920619010927e-05,2.6108743622899055e-05,160.83796125369395,160.83796125369395,3
+reduce,2,pow4,4096,2.1065417677164077e-05,2.0890105515718462e-05,2.1260865032672882e-05,0.1944419077168482,0.1944419077168482,3
+reduce,2,pow4,16384,2.1016765385866167e-05,2.093099057674408e-05,2.1150503307580948e-05,0.7795681066610891,0.7795681066610891,3
+reduce,2,pow4,65536,2.1723993122577666e-05,2.1685753017663957e-05,2.2108908742666243e-05,3.016756616990855,3.016756616990855,3
+reduce,2,pow4,262144,2.3519061505794527e-05,2.3509953171014785e-05,2.353409305214882e-05,11.146022979505966,11.146022979505966,3
+reduce,2,pow4,1048576,2.3806151002645492e-05,2.3569539189338683e-05,2.3955684155225755e-05,44.04643152450287,44.04643152450287,3
+reduce,2,pow4,4194304,2.4915020912885665e-05,2.4718325585126875e-05,2.5060819461941718e-05,168.3443901036732,168.3443901036732,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:50Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.2373847674693467e-05,
+      "B_GBps": 374.6689972759057,
+      "max_rel_err": 0.05518991273289999
+    },
+    "broadcast": {
+      "alpha_s": 2.087363436199679e-05,
+      "B_GBps": 763.9282469569245,
+      "max_rel_err": 0.057296597018887556
+    },
+    "reduce": {
+      "alpha_s": 2.1833205021976775e-05,
+      "B_GBps": 1205.9523247681045,
+      "max_rel_err": 0.06243792463485231
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=3 k=3
+  op=all_reduce, k=3, label=pow4, bytes=4096, median_s=2.233e-05, p25_s=2.228e-05, p75_s=2.296e-05, algbw_GBps=0.1834, busbw_GBps=0.2446, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=16384, median_s=2.194e-05, p25_s=2.175e-05, p75_s=2.239e-05, algbw_GBps=0.7467, busbw_GBps=0.9956, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=65536, median_s=2.238e-05, p25_s=2.232e-05, p75_s=2.242e-05, algbw_GBps=2.928, busbw_GBps=3.904, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=262144, median_s=2.399e-05, p25_s=2.387e-05, p75_s=2.447e-05, algbw_GBps=10.93, busbw_GBps=14.57, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=1048576, median_s=2.534e-05, p25_s=2.514e-05, p75_s=2.54e-05, algbw_GBps=41.39, busbw_GBps=55.18, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=4194304, median_s=4.425e-05, p25_s=4.41e-05, p75_s=4.449e-05, algbw_GBps=94.78, busbw_GBps=126.4, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4096, median_s=2.021e-05, p25_s=1.993e-05, p75_s=2.079e-05, algbw_GBps=0.2027, busbw_GBps=0.2027, trials=3
+  op=broadcast, k=3, label=pow4, bytes=16384, median_s=1.99e-05, p25_s=1.948e-05, p75_s=9.329e-05, algbw_GBps=0.8235, busbw_GBps=0.8235, trials=3
+  op=broadcast, k=3, label=pow4, bytes=65536, median_s=1.99e-05, p25_s=1.98e-05, p75_s=1.998e-05, algbw_GBps=3.293, busbw_GBps=3.293, trials=3
+  op=broadcast, k=3, label=pow4, bytes=262144, median_s=2.142e-05, p25_s=2.138e-05, p75_s=2.147e-05, algbw_GBps=12.24, busbw_GBps=12.24, trials=3
+  op=broadcast, k=3, label=pow4, bytes=1048576, median_s=2.282e-05, p25_s=2.254e-05, p75_s=2.292e-05, algbw_GBps=45.96, busbw_GBps=45.96, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4194304, median_s=2.617e-05, p25_s=2.617e-05, p75_s=2.625e-05, algbw_GBps=160.2, busbw_GBps=160.2, trials=3
+  op=reduce, k=3, label=pow4, bytes=4096, median_s=2.201e-05, p25_s=2.186e-05, p75_s=2.22e-05, algbw_GBps=0.1861, busbw_GBps=0.1861, trials=3
+  op=reduce, k=3, label=pow4, bytes=16384, median_s=2.181e-05, p25_s=2.179e-05, p75_s=2.183e-05, algbw_GBps=0.7512, busbw_GBps=0.7512, trials=3
+  op=reduce, k=3, label=pow4, bytes=65536, median_s=2.208e-05, p25_s=2.177e-05, p75_s=2.219e-05, algbw_GBps=2.968, busbw_GBps=2.968, trials=3
+  op=reduce, k=3, label=pow4, bytes=262144, median_s=2.384e-05, p25_s=2.34e-05, p75_s=2.414e-05, algbw_GBps=11, busbw_GBps=11, trials=3
+  op=reduce, k=3, label=pow4, bytes=1048576, median_s=2.46e-05, p25_s=2.457e-05, p75_s=2.461e-05, algbw_GBps=42.63, busbw_GBps=42.63, trials=3
+  op=reduce, k=3, label=pow4, bytes=4194304, median_s=2.744e-05, p25_s=2.735e-05, p75_s=2.781e-05, algbw_GBps=152.9, busbw_GBps=152.9, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,3,pow4,4096,2.2328589111566543e-05,2.2275131195783617e-05,2.29618139564991e-05,0.18344195325257745,0.24458927100343658,3
+all_reduce,3,pow4,16384,2.1941065788269044e-05,2.1754056215286256e-05,2.2385604679584504e-05,0.7467276274591833,0.9956368366122443,3
+all_reduce,3,pow4,65536,2.2383444011211396e-05,2.232136204838753e-05,2.2423677146434785e-05,2.9278783000138136,3.903837733351751,3
+all_reduce,3,pow4,262144,2.3988056927919387e-05,2.3872610181570054e-05,2.4468675255775452e-05,10.928104797637612,14.570806396850148,3
+all_reduce,3,pow4,1048576,2.5337040424346923e-05,2.5140531361103057e-05,2.5398824363946914e-05,41.38510190765612,55.18013587687483,3
+all_reduce,3,pow4,4194304,4.4251326471567154e-05,4.409980028867722e-05,4.449044354259968e-05,94.78368976566092,126.37825302088123,3
+broadcast,3,pow4,4096,2.021094784140587e-05,1.9931215792894363e-05,2.0793192088603974e-05,0.20266243978961668,0.20266243978961668,3
+broadcast,3,pow4,16384,1.989506185054779e-05,1.9482653588056564e-05,9.32946614921093e-05,0.8235209381643055,0.8235209381643055,3
+broadcast,3,pow4,65536,1.990143209695816e-05,1.9797105342149734e-05,1.9983351230621337e-05,3.293029349883663,3.293029349883663,3
+broadcast,3,pow4,262144,2.1423287689685823e-05,2.137739211320877e-05,2.1469146013259887e-05,12.236403851599697,12.236403851599697,3
+broadcast,3,pow4,1048576,2.2817403078079224e-05,2.2535845637321472e-05,2.291552722454071e-05,45.95509823847445,45.95509823847445,3
+broadcast,3,pow4,4194304,2.6174448430538176e-05,2.6167603209614754e-05,2.624676562845707e-05,160.24421722317686,160.24421722317686,3
+reduce,3,pow4,4096,2.201279625296593e-05,2.186046913266182e-05,2.2203177213668823e-05,0.1860735888766571,0.1860735888766571,3
+reduce,3,pow4,16384,2.1810196340084076e-05,2.1791327744722365e-05,2.1826382726430894e-05,0.7512082763734003,0.7512082763734003,3
+reduce,3,pow4,65536,2.208363264799118e-05,2.1773092448711396e-05,2.2193007171154023e-05,2.967627701684371,2.967627701684371,3
+reduce,3,pow4,262144,2.3837424814701082e-05,2.340111881494522e-05,2.4136807769536973e-05,10.997161062395039,10.997161062395039,3
+reduce,3,pow4,1048576,2.459535375237465e-05,2.456635236740112e-05,2.4608038365840912e-05,42.63309284172265,42.63309284172265,3
+reduce,3,pow4,4194304,2.743573859333992e-05,2.735378220677376e-05,2.7813622727990152e-05,152.8773860317424,152.8773860317424,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:12:59Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.1916261109881002e-05,
+      "B_GBps": 265.14473287638435,
+      "max_rel_err": 0.07310225841299628
+    },
+    "broadcast": {
+      "alpha_s": 2.0332360219764862e-05,
+      "B_GBps": 676.728635940541,
+      "max_rel_err": 0.041002258327928594
+    },
+    "reduce": {
+      "alpha_s": 2.239713242776735e-05,
+      "B_GBps": 779.4106491543108,
+      "max_rel_err": 0.04631189048367992
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=3 k=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=2.179e-05, p25_s=2.162e-05, p75_s=2.233e-05, algbw_GBps=0.188, busbw_GBps=0.282, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=2.157e-05, p25_s=2.135e-05, p75_s=2.163e-05, algbw_GBps=0.7595, busbw_GBps=1.139, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=2.25e-05, p25_s=2.242e-05, p75_s=2.254e-05, algbw_GBps=2.913, busbw_GBps=4.369, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=2.35e-05, p25_s=2.346e-05, p75_s=2.677e-05, algbw_GBps=11.16, busbw_GBps=16.74, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=2.449e-05, p25_s=2.42e-05, p75_s=2.456e-05, algbw_GBps=42.82, busbw_GBps=64.22, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=4.229e-05, p25_s=4.228e-05, p75_s=4.283e-05, algbw_GBps=99.18, busbw_GBps=148.8, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4096, median_s=2.076e-05, p25_s=2.074e-05, p75_s=2.126e-05, algbw_GBps=0.1973, busbw_GBps=0.1973, trials=3
+  op=broadcast, k=4, label=pow4, bytes=16384, median_s=2.034e-05, p25_s=2.008e-05, p75_s=2.038e-05, algbw_GBps=0.8053, busbw_GBps=0.8053, trials=3
+  op=broadcast, k=4, label=pow4, bytes=65536, median_s=2.055e-05, p25_s=2.053e-05, p75_s=2.083e-05, algbw_GBps=3.189, busbw_GBps=3.189, trials=3
+  op=broadcast, k=4, label=pow4, bytes=262144, median_s=2.197e-05, p25_s=2.195e-05, p75_s=2.211e-05, algbw_GBps=11.93, busbw_GBps=11.93, trials=3
+  op=broadcast, k=4, label=pow4, bytes=1048576, median_s=2.319e-05, p25_s=2.3e-05, p75_s=2.369e-05, algbw_GBps=45.23, busbw_GBps=45.23, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4194304, median_s=2.654e-05, p25_s=2.631e-05, p75_s=2.655e-05, algbw_GBps=158, busbw_GBps=158, trials=3
+  op=reduce, k=4, label=pow4, bytes=4096, median_s=2.093e-05, p25_s=2.09e-05, p75_s=2.113e-05, algbw_GBps=0.1957, busbw_GBps=0.1957, trials=3
+  op=reduce, k=4, label=pow4, bytes=16384, median_s=2.076e-05, p25_s=2.073e-05, p75_s=2.09e-05, algbw_GBps=0.7893, busbw_GBps=0.7893, trials=3
+  op=reduce, k=4, label=pow4, bytes=65536, median_s=2.124e-05, p25_s=2.113e-05, p75_s=2.142e-05, algbw_GBps=3.086, busbw_GBps=3.086, trials=3
+  op=reduce, k=4, label=pow4, bytes=262144, median_s=2.276e-05, p25_s=2.263e-05, p75_s=2.309e-05, algbw_GBps=11.52, busbw_GBps=11.52, trials=3
+  op=reduce, k=4, label=pow4, bytes=1048576, median_s=2.393e-05, p25_s=2.352e-05, p75_s=2.395e-05, algbw_GBps=43.81, busbw_GBps=43.81, trials=3
+  op=reduce, k=4, label=pow4, bytes=4194304, median_s=2.79e-05, p25_s=2.784e-05, p75_s=2.82e-05, algbw_GBps=150.4, busbw_GBps=150.4, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,2.1791011095046995e-05,2.1622143685817717e-05,2.2330060601234437e-05,0.1879674138172966,0.28195112072594486,3
+all_reduce,4,pow4,16384,2.1572727710008622e-05,2.134772017598152e-05,2.1633133292198183e-05,0.7594774393040097,1.1392161589560146,3
+all_reduce,4,pow4,65536,2.2498369216918944e-05,2.24202498793602e-05,2.2543910890817642e-05,2.9129222375245063,4.369383356286759,3
+all_reduce,4,pow4,262144,2.3495089262723923e-05,2.3462455719709395e-05,2.6773437857627867e-05,11.157395363289977,16.736093044934965,3
+all_reduce,4,pow4,1048576,2.4490058422088623e-05,2.420414239168167e-05,2.4561844766139986e-05,42.81639438859994,64.2245915828999,3
+all_reduce,4,pow4,4194304,4.228991456329822e-05,4.227720201015473e-05,4.2830128222703934e-05,99.17977000691494,148.7696550103724,3
+broadcast,4,pow4,4096,2.0762551575899123e-05,2.0740814507007598e-05,2.1263398230075838e-05,0.19727825768556206,0.19727825768556206,3
+broadcast,4,pow4,16384,2.0344667136669157e-05,2.0078886300325394e-05,2.038322389125824e-05,0.8053216054083056,0.8053216054083056,3
+broadcast,4,pow4,65536,2.055322751402855e-05,2.0533818751573563e-05,2.0828917622566224e-05,3.1885989660392067,3.1885989660392067,3
+broadcast,4,pow4,262144,2.1970439702272417e-05,2.1948385983705522e-05,2.2112522274255752e-05,11.931668348580493,11.931668348580493,3
+broadcast,4,pow4,1048576,2.3185107856988907e-05,2.3000799119472502e-05,2.3694708943367004e-05,45.226272246299594,45.226272246299594,3
+broadcast,4,pow4,4194304,2.6541389524936675e-05,2.631358802318573e-05,2.6550283655524255e-05,158.0288023752218,158.0288023752218,3
+reduce,4,pow4,4096,2.0927265286445617e-05,2.0898226648569106e-05,2.112891525030136e-05,0.19572552571658458,0.19572552571658458,3
+reduce,4,pow4,16384,2.075744792819023e-05,2.0728856325149535e-05,2.0896289497613908e-05,0.7893070504948372,0.7893070504948372,3
+reduce,4,pow4,65536,2.123739570379257e-05,2.1128728985786437e-05,2.1416470408439635e-05,3.0858774265008675,3.0858774265008675,3
+reduce,4,pow4,262144,2.2759586572647093e-05,2.2627785801887514e-05,2.3093316704034804e-05,11.517959659032194,11.517959659032194,3
+reduce,4,pow4,1048576,2.3933574557304382e-05,2.35229916870594e-05,2.3945141583681108e-05,43.81192610779408,43.81192610779408,3
+reduce,4,pow4,4194304,2.7895579114556314e-05,2.7837976813316345e-05,2.8198258951306344e-05,150.35730151991547,150.35730151991547,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:13:09Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.160092790363715e-05,
+      "B_GBps": 324.34210036176177,
+      "max_rel_err": 0.08004340597807225
+    },
+    "broadcast": {
+      "alpha_s": 2.087114145967046e-05,
+      "B_GBps": 700.2930403145174,
+      "max_rel_err": 0.035222070890544445
+    },
+    "reduce": {
+      "alpha_s": 2.134933601370562e-05,
+      "B_GBps": 606.3445664706787,
+      "max_rel_err": 0.04296719185897047
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E4 rep=3 k=1
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=8, b_global=8, step_s=0.004151, p25_s=0.003775, p75_s=0.005522, t_fwd_s=0.001863, t_bwd_s=0.001789, t_comm_s=3.828e-07, t_opt_s=0.000296, img_s=1927, img_s_per_gpu=1927, steps=4
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=16, b_global=16, step_s=0.006127, p25_s=0.006087, p75_s=0.006159, t_fwd_s=0.003544, t_bwd_s=0.002315, t_comm_s=2.757e-07, t_opt_s=0.0002694, img_s=2611, img_s_per_gpu=2611, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:13:16Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,8,8,0.004150812979787588,0.003774835728108883,0.00552232563495636,0.0018629231490194798,0.0017890185117721558,3.8277357816696167e-07,0.00029596034437417984,1927.333281204442,1927.333281204442,4
+resnet18_cifar,11173962,1,local,strong,16,16,0.0061269463039934635,0.006087118061259389,0.006158848758786917,0.0035439571365714073,0.0023145033046603203,2.7567148208618164e-07,0.00026942556723952293,2611.415084472245,2611.415084472245,4
+----- END FILE scaling.csv -----
+##### E4 rep=3 k=2
+[rank1]:[W1122 00:13:23.563148180 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:13:23.756796748 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.003833, p25_s=0.003783, p75_s=0.006301, t_fwd_s=0.001859, t_bwd_s=0.0017, t_comm_s=3.362e-07, t_opt_s=0.0002739, img_s=4174, img_s_per_gpu=2087, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.004475, p25_s=0.004456, p75_s=0.004728, t_fwd_s=0.001842, t_bwd_s=0.001677, t_comm_s=0.0007095, t_opt_s=0.0002557, img_s=3576, img_s_per_gpu=1788, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.005312, p25_s=0.005263, p75_s=0.005415, t_fwd_s=0.002422, t_bwd_s=0.002632, t_comm_s=2.221e-07, t_opt_s=0.0002665, img_s=3012, img_s_per_gpu=1506, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.003752, p25_s=0.00374, p75_s=0.003807, t_fwd_s=0.001817, t_bwd_s=0.001668, t_comm_s=2.417e-07, t_opt_s=0.0002696, img_s=4264, img_s_per_gpu=2132, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.004468, p25_s=0.004455, p75_s=0.004545, t_fwd_s=0.001845, t_bwd_s=0.001668, t_comm_s=0.000713, t_opt_s=0.0002557, img_s=3581, img_s_per_gpu=1790, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.005254, p25_s=0.00523, p75_s=0.005936, t_fwd_s=0.002483, t_bwd_s=0.002484, t_comm_s=3.381e-07, t_opt_s=0.0002678, img_s=3045, img_s_per_gpu=1523, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:13:22Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.003833351656794548,0.003783481428399682,0.0063013904727995396,0.0018589445389807224,0.0017001312226057053,3.3620744943618774e-07,0.00027393968775868416,4173.893092130038,2086.946546065019,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.00447487086057663,0.004455510526895523,0.004728377563878894,0.001841872464865446,0.0016770358197391033,0.0007095295004546642,0.0002556615509092808,3575.522176731207,1787.7610883656034,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.005311815999448299,0.005263461032882333,0.005414684070274234,0.0024220054037868977,0.0026317760348320007,2.2212043404579163e-07,0.0002664737403392792,3012.152529692634,1506.076264846317,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.0037520253099501133,0.0037398634012788534,0.0038069013971835375,0.001816529780626297,0.0016682548448443413,2.416782081127167e-07,0.00026955408975481987,4264.363557881419,2132.1817789407096,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.004468427039682865,0.004454636014997959,0.004544596886262298,0.0018445244058966637,0.0016680206172168255,0.0007130084559321404,0.0002556811086833477,3580.678359053068,1790.339179526534,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.005254167132079601,0.005229823291301727,0.005936069181188941,0.00248336186632514,0.0024844282306730747,3.380700945854187e-07,0.0002677873708307743,3045.201950716629,1522.6009753583146,4
+----- END FILE scaling.csv -----
+##### E4 rep=3 k=3
+[rank0]:[W1122 00:13:33.462733859 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 00:13:33.522115413 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:13:33.893948710 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=weak, b_gpu=8, b_global=24, step_s=0.004009, p25_s=0.003909, p75_s=0.004814, t_fwd_s=0.001914, t_bwd_s=0.001815, t_comm_s=4.605e-07, t_opt_s=0.0002796, img_s=5987, img_s_per_gpu=1996, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=weak, b_gpu=8, b_global=24, step_s=0.005549, p25_s=0.00544, p75_s=0.006546, t_fwd_s=0.001876, t_bwd_s=0.001758, t_comm_s=0.00156, t_opt_s=0.000259, img_s=4325, img_s_per_gpu=1442, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=weak, b_gpu=8, b_global=24, step_s=0.006299, p25_s=0.006173, p75_s=0.006524, t_fwd_s=0.002434, t_bwd_s=0.003617, t_comm_s=3.348e-07, t_opt_s=0.0002738, img_s=3810, img_s_per_gpu=1270, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=strong, b_gpu=5, b_global=15, step_s=0.003484, p25_s=0.003468, p75_s=0.003659, t_fwd_s=0.00168, t_bwd_s=0.001531, t_comm_s=3.036e-07, t_opt_s=0.0002723, img_s=4305, img_s_per_gpu=1435, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=strong, b_gpu=5, b_global=15, step_s=0.005315, p25_s=0.005218, p75_s=0.00553, t_fwd_s=0.001701, t_bwd_s=0.001551, t_comm_s=0.001809, t_opt_s=0.0002567, img_s=2822, img_s_per_gpu=940.7, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=strong, b_gpu=5, b_global=15, step_s=0.006171, p25_s=0.006035, p75_s=0.006192, t_fwd_s=0.002268, t_bwd_s=0.003643, t_comm_s=2.994e-07, t_opt_s=0.0002721, img_s=2431, img_s_per_gpu=810.3, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:13:32Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,3,local,weak,8,24,0.004009018186479807,0.003908531973138452,0.004814112326130271,0.001913832500576973,0.0018151612021028996,4.605390131473541e-07,0.00027957698330283165,5986.503149558832,1995.5010498529439,4
+resnet18_cifar,11173962,3,manual,weak,8,24,0.005549339111894369,0.005439740139991045,0.00654590199701488,0.0018761102110147476,0.0017581619322299957,0.001559628639370203,0.0002590073272585869,4324.839321597551,1441.6131071991838,4
+resnet18_cifar,11173962,3,ddp,weak,8,24,0.006298508495092392,0.006172548746690154,0.006523552117869258,0.002433659043163061,0.003616879228502512,3.348104655742645e-07,0.0002737562172114849,3810.4259157068814,1270.1419719022938,4
+resnet18_cifar,11173962,3,local,strong,5,15,0.0034839524887502193,0.0034678983502089977,0.0036591223906725645,0.0016802139580249786,0.0015314393676817417,3.03611159324646e-07,0.00027230940759181976,4305.454809856168,1435.1516032853895,4
+resnet18_cifar,11173962,3,manual,strong,5,15,0.005315023474395275,0.005217804107815027,0.005530235590413213,0.0017005219124257565,0.0015513543039560318,0.0018091914243996143,0.0002567167393863201,2822.1888524597057,940.7296174865686,4
+resnet18_cifar,11173962,3,ddp,strong,5,15,0.0061708735302090645,0.006035270402207971,0.006192031549289823,0.002267535775899887,0.0036433981731534004,2.9942020773887634e-07,0.00027209147810935974,2430.774172662685,810.2580575542282,4
+----- END FILE scaling.csv -----
+##### E4 rep=3 k=4
+[rank1]:[W1122 00:13:44.541591626 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:13:44.542361530 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank3]:[W1122 00:13:44.736368924 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:13:44.793607286 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.004512, p25_s=0.004382, p75_s=0.00768, t_fwd_s=0.002152, t_bwd_s=0.002024, t_comm_s=7.642e-07, t_opt_s=0.0003622, img_s=7092, img_s_per_gpu=1773, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.006243, p25_s=0.005432, p75_s=0.007774, t_fwd_s=0.002104, t_bwd_s=0.002244, t_comm_s=0.0009497, t_opt_s=0.000298, img_s=5125, img_s_per_gpu=1281, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.006431, p25_s=0.006323, p75_s=0.0082, t_fwd_s=0.002866, t_bwd_s=0.003251, t_comm_s=5.253e-07, t_opt_s=0.000339, img_s=4976, img_s_per_gpu=1244, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.004536, p25_s=0.004494, p75_s=0.005819, t_fwd_s=0.002043, t_bwd_s=0.002151, t_comm_s=5.662e-07, t_opt_s=0.0003479, img_s=3527, img_s_per_gpu=881.8, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.005224, p25_s=0.005177, p75_s=0.005327, t_fwd_s=0.001981, t_bwd_s=0.002168, t_comm_s=0.0007712, t_opt_s=0.0003015, img_s=3063, img_s_per_gpu=765.7, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.006116, p25_s=0.006103, p75_s=0.007595, t_fwd_s=0.002742, t_bwd_s=0.003037, t_comm_s=5.625e-07, t_opt_s=0.000337, img_s=2616, img_s_per_gpu=654, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:13:43Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.004511898383498192,0.004381964914500713,0.0076802431140094995,0.002151657361537218,0.002024431712925434,7.641501724720001e-07,0.00036222999915480614,7092.358311312315,1773.0895778280787,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.006243329495191574,0.005432405509054661,0.007773619843646884,0.0021036635152995586,0.0022435933351516724,0.0009497469291090965,0.0002979966811835766,5125.470315902027,1281.3675789755068,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.00643080985173583,0.0063226118218153715,0.008200421929359436,0.002865647431463003,0.0032510124146938324,5.252659320831299e-07,0.000338986050337553,4976.045123051248,1244.011280762812,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.004536057822406292,0.004493611631914973,0.005818957230076194,0.0020426283590495586,0.002150964457541704,5.662441253662109e-07,0.00034790346398949623,3527.2918967140295,881.8229741785074,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.005224248860031366,0.00517682358622551,0.0053266112226992846,0.0019813133403658867,0.002167904283851385,0.0007711751386523247,0.00030150776728987694,3062.6412387069813,765.6603096767453,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.0061164433136582375,0.006103341933339834,0.007594541413709521,0.002742114942520857,0.0030374061316251755,5.62518835067749e-07,0.00033700885251164436,2615.899335529102,653.9748338822754,4
+----- END FILE scaling.csv -----
+##### E3 rep=4 k=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=3.064e-05, p25_s=2.986e-05, p75_s=3.218e-05, algbw_GBps=0.1337, busbw_GBps=0.1337, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=3.071e-05, p25_s=3.058e-05, p75_s=3.119e-05, algbw_GBps=0.5336, busbw_GBps=0.5336, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=3.181e-05, p25_s=3.135e-05, p75_s=3.22e-05, algbw_GBps=2.06, busbw_GBps=2.06, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=3.442e-05, p25_s=3.405e-05, p75_s=3.502e-05, algbw_GBps=7.616, busbw_GBps=7.616, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=3.542e-05, p25_s=3.521e-05, p75_s=9.683e-05, algbw_GBps=29.6, busbw_GBps=29.6, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=3.694e-05, p25_s=3.672e-05, p75_s=3.703e-05, algbw_GBps=113.5, busbw_GBps=113.5, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4096, median_s=2.752e-05, p25_s=2.717e-05, p75_s=2.858e-05, algbw_GBps=0.1488, busbw_GBps=0.1488, trials=3
+  op=broadcast, k=2, label=pow4, bytes=16384, median_s=2.743e-05, p25_s=2.706e-05, p75_s=2.761e-05, algbw_GBps=0.5973, busbw_GBps=0.5973, trials=3
+  op=broadcast, k=2, label=pow4, bytes=65536, median_s=2.833e-05, p25_s=2.788e-05, p75_s=2.84e-05, algbw_GBps=2.314, busbw_GBps=2.314, trials=3
+  op=broadcast, k=2, label=pow4, bytes=262144, median_s=3.162e-05, p25_s=2.997e-05, p75_s=3.251e-05, algbw_GBps=8.291, busbw_GBps=8.291, trials=3
+  op=broadcast, k=2, label=pow4, bytes=1048576, median_s=3.175e-05, p25_s=3.171e-05, p75_s=3.236e-05, algbw_GBps=33.03, busbw_GBps=33.03, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4194304, median_s=3.359e-05, p25_s=3.327e-05, p75_s=3.364e-05, algbw_GBps=124.9, busbw_GBps=124.9, trials=3
+  op=reduce, k=2, label=pow4, bytes=4096, median_s=2.921e-05, p25_s=2.888e-05, p75_s=2.972e-05, algbw_GBps=0.1402, busbw_GBps=0.1402, trials=3
+  op=reduce, k=2, label=pow4, bytes=16384, median_s=2.979e-05, p25_s=2.931e-05, p75_s=3.006e-05, algbw_GBps=0.55, busbw_GBps=0.55, trials=3
+  op=reduce, k=2, label=pow4, bytes=65536, median_s=3.091e-05, p25_s=3.08e-05, p75_s=3.123e-05, algbw_GBps=2.12, busbw_GBps=2.12, trials=3
+  op=reduce, k=2, label=pow4, bytes=262144, median_s=3.337e-05, p25_s=3.322e-05, p75_s=3.416e-05, algbw_GBps=7.855, busbw_GBps=7.855, trials=3
+  op=reduce, k=2, label=pow4, bytes=1048576, median_s=3.389e-05, p25_s=3.386e-05, p75_s=3.405e-05, algbw_GBps=30.94, busbw_GBps=30.94, trials=3
+  op=reduce, k=2, label=pow4, bytes=4194304, median_s=3.54e-05, p25_s=3.517e-05, p75_s=3.579e-05, algbw_GBps=118.5, busbw_GBps=118.5, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,3.064364194869995e-05,2.9862374067306518e-05,3.218209370970726e-05,0.13366557430924988,0.13366557430924988,3
+all_reduce,2,pow4,16384,3.070751205086708e-05,3.0581504106521606e-05,3.119193017482758e-05,0.53355022617462,0.53355022617462,3
+all_reduce,2,pow4,65536,3.181369975209236e-05,3.1351279467344284e-05,3.220181912183762e-05,2.05999303792668,2.05999303792668,3
+all_reduce,2,pow4,262144,3.4419186413288116e-05,3.404555842280388e-05,3.5024043172597884e-05,7.616217212467138,7.616217212467138,3
+all_reduce,2,pow4,1048576,3.542378544807434e-05,3.5210419446229936e-05,9.683320298790932e-05,29.600901957162264,29.600901957162264,3
+all_reduce,2,pow4,4194304,3.694421611726284e-05,3.672339953482151e-05,3.7026358768343925e-05,113.53073473495996,113.53073473495996,3
+broadcast,2,pow4,4096,2.752253785729408e-05,2.7170535176992416e-05,2.857556566596031e-05,0.14882348500120127,0.14882348500120127,3
+broadcast,2,pow4,16384,2.7428120374679567e-05,2.7057267725467682e-05,2.760929986834526e-05,0.597343156446294,0.597343156446294,3
+broadcast,2,pow4,65536,2.832755446434021e-05,2.7879290282726288e-05,2.839915454387665e-05,2.3135071572273977,2.3135071572273977,3
+broadcast,2,pow4,262144,3.161963075399399e-05,2.9965918511152267e-05,3.250777721405029e-05,8.2905458966148,8.2905458966148,3
+broadcast,2,pow4,1048576,3.1745750457048414e-05,3.170633688569069e-05,3.236074000597e-05,33.03043666958542,33.03043666958542,3
+broadcast,2,pow4,4194304,3.359215334057808e-05,3.326507285237312e-05,3.364314325153828e-05,124.85963485209017,124.85963485209017,3
+reduce,2,pow4,4096,2.9210858047008513e-05,2.8876718133687972e-05,2.9724668711423873e-05,0.14022183098518984,0.14022183098518984,3
+reduce,2,pow4,16384,2.978852018713951e-05,2.930585294961929e-05,3.005636855959892e-05,0.5500105375181881,0.5500105375181881,3
+reduce,2,pow4,65536,3.091303631663323e-05,3.0797068029642104e-05,3.1233560293912886e-05,2.120011742901404,2.120011742901404,3
+reduce,2,pow4,262144,3.3371876925230025e-05,3.3222530037164686e-05,3.415841609239578e-05,7.855236928607159,7.855236928607159,3
+reduce,2,pow4,1048576,3.3890381455421445e-05,3.386037424206734e-05,3.405226394534111e-05,30.94022418659614,30.94022418659614,3
+reduce,2,pow4,4194304,3.539840690791607e-05,3.516655415296555e-05,3.57853714376688e-05,118.488496132351,118.488496132351,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:13:56Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 3.19375639926779e-05,
+      "B_GBps": 735.0289901223493,
+      "max_rel_err": 0.06173818168115631
+    },
+    "broadcast": {
+      "alpha_s": 2.866510293274148e-05,
+      "B_GBps": 753.6347240047963,
+      "max_rel_err": 0.08243892039048438
+    },
+    "reduce": {
+      "alpha_s": 3.081334157803303e-05,
+      "B_GBps": 803.8430280540372,
+      "max_rel_err": 0.06689530621792492
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=4 k=3
+  op=all_reduce, k=3, label=pow4, bytes=4096, median_s=2.281e-05, p25_s=2.269e-05, p75_s=2.425e-05, algbw_GBps=0.1796, busbw_GBps=0.2394, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=16384, median_s=2.239e-05, p25_s=2.173e-05, p75_s=2.256e-05, algbw_GBps=0.7318, busbw_GBps=0.9757, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=65536, median_s=2.267e-05, p25_s=2.231e-05, p75_s=2.276e-05, algbw_GBps=2.89, busbw_GBps=3.854, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=262144, median_s=2.435e-05, p25_s=2.429e-05, p75_s=2.439e-05, algbw_GBps=10.77, busbw_GBps=14.35, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=1048576, median_s=2.488e-05, p25_s=2.486e-05, p75_s=2.517e-05, algbw_GBps=42.15, busbw_GBps=56.2, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=4194304, median_s=4.421e-05, p25_s=4.401e-05, p75_s=4.432e-05, algbw_GBps=94.87, busbw_GBps=126.5, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4096, median_s=2.604e-05, p25_s=2.106e-05, p75_s=0.0001318, algbw_GBps=0.1573, busbw_GBps=0.1573, trials=3
+  op=broadcast, k=3, label=pow4, bytes=16384, median_s=1.97e-05, p25_s=1.968e-05, p75_s=1.976e-05, algbw_GBps=0.8318, busbw_GBps=0.8318, trials=3
+  op=broadcast, k=3, label=pow4, bytes=65536, median_s=2.02e-05, p25_s=2.006e-05, p75_s=2.04e-05, algbw_GBps=3.244, busbw_GBps=3.244, trials=3
+  op=broadcast, k=3, label=pow4, bytes=262144, median_s=2.144e-05, p25_s=2.129e-05, p75_s=2.19e-05, algbw_GBps=12.23, busbw_GBps=12.23, trials=3
+  op=broadcast, k=3, label=pow4, bytes=1048576, median_s=2.246e-05, p25_s=2.235e-05, p75_s=2.249e-05, algbw_GBps=46.68, busbw_GBps=46.68, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4194304, median_s=2.619e-05, p25_s=2.619e-05, p75_s=2.624e-05, algbw_GBps=160.1, busbw_GBps=160.1, trials=3
+  op=reduce, k=3, label=pow4, bytes=4096, median_s=7.45e-05, p25_s=2.138e-05, p75_s=0.0001365, algbw_GBps=0.05498, busbw_GBps=0.05498, trials=3
+  op=reduce, k=3, label=pow4, bytes=16384, median_s=2.057e-05, p25_s=2.055e-05, p75_s=2.079e-05, algbw_GBps=0.7964, busbw_GBps=0.7964, trials=3
+  op=reduce, k=3, label=pow4, bytes=65536, median_s=2.119e-05, p25_s=2.119e-05, p75_s=2.163e-05, algbw_GBps=3.093, busbw_GBps=3.093, trials=3
+  op=reduce, k=3, label=pow4, bytes=262144, median_s=2.319e-05, p25_s=2.314e-05, p75_s=2.32e-05, algbw_GBps=11.3, busbw_GBps=11.3, trials=3
+  op=reduce, k=3, label=pow4, bytes=1048576, median_s=2.465e-05, p25_s=2.454e-05, p75_s=2.47e-05, algbw_GBps=42.54, busbw_GBps=42.54, trials=3
+  op=reduce, k=3, label=pow4, bytes=4194304, median_s=2.73e-05, p25_s=2.713e-05, p75_s=2.754e-05, algbw_GBps=153.6, busbw_GBps=153.6, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,3,pow4,4096,2.281075343489647e-05,2.2691264748573304e-05,2.4245530366897582e-05,0.179564432700142,0.23941924360018932,3
+all_reduce,3,pow4,16384,2.2389534860849382e-05,2.1732226014137267e-05,2.2563301026821136e-05,0.7317704499814895,0.9756939333086527,3
+all_reduce,3,pow4,65536,2.2673625499010085e-05,2.2312849760055543e-05,2.276478335261345e-05,2.8904067416506134,3.853875655534151,3
+all_reduce,3,pow4,262144,2.43489071726799e-05,2.4291854351758957e-05,2.438841387629509e-05,10.76615053566479,14.354867380886386,3
+all_reduce,3,pow4,1048576,2.4878997355699538e-05,2.4860985577106475e-05,2.5169923901557922e-05,42.147036112762855,56.19604815035047,3
+all_reduce,3,pow4,4194304,4.421132616698742e-05,4.4008158147335054e-05,4.432071000337601e-05,94.86944553886477,126.49259405181968,3
+broadcast,3,pow4,4096,2.6040021330118178e-05,2.1058693528175353e-05,0.0001317865401506424,0.1572963381279001,0.1572963381279001,3
+broadcast,3,pow4,16384,1.9696149975061418e-05,1.9677113741636276e-05,1.976100727915764e-05,0.8318376952219013,0.8318376952219013,3
+broadcast,3,pow4,65536,2.0200274884700776e-05,2.0058024674654006e-05,2.040015533566475e-05,3.2443122865439546,3.2443122865439546,3
+broadcast,3,pow4,262144,2.1440833806991576e-05,2.1290089935064317e-05,2.189749851822853e-05,12.226390184252923,12.226390184252923,3
+broadcast,3,pow4,1048576,2.246381714940071e-05,2.2352542728185654e-05,2.2486597299575805e-05,46.6784426273686,46.6784426273686,3
+broadcast,3,pow4,4194304,2.619326114654541e-05,2.6188232004642488e-05,2.6239221915602685e-05,160.12912544695416,160.12912544695416,3
+reduce,3,pow4,4096,7.449930533766747e-05,2.137972041964531e-05,0.00013652874156832695,0.05498037842681774,0.05498037842681774,3
+reduce,3,pow4,16384,2.0572040230035783e-05,2.0549017935991287e-05,2.0791608840227127e-05,0.7964207641436982,0.7964207641436982,3
+reduce,3,pow4,65536,2.1187569946050644e-05,2.118503674864769e-05,2.1627992391586305e-05,3.0931343314439834,3.0931343314439834,3
+reduce,3,pow4,262144,2.3190584033727647e-05,2.3141223937273026e-05,2.319999039173126e-05,11.303898151885528,11.303898151885528,3
+reduce,3,pow4,1048576,2.4648401886224747e-05,2.4540964514017105e-05,2.4704281240701676e-05,42.541338170326476,42.541338170326476,3
+reduce,3,pow4,4194304,2.730023115873337e-05,2.71304976195097e-05,2.7543166652321815e-05,153.63620826552005,153.63620826552005,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:14:06Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.2217371514453025e-05,
+      "B_GBps": 275.7323383798684,
+      "max_rel_err": 0.0968236774037508
+    },
+    "broadcast": {
+      "alpha_s": 2.1254946837406304e-05,
+      "B_GBps": 858.2744778099608,
+      "max_rel_err": 0.1835752001135659
+    },
+    "reduce": {
+      "alpha_s": 2.2988422964287988e-05,
+      "B_GBps": 949.5128960084136,
+      "max_rel_err": 0.6913697832365205
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=4 k=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=2.219e-05, p25_s=2.217e-05, p75_s=2.35e-05, algbw_GBps=0.1846, busbw_GBps=0.2768, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=2.179e-05, p25_s=2.158e-05, p75_s=2.191e-05, algbw_GBps=0.752, busbw_GBps=1.128, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=2.238e-05, p25_s=2.231e-05, p75_s=2.239e-05, algbw_GBps=2.929, busbw_GBps=4.393, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=2.412e-05, p25_s=2.397e-05, p75_s=2.477e-05, algbw_GBps=10.87, busbw_GBps=16.3, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=2.53e-05, p25_s=2.473e-05, p75_s=0.000102, algbw_GBps=41.44, busbw_GBps=62.16, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=4.269e-05, p25_s=4.25e-05, p75_s=4.271e-05, algbw_GBps=98.25, busbw_GBps=147.4, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4096, median_s=1.684e-05, p25_s=1.677e-05, p75_s=1.749e-05, algbw_GBps=0.2432, busbw_GBps=0.2432, trials=3
+  op=broadcast, k=4, label=pow4, bytes=16384, median_s=1.652e-05, p25_s=1.65e-05, p75_s=1.658e-05, algbw_GBps=0.9919, busbw_GBps=0.9919, trials=3
+  op=broadcast, k=4, label=pow4, bytes=65536, median_s=1.673e-05, p25_s=1.666e-05, p75_s=1.674e-05, algbw_GBps=3.918, busbw_GBps=3.918, trials=3
+  op=broadcast, k=4, label=pow4, bytes=262144, median_s=2.004e-05, p25_s=1.798e-05, p75_s=0.0001352, algbw_GBps=13.08, busbw_GBps=13.08, trials=3
+  op=broadcast, k=4, label=pow4, bytes=1048576, median_s=2.085e-05, p25_s=2.08e-05, p75_s=2.137e-05, algbw_GBps=50.29, busbw_GBps=50.29, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4194304, median_s=2.621e-05, p25_s=2.618e-05, p75_s=2.623e-05, algbw_GBps=160, busbw_GBps=160, trials=3
+  op=reduce, k=4, label=pow4, bytes=4096, median_s=2.115e-05, p25_s=2.108e-05, p75_s=2.135e-05, algbw_GBps=0.1937, busbw_GBps=0.1937, trials=3
+  op=reduce, k=4, label=pow4, bytes=16384, median_s=2.114e-05, p25_s=2.087e-05, p75_s=2.119e-05, algbw_GBps=0.7752, busbw_GBps=0.7752, trials=3
+  op=reduce, k=4, label=pow4, bytes=65536, median_s=2.152e-05, p25_s=2.136e-05, p75_s=2.173e-05, algbw_GBps=3.046, busbw_GBps=3.046, trials=3
+  op=reduce, k=4, label=pow4, bytes=262144, median_s=2.356e-05, p25_s=2.354e-05, p75_s=2.37e-05, algbw_GBps=11.13, busbw_GBps=11.13, trials=3
+  op=reduce, k=4, label=pow4, bytes=1048576, median_s=2.509e-05, p25_s=2.493e-05, p75_s=2.562e-05, algbw_GBps=41.79, busbw_GBps=41.79, trials=3
+  op=reduce, k=4, label=pow4, bytes=4194304, median_s=2.793e-05, p25_s=2.773e-05, p75_s=2.846e-05, algbw_GBps=150.1, busbw_GBps=150.1, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,2.2193361073732375e-05,2.2174380719661714e-05,2.3498069494962693e-05,0.1845596972171982,0.2768395458257973,3
+all_reduce,4,pow4,16384,2.1787527948617935e-05,2.158358693122864e-05,2.1908096969127654e-05,0.7519898557853278,1.1279847836779917,3
+all_reduce,4,pow4,65536,2.2378023713827134e-05,2.2314917296171188e-05,2.2385362535715102e-05,2.928587476628065,4.392881214942097,3
+all_reduce,4,pow4,262144,2.4119466543197633e-05,2.39703431725502e-05,2.4766270071268083e-05,10.868565419160648,16.302848128740973,3
+all_reduce,4,pow4,1048576,2.53044068813324e-05,2.4733059108257292e-05,0.00010200601071119308,41.438473737693364,62.15771060654005,3
+all_reduce,4,pow4,4194304,4.2690755799412726e-05,4.250467754900456e-05,4.270854406058788e-05,98.2485299559325,147.37279493389875,3
+broadcast,4,pow4,4096,1.684056594967842e-05,1.676548272371292e-05,1.7490461468696596e-05,0.24322222971836738,0.24322222971836738,3
+broadcast,4,pow4,16384,1.6517918556928634e-05,1.650175079703331e-05,1.658029854297638e-05,0.9918925283190441,0.9918925283190441,3
+broadcast,4,pow4,65536,1.672901213169098e-05,1.6658008098602296e-05,1.673813909292221e-05,3.9175056772091406,3.9175056772091406,3
+broadcast,4,pow4,262144,2.0042210817337036e-05,1.798059791326523e-05,0.00013524699956178664,13.079594980272267,13.079594980272267,3
+broadcast,4,pow4,1048576,2.0851828157901764e-05,2.0803920924663545e-05,2.1371059119701385e-05,50.28700563133329,50.28700563133329,3
+broadcast,4,pow4,4194304,2.621370367705822e-05,2.6181340217590332e-05,2.6230607181787492e-05,160.00425013084978,160.00425013084978,3
+reduce,4,pow4,4096,2.114979550242424e-05,2.1078307181596756e-05,2.1348465234041215e-05,0.19366617514247395,0.19366617514247395,3
+reduce,4,pow4,16384,2.1136458963155745e-05,2.086704596877098e-05,2.1186098456382753e-05,0.7751534932393336,0.7751534932393336,3
+reduce,4,pow4,65536,2.1518897265195848e-05,2.1364837884902954e-05,2.1731704473495485e-05,3.045509218820258,3.045509218820258,3
+reduce,4,pow4,262144,2.355877310037613e-05,2.3538246750831604e-05,2.3702029138803483e-05,11.127234804762168,11.127234804762168,3
+reduce,4,pow4,1048576,2.5093425065279008e-05,2.4929121136665343e-05,2.5618262588977815e-05,41.78688231168897,41.78688231168897,3
+reduce,4,pow4,4194304,2.7934182435274123e-05,2.772747538983822e-05,2.845684066414833e-05,150.14951698402342,150.14951698402342,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:14:17Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.1927960400094486e-05,
+      "B_GBps": 317.2723732635807,
+      "max_rel_err": 0.06247963291583694
+    },
+    "broadcast": {
+      "alpha_s": 1.7287705054667585e-05,
+      "B_GBps": 437.7275582348717,
+      "max_rel_err": 0.10755455030425373
+    },
+    "reduce": {
+      "alpha_s": 2.1839543659696504e-05,
+      "B_GBps": 627.6842887007679,
+      "max_rel_err": 0.06309758709462908
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E4 rep=4 k=1
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=8, b_global=8, step_s=0.00386, p25_s=0.003806, p75_s=0.004555, t_fwd_s=0.001848, t_bwd_s=0.001741, t_comm_s=3.222e-07, t_opt_s=0.0002715, img_s=2072, img_s_per_gpu=2072, steps=4
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=16, b_global=16, step_s=0.006224, p25_s=0.006145, p75_s=0.006277, t_fwd_s=0.003583, t_bwd_s=0.002362, t_comm_s=2.505e-07, t_opt_s=0.0002764, img_s=2571, img_s_per_gpu=2571, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:14:24Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,8,8,0.003860236145555973,0.0038057034835219383,0.004554889164865017,0.0018475246615707874,0.0017408737912774086,3.2223761081695557e-07,0.00027151545509696007,2072.4120748959504,2072.4120748959504,4
+resnet18_cifar,11173962,1,local,strong,16,16,0.006223986856639385,0.006145365070551634,0.006276542320847511,0.003582898061722517,0.002362394705414772,2.505257725715637e-07,0.00027641281485557556,2570.699516007515,2570.699516007515,4
+----- END FILE scaling.csv -----
+##### E4 rep=4 k=2
+[rank1]:[W1122 00:14:31.559512202 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:14:31.714536067 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.004184, p25_s=0.004098, p75_s=0.00666, t_fwd_s=0.002064, t_bwd_s=0.001811, t_comm_s=4.149e-07, t_opt_s=0.0003088, img_s=3825, img_s_per_gpu=1912, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.004812, p25_s=0.004775, p75_s=0.005151, t_fwd_s=0.00208, t_bwd_s=0.001775, t_comm_s=0.0006795, t_opt_s=0.0002877, img_s=3325, img_s_per_gpu=1662, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.005839, p25_s=0.005715, p75_s=0.00671, t_fwd_s=0.002844, t_bwd_s=0.002678, t_comm_s=3.586e-07, t_opt_s=0.0003049, img_s=2740, img_s_per_gpu=1370, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.004097, p25_s=0.004044, p75_s=0.00435, t_fwd_s=0.002044, t_bwd_s=0.001756, t_comm_s=3.241e-07, t_opt_s=0.0003004, img_s=3905, img_s_per_gpu=1953, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.004811, p25_s=0.004766, p75_s=0.00515, t_fwd_s=0.002077, t_bwd_s=0.001774, t_comm_s=0.0006769, t_opt_s=0.0002839, img_s=3325, img_s_per_gpu=1663, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.006041, p25_s=0.005791, p75_s=0.007748, t_fwd_s=0.002879, t_bwd_s=0.002864, t_comm_s=3.232e-07, t_opt_s=0.0003017, img_s=2649, img_s_per_gpu=1324, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:14:30Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.004183535929769278,0.004098269157111645,0.006659808335825801,0.002063583582639694,0.0018107080832123756,4.149042069911957e-07,0.0003088293597102165,3824.5159761021587,1912.2579880510793,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.004812433384358883,0.004774842644110322,0.0051505244337022305,0.0020803334191441536,0.0017752652056515217,0.000679453369230032,0.0002876855432987213,3324.721346170184,1662.360673085092,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.005838937126100063,0.005714622093364596,0.006710071349516511,0.0028436463326215744,0.0026779244653880596,3.5855919122695923e-07,0.0003049238584935665,2740.2247454386793,1370.1123727193396,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.004097261931747198,0.004043856402859092,0.004350221017375588,0.002044031862169504,0.0017555095255374908,3.241002559661865e-07,0.0003003673627972603,3905.046898765662,1952.523449382831,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.004811493214219809,0.004765682388097048,0.005149659933522344,0.0020771408453583717,0.0017737224698066711,0.0006769457831978798,0.00028389086946845055,3325.370999737433,1662.6854998687165,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.006041109096258879,0.0057908110320568085,0.007747863419353962,0.002878780011087656,0.0028637400828301907,3.2316893339157104e-07,0.00030170800164341927,2648.5202874267634,1324.2601437133817,4
+----- END FILE scaling.csv -----
+##### E4 rep=4 k=3
+[rank0]:[W1122 00:14:41.120198524 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:14:41.252986423 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 00:14:41.291052705 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=weak, b_gpu=8, b_global=24, step_s=0.004636, p25_s=0.0045, p75_s=0.007564, t_fwd_s=0.002129, t_bwd_s=0.002179, t_comm_s=7.553e-07, t_opt_s=0.0003516, img_s=5177, img_s_per_gpu=1726, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=weak, b_gpu=8, b_global=24, step_s=0.005686, p25_s=0.005417, p75_s=0.007332, t_fwd_s=0.002093, t_bwd_s=0.002169, t_comm_s=0.001049, t_opt_s=0.0002849, img_s=4221, img_s_per_gpu=1407, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=weak, b_gpu=8, b_global=24, step_s=0.006985, p25_s=0.006284, p75_s=0.008557, t_fwd_s=0.003025, t_bwd_s=0.00336, t_comm_s=6.058e-07, t_opt_s=0.0003321, img_s=3436, img_s_per_gpu=1145, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=strong, b_gpu=5, b_global=15, step_s=0.004497, p25_s=0.004413, p75_s=0.004573, t_fwd_s=0.001969, t_bwd_s=0.002194, t_comm_s=6.119e-07, t_opt_s=0.0003334, img_s=3336, img_s_per_gpu=1112, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=strong, b_gpu=5, b_global=15, step_s=0.00567, p25_s=0.00531, p75_s=0.00775, t_fwd_s=0.00195, t_bwd_s=0.002147, t_comm_s=0.000952, t_opt_s=0.0002894, img_s=2646, img_s_per_gpu=881.9, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=strong, b_gpu=5, b_global=15, step_s=0.006019, p25_s=0.005977, p75_s=0.006051, t_fwd_s=0.002725, t_bwd_s=0.002968, t_comm_s=5.69e-07, t_opt_s=0.000335, img_s=2492, img_s_per_gpu=830.7, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:14:39Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,3,local,weak,8,24,0.00463602039963007,0.0044997441582381725,0.007564367260783911,0.002128846477717161,0.002179383300244808,7.553026080131531e-07,0.00035163993015885353,5176.85383824348,1725.6179460811602,4
+resnet18_cifar,11173962,3,manual,weak,8,24,0.005686103831976652,0.005417360924184322,0.007332114269956946,0.0020933179184794426,0.002168842125684023,0.001049102284014225,0.0002849232405424118,4220.816346165264,1406.938782055088,4
+resnet18_cifar,11173962,3,ddp,weak,8,24,0.006985340267419815,0.006283714435994625,0.008556876331567764,0.0030250828713178635,0.0033600679598748684,6.058253347873688e-07,0.0003320761024951935,3435.7667745890512,1145.255591529684,4
+resnet18_cifar,11173962,3,local,strong,5,15,0.004496523644775152,0.004412928130477667,0.004573293495923281,0.0019692317582666874,0.0021937903948128223,6.118789315223694e-07,0.00033342838287353516,3335.9104021235657,1111.9701340411887,4
+resnet18_cifar,11173962,3,manual,strong,5,15,0.005669861566275358,0.005310314940288663,0.007750230375677347,0.0019496618770062923,0.0021468745544552803,0.0009520263411104679,0.00028940383344888687,2645.5672373415264,881.8557457805089,4
+resnet18_cifar,11173962,3,ddp,strong,5,15,0.006019292864948511,0.0059770243242383,0.006050558062270284,0.002725353930145502,0.0029680002480745316,5.690380930900574e-07,0.00033502373844385147,2491.9870716621645,830.6623572207214,4
+----- END FILE scaling.csv -----
+##### E4 rep=4 k=4
+[rank1]:[W1122 00:14:53.413441345 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:14:53.538194767 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:14:53.548008383 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank3]:[W1122 00:14:53.698768141 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.004249, p25_s=0.004183, p75_s=0.007367, t_fwd_s=0.002124, t_bwd_s=0.00181, t_comm_s=5.323e-07, t_opt_s=0.0003279, img_s=7530, img_s_per_gpu=1883, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.005349, p25_s=0.00526, p75_s=0.005555, t_fwd_s=0.002101, t_bwd_s=0.001745, t_comm_s=0.001215, t_opt_s=0.000286, img_s=5982, img_s_per_gpu=1496, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.006434, p25_s=0.006322, p75_s=0.007397, t_fwd_s=0.002822, t_bwd_s=0.003313, t_comm_s=3.204e-07, t_opt_s=0.0002984, img_s=4974, img_s_per_gpu=1243, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.004054, p25_s=0.003949, p75_s=0.004428, t_fwd_s=0.001971, t_bwd_s=0.001751, t_comm_s=3.222e-07, t_opt_s=0.0002979, img_s=3946, img_s_per_gpu=986.6, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.0053, p25_s=0.005197, p75_s=0.005339, t_fwd_s=0.001987, t_bwd_s=0.001708, t_comm_s=0.00127, t_opt_s=0.0002875, img_s=3019, img_s_per_gpu=754.7, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.006093, p25_s=0.005991, p75_s=0.006525, t_fwd_s=0.002743, t_bwd_s=0.003056, t_comm_s=2.924e-07, t_opt_s=0.000297, img_s=2626, img_s_per_gpu=656.5, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:14:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.004249489400535822,0.004183155484497547,0.007366565754637122,0.0021236203610897064,0.001810487825423479,5.32250851392746e-07,0.0003279000520706177,7530.316464835773,1882.5791162089433,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.005349155515432358,0.0052595073357224464,0.005555339390411973,0.002100592013448477,0.001745038665831089,0.001214830670505762,0.0002859821543097496,5982.252695342234,1495.5631738355585,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.006433701608330011,0.006321977591142058,0.007397008128464222,0.0028216317296028137,0.0033133630640804768,3.203749656677246e-07,0.00029836641624569893,4973.808539483416,1243.452134870854,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.004054310265928507,0.00394902634434402,0.004428294254466891,0.001970571931451559,0.001751065719872713,3.2223761081695557e-07,0.00029794732108712196,3946.417257322492,986.604314330623,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.005299905780702829,0.005197383230552077,0.005338541464880109,0.0019872388802468777,0.0017081578262150288,0.0012703216634690762,0.0002875472418963909,3018.921592579371,754.7303981448428,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.006092878524214029,0.005991005338728428,0.006525168428197503,0.0027425060980021954,0.003056364133954048,2.9243528842926025e-07,0.00029697734862565994,2626.016575976947,656.5041439942368,4
+----- END FILE scaling.csv -----
+##### E3 rep=5 k=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=2.11e-05, p25_s=2.098e-05, p75_s=2.165e-05, algbw_GBps=0.1942, busbw_GBps=0.1942, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=2.115e-05, p25_s=2.098e-05, p75_s=2.127e-05, algbw_GBps=0.7746, busbw_GBps=0.7746, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=2.194e-05, p25_s=2.173e-05, p75_s=7.043e-05, algbw_GBps=2.987, busbw_GBps=2.987, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=2.367e-05, p25_s=2.338e-05, p75_s=2.37e-05, algbw_GBps=11.08, busbw_GBps=11.08, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=2.395e-05, p25_s=2.368e-05, p75_s=2.399e-05, algbw_GBps=43.78, busbw_GBps=43.78, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=3.365e-05, p25_s=3.362e-05, p75_s=3.394e-05, algbw_GBps=124.7, busbw_GBps=124.7, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4096, median_s=2.004e-05, p25_s=2.004e-05, p75_s=2.042e-05, algbw_GBps=0.2044, busbw_GBps=0.2044, trials=3
+  op=broadcast, k=2, label=pow4, bytes=16384, median_s=2.007e-05, p25_s=1.999e-05, p75_s=0.0001038, algbw_GBps=0.8162, busbw_GBps=0.8162, trials=3
+  op=broadcast, k=2, label=pow4, bytes=65536, median_s=2.097e-05, p25_s=2.093e-05, p75_s=2.13e-05, algbw_GBps=3.125, busbw_GBps=3.125, trials=3
+  op=broadcast, k=2, label=pow4, bytes=262144, median_s=2.261e-05, p25_s=2.258e-05, p75_s=2.273e-05, algbw_GBps=11.6, busbw_GBps=11.6, trials=3
+  op=broadcast, k=2, label=pow4, bytes=1048576, median_s=2.236e-05, p25_s=2.234e-05, p75_s=2.261e-05, algbw_GBps=46.9, busbw_GBps=46.9, trials=3
+  op=broadcast, k=2, label=pow4, bytes=4194304, median_s=2.632e-05, p25_s=2.629e-05, p75_s=2.633e-05, algbw_GBps=159.4, busbw_GBps=159.4, trials=3
+  op=reduce, k=2, label=pow4, bytes=4096, median_s=2.059e-05, p25_s=2.029e-05, p75_s=2.071e-05, algbw_GBps=0.1989, busbw_GBps=0.1989, trials=3
+  op=reduce, k=2, label=pow4, bytes=16384, median_s=2.043e-05, p25_s=2.04e-05, p75_s=2.049e-05, algbw_GBps=0.8019, busbw_GBps=0.8019, trials=3
+  op=reduce, k=2, label=pow4, bytes=65536, median_s=2.135e-05, p25_s=2.108e-05, p75_s=2.173e-05, algbw_GBps=3.07, busbw_GBps=3.07, trials=3
+  op=reduce, k=2, label=pow4, bytes=262144, median_s=2.286e-05, p25_s=2.281e-05, p75_s=2.304e-05, algbw_GBps=11.46, busbw_GBps=11.46, trials=3
+  op=reduce, k=2, label=pow4, bytes=1048576, median_s=2.336e-05, p25_s=2.335e-05, p75_s=2.36e-05, algbw_GBps=44.89, busbw_GBps=44.89, trials=3
+  op=reduce, k=2, label=pow4, bytes=4194304, median_s=2.484e-05, p25_s=2.474e-05, p75_s=2.486e-05, algbw_GBps=168.8, busbw_GBps=168.8, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,2.1096598356962203e-05,2.0982082933187485e-05,2.1652933210134506e-05,0.19415452343046843,0.19415452343046843,3
+all_reduce,2,pow4,16384,2.115253359079361e-05,2.0976532250642777e-05,2.126842737197876e-05,0.7745644241468521,0.7745644241468521,3
+all_reduce,2,pow4,65536,2.1940581500530243e-05,2.1725818514823912e-05,7.04321451485157e-05,2.9869764389980356,2.9869764389980356,3
+all_reduce,2,pow4,262144,2.3666657507419587e-05,2.337997779250145e-05,2.3697949945926666e-05,11.076511328979043,11.076511328979043,3
+all_reduce,2,pow4,1048576,2.39516980946064e-05,2.368498593568802e-05,2.3993030190467834e-05,43.77877492686522,43.77877492686522,3
+all_reduce,2,pow4,4194304,3.364831209182739e-05,3.36183700710535e-05,3.3937767148017885e-05,124.65124516658076,124.65124516658076,3
+broadcast,2,pow4,4096,2.0037926733493806e-05,2.0035244524478913e-05,2.0424574613571168e-05,0.20441236533485532,0.20441236533485532,3
+broadcast,2,pow4,16384,2.007449045777321e-05,1.9990429282188417e-05,0.00010379992425441743,0.816160192681544,0.816160192681544,3
+broadcast,2,pow4,65536,2.09706649184227e-05,2.0930729806423188e-05,2.129551023244858e-05,3.12512742227962,3.12512742227962,3
+broadcast,2,pow4,262144,2.2605601698160173e-05,2.2577419877052307e-05,2.2732987999916077e-05,11.59641771540792,11.59641771540792,3
+broadcast,2,pow4,1048576,2.235936000943184e-05,2.234041690826416e-05,2.2610202431678772e-05,46.8965122238597,46.8965122238597,3
+broadcast,2,pow4,4194304,2.6320293545722962e-05,2.6286160573363303e-05,2.6332354173064233e-05,159.3562774181739,159.3562774181739,3
+reduce,2,pow4,4096,2.059219405055046e-05,2.0293761044740675e-05,2.0708777010440827e-05,0.19891032446299756,0.19891032446299756,3
+reduce,2,pow4,16384,2.0432695746421813e-05,2.0396728068590164e-05,2.0487457513809206e-05,0.8018521003460435,0.8018521003460435,3
+reduce,2,pow4,65536,2.134915441274643e-05,2.1082572638988496e-05,2.1729376167058946e-05,3.069723452881674,3.069723452881674,3
+reduce,2,pow4,262144,2.286488190293312e-05,2.280591055750847e-05,2.3035705089569093e-05,11.46491817070667,11.46491817070667,3
+reduce,2,pow4,1048576,2.3358259350061418e-05,2.3346245288848877e-05,2.360314130783081e-05,44.891016247631605,44.891016247631605,3
+reduce,2,pow4,4194304,2.4844426661729813e-05,2.473671920597553e-05,2.485564909875393e-05,168.82273264373123,168.82273264373123,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:15:05Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.1538253781581405e-05,
+      "B_GBps": 349.59503768417625,
+      "max_rel_err": 0.05824875206372263
+    },
+    "broadcast": {
+      "alpha_s": 2.0727863151464162e-05,
+      "B_GBps": 725.2482007431892,
+      "max_rel_err": 0.06707560268689354
+    },
+    "reduce": {
+      "alpha_s": 2.1303287574139946e-05,
+      "B_GBps": 1065.9657373844352,
+      "max_rel_err": 0.057541199385193045
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=5 k=3
+  op=all_reduce, k=3, label=pow4, bytes=4096, median_s=2.219e-05, p25_s=2.18e-05, p75_s=2.277e-05, algbw_GBps=0.1846, busbw_GBps=0.2461, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=16384, median_s=2.159e-05, p25_s=2.148e-05, p75_s=2.169e-05, algbw_GBps=0.7589, busbw_GBps=1.012, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=65536, median_s=2.415e-05, p25_s=2.19e-05, p75_s=6.937e-05, algbw_GBps=2.714, busbw_GBps=3.618, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=262144, median_s=2.352e-05, p25_s=2.35e-05, p75_s=2.433e-05, algbw_GBps=11.15, busbw_GBps=14.86, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=1048576, median_s=2.5e-05, p25_s=2.479e-05, p75_s=2.601e-05, algbw_GBps=41.95, busbw_GBps=55.93, trials=3
+  op=all_reduce, k=3, label=pow4, bytes=4194304, median_s=4.425e-05, p25_s=4.417e-05, p75_s=4.461e-05, algbw_GBps=94.79, busbw_GBps=126.4, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4096, median_s=2.084e-05, p25_s=2.061e-05, p75_s=2.129e-05, algbw_GBps=0.1966, busbw_GBps=0.1966, trials=3
+  op=broadcast, k=3, label=pow4, bytes=16384, median_s=2.046e-05, p25_s=2.038e-05, p75_s=2.087e-05, algbw_GBps=0.8009, busbw_GBps=0.8009, trials=3
+  op=broadcast, k=3, label=pow4, bytes=65536, median_s=2.688e-05, p25_s=2.104e-05, p75_s=0.0001251, algbw_GBps=2.438, busbw_GBps=2.438, trials=3
+  op=broadcast, k=3, label=pow4, bytes=262144, median_s=2.204e-05, p25_s=2.2e-05, p75_s=2.622e-05, algbw_GBps=11.89, busbw_GBps=11.89, trials=3
+  op=broadcast, k=3, label=pow4, bytes=1048576, median_s=2.32e-05, p25_s=2.306e-05, p75_s=2.324e-05, algbw_GBps=45.2, busbw_GBps=45.2, trials=3
+  op=broadcast, k=3, label=pow4, bytes=4194304, median_s=2.637e-05, p25_s=2.62e-05, p75_s=2.693e-05, algbw_GBps=159.1, busbw_GBps=159.1, trials=3
+  op=reduce, k=3, label=pow4, bytes=4096, median_s=2.084e-05, p25_s=2.069e-05, p75_s=2.108e-05, algbw_GBps=0.1966, busbw_GBps=0.1966, trials=3
+  op=reduce, k=3, label=pow4, bytes=16384, median_s=2.078e-05, p25_s=2.074e-05, p75_s=2.079e-05, algbw_GBps=0.7885, busbw_GBps=0.7885, trials=3
+  op=reduce, k=3, label=pow4, bytes=65536, median_s=2.134e-05, p25_s=2.113e-05, p75_s=2.159e-05, algbw_GBps=3.071, busbw_GBps=3.071, trials=3
+  op=reduce, k=3, label=pow4, bytes=262144, median_s=2.3e-05, p25_s=2.273e-05, p75_s=2.333e-05, algbw_GBps=11.4, busbw_GBps=11.4, trials=3
+  op=reduce, k=3, label=pow4, bytes=1048576, median_s=2.442e-05, p25_s=2.417e-05, p75_s=2.458e-05, algbw_GBps=42.95, busbw_GBps=42.95, trials=3
+  op=reduce, k=3, label=pow4, bytes=4194304, median_s=2.71e-05, p25_s=2.688e-05, p75_s=2.713e-05, algbw_GBps=154.8, busbw_GBps=154.8, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,3,pow4,4096,2.2191181778907775e-05,2.1799411624670027e-05,2.2773798555135727e-05,0.18457782198391784,0.24610376264522377,3
+all_reduce,3,pow4,16384,2.1589659154415132e-05,2.1478720009326933e-05,2.1687038242816924e-05,0.7588818277684313,1.0118424370245749,3
+all_reduce,3,pow4,65536,2.4148672819137572e-05,2.1901093423366546e-05,6.936829537153244e-05,2.7138551460295326,3.6184735280393765,3
+all_reduce,3,pow4,262144,2.351716160774231e-05,2.3496691137552262e-05,2.4326015263795853e-05,11.146923441377256,14.862564588503007,3
+all_reduce,3,pow4,1048576,2.49975360929966e-05,2.4793054908514023e-05,2.6006158441305162e-05,41.94717415744717,55.929565543262896,3
+all_reduce,3,pow4,4194304,4.4248485937714574e-05,4.4168811291456224e-05,4.4607650488615035e-05,94.78977440954752,126.38636587939669,3
+broadcast,3,pow4,4096,2.0836647599935532e-05,2.0608492195606232e-05,2.1285582333803178e-05,0.19657672763120845,0.19657672763120845,3
+broadcast,3,pow4,16384,2.0457860082387923e-05,2.038363367319107e-05,2.0871441811323167e-05,0.8008657764799608,0.8008657764799608,3
+broadcast,3,pow4,65536,2.6881638914346694e-05,2.1037105470895766e-05,0.00012505726888775826,2.4379465927958557,2.4379465927958557,3
+broadcast,3,pow4,262144,2.2042468190193175e-05,2.200419083237648e-05,2.6220325380563737e-05,11.89267906561523,11.89267906561523,3
+broadcast,3,pow4,1048576,2.3196525871753694e-05,2.306317910552025e-05,2.3241620510816574e-05,45.20401054008033,45.20401054008033,3
+broadcast,3,pow4,4194304,2.636536955833435e-05,2.620220184326172e-05,2.6927003636956216e-05,159.08383118696472,159.08383118696472,3
+reduce,3,pow4,4096,2.0837727934122086e-05,2.068866044282913e-05,2.1082181483507156e-05,0.19656653609018188,0.19656653609018188,3
+reduce,3,pow4,16384,2.0778179168701173e-05,2.0740386098623275e-05,2.0786914974451064e-05,0.7885195265174985,0.7885195265174985,3
+reduce,3,pow4,65536,2.1342337131500244e-05,2.112550660967827e-05,2.158941701054573e-05,3.0707040000446844,3.0707040000446844,3
+reduce,3,pow4,262144,2.2996421903371812e-05,2.2730641067028046e-05,2.333037555217743e-05,11.399338605870836,11.399338605870836,3
+reduce,3,pow4,1048576,2.4416185915470124e-05,2.4174991995096207e-05,2.457534894347191e-05,42.94593773287174,42.94593773287174,3
+reduce,3,pow4,4194304,2.710064873099327e-05,2.6879552751779557e-05,2.712514251470566e-05,154.76766042147338,154.76766042147338,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:15:15Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.201883392181498e-05,
+      "B_GBps": 270.7968421012808,
+      "max_rel_err": 0.08737716243116952
+    },
+    "broadcast": {
+      "alpha_s": 2.1980169661798865e-05,
+      "B_GBps": 940.5394259051616,
+      "max_rel_err": 0.17974313638044243
+    },
+    "reduce": {
+      "alpha_s": 2.149093330029928e-05,
+      "B_GBps": 684.8493395506994,
+      "max_rel_err": 0.057099334931702335
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E3 rep=5 k=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=2.255e-05, p25_s=2.219e-05, p75_s=2.787e-05, algbw_GBps=0.1816, busbw_GBps=0.2724, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=2.221e-05, p25_s=2.216e-05, p75_s=2.238e-05, algbw_GBps=0.7377, busbw_GBps=1.107, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=2.261e-05, p25_s=2.222e-05, p75_s=2.284e-05, algbw_GBps=2.898, busbw_GBps=4.347, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=2.45e-05, p25_s=2.407e-05, p75_s=2.461e-05, algbw_GBps=10.7, busbw_GBps=16.05, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=2.57e-05, p25_s=2.555e-05, p75_s=2.587e-05, algbw_GBps=40.8, busbw_GBps=61.19, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=4.224e-05, p25_s=4.22e-05, p75_s=4.245e-05, algbw_GBps=99.3, busbw_GBps=148.9, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4096, median_s=1.974e-05, p25_s=1.972e-05, p75_s=0.0001001, algbw_GBps=0.2075, busbw_GBps=0.2075, trials=3
+  op=broadcast, k=4, label=pow4, bytes=16384, median_s=1.979e-05, p25_s=1.967e-05, p75_s=0.0001238, algbw_GBps=0.8278, busbw_GBps=0.8278, trials=3
+  op=broadcast, k=4, label=pow4, bytes=65536, median_s=2.07e-05, p25_s=1.998e-05, p75_s=2.077e-05, algbw_GBps=3.167, busbw_GBps=3.167, trials=3
+  op=broadcast, k=4, label=pow4, bytes=262144, median_s=2.25e-05, p25_s=2.235e-05, p75_s=2.257e-05, algbw_GBps=11.65, busbw_GBps=11.65, trials=3
+  op=broadcast, k=4, label=pow4, bytes=1048576, median_s=2.379e-05, p25_s=2.349e-05, p75_s=2.403e-05, algbw_GBps=44.08, busbw_GBps=44.08, trials=3
+  op=broadcast, k=4, label=pow4, bytes=4194304, median_s=2.63e-05, p25_s=2.627e-05, p75_s=2.632e-05, algbw_GBps=159.5, busbw_GBps=159.5, trials=3
+  op=reduce, k=4, label=pow4, bytes=4096, median_s=2.146e-05, p25_s=2.145e-05, p75_s=2.165e-05, algbw_GBps=0.1909, busbw_GBps=0.1909, trials=3
+  op=reduce, k=4, label=pow4, bytes=16384, median_s=2.122e-05, p25_s=2.118e-05, p75_s=2.144e-05, algbw_GBps=0.7719, busbw_GBps=0.7719, trials=3
+  op=reduce, k=4, label=pow4, bytes=65536, median_s=2.176e-05, p25_s=2.168e-05, p75_s=2.209e-05, algbw_GBps=3.012, busbw_GBps=3.012, trials=3
+  op=reduce, k=4, label=pow4, bytes=262144, median_s=2.339e-05, p25_s=2.324e-05, p75_s=2.358e-05, algbw_GBps=11.21, busbw_GBps=11.21, trials=3
+  op=reduce, k=4, label=pow4, bytes=1048576, median_s=2.47e-05, p25_s=2.449e-05, p75_s=2.483e-05, algbw_GBps=42.45, busbw_GBps=42.45, trials=3
+  op=reduce, k=4, label=pow4, bytes=4194304, median_s=2.814e-05, p25_s=2.784e-05, p75_s=2.816e-05, algbw_GBps=149, busbw_GBps=149, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,2.2554825991392137e-05,2.219017595052719e-05,2.787342295050621e-05,0.18160193306581948,0.2724028995987292,3
+all_reduce,4,pow4,16384,2.2208597511053085e-05,2.2158082574605943e-05,2.2382531315088273e-05,0.7377323125355296,1.1065984688032944,3
+all_reduce,4,pow4,65536,2.2612866014242173e-05,2.221643924713135e-05,2.2843461483716964e-05,2.8981731001600464,4.347259650240069,3
+all_reduce,4,pow4,262144,2.44954414665699e-05,2.4071671068668364e-05,2.4607740342617035e-05,10.70174629666342,16.05261944499513,3
+all_reduce,4,pow4,1048576,2.5702938437461853e-05,2.554517239332199e-05,2.5874599814414977e-05,40.79595811783558,61.19393717675337,3
+all_reduce,4,pow4,4194304,4.2239716276526454e-05,4.219948314130306e-05,4.244726151227951e-05,99.297636673068,148.946455009602,3
+broadcast,4,pow4,4096,1.973874866962433e-05,1.9715279340744018e-05,0.00010013030841946602,0.20751062129400707,0.20751062129400707,3
+broadcast,4,pow4,16384,1.9792485982179642e-05,1.9672494381666184e-05,0.00012384800240397453,0.8277888899227461,0.8277888899227461,3
+broadcast,4,pow4,65536,2.0695775747299193e-05,1.9978992640972136e-05,2.0766109228134154e-05,3.166636554252018,3.166636554252018,3
+broadcast,4,pow4,262144,2.2495351731777192e-05,2.2354386746883392e-05,2.257091924548149e-05,11.653251886241565,11.653251886241565,3
+broadcast,4,pow4,1048576,2.378750592470169e-05,2.3490171879529954e-05,2.402914687991142e-05,44.080955915227996,44.080955915227996,3
+broadcast,4,pow4,4194304,2.630404196679592e-05,2.6265950873494147e-05,2.6317546144127846e-05,159.4547334320158,159.4547334320158,3
+reduce,4,pow4,4096,2.1459832787513733e-05,2.1447408944368362e-05,2.1650660783052446e-05,0.1908682160088047,0.1908682160088047,3
+reduce,4,pow4,16384,2.1224431693553926e-05,2.117825672030449e-05,2.1443702280521393e-05,0.7719405747375553,0.7719405747375553,3
+reduce,4,pow4,65536,2.175796777009964e-05,2.1678376942873e-05,2.2092964500188827e-05,3.0120460096489925,3.0120460096489925,3
+reduce,4,pow4,262144,2.3389160633087157e-05,2.324027940630913e-05,2.3575350642204285e-05,11.207926787640321,11.207926787640321,3
+reduce,4,pow4,1048576,2.4699289351701736e-05,2.4493485689163208e-05,2.4830736219882964e-05,42.453691078676925,42.453691078676925,3
+reduce,4,pow4,4194304,2.8140610083937645e-05,2.783574163913727e-05,2.8161751106381417e-05,149.04808344557046,149.04808344557046,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:15:26Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 2.2316232515655395e-05,
+      "B_GBps": 328.41508582579456,
+      "max_rel_err": 0.05456770339089882
+    },
+    "broadcast": {
+      "alpha_s": 2.065688024481476e-05,
+      "B_GBps": 671.9791503762151,
+      "max_rel_err": 0.06600928732261306
+    },
+    "reduce": {
+      "alpha_s": 2.1921259061434325e-05,
+      "B_GBps": 629.5182531956764,
+      "max_rel_err": 0.045035718121871425
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+##### E4 rep=5 k=1
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=weak, b_gpu=8, b_global=8, step_s=0.004319, p25_s=0.003783, p75_s=0.00558, t_fwd_s=0.001835, t_bwd_s=0.001982, t_comm_s=3.59e-07, t_opt_s=0.0002847, img_s=1852, img_s_per_gpu=1852, steps=4
+  model=resnet18_cifar, params=11173962, k=1, mode=local, scaling=strong, b_gpu=16, b_global=16, step_s=0.006118, p25_s=0.006069, p75_s=0.006157, t_fwd_s=0.003538, t_bwd_s=0.002287, t_comm_s=2.589e-07, t_opt_s=0.0002731, img_s=2615, img_s_per_gpu=2615, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 1,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:15:33Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,1,local,weak,8,8,0.004318905528634787,0.0037826281040906906,0.0055797286331653595,0.0018352866172790527,0.0019819773733615875,3.5902485251426697e-07,0.00028473278507590294,1852.3211371397636,1852.3211371397636,4
+resnet18_cifar,11173962,1,local,strong,16,16,0.006118097808212042,0.006069241324439645,0.006156986812129617,0.0035383952781558037,0.002287296112626791,2.5890767574310303e-07,0.0002730991691350937,2615.191927550412,2615.191927550412,4
+----- END FILE scaling.csv -----
+##### E4 rep=5 k=2
+[rank1]:[W1122 00:15:40.394563577 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:15:40.510594283 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.004855, p25_s=0.004602, p75_s=0.006829, t_fwd_s=0.002275, t_bwd_s=0.002214, t_comm_s=8.293e-07, t_opt_s=0.0003658, img_s=3296, img_s_per_gpu=1648, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.005443, p25_s=0.00529, p75_s=0.005636, t_fwd_s=0.002083, t_bwd_s=0.002273, t_comm_s=0.0007611, t_opt_s=0.0003027, img_s=2939, img_s_per_gpu=1470, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.006368, p25_s=0.006231, p75_s=0.008168, t_fwd_s=0.002911, t_bwd_s=0.003165, t_comm_s=5.532e-07, t_opt_s=0.0003378, img_s=2512, img_s_per_gpu=1256, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.004708, p25_s=0.004639, p75_s=0.004992, t_fwd_s=0.002103, t_bwd_s=0.002274, t_comm_s=5.574e-07, t_opt_s=0.0003325, img_s=3399, img_s_per_gpu=1699, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.00529, p25_s=0.005258, p75_s=0.005547, t_fwd_s=0.002085, t_bwd_s=0.002178, t_comm_s=0.0007192, t_opt_s=0.0002996, img_s=3025, img_s_per_gpu=1512, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.0065, p25_s=0.006403, p75_s=0.006847, t_fwd_s=0.002923, t_bwd_s=0.00322, t_comm_s=5.416e-07, t_opt_s=0.0003322, img_s=2461, img_s_per_gpu=1231, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:15:39Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.0048548318445682526,0.0046024746261537075,0.006828982848674059,0.0022750915959477425,0.0022143800742924213,8.293427526950836e-07,0.0003657885827124119,3295.68572347183,1647.842861735915,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.005443451926112175,0.005290147149935365,0.0056356864515691996,0.0020834696479141712,0.0022726827301084995,0.0007610558532178402,0.000302738044410944,2939.311344562113,1469.6556722810565,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.006368341390043497,0.00623114057816565,0.008167550666257739,0.002911051269620657,0.0031645172275602818,5.532056093215942e-07,0.00033782050013542175,2512.42812218186,1256.21406109093,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.004707582760602236,0.004639383172616363,0.00499227293767035,0.0021029957570135593,0.002274276688694954,5.573965609073639e-07,0.0003324816934764385,3398.7718992226783,1699.3859496113391,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.005289929453283548,0.005258237477391958,0.005547360051423311,0.0020853839814662933,0.0021782428957521915,0.000719177071005106,0.0002996036782860756,3024.615005039156,1512.307502519578,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.0065004099160432816,0.006403227802366018,0.006846991367638111,0.002922637388110161,0.00322004035115242,5.415640771389008e-07,0.0003322456032037735,2461.3832368496232,1230.6916184248116,4
+----- END FILE scaling.csv -----
+##### E4 rep=5 k=3
+[rank0]:[W1122 00:15:50.101375289 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W1122 00:15:50.210585999 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:15:50.242907188 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=weak, b_gpu=8, b_global=24, step_s=0.003937, p25_s=0.003783, p75_s=0.006568, t_fwd_s=0.001948, t_bwd_s=0.001714, t_comm_s=2.678e-07, t_opt_s=0.0002744, img_s=6096, img_s_per_gpu=2032, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=weak, b_gpu=8, b_global=24, step_s=0.005489, p25_s=0.005448, p75_s=0.005625, t_fwd_s=0.001844, t_bwd_s=0.001711, t_comm_s=0.001662, t_opt_s=0.000255, img_s=4373, img_s_per_gpu=1458, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=weak, b_gpu=8, b_global=24, step_s=0.008172, p25_s=0.006539, p75_s=0.009711, t_fwd_s=0.002451, t_bwd_s=0.00539, t_comm_s=3.646e-07, t_opt_s=0.0002993, img_s=2937, img_s_per_gpu=978.9, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=local, scaling=strong, b_gpu=5, b_global=15, step_s=0.003417, p25_s=0.003367, p75_s=0.005629, t_fwd_s=0.001689, t_bwd_s=0.001464, t_comm_s=2.258e-07, t_opt_s=0.0002662, img_s=4389, img_s_per_gpu=1463, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=manual, scaling=strong, b_gpu=5, b_global=15, step_s=0.005314, p25_s=0.005243, p75_s=0.005418, t_fwd_s=0.001676, t_bwd_s=0.001493, t_comm_s=0.001897, t_opt_s=0.0002532, img_s=2823, img_s_per_gpu=940.9, steps=4
+  model=resnet18_cifar, params=11173962, k=3, mode=ddp, scaling=strong, b_gpu=5, b_global=15, step_s=0.006192, p25_s=0.006021, p75_s=0.006639, t_fwd_s=0.002259, t_bwd_s=0.003623, t_comm_s=2.813e-07, t_opt_s=0.0002723, img_s=2423, img_s_per_gpu=807.6, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 3,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:15:49Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,3,local,weak,8,24,0.003937224857509136,0.003783425083383918,0.006567896576598287,0.0019481279887259007,0.001714477315545082,2.6775524020195007e-07,0.00027438346296548843,6095.664044746347,2031.8880149154488,4
+resnet18_cifar,11173962,3,manual,weak,8,24,0.005488774739205837,0.005448157200589776,0.005625236546620727,0.0018439865671098232,0.0017105448059737682,0.0016616354696452618,0.0002550436183810234,4372.5605695876175,1457.520189862539,4
+resnet18_cifar,11173962,3,ddp,weak,8,24,0.008172299712896347,0.00653931125998497,0.009710905142128468,0.0024510016664862633,0.005390099249780178,3.6461278796195984e-07,0.00029925350099802017,2936.7498553836267,978.9166184612088,4
+resnet18_cifar,11173962,3,local,strong,5,15,0.003417415078729391,0.0033670261036604643,0.0056285434402525425,0.001688874326646328,0.0014637303538620472,2.2584572434425354e-07,0.00026624277234077454,4389.28244138756,1463.0941471291865,4
+resnet18_cifar,11173962,3,manual,strong,5,15,0.005314248148351908,0.005242679500952363,0.005417715525254607,0.001675749197602272,0.0014928989112377167,0.001897245179861784,0.0002531670033931732,2822.6005977255513,940.8668659085172,4
+resnet18_cifar,11173962,3,ddp,strong,5,15,0.006191520020365715,0.006020655622705817,0.006639099679887295,0.002258546184748411,0.003622963558882475,2.812594175338745e-07,0.00027234386652708054,2422.668415939967,807.5561386466558,4
+----- END FILE scaling.csv -----
+##### E4 rep=5 k=4
+[rank1]:[W1122 00:16:01.538581352 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 00:16:01.646222548 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank3]:[W1122 00:16:01.774275650 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 00:16:01.985584376 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.005785, p25_s=0.004799, p75_s=0.007689, t_fwd_s=0.002423, t_bwd_s=0.002228, t_comm_s=8.899e-07, t_opt_s=0.0003894, img_s=5532, img_s_per_gpu=1383, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.005615, p25_s=0.005367, p75_s=0.007282, t_fwd_s=0.00207, t_bwd_s=0.002192, t_comm_s=0.0008477, t_opt_s=0.0002903, img_s=5699, img_s_per_gpu=1425, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.006169, p25_s=0.006133, p75_s=0.007384, t_fwd_s=0.00282, t_bwd_s=0.003047, t_comm_s=4.778e-07, t_opt_s=0.0003039, img_s=5187, img_s_per_gpu=1297, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.004395, p25_s=0.004388, p75_s=0.004424, t_fwd_s=0.00198, t_bwd_s=0.002091, t_comm_s=5.169e-07, t_opt_s=0.0003254, img_s=3641, img_s_per_gpu=910.2, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.005356, p25_s=0.005189, p75_s=0.005502, t_fwd_s=0.00197, t_bwd_s=0.002088, t_comm_s=0.000972, t_opt_s=0.0002901, img_s=2987, img_s_per_gpu=746.8, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.006101, p25_s=0.006008, p75_s=0.007179, t_fwd_s=0.002722, t_bwd_s=0.003047, t_comm_s=5.295e-07, t_opt_s=0.0003342, img_s=2623, img_s_per_gpu=655.6, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave8-quick-m6p6d",
+    "time_utc": "2026-11-22T00:16:00Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.005784983746707439,0.004799117334187031,0.007688920712098479,0.0024234559386968613,0.0022278018295764923,8.898787200450897e-07,0.0003894190303981304,5531.562645826448,1382.890661456612,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.0056150369346141815,0.005367429694160819,0.007282382808625698,0.002070456277579069,0.0021922802552580833,0.0008476558141410351,0.00029030628502368927,5698.982993813339,1424.7457484533347,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.006169190630316734,0.006133155431598425,0.007384382886812091,0.002820016350597143,0.003046564757823944,4.777684807777405e-07,0.0003039408475160599,5187.066167601483,1296.7665419003708,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.004394524730741978,0.004388397792354226,0.004423622274771333,0.0019799629226326942,0.002090947702527046,5.168840289115906e-07,0.00032541994005441666,3640.8942901314695,910.2235725328674,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.0053561837412416935,0.005189096555113792,0.005501827225089073,0.00197024829685688,0.002088409848511219,0.0009719757363200188,0.00029008649289608,2987.201480188731,746.8003700471827,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.006100824102759361,0.006008432479575276,0.007178683066740632,0.0027223569341003895,0.003047486301511526,5.294568836688995e-07,0.00033424049615859985,2622.5965099966265,655.6491274991566,4
+----- END FILE scaling.csv -----
+WAVE8 FINISHED rc=0

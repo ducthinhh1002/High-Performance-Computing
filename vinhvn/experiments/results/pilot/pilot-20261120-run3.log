@@ -1,0 +1,231 @@
+threads: {'torch_threads': 16, 'cgroup_quota': 16, 'omp_env': '16', 'os_cpu_count': 128}
+
+===== env =====
+{
+  "python": "3.11.10",
+  "torch": "2.5.1+cu124",
+  "cuda": "12.4",
+  "cudnn": 90100,
+  "nccl": "2.21.5",
+  "gpu_count": 1,
+  "gpu_name": "NVIDIA H100 80GB HBM3",
+  "cpu_threads_torch": 16,
+  "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+  "nproc": "16",
+  "nvidia_smi_L": "GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)",
+  "driver": "550.90.07"
+}
+[OK] env (0.8s)
+
+===== im2col_check =====
+{'unfold_shape_per_image': [121, 2916], 'patches_per_image': 2916, 'max_abs_err': 0.0, 'match': True}
+[OK] im2col_check (0.4s)
+
+===== bench_conv_cpu_vs_gpu =====
+{'batch': 1, 'cpu_ms': 0.20221993327140808, 'gpu_ms': 0.0269436277449131, 'speedup': 7.505297177719016}
+{'batch': 8, 'cpu_ms': 1.8763625994324684, 'gpu_ms': 0.050648581236600876, 'speedup': 37.046696148648024}
+{'batch': 32, 'cpu_ms': 7.09660816937685, 'gpu_ms': 0.12949202209711075, 'speedup': 54.80343927330787}
+{'batch': 128, 'cpu_ms': 28.33024598658085, 'gpu_ms': 0.4007131792604923, 'speedup': 70.69956131431394}
+[OK] bench_conv_cpu_vs_gpu (0.4s)
+
+===== bench_matmul_cpu_vs_gpu =====
+{'n': 1024, 'cpu_ms': 0.9246561676263809, 'gpu_ms': 0.07252162322402, 'speedup': 12.750075446741022, 'gpu_fp32_tflops': 29.611632400538003}
+{'n': 4096, 'cpu_ms': 63.51474113762379, 'gpu_ms': 2.657432109117508, 'speedup': 23.900795403091614, 'gpu_fp32_tflops': 51.71870731916509}
+[OK] bench_matmul_cpu_vs_gpu (0.5s)
+
+===== dataset_readonly_mount =====
+{'cifar10_train_shape': [50000, 32, 32, 3], 'labels': 50000, 'load_sec': 0.11, 'revision': '0b2714987fa478483af9968de7c934580d0bb9a2', 'readonly': True}
+[OK] dataset_readonly_mount (0.1s)
+
+===== pvc_write_speed =====
+[OK] pvc_write_speed (1.0s)
+
+----- BEGIN FILE bench_conv.csv -----
+batch,cpu_ms,gpu_ms,speedup
+1,0.2022,0.0269,7.51
+8,1.8764,0.0506,37.05
+32,7.0966,0.1295,54.80
+128,28.3302,0.4007,70.70
+
+----- END FILE bench_conv.csv -----
+
+----- BEGIN FILE bench_matmul.csv -----
+n,cpu_ms,gpu_ms,speedup,gpu_fp32_tflops
+1024,0.9247,0.0725,12.75,29.61
+4096,63.5147,2.6574,23.90,51.72
+
+----- END FILE bench_matmul.csv -----
+
+----- BEGIN FILE nvidia_smi_topo.txt -----
+[4mGPU0	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+NIC0	PXB	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+NIC7	SYS	SYS	SYS	SYS	SYS	NODE	NODE	PXB	 X 	SYS				
+NIC8	NODE	NODE	NODE	NODE	NODE	SYS	SYS	SYS	SYS	 X 				
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_4
+  NIC3: mlx5_5
+  NIC4: mlx5_6
+  NIC5: mlx5_7
+  NIC6: mlx5_8
+  NIC7: mlx5_9
+  NIC8: mlx5_bond_0
+----- END FILE nvidia_smi_topo.txt -----
+
+----- BEGIN FILE summary.json -----
+{
+  "run_id": "20261120T160053Z",
+  "steps": {
+    "env": {
+      "ok": true,
+      "sec": 0.8,
+      "result": {
+        "python": "3.11.10",
+        "torch": "2.5.1+cu124",
+        "cuda": "12.4",
+        "cudnn": 90100,
+        "nccl": "2.21.5",
+        "gpu_count": 1,
+        "gpu_name": "NVIDIA H100 80GB HBM3",
+        "cpu_threads_torch": 16,
+        "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+        "nproc": "16",
+        "nvidia_smi_L": "GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)",
+        "driver": "550.90.07"
+      }
+    },
+    "im2col_check": {
+      "ok": true,
+      "sec": 0.4,
+      "result": {
+        "unfold_shape_per_image": [
+          121,
+          2916
+        ],
+        "patches_per_image": 2916,
+        "max_abs_err": 0.0,
+        "match": true
+      }
+    },
+    "bench_conv_cpu_vs_gpu": {
+      "ok": true,
+      "sec": 0.4,
+      "result": [
+        {
+          "batch": 1,
+          "cpu_ms": 0.20221993327140808,
+          "gpu_ms": 0.0269436277449131,
+          "speedup": 7.505297177719016
+        },
+        {
+          "batch": 8,
+          "cpu_ms": 1.8763625994324684,
+          "gpu_ms": 0.050648581236600876,
+          "speedup": 37.046696148648024
+        },
+        {
+          "batch": 32,
+          "cpu_ms": 7.09660816937685,
+          "gpu_ms": 0.12949202209711075,
+          "speedup": 54.80343927330787
+        },
+        {
+          "batch": 128,
+          "cpu_ms": 28.33024598658085,
+          "gpu_ms": 0.4007131792604923,
+          "speedup": 70.69956131431394
+        }
+      ]
+    },
+    "bench_matmul_cpu_vs_gpu": {
+      "ok": true,
+      "sec": 0.5,
+      "result": [
+        {
+          "n": 1024,
+          "cpu_ms": 0.9246561676263809,
+          "gpu_ms": 0.07252162322402,
+          "speedup": 12.750075446741022,
+          "gpu_fp32_tflops": 29.611632400538003
+        },
+        {
+          "n": 4096,
+          "cpu_ms": 63.51474113762379,
+          "gpu_ms": 2.657432109117508,
+          "speedup": 23.900795403091614,
+          "gpu_fp32_tflops": 51.71870731916509
+        }
+      ]
+    },
+    "dataset_readonly_mount": {
+      "ok": true,
+      "sec": 0.1,
+      "result": {
+        "cifar10_train_shape": [
+          50000,
+          32,
+          32,
+          3
+        ],
+        "labels": 50000,
+        "load_sec": 0.11,
+        "revision": "0b2714987fa478483af9968de7c934580d0bb9a2",
+        "readonly": true
+      }
+    },
+    "pvc_write_speed": {
+      "ok": true,
+      "sec": 1.0,
+      "result": {
+        "write_MBps": 634.9
+      }
+    }
+  },
+  "threads": {
+    "torch_threads": 16,
+    "cgroup_quota": 16,
+    "omp_env": "16",
+    "os_cpu_count": 128
+  }
+}
+----- END FILE summary.json -----
+
+----- BEGIN FILE torch_config.txt -----
+PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.5.3 (Git Hash 66f0cb9eb66affd2da3bf5f8d897376f04aae6af)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 12.4
+  - NVCC architecture flags: -gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90
+  - CuDNN 90.1
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=12.4, CUDNN_VERSION=9.1.0, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.5.1, USE_CUDA=ON, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, 
+
+----- END FILE torch_config.txt -----
+
+===== PILOT DONE: 6/6 steps OK, results in /data/results/pilot/20261120T160053Z =====

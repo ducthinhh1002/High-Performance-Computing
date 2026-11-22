@@ -1,0 +1,16 @@
+kernel,self_device_us_total,count
+"void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, bool, bool, int, int)",41931.4,60
+"void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, bool, bool, float const*, float const*, int*)",19017.9,15
+"sm80_xmma_fprop_implicit_gemm_indexed_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x64x8_stage3_warpsize1x2x1_g1_ffma_aligna4_alignc4_execute_kernel__5x_cudnn",2597.6,5
+"void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_tn_align1>(cutlass_80_simt_sgemm_256x128_8x4_tn_align1::Params)",1484.3,5
+"sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cublas",1429.0,5
+"void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})",1326.0,25
+"void at::native::(anonymous namespace)::max_pool_forward_nchw<float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)",1174.8,15
+"void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)",976.3,35
+"sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel__5x_cublas",845.2,5
+"void at::native::(anonymous namespace)::adaptive_average_pool<float>(float const*, float*, int, int, int, int, long, long, long)",436.2,5
+"void fft2d_c2r_32x32<float, false, false, 0u, false, false>(float*, float2 const*, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, cudnnActivationStruct, int, int)",406.9,5
+"void fft2d_r2c_32x32<float, false, 5u, false>(float2*, float const*, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",234.5,5
+"void fft2d_r2c_32x32<float, false, 0u, false>(float2*, float const*, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",208.1,5
+"sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cublas",161.6,5
+"void flip_filter<float, float>(float*, float const*, int, int, int, int)",96.7,5

@@ -1,0 +1,39 @@
+# Chuẩn bị dataset vào hostPath dùng chung. Chỉ dùng CPU, không giữ GPU.
+# hostPath là giải pháp tạm vì VAST PVC chưa cấp được (20/11/2026).
+# Thư mục trên node: /var/lib/hpc-dl-exp  (tự giới hạn 50 GB, xoá khi xong thí nghiệm)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dataset-prep
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 2                    # dataset đã có (.complete) sẽ được bỏ qua khi chạy lại
+  activeDeadlineSeconds: 1800
+  ttlSecondsAfterFinished: 21600
+  template:
+    metadata:
+      labels:
+        app: hpc-dataset-prep
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: prep
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime   # đã có sẵn trên node
+          command: ["python", "-u", "/scripts/prepare_datasets.py"]
+          env:
+            - {name: HOSTPATH_ROOT, value: /hostdata}
+            - {name: LIMIT_GB, value: "50"}
+          resources:
+            requests: {cpu: "2", memory: 4Gi}
+            limits:   {cpu: "2", memory: 4Gi}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+            - {name: hostdata, mountPath: /hostdata}
+      volumes:
+        - name: scripts
+          configMap:
+            name: hpc-dataset-prep-script
+        - name: hostdata
+          hostPath:
+            path: /var/lib/hpc-dl-exp
+            type: DirectoryOrCreate

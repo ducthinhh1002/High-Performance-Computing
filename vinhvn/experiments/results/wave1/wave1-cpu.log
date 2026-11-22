@@ -1,0 +1,375 @@
+DEVICE=cpu QUICK=0 OMP_NUM_THREADS=32 OUT_DIR=/data/results
+E2 {'experiment': 'E2', 'env': {'python': '3.11.10', 'torch': '2.5.1+cu124', 'cuda': '12.4', 'cudnn': 90100, 'torch_threads': 32, 'omp_env': '32', 'cpu_model': 'Intel(R) Xeon(R) Platinum 8462Y+', 'blas': 'mkl', 'device': 'cpu', 'pod': 'wave1-cpu-rg5w4', 'time_utc': '2026-11-20T16:38:35Z'}, 'threads': {'torch_threads': 32, 'cgroup_quota': 32, 'omp_env': '32', 'os_cpu_count': 128}, 'quick': False, 'config': {'conv_batches': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024], 'mat_ns': [256, 512, 1024, 2048, 4096, 8192, 16384], 'train_batches': {'alexnet_gray': [1, 16, 64, 128, 256], 'resnet18_cifar': [32, 128, 512], 'vgg16_cifar': [32, 128, 512]}, 'h2d_mb': [1, 4, 16, 64, 256, 1024]}, 'models': {'alexnet_gray': [1, 224, 224], 'resnet18_cifar': [3, 32, 32], 'vgg16_cifar': [3, 32, 32]}}
+
+== conv_forward (Hình 1–2)
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=1, median_s=0.0004439, p25_s=0.0004321, p75_s=0.0004651, reps=20, throughput=2253, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=2, median_s=0.0006353, p25_s=0.0006043, p75_s=0.0006391, reps=20, throughput=3148, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=4, median_s=0.0009735, p25_s=0.0009636, p75_s=0.0009851, reps=20, throughput=4109, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=8, median_s=0.001791, p25_s=0.001625, p75_s=0.001864, reps=20, throughput=4467, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=16, median_s=0.003232, p25_s=0.003165, p75_s=0.00328, reps=20, throughput=4951, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=32, median_s=0.006353, p25_s=0.006284, p75_s=0.00645, reps=20, throughput=5037, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=64, median_s=0.01242, p25_s=0.01233, p75_s=0.0125, reps=20, throughput=5154, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=128, median_s=0.02316, p25_s=0.02231, p75_s=0.02686, reps=20, throughput=5528, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=256, median_s=0.04947, p25_s=0.04892, p75_s=0.05024, reps=20, throughput=5175, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=512, median_s=0.09961, p25_s=0.09895, p75_s=0.1004, reps=20, throughput=5140, unit=img/s
+  test=conv_forward, device=cpu, precision=fp32, model=None, params=None, size=1024, median_s=0.1891, p25_s=0.1842, p75_s=0.1998, reps=20, throughput=5415, unit=img/s
+
+== matvec (Hình 3–4)
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=256, median_s=7.293e-06, p25_s=6.71e-06, p75_s=7.937e-06, reps=20, throughput=35.94, unit=GB/s
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=512, median_s=1.448e-05, p25_s=1.429e-05, p75_s=1.516e-05, reps=20, throughput=72.42, unit=GB/s
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=1024, median_s=1.289e-05, p25_s=1.241e-05, p75_s=1.352e-05, reps=20, throughput=325.4, unit=GB/s
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=2048, median_s=7.065e-05, p25_s=7.043e-05, p75_s=7.122e-05, reps=20, throughput=237.5, unit=GB/s
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=4096, median_s=0.0002829, p25_s=0.0001771, p75_s=0.0003238, reps=20, throughput=237.2, unit=GB/s
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=8192, median_s=0.001188, p25_s=0.001178, p75_s=0.001202, reps=20, throughput=226, unit=GB/s
+  test=matvec, device=cpu, precision=fp32, model=None, params=None, size=16384, median_s=0.005854, p25_s=0.005821, p75_s=0.005906, reps=20, throughput=183.4, unit=GB/s
+
+== matmul
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=256, median_s=9.468e-05, p25_s=9.407e-05, p75_s=9.531e-05, reps=20, throughput=0.3544, unit=TFLOPS
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=512, median_s=0.0001586, p25_s=0.0001572, p75_s=0.0001597, reps=20, throughput=1.692, unit=TFLOPS
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=1024, median_s=0.0009478, p25_s=0.0009413, p75_s=0.001053, reps=20, throughput=2.266, unit=TFLOPS
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=2048, median_s=0.00671, p25_s=0.0067, p75_s=0.00673, reps=20, throughput=2.56, unit=TFLOPS
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=4096, median_s=0.03685, p25_s=0.03579, p75_s=0.03902, reps=20, throughput=3.73, unit=TFLOPS
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=8192, median_s=0.2483, p25_s=0.2454, p75_s=0.2565, reps=20, throughput=4.427, unit=TFLOPS
+  test=matmul, device=cpu, precision=fp32, model=None, params=None, size=16384, median_s=1.564, p25_s=1.559, p75_s=1.609, reps=6, throughput=5.626, unit=TFLOPS
+
+== train_step
+  test=train_forward, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=1, median_s=0.002304, p25_s=0.002284, p75_s=0.002328, reps=20, throughput=434, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=1, median_s=0.04034, p25_s=0.04002, p75_s=0.04063, reps=20, throughput=24.79, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=16, median_s=0.01224, p25_s=0.01208, p75_s=0.01245, reps=20, throughput=1307, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=16, median_s=0.06393, p25_s=0.06065, p75_s=0.06652, reps=20, throughput=250.3, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=64, median_s=0.04862, p25_s=0.04776, p75_s=0.05169, reps=20, throughput=1316, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=64, median_s=0.1739, p25_s=0.17, p75_s=0.1804, reps=20, throughput=368, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=128, median_s=0.1096, p25_s=0.109, p75_s=0.1131, reps=20, throughput=1167, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=128, median_s=0.3238, p25_s=0.3196, p75_s=0.3341, reps=20, throughput=395.3, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=256, median_s=0.2631, p25_s=0.256, p75_s=0.2683, reps=20, throughput=972.9, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=alexnet_gray, params=58421992, size=256, median_s=0.7098, p25_s=0.6997, p75_s=0.7142, reps=12, throughput=360.7, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=resnet18_cifar, params=11173962, size=32, median_s=0.01614, p25_s=0.01599, p75_s=0.01645, reps=20, throughput=1983, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=resnet18_cifar, params=11173962, size=32, median_s=0.05211, p25_s=0.0518, p75_s=0.05443, reps=20, throughput=614.1, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=resnet18_cifar, params=11173962, size=128, median_s=0.09599, p25_s=0.09533, p75_s=0.09737, reps=20, throughput=1333, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=resnet18_cifar, params=11173962, size=128, median_s=0.2805, p25_s=0.2685, p75_s=0.2937, reps=20, throughput=456.3, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=resnet18_cifar, params=11173962, size=512, median_s=0.5502, p25_s=0.5439, p75_s=0.56, reps=15, throughput=930.6, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=resnet18_cifar, params=11173962, size=512, median_s=1.605, p25_s=1.582, p75_s=1.631, reps=5, throughput=319.1, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=vgg16_cifar, params=134301514, size=32, median_s=0.01411, p25_s=0.01395, p75_s=0.01424, reps=20, throughput=2268, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=vgg16_cifar, params=134301514, size=32, median_s=0.1061, p25_s=0.1056, p75_s=0.1072, reps=20, throughput=301.6, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=vgg16_cifar, params=134301514, size=128, median_s=0.03624, p25_s=0.03607, p75_s=0.03817, reps=20, throughput=3532, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=vgg16_cifar, params=134301514, size=128, median_s=0.1718, p25_s=0.1701, p75_s=0.1732, reps=20, throughput=744.9, unit=img/s
+  test=train_forward, device=cpu, precision=fp32, model=vgg16_cifar, params=134301514, size=512, median_s=0.2135, p25_s=0.2091, p75_s=0.2171, reps=20, throughput=2398, unit=img/s
+  test=train_step, device=cpu, precision=fp32, model=vgg16_cifar, params=134301514, size=512, median_s=0.7922, p25_s=0.7578, p75_s=0.7985, reps=11, throughput=646.3, unit=img/s
+
+E2 DONE (cpu) in 123.2s → /data/results/e2/20261120T163832Z_cpu
+
+----- BEGIN FILE e2_results.csv -----
+test,device,precision,model,params,size,median_s,p25_s,p75_s,reps,throughput,unit
+conv_forward,cpu,fp32,,,1,0.00044386042281985283,0.00043210876174271107,0.00046506081707775593,20,2252.960499715165,img/s
+conv_forward,cpu,fp32,,,2,0.0006352793425321579,0.0006043303292244673,0.0006391082424670458,20,3148.2213667269684,img/s
+conv_forward,cpu,fp32,,,4,0.0009734942577779293,0.0009636187460273504,0.000985077815130353,20,4108.909701357959,img/s
+conv_forward,cpu,fp32,,,8,0.001790887676179409,0.0016254282090812922,0.0018635429441928864,20,4467.05849082998,img/s
+conv_forward,cpu,fp32,,,16,0.0032318904995918274,0.0031652096658945084,0.0032798463944345713,20,4950.662778340023,img/s
+conv_forward,cpu,fp32,,,32,0.006352637428790331,0.006284006871283054,0.0064504926558583975,20,5037.277880046341,img/s
+conv_forward,cpu,fp32,,,64,0.012418415397405624,0.01233086921274662,0.01249964814633131,20,5153.636591458398,img/s
+conv_forward,cpu,fp32,,,128,0.023155405186116695,0.02230552094988525,0.026855774223804474,20,5527.866991364291,img/s
+conv_forward,cpu,fp32,,,256,0.04946597432717681,0.04891608492471278,0.05024271132424474,20,5175.274589898304,img/s
+conv_forward,cpu,fp32,,,512,0.09961298573762178,0.09894830943085253,0.10043258196674287,20,5139.892115558063,img/s
+conv_forward,cpu,fp32,,,1024,0.18908750219270587,0.18422467587515712,0.19983998266980052,20,5415.482187481671,img/s
+matvec,cpu,fp32,,,256,7.293187081813812e-06,6.709946319460869e-06,7.936963811516762e-06,20,35.943682379090276,GB/s
+matvec,cpu,fp32,,,512,1.4479272067546844e-05,1.4290446415543556e-05,1.5162862837314606e-05,20,72.41911023622718,GB/s
+matvec,cpu,fp32,,,1024,1.288997009396553e-05,1.2414064258337021e-05,1.3520009815692902e-05,20,325.3928418316171,GB/s
+matvec,cpu,fp32,,,2048,7.064640522003174e-05,7.042894139885902e-05,7.121800445020199e-05,20,237.48152432875426,GB/s
+matvec,cpu,fp32,,,4096,0.00028289901092648506,0.00017711520195007324,0.00032375683076679707,20,237.2184468946026,GB/s
+matvec,cpu,fp32,,,8192,0.0011875750496983528,0.0011779943015426397,0.001201883889734745,20,226.03662485851592,GB/s
+matvec,cpu,fp32,,,16384,0.005854447837918997,0.005820924649015069,0.0059055916499346495,20,183.40616463356668,GB/s
+matmul,cpu,fp32,,,256,9.467918425798416e-05,9.407289326190948e-05,9.531225077807903e-05,20,0.35440136354122004,TFLOPS
+matmul,cpu,fp32,,,512,0.00015862099826335907,0.00015717488713562489,0.00015965942293405533,20,1.692307190970489,TFLOPS
+matmul,cpu,fp32,,,1024,0.0009477543644607067,0.0009413405787199736,0.0010527092963457108,20,2.2658652162704267,TFLOPS
+matmul,cpu,fp32,,,2048,0.006710417568683624,0.006699532037600875,0.006729797227308154,20,2.5601788574492774,TFLOPS
+matmul,cpu,fp32,,,4096,0.03685179399326444,0.0357873325701803,0.039023605175316334,20,3.729505095386138,TFLOPS
+matmul,cpu,fp32,,,8192,0.2483420013450086,0.24537415895611048,0.2565076795872301,20,4.427409064198148,TFLOPS
+matmul,cpu,fp32,,,16384,1.5635643429122865,1.558863956015557,1.6090417401865125,6,5.625667445079007,TFLOPS
+train_forward,cpu,fp32,alexnet_gray,58421992,1,0.002303995657712221,0.0022842243779450655,0.0023282577749341726,20,434.028595779977,img/s
+train_step,cpu,fp32,alexnet_gray,58421992,1,0.040342381689697504,0.040023277048021555,0.04063036199659109,20,24.78782754304703,img/s
+train_forward,cpu,fp32,alexnet_gray,58421992,16,0.012238480150699615,0.012082467321306467,0.01245003822259605,20,1307.3518772741857,img/s
+train_step,cpu,fp32,alexnet_gray,58421992,16,0.06392788933590055,0.06064769811928272,0.06651705456897616,20,250.2820000192739,img/s
+train_forward,cpu,fp32,alexnet_gray,58421992,64,0.048616275656968355,0.04776027565822005,0.05168750090524554,20,1316.4315681352823,img/s
+train_step,cpu,fp32,alexnet_gray,58421992,64,0.1739080618135631,0.1700350516475737,0.18035773746669292,20,368.01054150445736,img/s
+train_forward,cpu,fp32,alexnet_gray,58421992,128,0.1096367510035634,0.108981070574373,0.1130790263414383,20,1167.4917290812434,img/s
+train_step,cpu,fp32,alexnet_gray,58421992,128,0.3237762968055904,0.31957343546673656,0.3341434523463249,20,395.3346840484029,img/s
+train_forward,cpu,fp32,alexnet_gray,58421992,256,0.2631260002963245,0.2559526301920414,0.2683291456196457,20,972.9179165559489,img/s
+train_step,cpu,fp32,alexnet_gray,58421992,256,0.7097622533328831,0.6996780480258167,0.7141505551990122,12,360.684156980569,img/s
+train_forward,cpu,fp32,resnet18_cifar,11173962,32,0.016138145234435797,0.01598956249654293,0.016451272182166576,20,1982.8796639974437,img/s
+train_step,cpu,fp32,resnet18_cifar,11173962,32,0.05211218260228634,0.051796565763652325,0.05443184985779226,20,614.0598685766051,img/s
+train_forward,cpu,fp32,resnet18_cifar,11173962,128,0.09599216701462865,0.095328604336828,0.09736611810512841,20,1333.4421336742355,img/s
+train_step,cpu,fp32,resnet18_cifar,11173962,128,0.2804964310489595,0.268480526516214,0.2937477589584887,20,456.3337919178663,img/s
+train_forward,cpu,fp32,resnet18_cifar,11173962,512,0.55018100887537,0.5439198296517134,0.5599534567445517,15,930.6028229629078,img/s
+train_step,cpu,fp32,resnet18_cifar,11173962,512,1.604688330553472,1.5821548313833773,1.6306884591467679,5,319.06507341734476,img/s
+train_forward,cpu,fp32,vgg16_cifar,134301514,32,0.014110901392996311,0.013951555360108614,0.01423984719440341,20,2267.7502385412895,img/s
+train_step,cpu,fp32,vgg16_cifar,134301514,32,0.10610807640478015,0.10559168178588152,0.1072421888820827,20,301.5793055933526,img/s
+train_forward,cpu,fp32,vgg16_cifar,134301514,128,0.03624082077294588,0.036070083966478705,0.03816580306738615,20,3531.928837979112,img/s
+train_step,cpu,fp32,vgg16_cifar,134301514,128,0.1718354169279337,0.17011352209374309,0.1732066695112735,20,744.8988240514009,img/s
+train_forward,cpu,fp32,vgg16_cifar,134301514,512,0.213509785477072,0.2091218705754727,0.21711302432231605,20,2398.016553929711,img/s
+train_step,cpu,fp32,vgg16_cifar,134301514,512,0.792201416566968,0.7578462827950716,0.7984805246815085,11,646.3002833531523,img/s
+----- END FILE e2_results.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E2",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cpu",
+    "pod": "wave1-cpu-rg5w4",
+    "time_utc": "2026-11-20T16:38:35Z"
+  },
+  "threads": {
+    "torch_threads": 32,
+    "cgroup_quota": 32,
+    "omp_env": "32",
+    "os_cpu_count": 128
+  },
+  "quick": false,
+  "config": {
+    "conv_batches": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      1024
+    ],
+    "mat_ns": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192,
+      16384
+    ],
+    "train_batches": {
+      "alexnet_gray": [
+        1,
+        16,
+        64,
+        128,
+        256
+      ],
+      "resnet18_cifar": [
+        32,
+        128,
+        512
+      ],
+      "vgg16_cifar": [
+        32,
+        128,
+        512
+      ]
+    },
+    "h2d_mb": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      1024
+    ]
+  },
+  "models": {
+    "alexnet_gray": [
+      1,
+      224,
+      224
+    ],
+    "resnet18_cifar": [
+      3,
+      32,
+      32
+    ],
+    "vgg16_cifar": [
+      3,
+      32,
+      32
+    ]
+  },
+  "elapsed_s": 123.2
+}
+----- END FILE meta.json -----
+E1 {'experiment': 'E1', 'env': {'python': '3.11.10', 'torch': '2.5.1+cu124', 'cuda': '12.4', 'cudnn': 90100, 'torch_threads': 32, 'omp_env': '32', 'cpu_model': 'Intel(R) Xeon(R) Platinum 8462Y+', 'blas': 'mkl', 'device': 'cpu', 'pod': 'wave1-cpu-rg5w4', 'time_utc': '2026-11-20T16:40:43Z'}, 'threads': {'torch_threads': 32, 'cgroup_quota': 32, 'omp_env': '32', 'os_cpu_count': 128}, 'quick': False, 'im2col_batches': [1, 8, 32, 128, 256], 'profile_models': [('alexnet_gray', 128), ('resnet18_cifar', 128), ('vgg16_cifar', 128)], 'profile_steps': 5, 'categories': [('conv', 'conv|cudnn_convolution|mkldnn_convolution'), ('gemm', 'addmm|\\bmm\\b|aten::mm|bmm|matmul|linear|gemm'), ('norm', 'batch_norm|layer_norm'), ('act_pool_dropout', 'relu|threshold|max_pool|avg_pool|adaptive|dropout|pool'), ('loss_softmax', 'cross_entropy|nll_loss|log_softmax|softmax'), ('optimizer', '_foreach|sgd|optimizer|lerp|addcmul|addcdiv'), ('elementwise_add', 'aten::add|aten::mul|aten::div|aten::sub'), ('memory_copy', 'copy_|aten::to|contiguous|clone|empty|zero_|fill_|cat')], 'tf32': False}
+
+== im2col
+  device=cpu, batch=1, cols_shape=121x2916, max_abs_err=0, unfold_ms=0.03895, matmul_ms=0.0273, im2col_total_ms=0.06625, matmul_share=0.412, conv2d_ms=0.1004, conv2d_vs_im2col=1.515
+  device=cpu, batch=8, cols_shape=121x2916, max_abs_err=0, unfold_ms=0.3864, matmul_ms=0.1152, im2col_total_ms=0.5016, matmul_share=0.2296, conv2d_ms=0.1994, conv2d_vs_im2col=0.3976
+  device=cpu, batch=32, cols_shape=121x2916, max_abs_err=0, unfold_ms=7.145, matmul_ms=3.144, im2col_total_ms=10.29, matmul_share=0.3056, conv2d_ms=6.025, conv2d_vs_im2col=0.5856
+  device=cpu, batch=128, cols_shape=121x2916, max_abs_err=0, unfold_ms=34.67, matmul_ms=13.31, im2col_total_ms=47.97, matmul_share=0.2774, conv2d_ms=25.65, conv2d_vs_im2col=0.5346
+  device=cpu, batch=256, cols_shape=121x2916, max_abs_err=0, unfold_ms=71.37, matmul_ms=28.97, im2col_total_ms=100.3, matmul_share=0.2887, conv2d_ms=52.71, conv2d_vs_im2col=0.5253
+
+== profile
+  model=alexnet_gray, device=cpu, batch=128, params=58421992, forward_ms=125.4, step_ms=340.9, backward_opt_ms=215.6, forward_share=0.3677
+  model=alexnet_gray, device=cpu, batch=128, category=act_pool_dropout, forward_ms=20.6, backward_opt_ms=16.59, step_ms=37.19, step_share=0.1225
+  model=alexnet_gray, device=cpu, batch=128, category=conv, forward_ms=81.91, backward_opt_ms=128.3, step_ms=210.2, step_share=0.6922
+  model=alexnet_gray, device=cpu, batch=128, category=elementwise_add, forward_ms=0.359, backward_opt_ms=12.22, step_ms=12.58, step_share=0.04144
+  model=alexnet_gray, device=cpu, batch=128, category=gemm, forward_ms=5.25, backward_opt_ms=15.02, step_ms=20.27, step_share=0.06675
+  model=alexnet_gray, device=cpu, batch=128, category=loss_softmax, forward_ms=0.05598, backward_opt_ms=0.02988, step_ms=0.08586, step_share=0.0002828
+  model=alexnet_gray, device=cpu, batch=128, category=memory_copy, forward_ms=0.1889, backward_opt_ms=10.37, step_ms=10.55, step_share=0.03476
+  model=alexnet_gray, device=cpu, batch=128, category=optimizer, forward_ms=0, backward_opt_ms=10.82, step_ms=10.82, step_share=0.03564
+  model=alexnet_gray, device=cpu, batch=128, category=other, forward_ms=3.219, backward_opt_ms=0, step_ms=1.947, step_share=0.006412
+  model=resnet18_cifar, device=cpu, batch=128, params=11173962, forward_ms=115.2, step_ms=335.9, backward_opt_ms=220.7, forward_share=0.3429
+  model=resnet18_cifar, device=cpu, batch=128, category=act_pool_dropout, forward_ms=0.1319, backward_opt_ms=10.57, step_ms=10.7, step_share=0.03639
+  model=resnet18_cifar, device=cpu, batch=128, category=conv, forward_ms=79.29, backward_opt_ms=155.5, step_ms=234.8, step_share=0.7983
+  model=resnet18_cifar, device=cpu, batch=128, category=elementwise_add, forward_ms=0.8118, backward_opt_ms=4.633, step_ms=5.445, step_share=0.01851
+  model=resnet18_cifar, device=cpu, batch=128, category=gemm, forward_ms=0.06159, backward_opt_ms=0.6745, step_ms=0.7361, step_share=0.002503
+  model=resnet18_cifar, device=cpu, batch=128, category=loss_softmax, forward_ms=0.04417, backward_opt_ms=0.03451, step_ms=0.07868, step_share=0.0002675
+  model=resnet18_cifar, device=cpu, batch=128, category=memory_copy, forward_ms=0.3862, backward_opt_ms=5.665, step_ms=6.051, step_share=0.02057
+  model=resnet18_cifar, device=cpu, batch=128, category=norm, forward_ms=15.35, backward_opt_ms=18.88, step_ms=34.23, step_share=0.1164
+  model=resnet18_cifar, device=cpu, batch=128, category=optimizer, forward_ms=0, backward_opt_ms=0.6884, step_ms=0.6884, step_share=0.00234
+  model=resnet18_cifar, device=cpu, batch=128, category=other, forward_ms=0.7214, backward_opt_ms=0.6835, step_ms=1.405, step_share=0.004777
+  model=vgg16_cifar, device=cpu, batch=128, params=134301514, forward_ms=36.31, step_ms=178.7, backward_opt_ms=142.4, forward_share=0.2032
+  model=vgg16_cifar, device=cpu, batch=128, category=act_pool_dropout, forward_ms=5.56, backward_opt_ms=7.991, step_ms=13.55, step_share=0.0635
+  model=vgg16_cifar, device=cpu, batch=128, category=conv, forward_ms=20.34, backward_opt_ms=84.44, step_ms=104.8, step_share=0.491
+  model=vgg16_cifar, device=cpu, batch=128, category=elementwise_add, forward_ms=0.1459, backward_opt_ms=22.33, step_ms=22.48, step_share=0.1053
+  model=vgg16_cifar, device=cpu, batch=128, category=gemm, forward_ms=9.62, backward_opt_ms=38.21, step_ms=47.83, step_share=0.2242
+  model=vgg16_cifar, device=cpu, batch=128, category=loss_softmax, forward_ms=0.04486, backward_opt_ms=0.03839, step_ms=0.08325, step_share=0.0003901
+  model=vgg16_cifar, device=cpu, batch=128, category=memory_copy, forward_ms=0.1746, backward_opt_ms=1.325, step_ms=1.5, step_share=0.007027
+  model=vgg16_cifar, device=cpu, batch=128, category=optimizer, forward_ms=0, backward_opt_ms=22.16, step_ms=22.16, step_share=0.1038
+  model=vgg16_cifar, device=cpu, batch=128, category=other, forward_ms=0.5293, backward_opt_ms=0.4844, step_ms=1.014, step_share=0.00475
+
+E1 DONE (cpu) in 41.1s → /data/results/e1/20261120T164041Z_cpu
+
+----- BEGIN FILE e1_im2col.csv -----
+device,batch,cols_shape,max_abs_err,unfold_ms,matmul_ms,im2col_total_ms,matmul_share,conv2d_ms,conv2d_vs_im2col
+cpu,1,121x2916,0.0,0.03895023837685585,0.027295202016830444,0.0662454403936863,0.41203140706166835,0.10035699233412743,1.5149267894925524
+cpu,8,121x2916,0.0,0.3863903693854809,0.11517945677042007,0.501569826155901,0.22963793028215237,0.1994115300476551,0.39757481341326306
+cpu,32,121x2916,0.0,7.144702598452568,3.1443159095942974,10.289018508046865,0.3055992082369355,6.025430746376514,0.585617640950313
+cpu,128,121x2916,0.0,34.666205290704966,13.306701090186834,47.9729063808918,0.2773795063516739,25.648399721831083,0.534643440574348
+cpu,256,121x2916,0.0,71.37057185173035,28.971314895898104,100.34188674762845,0.2887260329154896,52.70586721599102,0.5252628680239233
+----- END FILE e1_im2col.csv -----
+
+----- BEGIN FILE e1_ops.csv -----
+model,device,batch,category,forward_ms,backward_opt_ms,step_ms,step_share
+alexnet_gray,cpu,128,act_pool_dropout,20.603249400000074,16.591495999999886,37.19474539999996,0.12249810118574561
+alexnet_gray,cpu,128,conv,81.91091680000011,128.2704895999998,210.1814063999999,0.6922166803849003
+alexnet_gray,cpu,128,elementwise_add,0.35904580000000136,12.222753000000438,12.581798800000438,0.041437209636099516
+alexnet_gray,cpu,128,gemm,5.249512400000051,15.017647600000153,20.267160000000203,0.06674836968847013
+alexnet_gray,cpu,128,loss_softmax,0.05598240000001678,0.029882000000015257,0.08586440000003204,0.00028278795422154634
+alexnet_gray,cpu,128,memory_copy,0.1888892000000056,10.365801399999317,10.554690599999322,0.03476108098599746
+alexnet_gray,cpu,128,optimizer,0.0,10.822719799999948,10.822719799999948,0.0356438150310707
+alexnet_gray,cpu,128,other,3.218959999999772,0.0,1.9468958000003955,0.006411955133494525
+resnet18_cifar,cpu,128,act_pool_dropout,0.13186639999995786,10.572792800000181,10.704659200000139,0.036394113035666226
+resnet18_cifar,cpu,128,conv,79.28844860000012,155.507504,234.79595260000013,0.7982683315356012
+resnet18_cifar,cpu,128,elementwise_add,0.81183620000005,4.632877999999705,5.444714199999755,0.01851114924253595
+resnet18_cifar,cpu,128,gemm,0.061592599999989034,0.6745496000000537,0.7361422000000427,0.002502764631416311
+resnet18_cifar,cpu,128,loss_softmax,0.04416920000002138,0.03450660000007774,0.07867580000009912,0.00026748501796068755
+resnet18_cifar,cpu,128,memory_copy,0.38622779999974194,5.664792599999947,6.051020399999689,0.020572492435696418
+resnet18_cifar,cpu,128,norm,15.346158000000267,18.88094659999932,34.227104599999585,0.11636662974716094
+resnet18_cifar,cpu,128,optimizer,0.0,0.6884072000004647,0.6884072000004647,0.0023404733381314066
+resnet18_cifar,cpu,128,other,0.7214429999999232,0.6834946000006079,1.4049376000005311,0.004776561015830965
+vgg16_cifar,cpu,128,act_pool_dropout,5.560407000000027,7.990938599999901,13.551345599999928,0.06350362855146909
+vgg16_cifar,cpu,128,conv,20.335646400000016,84.44318260000036,104.77882900000037,0.4910092350440798
+vgg16_cifar,cpu,128,elementwise_add,0.14586959999999527,22.332753800000066,22.47862340000006,0.10533818506864533
+vgg16_cifar,cpu,128,gemm,9.620252000000011,38.212921600000044,47.83317360000006,0.22415339246697075
+vgg16_cifar,cpu,128,loss_softmax,0.044857200000000014,0.0383909999999727,0.08324819999997271,0.0003901134932590535
+vgg16_cifar,cpu,128,memory_copy,0.17461379999997365,1.324898399999681,1.4995121999996548,0.00702693803021117
+vgg16_cifar,cpu,128,optimizer,0.0,22.156462999999874,22.156462999999874,0.10382849333916833
+vgg16_cifar,cpu,128,other,0.5292715999999785,0.4843567999998336,1.0136283999998121,0.004750014006196428
+----- END FILE e1_ops.csv -----
+
+----- BEGIN FILE e1_phase.csv -----
+model,device,batch,params,forward_ms,step_ms,backward_opt_ms,forward_share
+alexnet_gray,cpu,128,58421992,125.37039956077933,340.94981336966157,215.57941380888224,0.3677092482372218
+resnet18_cifar,cpu,128,11173962,115.19355792552233,335.8964244835079,220.70286655798554,0.342943685996807
+vgg16_cifar,cpu,128,134301514,36.310370080173016,178.69510920718312,142.3847391270101,0.20319733562530778
+----- END FILE e1_phase.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E1",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cpu",
+    "pod": "wave1-cpu-rg5w4",
+    "time_utc": "2026-11-20T16:40:43Z"
+  },
+  "threads": {
+    "torch_threads": 32,
+    "cgroup_quota": 32,
+    "omp_env": "32",
+    "os_cpu_count": 128
+  },
+  "quick": false,
+  "im2col_batches": [
+    1,
+    8,
+    32,
+    128,
+    256
+  ],
+  "profile_models": [
+    [
+      "alexnet_gray",
+      128
+    ],
+    [
+      "resnet18_cifar",
+      128
+    ],
+    [
+      "vgg16_cifar",
+      128
+    ]
+  ],
+  "profile_steps": 5,
+  "categories": [
+    [
+      "conv",
+      "conv|cudnn_convolution|mkldnn_convolution"
+    ],
+    [
+      "gemm",
+      "addmm|\\bmm\\b|aten::mm|bmm|matmul|linear|gemm"
+    ],
+    [
+      "norm",
+      "batch_norm|layer_norm"
+    ],
+    [
+      "act_pool_dropout",
+      "relu|threshold|max_pool|avg_pool|adaptive|dropout|pool"
+    ],
+    [
+      "loss_softmax",
+      "cross_entropy|nll_loss|log_softmax|softmax"
+    ],
+    [
+      "optimizer",
+      "_foreach|sgd|optimizer|lerp|addcmul|addcdiv"
+    ],
+    [
+      "elementwise_add",
+      "aten::add|aten::mul|aten::div|aten::sub"
+    ],
+    [
+      "memory_copy",
+      "copy_|aten::to|contiguous|clone|empty|zero_|fill_|cat"
+    ]
+  ],
+  "tf32": false,
+  "elapsed_s": 41.1
+}
+----- END FILE meta.json -----
+WAVE1 FINISHED device=cpu rc=0

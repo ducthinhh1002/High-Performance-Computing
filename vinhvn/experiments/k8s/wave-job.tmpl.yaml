@@ -1,0 +1,46 @@
+# Mẫu Job cho Đợt 2–5 (tạo bằng tools/submit_wave.sh, thay @WAVE@, @GPUS@, @CPUS@, @QUICK@).
+# Dùng chung ConfigMap hpc-code (code.tgz + run_wave.sh) với Đợt 1.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wave@WAVE@@SUFFIX@
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: @DEADLINE@
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: hpc-wave, wave: "@WAVE@"}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: run
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          command: ["bash", "/code/run_wave.sh"]
+          env:
+            - {name: WAVE, value: "@WAVE@"}
+            - {name: QUICK, value: "@QUICK@"}
+            - {name: OUT_DIR, value: /data/results}
+            - {name: DATA_DIR, value: /data/datasets}
+            - name: OMP_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+            - name: MKL_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+          resources:
+            requests: {cpu: "@CPUS@", memory: 128Gi, nvidia.com/gpu: "@GPUS@"}
+            limits:   {cpu: "@CPUS@", memory: 128Gi, nvidia.com/gpu: "@GPUS@"}
+          volumeMounts:
+            - {name: code, mountPath: /code}
+            - {name: datasets, mountPath: /data/datasets, readOnly: true}
+            - {name: results, mountPath: /data/results}
+            - {name: dshm, mountPath: /dev/shm}
+      volumes:
+        - name: code
+          configMap: {name: hpc-code}
+        - name: datasets
+          hostPath: {path: /var/lib/hpc-dl-exp/datasets, type: Directory}
+        - name: results
+          hostPath: {path: /var/lib/hpc-dl-exp/results, type: Directory}
+        - name: dshm
+          emptyDir: {medium: Memory, sizeLimit: 32Gi}

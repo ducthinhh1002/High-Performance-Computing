@@ -1,0 +1,83 @@
+{
+  "experiment": "E1",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 8,
+    "omp_env": "8",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave1-gpu-cv9lg",
+    "time_utc": "2026-11-20T16:37:57Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07"
+  },
+  "threads": {
+    "torch_threads": 8,
+    "cgroup_quota": 8,
+    "omp_env": "8",
+    "os_cpu_count": 128
+  },
+  "quick": false,
+  "im2col_batches": [
+    1,
+    8,
+    32,
+    128,
+    256
+  ],
+  "profile_models": [
+    [
+      "alexnet_gray",
+      128
+    ],
+    [
+      "resnet18_cifar",
+      128
+    ],
+    [
+      "vgg16_cifar",
+      128
+    ]
+  ],
+  "profile_steps": 5,
+  "categories": [
+    [
+      "conv",
+      "conv|cudnn_convolution|mkldnn_convolution"
+    ],
+    [
+      "gemm",
+      "addmm|\\bmm\\b|aten::mm|bmm|matmul|linear|gemm"
+    ],
+    [
+      "norm",
+      "batch_norm|layer_norm"
+    ],
+    [
+      "act_pool_dropout",
+      "relu|threshold|max_pool|avg_pool|adaptive|dropout|pool"
+    ],
+    [
+      "loss_softmax",
+      "cross_entropy|nll_loss|log_softmax|softmax"
+    ],
+    [
+      "optimizer",
+      "_foreach|sgd|optimizer|lerp|addcmul|addcdiv"
+    ],
+    [
+      "elementwise_add",
+      "aten::add|aten::mul|aten::div|aten::sub"
+    ],
+    [
+      "memory_copy",
+      "copy_|aten::to|contiguous|clone|empty|zero_|fill_|cat"
+    ]
+  ],
+  "tf32": false,
+  "elapsed_s": 7.5
+}

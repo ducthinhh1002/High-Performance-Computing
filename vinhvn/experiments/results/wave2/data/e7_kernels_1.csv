@@ -1,0 +1,37 @@
+variant,precision,rank,kernel,self_cuda_ms,calls
+base,fp32,1,"void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, ",9.034409399999998,16
+base,fp32,2,sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,3.333689400000014,9
+base,fp32,3,"void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float con",2.1938542000000014,4
+base,fp32,4,"void cudnn::detail::dgrad_engine<float, 512, 6, 5, 3, 3, 3, false>(int, int, int, float const*, int, float const*, int, ",2.104503399999997,2
+base,fp32,5,"void pointwise_mult_and_sum_complex<float2, 8, 4>(float2*, float2*, float2*, int, int, int, int, int, float2)",1.6361984000000014,1
+base,fp32,6,sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize128x64x8_stage3_warpsize2x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cubl,1.3692231999999949,1
+base,fp32,7,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nt_align1>(cutlass_80_simt_sgemm_256x128_8x4_nt_align1::Params),1.2769866000000005,2
+base,fp32,8,void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(cutlass_80_simt_sgemm_256x128_8x4_nn_align1::Params),1.234638800000004,2
+base,fp32,9,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1618255999999811,14
+base,fp32,10,sm80_xmma_dgrad_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.9806162,4
+base,fp32,11,sm80_xmma_gemm_cf32cf32_f32f32_cf32_nt_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cu,0.7374941999999959,5
+base,fp32,12,sm80_xmma_fprop_implicit_gemm_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize64x64x8_stage3_warpsize1x4x1_g1_ffma_aligna4_align,0.6972710000000041,4
+base,bf16,1,"void at::native::(anonymous namespace)::atomic_adaptive_average_gradinput<c10::BFloat16>(c10::BFloat16*, c10::BFloat16 c",29.357310400000006,1
+base,bf16,2,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,1.1628570000000007,14
+base,bf16,3,"void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType",0.786312800000027,74
+base,bf16,4,"void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, ",0.50817040000001,5
+base,bf16,5,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.5073014000000061,34
+base,bf16,6,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.4781934000000482,33
+base,bf16,7,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.39744419999998937,7
+base,bf16,8,"void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType",0.36604760000000613,37
+base,bf16,9,"void at::native::(anonymous namespace)::adaptive_average_pool<c10::BFloat16>(c10::BFloat16 const*, c10::BFloat16*, int, ",0.326110599999998,1
+base,bf16,10,"void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.26020939999998666,13
+base,bf16,11,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.2261434000000168,13
+base,bf16,12,"void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,",0.15137179999996989,15
+no_avgpool,bf16,1,"void cudnn::engines_precompiled::nchwToNhwcKernel<__nv_bfloat16, __nv_bfloat16, float, false, true, (cudnnKernelDataType",0.7844001999999997,74
+no_avgpool,bf16,2,"void at::native::(anonymous namespace)::max_pool_backward_nchw<c10::BFloat16, float>(c10::BFloat16 const*, long const*, ",0.5079785999999998,5
+no_avgpool,bf16,3,"void cudnn::engines_precompiled::nhwcToNchwKernel<__nv_bfloat16, __nv_bfloat16, float, true, false, (cudnnKernelDataType",0.3658034000000011,37
+no_avgpool,bf16,4,void at::native::(anonymous namespace)::multi_tensor_apply_kernel<at::native::(anonymous namespace)::TensorListMetadata<,0.28984839999999895,4
+no_avgpool,bf16,5,"void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::BFloat16, at::native::func_wrapper_t<c10::BFloat16, at:",0.2619253999999989,13
+no_avgpool,bf16,6,"void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",0.22635320000000037,13
+no_avgpool,bf16,7,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.21074000000000465,34
+no_avgpool,bf16,8,void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:,0.16849199999999773,33
+no_avgpool,bf16,9,"void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::BFloat16, c10::BFloat16, c10::BFloat16,",0.15035380000000179,15
+no_avgpool,bf16,10,sm90_xmma_dgrad_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen,0.14641179999999884,5
+no_avgpool,bf16,11,sm90_xmma_fprop_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x128x64_warpgroupsize1x1x1_g1_execute_segmen,0.1366137999999999,5
+no_avgpool,bf16,12,sm90_xmma_wgrad_indexed_implicit_gemm_bf16bf16_bf16f32_f32_nhwckrsc_nhwc_tilesize128x64x64_warpgroupsize1x1x1_g1_execute,0.11441219999999938,3

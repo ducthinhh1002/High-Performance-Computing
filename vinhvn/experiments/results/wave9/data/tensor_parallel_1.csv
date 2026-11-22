@@ -1,0 +1,2 @@
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+1,8,8192,4096,4295.22944,4295.22944,1.9991382939430575,2048.8827673452934,134.217728,0,0.0,35.251030016,ok

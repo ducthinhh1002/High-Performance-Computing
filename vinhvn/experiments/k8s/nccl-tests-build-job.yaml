@@ -1,0 +1,32 @@
+# Build nccl-tests vào hostPath. Chỉ CPU, không giữ GPU.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nccl-tests-build
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 2400        # gồm cả kéo image devel
+  ttlSecondsAfterFinished: 21600
+  template:
+    metadata:
+      labels: {app: hpc-nccl-build}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: build
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-devel     # có nvcc
+          command: ["bash", "/scripts/build_nccl_tests.sh"]
+          env:
+            - {name: OUT, value: /hostdata/tools/nccl-tests}
+          resources:
+            requests: {cpu: "16", memory: 16Gi}
+            limits:   {cpu: "16", memory: 16Gi}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+            - {name: hostdata, mountPath: /hostdata}
+      volumes:
+        - name: scripts
+          configMap: {name: hpc-nccl-scripts}
+        - name: hostdata
+          hostPath: {path: /var/lib/hpc-dl-exp, type: Directory}

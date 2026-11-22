@@ -1,0 +1,561 @@
+DEVICE=cuda QUICK=0 OMP_NUM_THREADS=8 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+E2 {'experiment': 'E2', 'env': {'python': '3.11.10', 'torch': '2.5.1+cu124', 'cuda': '12.4', 'cudnn': 90100, 'torch_threads': 8, 'omp_env': '8', 'cpu_model': 'Intel(R) Xeon(R) Platinum 8462Y+', 'blas': 'mkl', 'device': 'cuda', 'pod': 'wave1-gpu-cv9lg', 'time_utc': '2026-11-20T16:37:17Z', 'gpu_name': 'NVIDIA H100 80GB HBM3', 'driver': '550.90.07'}, 'threads': {'torch_threads': 8, 'cgroup_quota': 8, 'omp_env': '8', 'os_cpu_count': 128}, 'quick': False, 'config': {'conv_batches': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024], 'mat_ns': [256, 512, 1024, 2048, 4096, 8192, 16384], 'train_batches': {'alexnet_gray': [1, 16, 64, 128, 256], 'resnet18_cifar': [32, 128, 512], 'vgg16_cifar': [32, 128, 512]}, 'h2d_mb': [1, 4, 16, 64, 256, 1024]}, 'models': {'alexnet_gray': [1, 224, 224], 'resnet18_cifar': [3, 32, 32], 'vgg16_cifar': [3, 32, 32]}}
+
+== conv_forward (Hình 1–2)
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=1, median_s=2.481e-05, p25_s=2.457e-05, p75_s=2.517e-05, reps=20, throughput=4.031e+04, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=2, median_s=2.692e-05, p25_s=2.677e-05, p75_s=2.722e-05, reps=20, throughput=7.428e+04, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=4, median_s=3.371e-05, p25_s=3.35e-05, p75_s=3.4e-05, reps=20, throughput=1.187e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=8, median_s=4.681e-05, p25_s=4.642e-05, p75_s=4.725e-05, reps=20, throughput=1.709e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=16, median_s=7.269e-05, p25_s=7.233e-05, p75_s=7.314e-05, reps=20, throughput=2.201e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=32, median_s=0.000125, p25_s=0.0001246, p75_s=0.0001266, reps=20, throughput=2.559e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=64, median_s=0.0002139, p25_s=0.0002135, p75_s=0.0002151, reps=20, throughput=2.992e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=128, median_s=0.0003932, p25_s=0.0003927, p75_s=0.0003939, reps=20, throughput=3.255e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=256, median_s=0.0007527, p25_s=0.0007507, p75_s=0.0007537, reps=20, throughput=3.401e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=512, median_s=0.001455, p25_s=0.001454, p75_s=0.001457, reps=20, throughput=3.519e+05, unit=img/s
+  test=conv_forward, device=cuda, precision=fp32, model=None, params=None, size=1024, median_s=0.002917, p25_s=0.002917, p75_s=0.00292, reps=20, throughput=3.51e+05, unit=img/s
+
+== matvec (Hình 3–4)
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=256, median_s=1.29e-05, p25_s=1.27e-05, p75_s=1.32e-05, reps=20, throughput=20.33, unit=GB/s
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=512, median_s=1.374e-05, p25_s=1.349e-05, p75_s=1.39e-05, reps=20, throughput=76.31, unit=GB/s
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=1024, median_s=1.337e-05, p25_s=1.319e-05, p75_s=1.352e-05, reps=20, throughput=313.6, unit=GB/s
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=2048, median_s=1.674e-05, p25_s=1.662e-05, p75_s=1.7e-05, reps=20, throughput=1002, unit=GB/s
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=4096, median_s=3.719e-05, p25_s=3.68e-05, p75_s=3.78e-05, reps=20, throughput=1805, unit=GB/s
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=8192, median_s=9.974e-05, p25_s=9.942e-05, p75_s=0.0001001, reps=20, throughput=2691, unit=GB/s
+  test=matvec, device=cuda, precision=fp32, model=None, params=None, size=16384, median_s=0.0003568, p25_s=0.000356, p75_s=0.0003572, reps=20, throughput=3010, unit=GB/s
+
+== matmul
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=256, median_s=2.162e-05, p25_s=2.144e-05, p75_s=2.181e-05, reps=20, throughput=1.552, unit=TFLOPS
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=512, median_s=2.826e-05, p25_s=2.808e-05, p75_s=2.835e-05, reps=20, throughput=9.5, unit=TFLOPS
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=1024, median_s=6.898e-05, p25_s=6.886e-05, p75_s=6.929e-05, reps=20, throughput=31.13, unit=TFLOPS
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=2048, median_s=0.0003511, p25_s=0.000351, p75_s=0.0003514, reps=20, throughput=48.93, unit=TFLOPS
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=4096, median_s=0.00266, p25_s=0.002659, p75_s=0.00266, reps=20, throughput=51.68, unit=TFLOPS
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=8192, median_s=0.0212, p25_s=0.0212, p75_s=0.02121, reps=20, throughput=51.86, unit=TFLOPS
+  test=matmul, device=cuda, precision=fp32, model=None, params=None, size=16384, median_s=0.1647, p25_s=0.1636, p75_s=0.1654, reps=20, throughput=53.42, unit=TFLOPS
+
+== train_step
+  test=train_forward, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=1, median_s=0.001881, p25_s=0.001868, p75_s=0.001903, reps=20, throughput=531.7, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=1, median_s=0.003294, p25_s=0.003273, p75_s=0.003322, reps=20, throughput=303.6, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=16, median_s=0.001838, p25_s=0.001837, p75_s=0.001841, reps=20, throughput=8706, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=16, median_s=0.004278, p25_s=0.004268, p75_s=0.004281, reps=20, throughput=3740, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=64, median_s=0.005121, p25_s=0.005114, p75_s=0.005125, reps=20, throughput=1.25e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=64, median_s=0.009211, p25_s=0.009201, p75_s=0.009236, reps=20, throughput=6948, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=128, median_s=0.006069, p25_s=0.006063, p75_s=0.006079, reps=20, throughput=2.109e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=128, median_s=0.01268, p25_s=0.01268, p75_s=0.01269, reps=20, throughput=1.009e+04, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=256, median_s=0.01155, p25_s=0.01152, p75_s=0.01158, reps=20, throughput=2.216e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=alexnet_gray, params=58421992, size=256, median_s=0.02332, p25_s=0.02329, p75_s=0.02335, reps=20, throughput=1.098e+04, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=resnet18_cifar, params=11173962, size=32, median_s=0.002325, p25_s=0.00232, p75_s=0.002331, reps=20, throughput=1.376e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=resnet18_cifar, params=11173962, size=32, median_s=0.006038, p25_s=0.006028, p75_s=0.006052, reps=20, throughput=5300, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=resnet18_cifar, params=11173962, size=128, median_s=0.007267, p25_s=0.007251, p75_s=0.007284, reps=20, throughput=1.761e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=resnet18_cifar, params=11173962, size=128, median_s=0.01808, p25_s=0.01805, p75_s=0.01809, reps=20, throughput=7080, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=resnet18_cifar, params=11173962, size=512, median_s=0.01778, p25_s=0.01777, p75_s=0.0178, reps=20, throughput=2.879e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=resnet18_cifar, params=11173962, size=512, median_s=0.05568, p25_s=0.05566, p75_s=0.0557, reps=20, throughput=9195, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=vgg16_cifar, params=134301514, size=32, median_s=0.00224, p25_s=0.002235, p75_s=0.002247, reps=20, throughput=1.429e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=vgg16_cifar, params=134301514, size=32, median_s=0.006943, p25_s=0.00693, p75_s=0.006956, reps=20, throughput=4609, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=vgg16_cifar, params=134301514, size=128, median_s=0.005461, p25_s=0.00545, p75_s=0.005472, reps=20, throughput=2.344e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=vgg16_cifar, params=134301514, size=128, median_s=0.01392, p25_s=0.01392, p75_s=0.01395, reps=20, throughput=9193, unit=img/s
+  test=train_forward, device=cuda, precision=fp32, model=vgg16_cifar, params=134301514, size=512, median_s=0.01337, p25_s=0.01336, p75_s=0.01339, reps=20, throughput=3.829e+04, unit=img/s
+  test=train_step, device=cuda, precision=fp32, model=vgg16_cifar, params=134301514, size=512, median_s=0.03706, p25_s=0.03705, p75_s=0.03707, reps=20, throughput=1.381e+04, unit=img/s
+
+== precision tf32
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=256, median_s=1.577e-05, p25_s=1.568e-05, p75_s=1.595e-05, reps=20, throughput=2.127, unit=TFLOPS
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=512, median_s=1.824e-05, p25_s=1.815e-05, p75_s=1.84e-05, reps=20, throughput=14.72, unit=TFLOPS
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=1024, median_s=2.969e-05, p25_s=2.958e-05, p75_s=2.993e-05, reps=20, throughput=72.32, unit=TFLOPS
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=2048, median_s=6.325e-05, p25_s=6.303e-05, p75_s=6.357e-05, reps=20, throughput=271.6, unit=TFLOPS
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=4096, median_s=0.0003533, p25_s=0.0003529, p75_s=0.0003542, reps=20, throughput=389.1, unit=TFLOPS
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=8192, median_s=0.002826, p25_s=0.00265, p75_s=0.002919, reps=20, throughput=389, unit=TFLOPS
+  test=matmul, device=cuda, precision=tf32, model=None, params=None, size=16384, median_s=0.02479, p25_s=0.02469, p75_s=0.02498, reps=20, throughput=354.8, unit=TFLOPS
+  test=train_forward, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=1, median_s=0.0003122, p25_s=0.0003115, p75_s=0.0003149, reps=20, throughput=3203, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=1, median_s=0.001904, p25_s=0.00189, p75_s=0.002005, reps=20, throughput=525.2, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=16, median_s=0.0005415, p25_s=0.0005404, p75_s=0.0005431, reps=20, throughput=2.955e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=16, median_s=0.00245, p25_s=0.002441, p75_s=0.002467, reps=20, throughput=6531, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=64, median_s=0.001269, p25_s=0.001266, p75_s=0.001274, reps=20, throughput=5.042e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=64, median_s=0.00469, p25_s=0.004684, p75_s=0.00471, reps=20, throughput=1.364e+04, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=128, median_s=0.002209, p25_s=0.002198, p75_s=0.002211, reps=20, throughput=5.794e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=128, median_s=0.007689, p25_s=0.007677, p75_s=0.007705, reps=20, throughput=1.665e+04, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=256, median_s=0.004127, p25_s=0.0041, p75_s=0.004154, reps=20, throughput=6.203e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=alexnet_gray, params=58421992, size=256, median_s=0.01385, p25_s=0.01382, p75_s=0.01388, reps=20, throughput=1.848e+04, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=resnet18_cifar, params=11173962, size=32, median_s=0.001386, p25_s=0.001377, p75_s=0.001408, reps=20, throughput=2.309e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=resnet18_cifar, params=11173962, size=32, median_s=0.004336, p25_s=0.003867, p75_s=0.004361, reps=20, throughput=7381, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=resnet18_cifar, params=11173962, size=128, median_s=0.002301, p25_s=0.002299, p75_s=0.002304, reps=20, throughput=5.563e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=resnet18_cifar, params=11173962, size=128, median_s=0.008013, p25_s=0.007984, p75_s=0.008027, reps=20, throughput=1.597e+04, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=resnet18_cifar, params=11173962, size=512, median_s=0.007812, p25_s=0.007808, p75_s=0.007817, reps=20, throughput=6.554e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=resnet18_cifar, params=11173962, size=512, median_s=0.02605, p25_s=0.02603, p75_s=0.02606, reps=20, throughput=1.966e+04, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=vgg16_cifar, params=134301514, size=32, median_s=0.000852, p25_s=0.0008498, p75_s=0.000854, reps=20, throughput=3.756e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=vgg16_cifar, params=134301514, size=32, median_s=0.004363, p25_s=0.004355, p75_s=0.004373, reps=20, throughput=7335, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=vgg16_cifar, params=134301514, size=128, median_s=0.001498, p25_s=0.001492, p75_s=0.0015, reps=20, throughput=8.544e+04, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=vgg16_cifar, params=134301514, size=128, median_s=0.006441, p25_s=0.006433, p75_s=0.006447, reps=20, throughput=1.987e+04, unit=img/s
+  test=train_forward, device=cuda, precision=tf32, model=vgg16_cifar, params=134301514, size=512, median_s=0.004242, p25_s=0.004238, p75_s=0.004252, reps=20, throughput=1.207e+05, unit=img/s
+  test=train_step, device=cuda, precision=tf32, model=vgg16_cifar, params=134301514, size=512, median_s=0.01484, p25_s=0.01483, p75_s=0.01485, reps=20, throughput=3.45e+04, unit=img/s
+
+== precision bf16
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=256, median_s=1.482e-05, p25_s=1.47e-05, p75_s=1.499e-05, reps=20, throughput=2.264, unit=TFLOPS
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=512, median_s=1.586e-05, p25_s=1.576e-05, p75_s=1.597e-05, reps=20, throughput=16.93, unit=TFLOPS
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=1024, median_s=2.454e-05, p25_s=2.439e-05, p75_s=2.463e-05, reps=20, throughput=87.52, unit=TFLOPS
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=2048, median_s=4.148e-05, p25_s=4.131e-05, p75_s=4.174e-05, reps=20, throughput=414.2, unit=TFLOPS
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=4096, median_s=0.0002035, p25_s=0.0002031, p75_s=0.0002037, reps=20, throughput=675.3, unit=TFLOPS
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=8192, median_s=0.001381, p25_s=0.001373, p75_s=0.001382, reps=20, throughput=796.1, unit=TFLOPS
+  test=matmul, device=cuda, precision=bf16, model=None, params=None, size=16384, median_s=0.01199, p25_s=0.01166, p75_s=0.01256, reps=20, throughput=733.9, unit=TFLOPS
+  test=train_forward, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=1, median_s=0.0005394, p25_s=0.0005345, p75_s=0.0005504, reps=20, throughput=1854, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=1, median_s=0.00219, p25_s=0.002165, p75_s=0.002204, reps=20, throughput=456.6, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=16, median_s=0.0006892, p25_s=0.0006877, p75_s=0.0006912, reps=20, throughput=2.321e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=16, median_s=0.002515, p25_s=0.002509, p75_s=0.002523, reps=20, throughput=6362, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=64, median_s=0.001221, p25_s=0.00122, p75_s=0.001227, reps=20, throughput=5.243e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=64, median_s=0.004076, p25_s=0.004071, p75_s=0.004084, reps=20, throughput=1.57e+04, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=128, median_s=0.001959, p25_s=0.001957, p75_s=0.001962, reps=20, throughput=6.533e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=128, median_s=0.006113, p25_s=0.006097, p75_s=0.006151, reps=20, throughput=2.094e+04, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=256, median_s=0.003433, p25_s=0.003428, p75_s=0.003438, reps=20, throughput=7.457e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=alexnet_gray, params=58421992, size=256, median_s=0.009989, p25_s=0.009961, p75_s=0.01002, reps=20, throughput=2.563e+04, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=resnet18_cifar, params=11173962, size=32, median_s=0.001248, p25_s=0.001246, p75_s=0.00125, reps=20, throughput=2.565e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=resnet18_cifar, params=11173962, size=32, median_s=0.003827, p25_s=0.003795, p75_s=0.003864, reps=20, throughput=8362, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=resnet18_cifar, params=11173962, size=128, median_s=0.00241, p25_s=0.002407, p75_s=0.002412, reps=20, throughput=5.31e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=resnet18_cifar, params=11173962, size=128, median_s=0.006737, p25_s=0.00673, p75_s=0.006749, reps=20, throughput=1.9e+04, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=resnet18_cifar, params=11173962, size=512, median_s=0.008286, p25_s=0.008273, p75_s=0.008292, reps=20, throughput=6.179e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=resnet18_cifar, params=11173962, size=512, median_s=0.02205, p25_s=0.02203, p75_s=0.02207, reps=20, throughput=2.322e+04, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=vgg16_cifar, params=134301514, size=32, median_s=0.001259, p25_s=0.001257, p75_s=0.001261, reps=20, throughput=2.542e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=vgg16_cifar, params=134301514, size=32, median_s=0.00854, p25_s=0.008515, p75_s=0.008588, reps=20, throughput=3747, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=vgg16_cifar, params=134301514, size=128, median_s=0.001726, p25_s=0.001724, p75_s=0.001729, reps=20, throughput=7.414e+04, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=vgg16_cifar, params=134301514, size=128, median_s=0.02111, p25_s=0.02087, p75_s=0.02133, reps=20, throughput=6064, unit=img/s
+  test=train_forward, device=cuda, precision=bf16, model=vgg16_cifar, params=134301514, size=512, median_s=0.003745, p25_s=0.003741, p75_s=0.003748, reps=20, throughput=1.367e+05, unit=img/s
+  test=train_step, device=cuda, precision=bf16, model=vgg16_cifar, params=134301514, size=512, median_s=0.06934, p25_s=0.06924, p75_s=0.06938, reps=20, throughput=7384, unit=img/s
+
+== h2d
+  test=h2d_pageable, device=cuda, precision=-, model=None, params=None, size=1, median_s=7.377e-05, p25_s=7.344e-05, p75_s=7.548e-05, reps=20, throughput=14.21, unit=GB/s
+  test=h2d_pinned, device=cuda, precision=-, model=None, params=None, size=1, median_s=2.884e-05, p25_s=2.88e-05, p75_s=2.891e-05, reps=20, throughput=36.36, unit=GB/s
+  test=h2d_pageable, device=cuda, precision=-, model=None, params=None, size=4, median_s=0.0001853, p25_s=0.0001851, p75_s=0.0001856, reps=20, throughput=22.64, unit=GB/s
+  test=h2d_pinned, device=cuda, precision=-, model=None, params=None, size=4, median_s=8.569e-05, p25_s=8.56e-05, p75_s=8.594e-05, reps=20, throughput=48.95, unit=GB/s
+  test=h2d_pageable, device=cuda, precision=-, model=None, params=None, size=16, median_s=0.000631, p25_s=0.0006305, p75_s=0.000636, reps=20, throughput=26.59, unit=GB/s
+  test=h2d_pinned, device=cuda, precision=-, model=None, params=None, size=16, median_s=0.0003129, p25_s=0.0003128, p75_s=0.0003131, reps=20, throughput=53.61, unit=GB/s
+  test=h2d_pageable, device=cuda, precision=-, model=None, params=None, size=64, median_s=0.002427, p25_s=0.002424, p75_s=0.002496, reps=20, throughput=27.65, unit=GB/s
+  test=h2d_pinned, device=cuda, precision=-, model=None, params=None, size=64, median_s=0.001223, p25_s=0.001222, p75_s=0.001224, reps=20, throughput=54.89, unit=GB/s
+  test=h2d_pageable, device=cuda, precision=-, model=None, params=None, size=256, median_s=0.009527, p25_s=0.009513, p75_s=0.009558, reps=20, throughput=28.17, unit=GB/s
+  test=h2d_pinned, device=cuda, precision=-, model=None, params=None, size=256, median_s=0.004858, p25_s=0.004856, p75_s=0.004859, reps=20, throughput=55.26, unit=GB/s
+  test=h2d_pageable, device=cuda, precision=-, model=None, params=None, size=1024, median_s=0.03805, p25_s=0.03801, p75_s=0.03812, reps=20, throughput=28.22, unit=GB/s
+  test=h2d_pinned, device=cuda, precision=-, model=None, params=None, size=1024, median_s=0.01938, p25_s=0.01938, p75_s=0.01938, reps=20, throughput=55.4, unit=GB/s
+
+E2 DONE (cuda) in 36.9s → /data/results/e2/20261120T163717Z_cuda
+
+----- BEGIN FILE e2_results.csv -----
+test,device,precision,model,params,size,median_s,p25_s,p75_s,reps,throughput,unit
+conv_forward,cuda,fp32,,,1,2.4810433387756348e-05,2.456922084093094e-05,2.5166664272546768e-05,20,40305.62402402402,img/s
+conv_forward,cuda,fp32,,,2,2.692360430955887e-05,2.67659779638052e-05,2.7218833565711975e-05,20,74284.25915804767,img/s
+conv_forward,cuda,fp32,,,4,3.371015191078186e-05,3.350060433149338e-05,3.399699926376343e-05,20,118658.61686374185,img/s
+conv_forward,cuda,fp32,,,8,4.680594429373741e-05,4.642386920750141e-05,4.72476240247488e-05,20,170918.46176192607,img/s
+conv_forward,cuda,fp32,,,16,7.268507033586502e-05,7.232837378978729e-05,7.313932292163372e-05,20,220127.7363572298,img/s
+conv_forward,cuda,fp32,,,32,0.00012504961341619492,0.00012456253170967102,0.00012663332745432854,20,255898.43203670188,img/s
+conv_forward,cuda,fp32,,,64,0.00021393224596977234,0.0002135331742465496,0.00021505961194634438,20,299160.1369390705,img/s
+conv_forward,cuda,fp32,,,128,0.0003931918181478977,0.00039269006811082363,0.0003938719164580107,20,325540.853324301,img/s
+conv_forward,cuda,fp32,,,256,0.0007526814006268978,0.0007507323753088713,0.0007537398487329483,20,340117.34551535506,img/s
+conv_forward,cuda,fp32,,,512,0.0014547952450811863,0.0014541537966579199,0.0014573968946933746,20,351939.56106959045,img/s
+conv_forward,cuda,fp32,,,1024,0.0029173586517572403,0.0029167071916162968,0.002920029917731881,20,351002.438244336,img/s
+matvec,cuda,fp32,,,256,1.2896955013275146e-05,1.270463690161705e-05,1.3197306543588638e-05,20,20.326038179567878,GB/s
+matvec,cuda,fp32,,,512,1.3741198927164078e-05,1.348624937236309e-05,1.3898825272917747e-05,20,76.30891638772063,GB/s
+matvec,cuda,fp32,,,1024,1.337425783276558e-05,1.318776048719883e-05,1.352047547698021e-05,20,313.6102243912465,GB/s
+matvec,cuda,fp32,,,2048,1.6740988940000534e-05,1.6615958884358406e-05,1.7004553228616714e-05,20,1002.1639737132199,GB/s
+matvec,cuda,fp32,,,4096,3.7186313420534134e-05,3.680284135043621e-05,3.7797028198838234e-05,20,1804.6656908706295,GB/s
+matvec,cuda,fp32,,,8192,9.974045678973198e-05,9.942101314663887e-05,0.0001001269556581974,20,2691.339749585293,GB/s
+matvec,cuda,fp32,,,16384,0.00035677384585142136,0.0003559666220098734,0.00035720644518733025,20,3009.5867073371746,GB/s
+matmul,cuda,fp32,,,256,2.1618790924549103e-05,2.14411411434412e-05,2.1807150915265083e-05,20,1.5520956799622612,TFLOPS
+matmul,cuda,fp32,,,512,2.8256792575120926e-05,2.8077512979507446e-05,2.8354115784168243e-05,20,9.499855841258771,TFLOPS
+matmul,cuda,fp32,,,1024,6.89774751663208e-05,6.88598956912756e-05,6.928923539817333e-05,20,31.133114727987873,TFLOPS
+matmul,cuda,fp32,,,2048,0.0003511444665491581,0.0003510464448481798,0.0003513938281685114,20,48.92535927686311,TFLOPS
+matmul,cuda,fp32,,,4096,0.002659641206264496,0.0026589869521558285,0.0026602691505104303,20,51.675749777179526,TFLOPS
+matmul,cuda,fp32,,,8192,0.02120246458798647,0.021200350485742092,0.021207034355029464,20,51.85772735113985,TFLOPS
+matmul,cuda,fp32,,,16384,0.16465626563876867,0.16362765431404114,0.16543071484193206,20,53.42094324855708,TFLOPS
+train_forward,cuda,fp32,alexnet_gray,58421992,1,0.0018806615844368935,0.0018675161991268396,0.0019034820143133402,20,531.7277750953898,img/s
+train_step,cuda,fp32,alexnet_gray,58421992,1,0.0032941377721726894,0.003273192560300231,0.0033224825747311115,20,303.56957394056946,img/s
+train_forward,cuda,fp32,alexnet_gray,58421992,16,0.0018377802334725857,0.001836701761931181,0.0018411711789667606,20,8706.155234767723,img/s
+train_step,cuda,fp32,alexnet_gray,58421992,16,0.004278212320059538,0.004267859505489469,0.0042814023327082396,20,3739.879838356722,img/s
+train_forward,cuda,fp32,alexnet_gray,58421992,64,0.005121489055454731,0.005114131141453981,0.005125095834955573,20,12496.365667683247,img/s
+train_step,cuda,fp32,alexnet_gray,58421992,64,0.009211406577378511,0.009200861910358071,0.009236166020855308,20,6947.907408318292,img/s
+train_forward,cuda,fp32,alexnet_gray,58421992,128,0.006069257855415344,0.006062917644158006,0.006078873295336962,20,21089.89320428872,img/s
+train_step,cuda,fp32,alexnet_gray,58421992,128,0.012683066539466381,0.012675779638811946,0.012690478004515171,20,10092.196520588892,img/s
+train_forward,cuda,fp32,alexnet_gray,58421992,256,0.011550114955753088,0.011520345695316792,0.011584443971514702,20,22164.28156608839,img/s
+train_step,cuda,fp32,alexnet_gray,58421992,256,0.023323172237724066,0.023294100305065513,0.023346676724031568,20,10976.208441574376,img/s
+train_forward,cuda,fp32,resnet18_cifar,11173962,32,0.002325167413800955,0.0023200931027531624,0.002330685732886195,20,13762.44988213109,img/s
+train_step,cuda,fp32,resnet18_cifar,11173962,32,0.006037659477442503,0.00602845149114728,0.006052324082702398,20,5300.067040805506,img/s
+train_forward,cuda,fp32,resnet18_cifar,11173962,128,0.007267177104949951,0.007251460338011384,0.007284009596332908,20,17613.44166400105,img/s
+train_step,cuda,fp32,resnet18_cifar,11173962,128,0.018078729044646025,0.018051399616524577,0.018091874895617366,20,7080.143724921134,img/s
+train_forward,cuda,fp32,resnet18_cifar,11173962,512,0.01778140477836132,0.017768163233995438,0.01779824774712324,20,28794.125457571656,img/s
+train_step,cuda,fp32,resnet18_cifar,11173962,512,0.055679408833384514,0.05566276633180678,0.055695737013593316,20,9195.499929464278,img/s
+train_forward,cuda,fp32,vgg16_cifar,134301514,32,0.002239840105175972,0.0022354470565915108,0.0022473230492323637,20,14286.734095908125,img/s
+train_step,cuda,fp32,vgg16_cifar,134301514,32,0.0069432612508535385,0.006930268136784434,0.006955664372071624,20,4608.785244263454,img/s
+train_forward,cuda,fp32,vgg16_cifar,134301514,128,0.005461330525577068,0.005450452445074916,0.005472020246088505,20,23437.51204958886,img/s
+train_step,cuda,fp32,vgg16_cifar,134301514,128,0.013922941405326128,0.01391750737093389,0.013952517416328192,20,9193.459648622415,img/s
+train_forward,cuda,fp32,vgg16_cifar,134301514,512,0.013372904155403376,0.013364671729505062,0.013385460246354342,20,38286.373255215796,img/s
+train_step,cuda,fp32,vgg16_cifar,134301514,512,0.03706260351464152,0.03704842925071716,0.03707371489144862,20,13814.46394605644,img/s
+matmul,cuda,tf32,,,256,1.5772413462400436e-05,1.5682075172662735e-05,1.5949364751577377e-05,20,2.1274126550124866,TFLOPS
+matmul,cuda,tf32,,,512,1.823529601097107e-05,1.815473660826683e-05,1.8396880477666855e-05,20,14.720652510301928,TFLOPS
+matmul,cuda,tf32,,,1024,2.9694288969039917e-05,2.9580434784293175e-05,2.993340604007244e-05,20,72.31975314307158,TFLOPS
+matmul,cuda,tf32,,,2048,6.325030699372292e-05,6.303144618868828e-05,6.357044912874699e-05,20,271.6171667863203,TFLOPS
+matmul,cuda,tf32,,,4096,0.00035326555371284485,0.00035285670310258865,0.0003541833721101284,20,389.0528018582828,TFLOPS
+matmul,cuda,tf32,,,8192,0.0028261863626539707,0.002649510046467185,0.0029187172185629606,20,389.04427616850006,TFLOPS
+matmul,cuda,tf32,,,16384,0.024793250020593405,0.02468743035569787,0.024983099196106195,20,354.7777324433835,TFLOPS
+train_forward,cuda,tf32,alexnet_gray,58421992,1,0.0003121849149465561,0.000311465235427022,0.00031494442373514175,20,3203.2297273915146,img/s
+train_step,cuda,tf32,alexnet_gray,58421992,1,0.0019041928462684155,0.0018896744586527348,0.002005227142944932,20,525.1568936201327,img/s
+train_forward,cuda,tf32,alexnet_gray,58421992,16,0.0005414895713329315,0.0005404362455010414,0.0005431340541690588,20,29548.12215610058,img/s
+train_step,cuda,tf32,alexnet_gray,58421992,16,0.0024499627761542797,0.0024407573509961367,0.0024672718718647957,20,6530.711468651491,img/s
+train_forward,cuda,tf32,alexnet_gray,58421992,64,0.0012694238685071468,0.0012658319901674986,0.0012738406658172607,20,50416.57210626151,img/s
+train_step,cuda,tf32,alexnet_gray,58421992,64,0.004690402653068304,0.004683556500822306,0.004710499430075288,20,13644.883975607798,img/s
+train_forward,cuda,tf32,alexnet_gray,58421992,128,0.0022090310230851173,0.0021976393181830645,0.002211179118603468,20,57943.95762773675,img/s
+train_step,cuda,tf32,alexnet_gray,58421992,128,0.007688886485993862,0.007677037268877029,0.00770509266294539,20,16647.404046498257,img/s
+train_forward,cuda,tf32,alexnet_gray,58421992,256,0.004127131775021553,0.004099729936569929,0.004153800196945667,20,62028.55008153043,img/s
+train_step,cuda,tf32,alexnet_gray,58421992,256,0.01384951127693057,0.01381733431480825,0.013878758298233151,20,18484.406769387213,img/s
+train_forward,cuda,tf32,resnet18_cifar,11173962,32,0.0013857362791895866,0.0013771501835435629,0.0014083001296967268,20,23092.416992008322,img/s
+train_step,cuda,tf32,resnet18_cifar,11173962,32,0.004335709847509861,0.003866876009851694,0.004360691644251347,20,7380.56768682956,img/s
+train_forward,cuda,tf32,resnet18_cifar,11173962,128,0.0023009316064417362,0.002298861974850297,0.0023035509511828423,20,55629.64133381823,img/s
+train_step,cuda,tf32,resnet18_cifar,11173962,128,0.008013181388378143,0.007983562769368291,0.008027133997529745,20,15973.68058904093,img/s
+train_forward,cuda,tf32,resnet18_cifar,11173962,512,0.007812038995325565,0.007807968417182565,0.007816841127350926,20,65539.86741571077,img/s
+train_step,cuda,tf32,resnet18_cifar,11173962,512,0.026047454215586185,0.026030027773231268,0.026061585638672113,20,19656.431517734705,img/s
+train_forward,cuda,tf32,vgg16_cifar,134301514,32,0.0008520372211933136,0.0008498129900544882,0.0008539750706404448,20,37557.0446971585,img/s
+train_step,cuda,tf32,vgg16_cifar,134301514,32,0.004362859763205051,0.004355200799182057,0.004373025614768267,20,7334.63868581742,img/s
+train_forward,cuda,tf32,vgg16_cifar,134301514,128,0.0014981976710259914,0.0014924053102731705,0.001500152749940753,20,85435.98917247241,img/s
+train_step,cuda,tf32,vgg16_cifar,134301514,128,0.006440743338316679,0.006432799389585853,0.006446586223319173,20,19873.482496735145,img/s
+train_forward,cuda,tf32,vgg16_cifar,134301514,512,0.004241576883941889,0.004237503511831164,0.004251507110893726,20,120709.82420202538,img/s
+train_step,cuda,tf32,vgg16_cifar,134301514,512,0.014841439668089151,0.014832232845947146,0.014848227379843593,20,34498.0009655573,img/s
+matmul,cuda,bf16,,,256,1.4818273484706879e-05,1.4696735888719559e-05,1.4988938346505165e-05,20,2.264395513730373,TFLOPS
+matmul,cuda,bf16,,,512,1.5857163816690445e-05,1.576356589794159e-05,1.5965662896633148e-05,20,16.928339714663128,TFLOPS
+matmul,cuda,bf16,,,1024,2.4537090212106705e-05,2.4390406906604767e-05,2.4631619453430176e-05,20,87.519898628421,TFLOPS
+matmul,cuda,bf16,,,2048,4.148157313466072e-05,4.130508750677109e-05,4.1735824197530746e-05,20,414.1566456081443,TFLOPS
+matmul,cuda,bf16,,,4096,0.0002035084180533886,0.00020310888066887856,0.00020374194718897343,20,675.3477560615903,TFLOPS
+matmul,cuda,bf16,,,8192,0.0013810805976390839,0.0013734037056565285,0.0013822366017848253,20,796.1241578917135,TFLOPS
+matmul,cuda,bf16,,,16384,0.011985592544078827,0.011660503456369042,0.012562817893922329,20,733.8888744848484,TFLOPS
+train_forward,cuda,bf16,alexnet_gray,58421992,1,0.0005394085310399532,0.0005344641394913197,0.0005503615830093622,20,1853.8824331755543,img/s
+train_step,cuda,bf16,alexnet_gray,58421992,1,0.002189998049288988,0.002165383193641901,0.0022043900098651648,20,456.6214112951668,img/s
+train_forward,cuda,bf16,alexnet_gray,58421992,16,0.0006892355158925056,0.0006876860279589891,0.0006911673117429018,20,23214.125840977973,img/s
+train_step,cuda,bf16,alexnet_gray,58421992,16,0.0025149062275886536,0.0025090682320296764,0.002523260423913598,20,6362.066237094314,img/s
+train_forward,cuda,bf16,alexnet_gray,58421992,64,0.001220631878823042,0.0012197205796837807,0.0012268379796296358,20,52431.86017860692,img/s
+train_step,cuda,bf16,alexnet_gray,58421992,64,0.004075619857758284,0.00407107500359416,0.004084218526259065,20,15703.132832217078,img/s
+train_forward,cuda,bf16,alexnet_gray,58421992,128,0.0019593634642660618,0.001957183238118887,0.0019616675563156605,20,65327.33835983118,img/s
+train_step,cuda,bf16,alexnet_gray,58421992,128,0.006112964358180761,0.006097449688240886,0.006151270121335983,20,20939.104581675205,img/s
+train_forward,cuda,bf16,alexnet_gray,58421992,256,0.0034331008791923523,0.0034276568330824375,0.003438158892095089,20,74568.15543976231,img/s
+train_step,cuda,bf16,alexnet_gray,58421992,256,0.009988834150135517,0.009960566647350788,0.010018134955316782,20,25628.616528439095,img/s
+train_forward,cuda,bf16,resnet18_cifar,11173962,32,0.0012475773692131042,0.0012458988931030035,0.0012497566640377045,20,25649.71182523425,img/s
+train_step,cuda,bf16,resnet18_cifar,11173962,32,0.0038268757052719593,0.0037950645200908184,0.0038636589888483286,20,8361.912553343798,img/s
+train_forward,cuda,bf16,resnet18_cifar,11173962,128,0.002410442102700472,0.002407485619187355,0.0024122113827615976,20,53102.2918395753,img/s
+train_step,cuda,bf16,resnet18_cifar,11173962,128,0.006736584007740021,0.006729678716510534,0.006748746149241924,20,19000.727943559225,img/s
+train_forward,cuda,bf16,resnet18_cifar,11173962,512,0.008286386262625456,0.008273236220702529,0.008292226353660226,20,61788.092393098035,img/s
+train_step,cuda,bf16,resnet18_cifar,11173962,512,0.02204565517604351,0.022033259505406022,0.022072512889280915,20,23224.53090695069,img/s
+train_forward,cuda,bf16,vgg16_cifar,134301514,32,0.0012588263489305973,0.001257062889635563,0.0012613835278898478,20,25420.503810700146,img/s
+train_step,cuda,bf16,vgg16_cifar,134301514,32,0.008540048263967037,0.008515383349731565,0.008587605087086558,20,3747.0514230015965,img/s
+train_forward,cuda,bf16,vgg16_cifar,134301514,128,0.001726456917822361,0.0017244606278836727,0.00172919942997396,20,74140.28040818463,img/s
+train_step,cuda,bf16,vgg16_cifar,134301514,128,0.0211089882068336,0.02086542802862823,0.021327867405489087,20,6063.767658866882,img/s
+train_forward,cuda,bf16,vgg16_cifar,134301514,512,0.003744719084352255,0.003741436405107379,0.0037481056060642004,20,136725.87675253177,img/s
+train_step,cuda,bf16,vgg16_cifar,134301514,512,0.06933636730536819,0.06924401666037738,0.06937574502080679,20,7384.292253804877,img/s
+h2d_pageable,cuda,-,,,1,7.377145811915398e-05,7.34387431293726e-05,7.548322901129723e-05,20,14.21384403581076,GB/s
+h2d_pinned,cuda,-,,,1,2.8839800506830215e-05,2.8802314773201942e-05,2.8910581022500992e-05,20,36.358642624856664,GB/s
+h2d_pageable,cuda,-,,,4,0.0001852894201874733,0.00018513528630137444,0.00018557650037109852,20,22.63650021548052,GB/s
+h2d_pinned,cuda,-,,,4,8.568586781620979e-05,8.560414426028728e-05,8.593779057264328e-05,20,48.949775580221576,GB/s
+h2d_pageable,cuda,-,,,16,0.0006310115568339825,0.0006304709240794182,0.0006360155530273914,20,26.587810981113364,GB/s
+h2d_pinned,cuda,-,,,16,0.00031294533982872963,0.0003127891104668379,0.0003131281118839979,20,53.610691276572204,GB/s
+h2d_pageable,cuda,-,,,64,0.0024267230182886124,0.0024238713085651398,0.0024963081814348698,20,27.65410946953761,GB/s
+h2d_pinned,cuda,-,,,64,0.0012225680984556675,0.001221702666953206,0.0012239490170031786,20,54.89171857565322,GB/s
+h2d_pageable,cuda,-,,,256,0.009527487680315971,0.009513309923931956,0.009558385936543345,20,28.17484157493002,GB/s
+h2d_pinned,cuda,-,,,256,0.004857612773776054,0.004855753853917122,0.004858945496380329,20,55.26077694977163,GB/s
+h2d_pageable,cuda,-,,,1024,0.03805167507380247,0.038013007026165724,0.03811845858581364,20,28.21799097983052,GB/s
+h2d_pinned,cuda,-,,,1024,0.019381449092179537,0.019377888180315495,0.019384889164939523,20,55.400492444770684,GB/s
+----- END FILE e2_results.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E2",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 8,
+    "omp_env": "8",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave1-gpu-cv9lg",
+    "time_utc": "2026-11-20T16:37:17Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07"
+  },
+  "threads": {
+    "torch_threads": 8,
+    "cgroup_quota": 8,
+    "omp_env": "8",
+    "os_cpu_count": 128
+  },
+  "quick": false,
+  "config": {
+    "conv_batches": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      1024
+    ],
+    "mat_ns": [
+      256,
+      512,
+      1024,
+      2048,
+      4096,
+      8192,
+      16384
+    ],
+    "train_batches": {
+      "alexnet_gray": [
+        1,
+        16,
+        64,
+        128,
+        256
+      ],
+      "resnet18_cifar": [
+        32,
+        128,
+        512
+      ],
+      "vgg16_cifar": [
+        32,
+        128,
+        512
+      ]
+    },
+    "h2d_mb": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      1024
+    ]
+  },
+  "models": {
+    "alexnet_gray": [
+      1,
+      224,
+      224
+    ],
+    "resnet18_cifar": [
+      3,
+      32,
+      32
+    ],
+    "vgg16_cifar": [
+      3,
+      32,
+      32
+    ]
+  },
+  "elapsed_s": 36.9
+}
+----- END FILE meta.json -----
+E1 {'experiment': 'E1', 'env': {'python': '3.11.10', 'torch': '2.5.1+cu124', 'cuda': '12.4', 'cudnn': 90100, 'torch_threads': 8, 'omp_env': '8', 'cpu_model': 'Intel(R) Xeon(R) Platinum 8462Y+', 'blas': 'mkl', 'device': 'cuda', 'pod': 'wave1-gpu-cv9lg', 'time_utc': '2026-11-20T16:37:57Z', 'gpu_name': 'NVIDIA H100 80GB HBM3', 'driver': '550.90.07'}, 'threads': {'torch_threads': 8, 'cgroup_quota': 8, 'omp_env': '8', 'os_cpu_count': 128}, 'quick': False, 'im2col_batches': [1, 8, 32, 128, 256], 'profile_models': [('alexnet_gray', 128), ('resnet18_cifar', 128), ('vgg16_cifar', 128)], 'profile_steps': 5, 'categories': [('conv', 'conv|cudnn_convolution|mkldnn_convolution'), ('gemm', 'addmm|\\bmm\\b|aten::mm|bmm|matmul|linear|gemm'), ('norm', 'batch_norm|layer_norm'), ('act_pool_dropout', 'relu|threshold|max_pool|avg_pool|adaptive|dropout|pool'), ('loss_softmax', 'cross_entropy|nll_loss|log_softmax|softmax'), ('optimizer', '_foreach|sgd|optimizer|lerp|addcmul|addcdiv'), ('elementwise_add', 'aten::add|aten::mul|aten::div|aten::sub'), ('memory_copy', 'copy_|aten::to|contiguous|clone|empty|zero_|fill_|cat')], 'tf32': False}
+
+== im2col
+  device=cuda, batch=1, cols_shape=121x2916, max_abs_err=0, unfold_ms=0.03645, matmul_ms=0.0234, im2col_total_ms=0.05985, matmul_share=0.3909, conv2d_ms=0.02403, conv2d_vs_im2col=0.4015
+  device=cuda, batch=8, cols_shape=121x2916, max_abs_err=0, unfold_ms=0.1912, matmul_ms=0.0418, im2col_total_ms=0.233, matmul_share=0.1794, conv2d_ms=0.05155, conv2d_vs_im2col=0.2213
+  device=cuda, batch=32, cols_shape=121x2916, max_abs_err=0, unfold_ms=0.7492, matmul_ms=0.0924, im2col_total_ms=0.8416, matmul_share=0.1098, conv2d_ms=0.1491, conv2d_vs_im2col=0.1772
+  device=cuda, batch=128, cols_shape=121x2916, max_abs_err=0, unfold_ms=2.972, matmul_ms=0.3458, im2col_total_ms=3.318, matmul_share=0.1042, conv2d_ms=0.528, conv2d_vs_im2col=0.1591
+  device=cuda, batch=256, cols_shape=121x2916, max_abs_err=0, unfold_ms=5.917, matmul_ms=0.6555, im2col_total_ms=6.572, matmul_share=0.09974, conv2d_ms=1.033, conv2d_vs_im2col=0.1572
+
+== profile
+  model=alexnet_gray, device=cuda, batch=128, params=58421992, forward_ms=6.178, step_ms=12.83, backward_opt_ms=6.647, forward_share=0.4817
+  model=alexnet_gray, device=cuda, batch=128, category=act_pool_dropout, forward_ms=0.331, backward_opt_ms=1.208, step_ms=1.539, step_share=0.07324
+  model=alexnet_gray, device=cuda, batch=128, category=conv, forward_ms=13.19, backward_opt_ms=3.667, step_ms=16.86, step_share=0.8023
+  model=alexnet_gray, device=cuda, batch=128, category=elementwise_add, forward_ms=0.2652, backward_opt_ms=8.34e-05, step_ms=0.2653, step_share=0.01263
+  model=alexnet_gray, device=cuda, batch=128, category=gemm, forward_ms=0.501, backward_opt_ms=0.6895, step_ms=1.19, step_share=0.05666
+  model=alexnet_gray, device=cuda, batch=128, category=loss_softmax, forward_ms=0.006214, backward_opt_ms=0.004691, step_ms=0.01091, step_share=0.0005191
+  model=alexnet_gray, device=cuda, batch=128, category=memory_copy, forward_ms=0, backward_opt_ms=0.08415, step_ms=0.08415, step_share=0.004005
+  model=alexnet_gray, device=cuda, batch=128, category=optimizer, forward_ms=0, backward_opt_ms=0.6705, step_ms=0.6705, step_share=0.03191
+  model=alexnet_gray, device=cuda, batch=128, category=other, forward_ms=0.1953, backward_opt_ms=0.1986, step_ms=0.3939, step_share=0.01875
+  model=resnet18_cifar, device=cuda, batch=128, params=11173962, forward_ms=7.307, step_ms=18.08, backward_opt_ms=10.78, forward_share=0.4041
+  model=resnet18_cifar, device=cuda, batch=128, category=act_pool_dropout, forward_ms=0, backward_opt_ms=0.2745, step_ms=0.2745, step_share=0.01516
+  model=resnet18_cifar, device=cuda, batch=128, category=conv, forward_ms=6.861, backward_opt_ms=8.384, step_ms=15.25, step_share=0.8419
+  model=resnet18_cifar, device=cuda, batch=128, category=elementwise_add, forward_ms=0.1512, backward_opt_ms=0.1454, step_ms=0.2966, step_share=0.01638
+  model=resnet18_cifar, device=cuda, batch=128, category=gemm, forward_ms=0.01908, backward_opt_ms=0.01219, step_ms=0.03127, step_share=0.001727
+  model=resnet18_cifar, device=cuda, batch=128, category=loss_softmax, forward_ms=0.005459, backward_opt_ms=0.004166, step_ms=0.009625, step_share=0.0005315
+  model=resnet18_cifar, device=cuda, batch=128, category=memory_copy, forward_ms=0, backward_opt_ms=0.002393, step_ms=0.002393, step_share=0.0001322
+  model=resnet18_cifar, device=cuda, batch=128, category=norm, forward_ms=0.5284, backward_opt_ms=1.407, step_ms=1.935, step_share=0.1069
+  model=resnet18_cifar, device=cuda, batch=128, category=optimizer, forward_ms=0, backward_opt_ms=0.1323, step_ms=0.1323, step_share=0.007308
+  model=resnet18_cifar, device=cuda, batch=128, category=other, forward_ms=0.1725, backward_opt_ms=0.008741, step_ms=0.1812, step_share=0.01001
+  model=vgg16_cifar, device=cuda, batch=128, params=134301514, forward_ms=5.47, step_ms=13.97, backward_opt_ms=8.496, forward_share=0.3917
+  model=vgg16_cifar, device=cuda, batch=128, category=act_pool_dropout, forward_ms=0.2298, backward_opt_ms=0.5958, step_ms=0.8256, step_share=0.05999
+  model=vgg16_cifar, device=cuda, batch=128, category=conv, forward_ms=4.18, backward_opt_ms=4.393, step_ms=8.573, step_share=0.623
+  model=vgg16_cifar, device=cuda, batch=128, category=elementwise_add, forward_ms=0.1309, backward_opt_ms=0, step_ms=0.1307, step_share=0.009496
+  model=vgg16_cifar, device=cuda, batch=128, category=gemm, forward_ms=0.9281, backward_opt_ms=1.424, step_ms=2.352, step_share=0.1709
+  model=vgg16_cifar, device=cuda, batch=128, category=loss_softmax, forward_ms=0.005875, backward_opt_ms=0.004448, step_ms=0.01032, step_share=0.0007501
+  model=vgg16_cifar, device=cuda, batch=128, category=memory_copy, forward_ms=0, backward_opt_ms=0.02999, step_ms=0.02999, step_share=0.002179
+  model=vgg16_cifar, device=cuda, batch=128, category=optimizer, forward_ms=0, backward_opt_ms=1.558, step_ms=1.558, step_share=0.1132
+  model=vgg16_cifar, device=cuda, batch=128, category=other, forward_ms=0.0815, backward_opt_ms=0.2001, step_ms=0.2816, step_share=0.02047
+top GPU kernels (alexnet forward):
+     41.93 ms  x60   void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float con
+     19.02 ms  x15   void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*,
+      2.60 ms  x5    sm80_xmma_fprop_implicit_gemm_indexed_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x64x8_stage3_warpsize1x2x1_g1_
+      1.48 ms  x5    void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_tn_align1>(cutlass_80_simt_sgemm_256x128_8x4_tn_align1
+      1.43 ms  x5    sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_ker
+      1.33 ms  x25   void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<flo
+      1.17 ms  x15   void at::native::(anonymous namespace)::max_pool_forward_nchw<float>(int, float const*, long, long, long, int,
+      0.98 ms  x35   void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::T
+      0.85 ms  x5    sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel
+      0.44 ms  x5    void at::native::(anonymous namespace)::adaptive_average_pool<float>(float const*, float*, int, int, int, int,
+      0.41 ms  x5    void fft2d_c2r_32x32<float, false, false, 0u, false, false>(float*, float2 const*, int, int, int, int, int, in
+      0.23 ms  x5    void fft2d_r2c_32x32<float, false, 5u, false>(float2*, float const*, int, int, int, int, int, int, int, int, i
+      0.21 ms  x5    void fft2d_r2c_32x32<float, false, 0u, false>(float2*, float const*, int, int, int, int, int, int, int, int, i
+      0.16 ms  x5    sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel
+      0.10 ms  x5    void flip_filter<float, float>(float*, float const*, int, int, int, int)
+
+E1 DONE (cuda) in 7.5s → /data/results/e1/20261120T163756Z_cuda
+
+----- BEGIN FILE e1_alexnet_forward_top_kernels.csv -----
+kernel,self_device_us_total,count
+"void implicit_convolve_sgemm<float, float, 128, 6, 7, 3, 3, 5, 1, false, false, true>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, float const*, float const*, bool, bool, int, int)",41931.4,60
+"void precomputed_convolve_sgemm<float, 128, 6, 7, 3, 3, 5, 1, false>(int, int, int, float const*, int, float*, float const*, kernel_conv_params, unsigned long long, int, float, float, int, bool, bool, float const*, float const*, int*)",19017.9,15
+"sm80_xmma_fprop_implicit_gemm_indexed_f32f32_f32f32_f32_nchwkcrs_nchw_tilesize32x64x8_stage3_warpsize1x2x1_g1_ffma_aligna4_alignc4_execute_kernel__5x_cudnn",2597.6,5
+"void cutlass::Kernel2<cutlass_80_simt_sgemm_256x128_8x4_tn_align1>(cutlass_80_simt_sgemm_256x128_8x4_tn_align1::Params)",1484.3,5
+"sm80_xmma_gemm_cf32cf32_f32f32_cf32_tn_n_tilesize64x64x8_stage3_warpsize2x2x1_ffma_aligna8_alignc8_execute_kernel__5x_cublas",1429.0,5
+"void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})",1326.0,25
+"void at::native::(anonymous namespace)::max_pool_forward_nchw<float>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)",1174.8,15
+"void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2> >(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>)",976.3,35
+"sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize64x64x8_stage3_warpsize1x4x1_ffma_aligna4_alignc4_execute_kernel__5x_cublas",845.2,5
+"void at::native::(anonymous namespace)::adaptive_average_pool<float>(float const*, float*, int, int, int, int, long, long, long)",436.2,5
+"void fft2d_c2r_32x32<float, false, false, 0u, false, false>(float*, float2 const*, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, cudnnActivationStruct, int, int)",406.9,5
+"void fft2d_r2c_32x32<float, false, 5u, false>(float2*, float const*, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",234.5,5
+"void fft2d_r2c_32x32<float, false, 0u, false>(float2*, float const*, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",208.1,5
+"sm80_xmma_gemm_f32f32_f32f32_f32_tn_n_tilesize32x32x8_stage3_warpsize1x2x1_ffma_aligna4_alignc4_execute_kernel__5x_cublas",161.6,5
+"void flip_filter<float, float>(float*, float const*, int, int, int, int)",96.7,5
+----- END FILE e1_alexnet_forward_top_kernels.csv -----
+
+----- BEGIN FILE e1_im2col.csv -----
+device,batch,cols_shape,max_abs_err,unfold_ms,matmul_ms,im2col_total_ms,matmul_share,conv2d_ms,conv2d_vs_im2col
+cuda,1,121x2916,0.0,0.03645429387688637,0.023395288735628128,0.059849582612514496,0.390901451846319,0.02402905374765396,0.4014907489535191
+cuda,8,121x2916,0.0,0.1911683939397335,0.04180474206805229,0.2329731360077858,0.17944018260824376,0.05154591053724289,0.22125259341283135
+cuda,32,121x2916,0.0,0.7491926662623882,0.09240442886948586,0.8415970951318741,0.10979651593855197,0.14913780614733696,0.17720808093327342
+cuda,128,121x2916,0.0,2.971895504742861,0.3458429127931595,3.3177384175360203,0.1042405606678317,0.5279621109366417,0.15913313362683443
+cuda,256,121x2916,0.0,5.916793365031481,0.655527226626873,6.572320591658354,0.09974060417242486,1.033247448503971,0.1572119670813651
+----- END FILE e1_im2col.csv -----
+
+----- BEGIN FILE e1_ops.csv -----
+model,device,batch,category,forward_ms,backward_opt_ms,step_ms,step_share
+alexnet_gray,cuda,128,act_pool_dropout,0.3310085999999981,1.207771000000003,1.5387796000000011,0.07323882493172898
+alexnet_gray,cuda,128,conv,13.189959400000003,3.666510399999993,16.856469799999996,0.802290360912749
+alexnet_gray,cuda,128,elementwise_add,0.2652036000000011,8.339999999618097e-05,0.2652869999999973,0.0126264399070948
+alexnet_gray,cuda,128,gemm,0.5009608000000016,0.6894868000000047,1.1904476000000064,0.056659825336128275
+alexnet_gray,cuda,128,loss_softmax,0.006214400000000751,0.0046911999999942056,0.010905599999994957,0.0005190563542531326
+alexnet_gray,cuda,128,memory_copy,0.0,0.08415399999999991,0.08415399999999991,0.004005342983039748
+alexnet_gray,cuda,128,optimizer,0.0,0.6704909999999993,0.6704909999999993,0.03191228488296817
+alexnet_gray,cuda,128,other,0.19526499999999986,0.19863580000000597,0.3939008000000058,0.018747864692038027
+resnet18_cifar,cuda,128,act_pool_dropout,0.0,0.27448459999998703,0.27448459999998703,0.01515764096587917
+resnet18_cifar,cuda,128,conv,6.8613554000000025,8.384264799999972,15.245620199999975,0.8418965482717993
+resnet18_cifar,cuda,128,elementwise_add,0.15118600000000132,0.14538340000000938,0.2965694000000107,0.01637721200630775
+resnet18_cifar,cuda,128,gemm,0.019078200000001017,0.01219219999999259,0.031270399999993606,0.0017268199966750538
+resnet18_cifar,cuda,128,loss_softmax,0.005458999999997832,0.0041660000000007125,0.009624999999998544,0.0005315135869064124
+resnet18_cifar,cuda,128,memory_copy,0.0,0.0023934000000012017,0.0023934000000012017,0.0001321687915743001
+resnet18_cifar,cuda,128,norm,0.5283730000000003,1.40674560000001,1.9351186000000102,0.1068614886416079
+resnet18_cifar,cuda,128,optimizer,0.0,0.13233320000000096,0.13233320000000096,0.007307729225850887
+resnet18_cifar,cuda,128,other,0.1725059999999989,0.008741399999984273,0.18124739999998318,0.01000887851339916
+vgg16_cifar,cuda,128,act_pool_dropout,0.2297659999999999,0.5957971999999911,0.8255631999999911,0.059990076199221386
+vgg16_cifar,cuda,128,conv,4.180188400000002,4.3926896000000095,8.572878000000012,0.622953644816817
+vgg16_cifar,cuda,128,elementwise_add,0.1308992000000002,0.0,0.13067480000000403,0.009495567643177823
+vgg16_cifar,cuda,128,gemm,0.9281415999999991,1.4242280000000038,2.352369600000003,0.1709364365474789
+vgg16_cifar,cuda,128,loss_softmax,0.005875399999999354,0.004447799999999915,0.010323199999999269,0.0007501419087233601
+vgg16_cifar,cuda,128,memory_copy,0.0,0.02999059999999481,0.02999059999999481,0.002179286067087386
+vgg16_cifar,cuda,128,optimizer,0.0,1.5582174000000066,1.5582174000000066,0.11322886068680633
+vgg16_cifar,cuda,128,other,0.08149679999999991,0.2001492000000027,0.2816460000000026,0.02046598613068781
+----- END FILE e1_ops.csv -----
+
+----- BEGIN FILE e1_phase.csv -----
+model,device,batch,params,forward_ms,step_ms,backward_opt_ms,forward_share
+alexnet_gray,cuda,128,58421992,6.177867297083139,12.825240846723318,6.647373549640179,0.48169600640766946
+resnet18_cifar,cuda,128,11173962,7.306602783501148,18.082252703607082,10.775649920105934,0.4040759137296877
+vgg16_cifar,cuda,128,134301514,5.470257252454758,13.966047670692205,8.495790418237448,0.39168255625634946
+----- END FILE e1_phase.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E1",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 8,
+    "omp_env": "8",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave1-gpu-cv9lg",
+    "time_utc": "2026-11-20T16:37:57Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07"
+  },
+  "threads": {
+    "torch_threads": 8,
+    "cgroup_quota": 8,
+    "omp_env": "8",
+    "os_cpu_count": 128
+  },
+  "quick": false,
+  "im2col_batches": [
+    1,
+    8,
+    32,
+    128,
+    256
+  ],
+  "profile_models": [
+    [
+      "alexnet_gray",
+      128
+    ],
+    [
+      "resnet18_cifar",
+      128
+    ],
+    [
+      "vgg16_cifar",
+      128
+    ]
+  ],
+  "profile_steps": 5,
+  "categories": [
+    [
+      "conv",
+      "conv|cudnn_convolution|mkldnn_convolution"
+    ],
+    [
+      "gemm",
+      "addmm|\\bmm\\b|aten::mm|bmm|matmul|linear|gemm"
+    ],
+    [
+      "norm",
+      "batch_norm|layer_norm"
+    ],
+    [
+      "act_pool_dropout",
+      "relu|threshold|max_pool|avg_pool|adaptive|dropout|pool"
+    ],
+    [
+      "loss_softmax",
+      "cross_entropy|nll_loss|log_softmax|softmax"
+    ],
+    [
+      "optimizer",
+      "_foreach|sgd|optimizer|lerp|addcmul|addcdiv"
+    ],
+    [
+      "elementwise_add",
+      "aten::add|aten::mul|aten::div|aten::sub"
+    ],
+    [
+      "memory_copy",
+      "copy_|aten::to|contiguous|clone|empty|zero_|fill_|cat"
+    ]
+  ],
+  "tf32": false,
+  "elapsed_s": 7.5
+}
+----- END FILE meta.json -----
+WAVE1 FINISHED device=cuda rc=0

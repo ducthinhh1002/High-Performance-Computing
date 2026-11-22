@@ -1,0 +1,82 @@
+# Đợt 1 (E2 + E1). Hai Job dùng chung code (ConfigMap hpc-code: code.tgz + run_wave1.sh):
+#   wave1-gpu: 1 GPU, 8 CPU  — đo phía GPU
+#   wave1-cpu: 0 GPU, 32 CPU — đo phía CPU, không giữ GPU trong lúc đo CPU chậm
+# Kết quả ghi vào hostPath /var/lib/hpc-dl-exp/results/{e1,e2}/ và in ra log.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wave1-gpu
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 5400
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: hpc-wave1, device: cuda}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: run
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          command: ["bash", "/code/run_wave1.sh"]
+          env:
+            - {name: DEVICE, value: cuda}
+            - {name: QUICK, value: "0"}
+            - {name: OUT_DIR, value: /data/results}
+            - name: OMP_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+            - name: MKL_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+          resources:
+            requests: {cpu: "8", memory: 64Gi, nvidia.com/gpu: "1"}
+            limits:   {cpu: "8", memory: 64Gi, nvidia.com/gpu: "1"}
+          volumeMounts:
+            - {name: code, mountPath: /code}
+            - {name: results, mountPath: /data/results}
+            - {name: dshm, mountPath: /dev/shm}
+      volumes:
+        - name: code
+          configMap: {name: hpc-code}
+        - name: results
+          hostPath: {path: /var/lib/hpc-dl-exp/results, type: Directory}
+        - name: dshm
+          emptyDir: {medium: Memory, sizeLimit: 8Gi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wave1-cpu
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 7200
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: hpc-wave1, device: cpu}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: run
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          command: ["bash", "/code/run_wave1.sh"]
+          env:
+            - {name: DEVICE, value: cpu}
+            - {name: QUICK, value: "0"}
+            - {name: OUT_DIR, value: /data/results}
+            - name: OMP_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+            - name: MKL_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+          resources:
+            requests: {cpu: "32", memory: 64Gi}
+            limits:   {cpu: "32", memory: 64Gi}
+          volumeMounts:
+            - {name: code, mountPath: /code}
+            - {name: results, mountPath: /data/results}
+      volumes:
+        - name: code
+          configMap: {name: hpc-code}
+        - name: results
+          hostPath: {path: /var/lib/hpc-dl-exp/results, type: Directory}

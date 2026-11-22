@@ -1,0 +1,80 @@
+WAVE=5 QUICK=0 RUN_ID=20261121T142147Z OMP_NUM_THREADS=32 OUT_DIR=/data/results
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+GPU 3: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+	[4mGPU0	GPU1	GPU2	GPU3	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	NIC8	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	NV18	NV18	PXB	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU1	NV18	 X 	NV18	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU2	NV18	NV18	 X 	NV18	NODE	NODE	PXB	PXB	SYS	SYS	SYS	SYS	NODE	0-31,64-95	0		N/A
+GPU3	NV18	NV18	NV18	 X 	SYS	SYS	SYS	SYS	PXB	PXB	NODE	NODE	SYS	32-63,96-127	1		N/A
+NIC0	PXB	NODE	NODE	SYS	 X 	PXB	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC1	PXB	NODE	NODE	SYS	PXB	 X 	NODE	NODE	SYS	SYS	SYS	SYS	NODE				
+NIC2	NODE	PXB	PXB	SYS	NODE	NODE	 X 	PXB	SYS	SYS	SYS	SYS	NODE				
+NIC3	NODE	PXB	PXB	SYS	NODE	NODE	PXB	 X 	SYS	SYS	SYS	SYS	NODE				
+NIC4	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	 X 	PXB	NODE	NODE	SYS				
+NIC5	SYS	SYS	SYS	PXB	SYS	SYS	SYS	SYS	PXB	 X 	NODE	NODE	SYS				
+NIC6	SYS	SYS	SYS	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PXB	SYS				
+##### E6
+=== resnet18_cifar W=1
+  model=resnet18_cifar, workers=1, gpus=4, total_updates=1600, wall_s=89.24, updates_per_s=17.93, T_ms_median=46.99, tau_ms_mean=3.556, P_pred=13.21, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.654
+=== resnet18_cifar W=2
+  model=resnet18_cifar, workers=2, gpus=4, total_updates=1600, wall_s=44.47, updates_per_s=35.98, T_ms_median=46.22, tau_ms_mean=3.56, P_pred=12.98, stale_mean=0.9844, stale_p50=1, stale_p95=1, stale_max=2, test_acc=0.6573
+=== resnet18_cifar W=4
+  model=resnet18_cifar, workers=4, gpus=4, total_updates=1600, wall_s=23, updates_per_s=69.56, T_ms_median=48.15, tau_ms_mean=3.294, P_pred=14.62, stale_mean=2.983, stale_p50=3, stale_p95=3, stale_max=5, test_acc=0.6395
+=== resnet18_cifar W=8
+  model=resnet18_cifar, workers=8, gpus=4, total_updates=1600, wall_s=16.6, updates_per_s=96.38, T_ms_median=62.39, tau_ms_mean=4.652, P_pred=13.41, stale_mean=6.871, stale_p50=7, stale_p95=9, stale_max=11, test_acc=0.5909
+=== vgg16_cifar W=1
+  model=vgg16_cifar, workers=1, gpus=4, total_updates=1600, wall_s=551.3, updates_per_s=2.902, T_ms_median=260.2, tau_ms_mean=24.35, P_pred=10.69, stale_mean=0, stale_p50=0, stale_p95=0, stale_max=0, test_acc=0.5509
+=== vgg16_cifar W=2
+  model=vgg16_cifar, workers=2, gpus=4, total_updates=1600, wall_s=317.2, updates_per_s=5.045, T_ms_median=284.7, tau_ms_mean=24.68, P_pred=11.53, stale_mean=0.9456, stale_p50=1, stale_p95=2, stale_max=2, test_acc=0.4881
+=== vgg16_cifar W=4
+  model=vgg16_cifar, workers=4, gpus=4, total_updates=1600, wall_s=160.8, updates_per_s=9.953, T_ms_median=298.5, tau_ms_mean=27.11, P_pred=11.01, stale_mean=2.966, stale_p50=3, stale_p95=4, stale_max=5, test_acc=0.4071
+=== vgg16_cifar W=8
+  model=vgg16_cifar, workers=8, gpus=4, total_updates=1600, wall_s=89.87, updates_per_s=17.8, T_ms_median=327, tau_ms_mean=30.44, P_pred=10.74, stale_mean=6.941, stale_p50=7, stale_p95=8, stale_max=10, test_acc=0.2136
+
+----- BEGIN FILE downpour.csv -----
+model,workers,gpus,total_updates,wall_s,updates_per_s,T_ms_median,tau_ms_mean,P_pred,stale_mean,stale_p50,stale_p95,stale_max,test_acc
+resnet18_cifar,1,4,1600,89.23762596677989,17.92965671896768,46.994399279356,3.5562048450810835,13.21476161429742,0,0,0,0,0.654
+resnet18_cifar,2,4,1600,44.467209671624005,35.981569606356764,46.22429748997092,3.560307920561172,12.9832302489963,0.984375,1,1,2,0.6573
+resnet18_cifar,4,4,1600,23.000748078338802,69.56295484609986,48.14657708629966,3.2936589611927047,14.61796064910884,2.983125,3,3,5,0.6395
+resnet18_cifar,8,4,1600,16.60056348517537,96.38227048309724,62.39240895956755,4.651520382030867,13.413336680323615,6.87125,7,9,11,0.5909
+vgg16_cifar,1,4,1600,551.3336745901033,2.9020538264591624,260.2345058694482,24.347364092245698,10.688405729814889,0,0,0,0,0.5509
+vgg16_cifar,2,4,1600,317.1605392275378,5.044763777665687,284.72498850896955,24.684754305053502,11.534446929888226,0.945625,1,2,2,0.4881
+vgg16_cifar,4,4,1600,160.7564081326127,9.952946937456533,298.532850574702,27.10847049660515,11.012530220474368,2.965625,3,4,5,0.4071
+vgg16_cifar,8,4,1600,89.87430802546442,17.802640544911526,327.02544145286083,30.43686879274901,10.74438516260149,6.94125,7,8,10,0.2136
+----- END FILE downpour.csv -----
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E6",
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 32,
+    "omp_env": "32",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda",
+    "pod": "wave5-4pvz8",
+    "time_utc": "2026-11-21T14:21:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07\n550.90.07\n550.90.07"
+  },
+  "n_gpu": 4,
+  "args": {
+    "out": "/data/results/e6",
+    "quick": false,
+    "models": "resnet18_cifar,vgg16_cifar",
+    "workers": "1,2,4,8",
+    "updates": 1600,
+    "batch": 128,
+    "lr": 0.02,
+    "server_threads": 4
+  },
+  "data_dir": "/data/datasets"
+}
+----- END FILE meta.json -----
+WAVE5 FINISHED rc=0

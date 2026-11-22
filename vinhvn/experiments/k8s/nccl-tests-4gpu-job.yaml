@@ -1,0 +1,42 @@
+# Đo băng thông NCCL trên 4 GPU (mốc cho E3). Binary build sẵn trên hostPath.
+# Kiểm tra còn đủ 4 GPU trống trước khi apply.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nccl-tests-4gpu
+  namespace: hpc-dl-exp
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 1200
+  ttlSecondsAfterFinished: 21600
+  template:
+    metadata:
+      labels: {app: hpc-nccl-run}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: nccl
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          command: ["bash", "/scripts/run_nccl_tests.sh"]
+          env:
+            - {name: BIN, value: /hostdata/tools/nccl-tests}
+            - {name: OUT, value: /hostdata/results/nccl-tests}
+            - name: OMP_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+          resources:
+            requests: {cpu: "32", memory: 128Gi, nvidia.com/gpu: "4"}
+            limits:   {cpu: "32", memory: 128Gi, nvidia.com/gpu: "4"}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+            - {name: tools, mountPath: /hostdata/tools, readOnly: true}
+            - {name: results, mountPath: /hostdata/results}
+            - {name: dshm, mountPath: /dev/shm}
+      volumes:
+        - name: scripts
+          configMap: {name: hpc-nccl-scripts}
+        - name: tools
+          hostPath: {path: /var/lib/hpc-dl-exp/tools, type: Directory}
+        - name: results
+          hostPath: {path: /var/lib/hpc-dl-exp/results, type: Directory}
+        - name: dshm
+          emptyDir: {medium: Memory, sizeLimit: 32Gi}
