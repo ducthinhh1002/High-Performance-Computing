@@ -1,0 +1,33 @@
+# Số liệu đọc lại từ Hình 1-4 (trang 3) của bài báo, kết xuất PDF ở 8x và đọc tọa độ điểm trên trục hình.
+# Sai số đọc: Hình 2 khoảng ±0,03; Hình 4 khoảng ±0,3 (nhỏ hơn ở n lớn); Hình 1 khoảng ±3 ms; Hình 3 khoảng ±3%
+# (n=8192: điểm CPU bị chú thích che một phần nên sai số lớn hơn, khoảng ±2%). Giá trị GPU của Hình 3 không được ghi vì quá nhỏ để đọc,
+# trong phân tích được suy từ CPU và tỷ lệ ở Hình 4 (đọc trực tiếp cho 4–10% khác nhau, ví dụ GPU ở n=8192 khoảng 17–19 ms).
+# Kiểm tra chéo: hồi quy các điểm CPU của Hình 1 cho độ dốc 6,32 ms/ảnh (bài báo viết 6,45; lệch 2%); hồi quy các điểm GPU của Hình 1 chỉ cho
+# 0,144 ms/ảnh (bài viết 0,16; lệch 10%) vì điểm GPU rất nhỏ so với trục, sai số đọc ~3 ms. Dùng số trong phần chữ của bài cho độ dốc GPU.
+figure,series,x,value,unit
+fig1,cpu,16,103.6,ms
+fig1,cpu,32,200.6,ms
+fig1,cpu,64,398.4,ms
+fig1,cpu,128,809.0,ms
+fig1,gpu,16,5.5,ms
+fig1,gpu,32,6.6,ms
+fig1,gpu,64,13.6,ms
+fig1,gpu,128,20.7,ms
+fig1,gpu,256,39.9,ms
+fig2,ratio_cpu_gpu,16,37.01,ratio
+fig2,ratio_cpu_gpu,32,37.67,ratio
+fig2,ratio_cpu_gpu,64,38.28,ratio
+fig2,ratio_cpu_gpu,128,39.76,ratio
+fig2,ratio_cpu_gpu,256,40.80,ratio
+fig3,cpu,2048,62.6,ms
+fig3,cpu,4096,229.7,ms
+fig3,cpu,8192,967.0,ms
+fig4,ratio_cpu_gpu,32,1.71,ratio
+fig4,ratio_cpu_gpu,64,0.53,ratio
+fig4,ratio_cpu_gpu,128,5.41,ratio
+fig4,ratio_cpu_gpu,256,3.14,ratio
+fig4,ratio_cpu_gpu,512,7.74,ratio
+fig4,ratio_cpu_gpu,1024,44.45,ratio
+fig4,ratio_cpu_gpu,2048,28.65,ratio
+fig4,ratio_cpu_gpu,4096,52.50,ratio
+fig4,ratio_cpu_gpu,8192,56.61,ratio
