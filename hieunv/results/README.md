@@ -8,7 +8,7 @@ tài liệu tham khảo ở [`../REFERENCES.md`](../REFERENCES.md).
 
 | Thư mục | Trạng thái | Nội dung |
 |---|---|---|
-| `kaggle/agg_20261122_074407` | **Chính** | Gộp 3 lần chạy Kaggle (Tesla T4 + Xeon 2.0 GHz, cùng một máy): CSV, hình, `summary.md`, `gpu_diag.md` |
+| `kaggle/agg_20261122_074407` | **Chính** | Gộp 3 lần chạy Kaggle (Tesla T4 + Xeon 2.0 GHz, cùng một máy): CSV, hình và `summary.md` (trong `figures/`), `gpu_diag.md` |
 | `kaggle/run{1,2,3}_20261122_074407` | Dữ liệu thô của bản chính | Mỗi lần: 30 lần đo/điểm, thứ tự xáo trộn, GPU trước; có `gpu_clocks.csv` |
 | `kaggle/diag_cold_20261122_074407` | Chẩn đoán | GPU nguội, batch tăng dần; dùng để tìm nguyên nhân bậc nhảy thời gian GPU |
 | `laptop/agg_20261122_152118` | **Chính** | Gộp 3 lần chạy trên laptop (Ryzen 7 5800H, không có GPU CUDA) |
@@ -40,15 +40,17 @@ n ≥ 4096 được chọn sau khi thấy kết quả với khoảng n ≥ 1024,
 ## Những gì đã chứng minh được
 
 - Thời gian conv tăng tuyến tính theo batch size trên cả CPU và GPU (R² ≈ 1,000).
-- Matvec tăng xấp xỉ theo n² trên CPU (cả hai máy) và GPU.
-- **Bậc nhảy thời gian mỗi ảnh trên GPU (109 → 69 µs ở lần chạy đầu) là do xung nhịp GPU.** Ở lần chẩn đoán,
-  thời gian × xung nhịp gần như không đổi (khoảng 95.000–96.000 chu kỳ/ảnh) trong khi xung nhịp đi từ khoảng
-  1005 lên 1500 MHz; xem `kaggle/agg_20261122_074407/gpu_diag.md`.
+- Matvec tăng xấp xỉ theo n² trên CPU (cả hai máy, số mũ 2,0–2,2 tùy khoảng khớp). Trên GPU số mũ phụ thuộc khoảng
+  khớp: 1,94 (n ≥ 4096) hoặc 1,75 (n ≥ 1024).
+- **Bậc nhảy thời gian mỗi ảnh trên GPU không phải do batch size mà do xung nhịp GPU.** Ở lần chẩn đoán và 3 lần chạy
+  chính, thời gian × xung nhịp mỗi ảnh (batch ≥ 16) nằm trong 93.500–100.000 chu kỳ, trong khi xung nhịp đi từ 1005 đến
+  1510 MHz; khi xáo trộn thứ tự đo, bậc nhảy biến mất. Xem `kaggle/agg_20261122_074407/gpu_diag.md`. Riêng lần chạy đầu
+  (109 → 69 µs) không ghi xung nhịp nên ở lần đó đây là suy luận.
 
 ## Giới hạn
 
 - Ba lần chạy của mỗi máy nằm trong cùng một phiên: sai số giữa các lần là dao động trên một máy, không phải
-  giữa các máy. Trên Kaggle, GPU nóng dần (khoảng 60 → 80 °C) nên xung nhịp giảm khoảng 7% từ lần 1 đến lần 3.
+  giữa các máy. Trên Kaggle, GPU nóng dần (khoảng 54 → 80 °C) nên xung nhịp giảm khoảng 7% từ lần 1 đến lần 3.
 - Bước làm nóng GPU khiến GPU bị hạ xung ngay sau đó; điểm conv batch 8 của lần 3 (GPU 14,2× CPU) bị ảnh hưởng.
   Điểm này chưa bị loại, nên thanh sai số ở batch 8 rất dài.
 - GEMM và cuDNN trên T4 bị giới hạn công suất (khoảng 70 W) nên số TFLOP/s là trạng thái nóng, không phải đỉnh.
