@@ -17,6 +17,9 @@ thì đo được nguyên nhân nào? Thư mục này **chỉ đo lại mục 3*
 | [`code/`](code/) | Code đo (PyTorch): `bench_conv.py`, `bench_fc.py`, `run_all.py` (một lần chạy), `run_session.py` (ba lần chạy trên laptop), `aggregate.py`, `plot.py`, `gpu_diag.py`. Chi tiết ở [code/README.md](code/README.md) |
 | [`kaggle/hpc_replication_kaggle.ipynb`](kaggle/hpc_replication_kaggle.ipynb) | Notebook tự chứa để chạy trên Kaggle, sinh từ `code/make_kaggle_notebook.py` |
 | [`results/`](results/) | Dữ liệu gốc (CSV, `env.json`, log) và hình. Nên dùng thư mục nào: [results/README.md](results/README.md) |
+| [`ANALYSIS.md`](ANALYSIS.md) | Phân tích: đối chiếu từng kết luận của bài báo, mô hình, giới hạn, bước kiểm chứng tiếp |
+| [`results/analysis/`](results/analysis/) | Bảng số (`tables.md`) và 3 hình phân tích (Hình 7–9), sinh từ `code/analyze.py` |
+| [`results/paper_digitized.csv`](results/paper_digitized.csv) | Điểm đọc từ Hình 1–4 của bài báo, kèm sai số đọc |
 | [`REFERENCES.md`](REFERENCES.md) | Trích dẫn và đường dẫn tài liệu |
 
 Dữ liệu chính thức: `results/kaggle/agg_20261122_074407` và `results/laptop/agg_20261122_152118`.
@@ -64,6 +67,12 @@ Lệnh `--quick` chỉ để thử trong vài giây. Trên Windows, `run_session
 **Kaggle.** Mở notebook bằng File → Import Notebook, chọn Accelerator **GPU T4 x2**, bấm Run All. Notebook chạy một lần
 chẩn đoán GPU nguội rồi 3 lần đo (mỗi lần khoảng 7 phút). Tải `results_kaggle.zip` ở panel Output về `results/kaggle/`.
 
+**Tạo lại bảng và hình phân tích** (giai đoạn 5; không cần đo lại, chạy trong `hieunv\code`):
+
+```powershell
+python analyze.py
+```
+
 **Chỉ vẽ lại hình và bảng từ dữ liệu có sẵn** (chạy trong `hieunv\code`, không cần đo lại; `summary.md` sinh ra giống hệt bản đã commit):
 
 ```powershell
@@ -89,6 +98,9 @@ chứng được thứ tự thời gian từ lịch sử repo.
 | Speedup tăng theo batch và theo n | Convolution: tăng tới batch khoảng 32 rồi phẳng ở 26–29× (từng lần). Matvec: tăng đến n lớn nhất đã đo (0,43× → 21,7×) |
 | Tỷ lệ GPU/CPU khác 40 lần nhưng xu hướng giống | Đúng: 27,8× (conv) và 21,7× (matvec, n = 16384). Kế hoạch không dự đoán tỷ lệ sẽ lớn hơn hay nhỏ hơn 40 |
 
+Các hướng giải thích khác trong kế hoạch (vòng lặp từng ảnh, chi phí khởi chạy kernel, giới hạn tính toán/băng thông) và kết quả, kể cả phần
+không đúng: [ANALYSIS.md](ANALYSIS.md) mục 5.
+
 ### Các con số chính
 
 **Convolution, kiểu Caffe (độ dốc của đường thời gian theo batch, ms/ảnh):**
@@ -100,7 +112,7 @@ chứng được thứ tự thời gian từ lịch sử repo.
 | GPU | 0,0677 (0,0648–0,0694) | không có | 0,16 |
 | Tỷ lệ CPU 1 luồng / GPU | **27,8×** (28,6 / 27,4 / 27,3) | – | khoảng 40× |
 
-Đơn vị "ms/ảnh" là cách hiểu của mình: bài báo không ghi đơn vị độ dốc.
+Đơn vị ms/ảnh: Hình 1 của bài có trục "Time (ms)" theo batch size (đọc hình ra độ dốc CPU 6,32, sát 6,45 trong phần chữ).
 
 **Speedup conv theo batch, CPU 1 luồng / GPU, Kaggle** (tỷ lệ trung bình 3 lần chạy): batch 1 là 18,6×, batch 16 là
 26,1×, từ batch 32 trở đi 27–28× (từng lần 26–29×). Batch 8 là 21,4× nhưng **lẫn một lần đo hỏng**: lần 3 chỉ 14,2× vì
@@ -117,14 +129,14 @@ GPU đang bị giảm xung nhịp; hai lần còn lại là 25,2× và 24,9×. �
 
 Khoảng n ≥ 4096 được chọn **sau khi đã thấy** kết quả với n ≥ 1024, nên ghi cả hai. Ở n = 256, GPU **chậm hơn** CPU
 (0,43×); từ n = 512 GPU mới nhanh hơn. Bài báo cũng ghi hệ số chênh của matvec là "khoảng 40 lần"; chúng tôi đo được
-21,7× trên Kaggle.
+21,7× trên Kaggle (có thể không cùng phép, xem [ANALYSIS.md](ANALYSIS.md) mục 3).
 
 **Cách cài đặt thay đổi tỷ lệ rất nhiều.** Với `nn.Conv2d` trên cả hai thiết bị, tỷ lệ CPU 1 luồng / GPU trên Kaggle chỉ
 còn khoảng 14× (15,8 / 13,4 / 13,0 từng lần): so với kiểu Caffe, CPU (oneDNN) nhanh hơn 2,4× còn GPU (cuDNN, đo khi bị hạ xung) chỉ nhanh
 hơn 1,2×. Con số 40× hay 27,8×
 vì vậy gắn với cách cài đặt kiểu Caffe, không phải là tỷ lệ của "convolution nói chung".
 
-**GEMM n = 4096 (phần thêm, vì chú thích Hình 3 của bài ghi "matrix-matrix"):** Kaggle CPU 1 luồng 129 GFLOP/s, GPU 2,97–3,49 TFLOP/s;
+**GEMM n = 4096 (phần thêm, vì chú thích Hình 3 của bài ghi "matrix-matrix", dù tiêu đề trong hình ghi "matrix vector"):** Kaggle CPU 1 luồng 129 GFLOP/s, GPU 2,97–3,49 TFLOP/s;
 laptop 106 GFLOP/s (1 luồng) và 475 GFLOP/s (8 luồng). Đây là trạng thái T4 bị giới hạn công suất, không phải đỉnh.
 
 Hình và bảng đầy đủ: [`results/kaggle/agg_20261122_074407/figures/`](results/kaggle/agg_20261122_074407/figures/) và
@@ -143,11 +155,11 @@ Hình và bảng đầy đủ: [`results/kaggle/agg_20261122_074407/figures/`](r
 
 - **Nguyên nhân** của khác biệt so với con số 40× của bài báo (27,8× ở đây): phần cứng, phần mềm và cách cài đặt đều khác
   nhau, chúng tôi không tách được từng yếu tố.
-- Matvec GPU bị giới hạn bởi băng thông bộ nhớ: GB/s trong bảng được **tính từ chính thời gian đo**, nên việc tỷ lệ GB/s
-  bằng tỷ lệ thời gian (21,7×) **không phải bằng chứng độc lập**. Chỉ biết 267 GB/s bằng khoảng 84% băng thông danh định 320 GB/s
-  của T4 (theo thông số của NVIDIA), điều này phù hợp nhưng không chứng minh.
+- **Speedup FC bằng tỷ lệ băng thông bộ nhớ:** GB/s trong bảng được **tính từ chính thời gian đo**, nên tỷ lệ GB/s bằng tỷ lệ thời gian (21,7×) **không phải bằng chứng độc lập**, và số đo hiện có không phân biệt được "theo băng thông" với "theo FLOP".
+  (Có bằng chứng độc lập rằng matvec **trên GPU** bị giới hạn bởi bộ nhớ: GB/s giữ 262–268 khi xung nhịp GPU đổi 630–1590 MHz; CPU chưa kiểm chứng.)
 - Vì sao matvec 8 luồng trên laptop không nhanh hơn 1 luồng.
-- Hình dạng đường speedup có giống Hình 2 và Hình 4 của bài báo không: chúng tôi mới đọc phần chữ, **chưa xem được hình** trong PDF.
+- **Nguyên nhân bên trong** khiến conv trên GPU chỉ đạt khoảng 14% trần FP32 (im2col, ma trận nhỏ, số kernel) vì chưa đo riêng từng bước.
+- Vì sao số tuyệt đối FC của bài báo không khớp matvec thường (CPU khoảng 0,28 GB/s, GPU khoảng 14–16 GB/s): giả thuyết là nhân với nhiều vector (khoảng 64–78), **chưa kiểm chứng**; xem ANALYSIS.md mục 3.
 
 ## Giới hạn
 
@@ -165,4 +177,4 @@ Hình và bảng đầy đủ: [`results/kaggle/agg_20261122_074407/figures/`](r
 - Các lần chạy cũ (`run_kaggle_20261121_074742`, `run_trial_balanced`) có lỗi đo ở `batched` và `conv2d` trên CPU; không trích số từ đó
   (xem [results/README.md](results/README.md)).
 - Số nhân vật lý của CPU Kaggle chỉ được suy từ mặc định 2 luồng của torch. Tên và thông số phần cứng của bài báo lấy từ phần chữ của bài.
-- **Chưa có phần phân tích và báo cáo đối chiếu từng kết luận của bài báo** (bước tiếp theo).
+- Phần phân tích đối chiếu từng kết luận của bài báo ở [ANALYSIS.md](ANALYSIS.md); **báo cáo và slide chưa làm**.

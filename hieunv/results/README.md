@@ -13,6 +13,8 @@ tài liệu tham khảo ở [`../REFERENCES.md`](../REFERENCES.md).
 | `kaggle/diag_cold_20261122_074407` | Chẩn đoán | GPU nguội, batch tăng dần; dùng để tìm nguyên nhân bậc nhảy thời gian GPU |
 | `laptop/agg_20261122_152118` | **Chính** | Gộp 3 lần chạy trên laptop (Ryzen 7 5800H, không có GPU CUDA) |
 | `laptop/run{1,2,3}_20261122_152118` | Dữ liệu thô của bản chính | 30 lần đo/điểm; có `cpu_perf.csv` (xung nhịp và tải nền) |
+| `analysis` | Phân tích | Bảng số và Hình 7–9, sinh bởi `../code/analyze.py`; xem `../ANALYSIS.md` |
+| `paper_digitized.csv` | Số liệu bài báo | Điểm đọc từ Hình 1–4 của bài báo, kèm sai số đọc |
 | `kaggle/run_kaggle_20261121_074742` | **Cũ** | 1 lần chạy, 10 lần đo. Cột CPU của `batched` và `conv2d` sai (tính cả chi phí cấp phát bộ nhớ); thời gian GPU bị ảnh hưởng bởi xung nhịp |
 | `laptop/run_trial_balanced` | **Cũ** | Chạy thử, có cùng lỗi cấp phát, matvec bị nhiễu (52,5 ms ở n=16384, bản chính là 38,4 ms) |
 
@@ -34,7 +36,7 @@ Caffe (im2col rồi nhân ma trận cho từng ảnh), ảnh xám 224×224, 96 f
 | Matvec, số mũ k khớp từ n ≥ 4096 (CPU 1 luồng) | 2,07 | 2,01 | O(n²) |
 | Matvec, số mũ k khớp từ n ≥ 1024 (CPU 1 luồng) | 2,21 | 2,13 | O(n²) |
 
-Phần paper ghi đơn vị độ dốc không rõ; ở đây hiểu là ms/ảnh. Số mũ matvec phụ thuộc khoảng khớp, khoảng
+Đơn vị: trục Hình 1 của bài báo là thời gian (ms) theo batch size nên độ dốc là ms/ảnh. Số mũ matvec phụ thuộc khoảng khớp, khoảng
 n ≥ 4096 được chọn sau khi thấy kết quả với khoảng n ≥ 1024, nên ghi cả hai.
 
 ## Những gì đã chứng minh được
