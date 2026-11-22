@@ -1,0 +1,5 @@
+# Tệp sinh ra khi chạy code
+__pycache__/
+*.pyc
+.venv/
+.DS_Store

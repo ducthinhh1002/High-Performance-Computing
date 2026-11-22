@@ -21,6 +21,7 @@ Quy ước đặt tên thư mục: chữ thường, không dấu, không khoản
 | Thư mục | Thành viên | GitHub | Chủ đề / phần việc |
 |---|---|---|---|
 | [`vinhvn/`](vinhvn/) | (điền) | (điền) | Thực nghiệm Parallel and Distributed Deep Learning: CPU/GPU, giao tiếp NCCL, data/model parallelism |
+| [`hieunv/`](hieunv/) | (điền) | (điền) | Đo lại mục 3 của Parallel and Distributed Deep Learning: CPU so với GPU (convolution, matvec), đối chiếu với bài báo, kiểm chứng băng thông bộ nhớ |
 | (thư mục của bạn) | | | |
 
 Khi thêm thư mục mới, thêm **một dòng** vào bảng này trong cùng Pull Request.
