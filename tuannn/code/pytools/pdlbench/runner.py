@@ -41,7 +41,15 @@ def _launcher_args(exp: cfgmod.Experiment, np_: int, flavor: str, phys: int, log
         if hasattr(os, "geteuid") and os.geteuid() == 0:
             extra.append("--allow-run-as-root")
         if np_ > phys:
-            if mpi.get("allow_oversubscribe", True):
+            requested = extra[extra.index("--bind-to") + 1] if "--bind-to" in extra and \
+                extra.index("--bind-to") + 1 < len(extra) else None
+            if mpi.get("allow_oversubscribe", True) and requested == "none":
+                # Explicitly unpinned (the OS places the ranks): keep it, just allow np > slots.
+                extra.append("--oversubscribe")
+                if "--map-by" in extra:
+                    i = extra.index("--map-by")
+                    del extra[i:i + 2]
+            elif mpi.get("allow_oversubscribe", True):
                 bind = "hwthread" if np_ <= logical else "none"
                 if "--bind-to" in extra:
                     extra[extra.index("--bind-to") + 1] = bind
