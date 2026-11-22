@@ -9,6 +9,7 @@
 | `aggregate.py` | combines several runs into one folder (mean, std between runs) |
 | `gpu_sampler.py`, `gpu_diag.py` | NVML clock log during GPU work; wall vs host issue time vs SM clock table |
 | `plot.py` | Fig 1–6 + `summary.md` / `summary.csv` for one run or an aggregated folder (error bars) |
+| `analyze.py` | stage 5: compares the official runs with the paper's digitized figures, writes `../results/analysis` (tables, Fig 7–9) |
 
 Every benchmark first checks that its implementations agree (caffe and batched vs conv2d,
 matvec/gemm vs float64), so a wrong kernel is never timed.
