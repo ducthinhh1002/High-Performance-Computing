@@ -293,7 +293,8 @@ def fig_scaling_dot2() -> None:
     a1.errorbar(k, pin.speedup, yerr=pin.speedup * pin.train_time_s_std / pin.train_time_s_mean, fmt="o-", color=C[0], capsize=3, label="ghim vào nhân (--bind-to core)")
     a1.errorbar(unb.np, unb.speedup, yerr=unb.speedup * unb.train_time_s_std / unb.train_time_s_mean, fmt="s--", color=C[1], capsize=3, label="không ghim")
     for x, y in zip(k, pin.speedup):
-        a1.annotate(f"{y:.2f}×", (x, y), textcoords="offset points", xytext=(5, -13), fontsize=8.5, color=INK)
+        if x > 1:
+            a1.annotate(f"{y:.2f}×", (x, y), textcoords="offset points", xytext=(5, -13), fontsize=8.5, color=INK)
     a1.set(title="Strong scaling sync SGD (LeNet/MNIST, batch tổng 256)", xlabel="số tiến trình k", ylabel="speedup")
     a1.set_xticks(k)
     a1.legend(loc="upper left", fontsize=8.5)
