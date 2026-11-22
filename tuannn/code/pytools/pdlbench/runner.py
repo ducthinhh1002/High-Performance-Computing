@@ -104,6 +104,31 @@ def _parse_filters(items: Optional[List[str]]) -> List[Tuple[str, str]]:
     return out
 
 
+def _preflight_cuda(runs: List[cfgmod.Run], build_dir: Path) -> None:
+    """Stops before any measurement if the experiment needs the GPU but CUDA does not work.
+
+    Without this, a missing/shadowed driver library (e.g. a stale libcuda in /lib shadowing
+    /usr/lib/wsl/lib) makes the binaries skip every GPU case silently and the experiment
+    "succeeds" with CPU-only data.
+    """
+    def wants_gpu(r: cfgmod.Run) -> bool:
+        vals = [str(v).lower() for v in r.params.values()]
+        return any("cuda" in v or v in ("all", "gpu") for v in vals) and r.binary != "pdl_bench_comm"
+
+    probe = build_dir / "bin" / "pdl_check"
+    if not any(wants_gpu(r) for r in runs) or not probe.exists():
+        return
+    res = subprocess.run([str(probe), "--device", "cuda", "--tests", "kernels"],
+                         capture_output=True, text=True, check=False)
+    if res.returncode != 0 or "CUDA requested but not available" in (res.stdout + res.stderr):
+        raise SystemExit(
+            "preflight: this experiment needs CUDA but the GPU check failed.\n"
+            "  - run `build/bin/pdl_check --device cuda` to see the error\n"
+            "  - WSL2: export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH\n"
+            + (res.stdout + res.stderr)[-600:])
+    log("preflight: CUDA kernels verified against the CPU reference")
+
+
 def run_experiment(config_path: Path, build_dir: Path = Path("build"), results_dir: Path = Path("results"),
                    dry_run: bool = False, resume: Optional[Path] = None, repeats: Optional[int] = None,
                    filters: Optional[List[str]] = None, stop_on_error: bool = False) -> Optional[Path]:
@@ -126,6 +151,8 @@ def run_experiment(config_path: Path, build_dir: Path = Path("build"), results_d
     missing = sorted({r.binary for r in runs if not (build_dir / "bin" / r.binary).exists()})
     if missing:
         raise SystemExit(f"missing binaries in {build_dir}/bin: {missing} (run scripts/build.sh)")
+
+    _preflight_cuda(runs, build_dir)
 
     if resume is not None:
         run_dir = resume
