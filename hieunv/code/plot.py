@@ -27,8 +27,8 @@ import pandas as pd  # noqa: E402
 from matplotlib import font_manager  # noqa: E402
 from matplotlib.ticker import FuncFormatter, LogLocator, NullLocator  # noqa: E402
 
-# Paper section 3.2.1: slopes of the CPU and GPU lines in its Fig 1 (unit not stated,
-# read here as ms per image), Xeon E5-2670 vs NVIDIA GRID K520 with Caffe.
+# Paper section 3.2.1: slopes of the CPU and GPU lines in its Fig 1 (its axes are "Time (ms)" vs
+# batch size, so ms per image), Xeon E5-2670 vs NVIDIA GRID K520 with Caffe.
 PAPER_CPU_SLOPE = 6.45
 PAPER_GPU_SLOPE = 0.16
 
@@ -389,7 +389,7 @@ def write_summary(run_dir, figdir, env, meta, summary, conv_speed, fc_speed, bas
                   "|---" * (len(fc_speed.columns) + 1) + "|"]
         for size, row in fc_speed.iterrows():
             lines.append(f"| {size} | " + " | ".join(f"{v:.2f}×" for v in row) + " |")
-    lines += ["", "Ghi chú: paper không ghi đơn vị độ dốc; ở đây hiểu là ms/ảnh. "
+    lines += ["", "Ghi chú: trục Hình 1 của paper là Time (ms) theo batch size, nên độ dốc là ms/ảnh. "
               "Con số tuyệt đối khác paper vì phần cứng khác đời; điều cần so là xu hướng."]
     path = figdir / "summary.md"
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

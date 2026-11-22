@@ -54,4 +54,4 @@ Speedup matvec theo n:
 | 12288 | 1.91× | 21.24× |
 | 16384 | 1.91× | 21.74× |
 
-Ghi chú: paper không ghi đơn vị độ dốc; ở đây hiểu là ms/ảnh. Con số tuyệt đối khác paper vì phần cứng khác đời; điều cần so là xu hướng.
+Ghi chú: trục Hình 1 của paper là Time (ms) theo batch size, nên độ dốc là ms/ảnh. Con số tuyệt đối khác paper vì phần cứng khác đời; điều cần so là xu hướng.
