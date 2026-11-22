@@ -59,7 +59,8 @@ def env_info(device):
         "device": str(device),
         "pod": os.environ.get("HOSTNAME"),
         "net_env": {k: v for k, v in os.environ.items()
-                    if k.startswith("NCCL_") or k in ("NET_LABEL", "NODE_NAME", "MASTER_ADDR", "NNODES")},
+                    if k.startswith("NCCL_") or k in ("NET_LABEL", "NODE_NAME", "MASTER_ADDR", "NNODES", "DDP_BUCKET_MB",
+                                                    "DDP_BCAST_BUF", "FAST_EXIT", "TEARDOWN_SLEEP_S")},
         "time_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     if str(device).startswith("cuda"):

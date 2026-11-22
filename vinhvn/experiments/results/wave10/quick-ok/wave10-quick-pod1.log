@@ -1,0 +1,35 @@
+MN: idx=1 node=<node> master=wave10-quick-0.wave10-quick-svc run=20261122T144340Z quick=1
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+CFG: NETS='native socket' WORLDS='2 1' STEPS='e3 e4 pp tp' STEP_TIMEOUT=300 DIST_TIMEOUT_S=180 DIAG=0
+##### NCCL transport (net=native, world 4)
+      2  NCCL INFO Using network Socket
+      2  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.224<0>
+      2  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      2  NCCL INFO Connected all trees
+      2  NCCL INFO Connected all rings
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f7528005210
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f7528005198
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f7528005120
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f75280050a8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f7528005030
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f7528004fb8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f7528004f40
+##### net=native world=4
+##### net=native world=2
+##### NCCL transport (net=socket, world 4)
+      2  NCCL INFO Using network Socket
+      2  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.224<0>
+      2  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      2  NCCL INFO Connected all trees
+      2  NCCL INFO Connected all rings
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf8005288
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf8005210
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf8005198
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf8005120
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf80050a8
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf8005030
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7fbcf8004fb8
+##### net=socket world=4
+##### net=socket world=2
+WAVE10 FINISHED rc=0 idx=1

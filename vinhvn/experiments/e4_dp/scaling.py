@@ -45,7 +45,10 @@ def run_config(model_name, mode, b_gpu, k, device, warmup, steps):
     x = torch.randn(b_gpu, *shape, device=device)
     y = torch.randint(0, ncls, (b_gpu,), device=device)
     loss_fn = nn.CrossEntropyLoss()
-    net = DDP(model, device_ids=[device.index] if device.type == "cuda" else None) if mode == "ddp" else model
+    net = (DDP(model, device_ids=[device.index] if device.type == "cuda" else None,
+               bucket_cap_mb=int(os.environ.get("DDP_BUCKET_MB", "25")),
+               broadcast_buffers=os.environ.get("DDP_BCAST_BUF", "1") == "1")
+           if mode == "ddp" else model)
     opt = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.9, foreach=True)
     params = [q for q in model.parameters()]
 

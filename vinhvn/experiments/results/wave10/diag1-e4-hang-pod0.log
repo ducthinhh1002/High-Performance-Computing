@@ -1,0 +1,205 @@
+MN: idx=0 node=<node> master=wave10-quick-0.wave10-quick-svc run=20261122T141150Z quick=1
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+CFG: NETS='native' WORLDS='2' STEPS='e3 e4 pp tp' STEP_TIMEOUT=240 DIST_TIMEOUT_S=120 DIAG=1
+##### NCCL transport (net=native, world 4)
+      2  NCCL INFO Using network Socket
+      2  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.219<0>
+      2  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      2  NCCL INFO Connected all trees
+      2  NCCL INFO Connected all rings
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f4005210
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f4005198
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f4005120
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f40050a8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f4005030
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f4004fb8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f23f4004f40
+##### net=native world=4
+NCCL version 2.21.5+cuda12.4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=0.0001014, p25_s=0.0001, p75_s=0.0001031, algbw_GBps=0.0404, busbw_GBps=0.0606, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=0.0001065, p25_s=0.0001051, p75_s=0.0001077, algbw_GBps=0.1538, busbw_GBps=0.2307, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=0.000274, p25_s=0.0002706, p75_s=0.0002755, algbw_GBps=0.2392, busbw_GBps=0.3588, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=0.0003525, p25_s=0.0003397, p75_s=0.0003578, algbw_GBps=0.7437, busbw_GBps=1.116, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=0.0008222, p25_s=0.0008219, p75_s=0.000834, algbw_GBps=1.275, busbw_GBps=1.913, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=0.002286, p25_s=0.002271, p75_s=0.002318, algbw_GBps=1.835, busbw_GBps=2.752, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,0.00010138249024748802,0.000100016500800848,0.0001031048595905304,0.04040145384080746,0.0606021807612112,3
+all_reduce,4,pow4,16384,0.00010652264580130578,0.00010508451610803604,0.00010770432651042938,0.15380767044183916,0.23071150566275872,3
+all_reduce,4,pow4,65536,0.0002739940397441387,0.0002706211805343628,0.000275502260774374,0.23918768474379543,0.3587815271156931,3
+all_reduce,4,pow4,262144,0.00035249289125204085,0.00033969709649682043,0.00035778868943452834,0.7436859196475561,1.1155288794713343,3
+all_reduce,4,pow4,1048576,0.0008221657015383243,0.000821878183633089,0.0008340316265821457,1.2753828066994861,1.913074210049229,3
+all_reduce,4,pow4,4194304,0.0022860027384012938,0.0022712014615535736,0.002318066265434027,1.8347764547881813,2.752164682182272,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_DEBUG": "WARN",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:12:15Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 0.00011000109814740484,
+      "B_GBps": 2.413941529575162,
+      "max_rel_err": 0.44989848309294106
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+[rank1]:[W1122 14:12:23.373846687 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W1122 14:12:23.378907693 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+NCCL version 2.21.5+cuda12.4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.003909, p25_s=0.00382, p75_s=0.005778, t_fwd_s=0.001866, t_bwd_s=0.001775, t_comm_s=3.134e-07, t_opt_s=0.0002747, img_s=8186, img_s_per_gpu=2047, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.0274, p25_s=0.02635, p75_s=0.0279, t_fwd_s=0.001873, t_bwd_s=0.003832, t_comm_s=0.02116, t_opt_s=0.0002682, img_s=1168, img_s_per_gpu=292, steps=4
+=== PY-SPY pid=214 sống 70s: /opt/conda/bin/python -u -m e4_dp.scaling --quick
+Error: Permission denied (os error 13)
+
+Caused by:
+    Permission denied (os error 13)
+=== PY-SPY pid=215 sống 70s: /opt/conda/bin/python -u -m e4_dp.scaling --quick
+Error: Permission denied (os error 13)
+
+Caused by:
+    Permission denied (os error 13)
+[rank0]:[E1122 14:14:24.955685211 ProcessGroupNCCL.cpp:616] [Rank 0] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120001 milliseconds before timing out.
+[rank0]:[E1122 14:14:24.956522028 ProcessGroupNCCL.cpp:1785] [PG ID 0 PG GUID 0(default_pg) Rank 0] Exception (either an error or timeout) detected by watchdog at work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank1]:[E1122 14:14:25.997337051 ProcessGroupNCCL.cpp:616] [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120042 milliseconds before timing out.
+[rank1]:[E1122 14:14:25.998132836 ProcessGroupNCCL.cpp:1785] [PG ID 0 PG GUID 0(default_pg) Rank 1] Exception (either an error or timeout) detected by watchdog at work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank1]:[E1122 14:14:26.989748258 ProcessGroupNCCL.cpp:1834] [PG ID 0 PG GUID 0(default_pg) Rank 1] Timeout at NCCL work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank1]:[E1122 14:14:26.989765865 ProcessGroupNCCL.cpp:630] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E1122 14:14:26.989770933 ProcessGroupNCCL.cpp:636] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E1122 14:14:26.990840949 ProcessGroupNCCL.cpp:1595] [PG ID 0 PG GUID 0(default_pg) Rank 1] Process group watchdog thread terminated with exception: [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120042 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f274ad6c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x7f2700c19772 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f2700c20bb3 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f2700c2261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x7f274b1d75c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x94ac3 (0x7f274bb1dac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #6: <unknown function> + 0x126850 (0x7f274bbaf850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 1] Process group watchdog thread terminated with exception: [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120042 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f274ad6c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x7f2700c19772 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f2700c20bb3 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f2700c2261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x7f274b1d75c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x94ac3 (0x7f274bb1dac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #6: <unknown function> + 0x126850 (0x7f274bbaf850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1601 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f274ad6c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe4271b (0x7f270088f71b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x7f274b1d75c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x94ac3 (0x7f274bb1dac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x126850 (0x7f274bbaf850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+W1122 14:14:27.338000 195 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 214 closing signal SIGTERM
+E1122 14:14:27.603000 195 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: -6) local_rank: 1 (pid: 215) of binary: /opt/conda/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 923, in <module>
+    main()
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+e4_dp.scaling FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-22_14:14:27
+  host      : wave10-quick-0.wave10-quick-svc.hpc-dl-exp.svc.cluster.local
+  rank      : 1 (local_rank: 1)
+  exitcode  : -6 (pid: 215)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 215
+============================================================
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+NCCL version 2.21.5+cuda12.4
+NCCL version 2.21.5+cuda12.4
+  arch=vgg16, S=4, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005686, samples_s=2814, peak_mem_GB_max=1.027, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006021, samples_s=2657, peak_mem_GB_max=1.438, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.6, status=ok
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+  arch=mlp, S=4, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.0008994, samples_s=1.779e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.0009231, samples_s=1.733e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.6, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_DEBUG": "WARN",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:14:33Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,16,16,134.301514,0.00568623784929514,2813.811244632221,1.027281403541565,0.04208025708794594,5.30841588973999,0.75,ok
+vgg16,4,2,16,8,134.301514,0.006020943447947502,2657.390845525096,1.4382110834121704,0.04208025708794594,5.30841588973999,0.6,ok
+mlp,4,1,16,16,0.01729,0.0008994245901703835,17789.151169381552,1.0238285064697266,0.06818559765815735,0.02457600086927414,0.75,ok
+mlp,4,2,16,8,0.01729,0.0009231481701135636,17331.995575565856,1.0238285064697266,0.06818559765815735,0.02457600086927414,0.6,ok
+----- END FILE pipeline.csv -----

@@ -40,6 +40,14 @@ spec:
             - {name: RUN_ID, value: "@RUNID@"}
             - {name: MASTER_ADDR, value: "@NAME@-0.@NAME@-svc"}
             - {name: NNODES, value: "2"}
+            - {name: DIAG, value: "@DIAG@"}
+            - {name: NETS, value: "@NETS@"}
+            - {name: WORLDS, value: "@WORLDS@"}
+            - {name: STEPS, value: "@STEPS@"}
+            - {name: STEP_TIMEOUT, value: "@STEP_TIMEOUT@"}
+            - {name: DIST_TIMEOUT_S, value: "@DIST_TIMEOUT_S@"}
+            - {name: DEBUG_DETAIL, value: "@DEBUG_DETAIL@"}
+            - {name: HANG_S, value: "@HANG_S@"}
             - {name: OUT_DIR, value: /data/results}
             - {name: DATA_DIR, value: /data/datasets}
             - name: NODE_NAME

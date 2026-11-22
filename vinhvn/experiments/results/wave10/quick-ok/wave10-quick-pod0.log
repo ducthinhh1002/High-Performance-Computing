@@ -1,0 +1,843 @@
+MN: idx=0 node=<node> master=wave10-quick-0.wave10-quick-svc run=20261122T144340Z quick=1
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-c0edb55d-5e5c-2bf0-38e4-e9c9005a5176)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-e9bf1af5-854d-a7a0-988c-3b5a338dd3eb)
+CFG: NETS='native socket' WORLDS='2 1' STEPS='e3 e4 pp tp' STEP_TIMEOUT=300 DIST_TIMEOUT_S=180 DIAG=0
+##### NCCL transport (net=native, world 4)
+      2  NCCL INFO Using network Socket
+      2  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.223<0>
+      2  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      2  NCCL INFO Connected all trees
+      2  NCCL INFO Connected all rings
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee8005210
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee8005198
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee8005120
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee80050a8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee8005030
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee8004fb8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8ee8004f40
+##### net=native world=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=0.0001201, p25_s=0.0001179, p75_s=0.0001202, algbw_GBps=0.03412, busbw_GBps=0.05118, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=0.0001364, p25_s=0.0001337, p75_s=0.0001454, algbw_GBps=0.1201, busbw_GBps=0.1802, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=0.0003291, p25_s=0.0003286, p75_s=0.0003368, algbw_GBps=0.1991, busbw_GBps=0.2987, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=0.0004016, p25_s=0.0003942, p75_s=0.0004025, algbw_GBps=0.6527, busbw_GBps=0.979, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=0.0009058, p25_s=0.0009022, p75_s=0.0009208, algbw_GBps=1.158, busbw_GBps=1.737, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=0.002484, p25_s=0.002457, p75_s=0.002542, algbw_GBps=1.689, busbw_GBps=2.533, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,0.00012005561962723732,0.00011785976588726044,0.0001201731339097023,0.03411751996880894,0.051176279953213416,3
+all_reduce,4,pow4,16384,0.00013641564175486564,0.0001337095908820629,0.00014541007578372956,0.12010352910585945,0.18015529365878918,3
+all_reduce,4,pow4,65536,0.00032913874834775923,0.00032856689766049387,0.0003368212841451168,0.19911359670954454,0.2986703950643168,3
+all_reduce,4,pow4,262144,0.00040164057165384295,0.00039424577727913856,0.000402508731931448,0.6526830666547573,0.9790245999821359,3
+all_reduce,4,pow4,1048576,0.0009057610854506493,0.0009021779149770737,0.0009208078309893608,1.1576739350402705,1.7365109025604057,3
+all_reduce,4,pow4,4194304,0.0024839836172759534,0.002457277337089181,0.002542155282571912,1.6885393167768392,2.532808975165259,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:04Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 0.00013663964473875978,
+      "B_GBps": 2.2458194841678973,
+      "max_rel_err": 0.45186751488112553
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.004131, p25_s=0.00405, p75_s=0.006675, t_fwd_s=0.002093, t_bwd_s=0.001726, t_comm_s=3.404e-07, t_opt_s=0.000315, img_s=7746, img_s_per_gpu=1937, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.02893, p25_s=0.02806, p75_s=0.02927, t_fwd_s=0.00211, t_bwd_s=0.00423, t_comm_s=0.02221, t_opt_s=0.000311, img_s=1106, img_s_per_gpu=276.5, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.03117, p25_s=0.0296, p75_s=0.03283, t_fwd_s=0.002859, t_bwd_s=0.02795, t_comm_s=1.021e-06, t_opt_s=0.0003526, img_s=1026, img_s_per_gpu=256.6, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.003869, p25_s=0.003847, p75_s=0.004026, t_fwd_s=0.001919, t_bwd_s=0.001652, t_comm_s=2.976e-07, t_opt_s=0.0002986, img_s=4136, img_s_per_gpu=1034, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.02907, p25_s=0.02796, p75_s=0.02992, t_fwd_s=0.002002, t_bwd_s=0.004627, t_comm_s=0.02213, t_opt_s=0.0003114, img_s=550.4, img_s_per_gpu=137.6, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.03219, p25_s=0.03125, p75_s=0.03262, t_fwd_s=0.002772, t_bwd_s=0.02905, t_comm_s=5.765e-07, t_opt_s=0.0003545, img_s=497, img_s_per_gpu=124.2, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:09Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.0041310787200927734,0.004050108138471842,0.006674547679722309,0.0020931526087224483,0.0017264285124838352,3.403984010219574e-07,0.0003149728290736675,7746.160789519247,1936.5401973798118,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.028931909706443548,0.028061831602826715,0.029268807964399457,0.002109740860760212,0.004229721147567034,0.022206778172403574,0.0003109951503574848,1106.0452049203357,276.5113012300839,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.0311743151396513,0.02959642861969769,0.032825920497998595,0.0028589796274900436,0.02795372623950243,1.0211952030658722e-06,0.00035258568823337555,1026.486062537377,256.62151563434423,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.0038686669431626797,0.0038465920370072126,0.004025538917630911,0.0019185361452400684,0.0016524712555110455,2.975575625896454e-07,0.00029863277450203896,4135.791536223539,1033.9478840558847,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.029072306118905544,0.02795969066210091,0.029924166155979037,0.002002132125198841,0.00462746899574995,0.022125742863863707,0.0003113732673227787,550.351937495433,137.58798437385826,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.032193954568356276,0.031252579065039754,0.03261615987867117,0.0027721477672457695,0.02904812665656209,5.764886736869812e-07,0.00035454239696264267,496.9877175551009,124.24692938877523,4
+----- END FILE scaling.csv -----
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+  arch=vgg16, S=4, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005616, samples_s=2849, peak_mem_GB_max=1.027, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.005902, samples_s=2711, peak_mem_GB_max=1.438, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.6, status=ok
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+  arch=mlp, S=4, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.0007926, samples_s=2.019e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.0008235, samples_s=1.943e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.6, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:19Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,16,16,134.301514,0.005615806579589844,2849.1009747647995,1.027281403541565,0.04208025708794594,5.30841588973999,0.75,ok
+vgg16,4,2,16,8,134.301514,0.005901636928319931,2711.1122209537302,1.4382110834121704,0.04208025708794594,5.30841588973999,0.6,ok
+mlp,4,1,16,16,0.01729,0.0007925543934106827,20187.888847786857,1.0238285064697266,0.06818559765815735,0.02457600086927414,0.75,ok
+mlp,4,2,16,8,0.01729,0.0008235435932874679,19428.236866163083,1.0238285064697266,0.06818559765815735,0.02457600086927414,0.6,ok
+----- END FILE pipeline.csv -----
+  T=4, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.01651, step_s=0.001972, tokens_s=1.622e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=4.915e-05, peak_mem_GB=0.06826, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:31Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+4,2,64,32,0.066048,0.016512,0.001972301242252191,16224.702045747774,0.008192,4,4.9152e-05,0.06825728,ok
+----- END FILE tensor_parallel.csv -----
+##### net=native world=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=5.299e-05, p25_s=5.175e-05, p75_s=5.301e-05, algbw_GBps=0.0773, busbw_GBps=0.0773, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=9.443e-05, p25_s=9.108e-05, p75_s=9.448e-05, algbw_GBps=0.1735, busbw_GBps=0.1735, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=0.0001263, p25_s=0.0001234, p75_s=0.0001282, algbw_GBps=0.5191, busbw_GBps=0.5191, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=0.0002311, p25_s=0.0002278, p75_s=0.0002343, algbw_GBps=1.134, busbw_GBps=1.134, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=0.0004904, p25_s=0.0004837, p75_s=0.0004944, algbw_GBps=2.138, busbw_GBps=2.138, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=0.001403, p25_s=0.001383, p75_s=0.001597, algbw_GBps=2.988, busbw_GBps=2.988, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,5.298895761370659e-05,5.175476893782616e-05,5.300987511873245e-05,0.07729912390162763,0.07729912390162763,3
+all_reduce,2,pow4,16384,9.442625567317009e-05,9.107640013098716e-05,9.44824330508709e-05,0.1735110630321783,0.1735110630321783,3
+all_reduce,2,pow4,65536,0.00012625709176063537,0.0001234019175171852,0.00012821074575185775,0.5190678724348133,0.5190678724348133,3
+all_reduce,2,pow4,262144,0.00023110290989279746,0.0002277943678200245,0.00023433782160282136,1.1343171755024708,1.1343171755024708,3
+all_reduce,2,pow4,1048576,0.0004903993755578994,0.0004836593195796013,0.0004943952895700932,2.1382082691420536,2.1382082691420536,3
+all_reduce,2,pow4,4194304,0.0014034879859536886,0.0013828884810209274,0.0015973462723195553,2.9884858594994776,2.9884858594994776,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:40Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 6.723657312217434e-05,
+      "B_GBps": 2.617740280551146,
+      "max_rel_err": 0.29840790500255143
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.004111, p25_s=0.003763, p75_s=0.004939, t_fwd_s=0.001868, t_bwd_s=0.001948, t_comm_s=3.846e-07, t_opt_s=0.0002945, img_s=3892, img_s_per_gpu=1946, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.02332, p25_s=0.02231, p75_s=0.02355, t_fwd_s=0.00187, t_bwd_s=0.004347, t_comm_s=0.0168, t_opt_s=0.0002775, img_s=686, img_s_per_gpu=343, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.0221, p25_s=0.02106, p75_s=0.02328, t_fwd_s=0.002424, t_bwd_s=0.01937, t_comm_s=3.818e-07, t_opt_s=0.0002987, img_s=724, img_s_per_gpu=362, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.003752, p25_s=0.00374, p75_s=0.003946, t_fwd_s=0.001798, t_bwd_s=0.001686, t_comm_s=2.123e-07, t_opt_s=0.0002711, img_s=4264, img_s_per_gpu=2132, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.02271, p25_s=0.02241, p75_s=0.02524, t_fwd_s=0.001869, t_bwd_s=0.004703, t_comm_s=0.01587, t_opt_s=0.0002635, img_s=704.5, img_s_per_gpu=352.2, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.02236, p25_s=0.02095, p75_s=0.02304, t_fwd_s=0.002444, t_bwd_s=0.01957, t_comm_s=3.814e-07, t_opt_s=0.0003001, img_s=715.6, img_s_per_gpu=357.8, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:44Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.004110607318580151,0.00376312667503953,0.004939313977956772,0.0018681217916309834,0.0019475244916975498,3.8463622331619263e-07,0.00029445765540003777,3892.3688788464906,1946.1844394232453,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.023324877489358187,0.02230513864196837,0.023547988384962082,0.0018695499747991562,0.0043467250652611256,0.016804445534944534,0.0002774735912680626,685.9628740729673,342.98143703648367,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.022098235320299864,0.021060182014480233,0.023282329319044948,0.0024240012280642986,0.019365756306797266,3.818422555923462e-07,0.00029870448634028435,724.0397148500855,362.01985742504274,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.003752459306269884,0.0037395900581032038,0.003945827949792147,0.001798412762582302,0.001685533206909895,2.123415470123291e-07,0.00027106748893857,4263.870356506206,2131.935178253103,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.022712002974003553,0.022407293086871505,0.025236526504158974,0.00186920166015625,0.004702921025454998,0.015873264987021685,0.00026347534731030464,704.4733138822588,352.2366569411294,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.02235871972516179,0.020950749283656478,0.023038255283609033,0.0024439957924187183,0.01957075810059905,3.8137659430503845e-07,0.0003001447767019272,715.6044798931,357.80223994655,4
+----- END FILE scaling.csv -----
+[vgg16] stage split (layer ranges): [(0, 19), (19, 40)]
+  arch=vgg16, S=2, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005486, samples_s=2917, peak_mem_GB_max=1.16, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.5, status=ok
+  arch=vgg16, S=2, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006575, samples_s=2433, peak_mem_GB_max=1.533, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.3333, status=ok
+[mlp] stage split (layer ranges): [(0, 2), (2, 5)]
+  arch=mlp, S=2, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.0008817, samples_s=1.815e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.5, status=ok
+  arch=mlp, S=2, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.001018, samples_s=1.572e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.3333, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:44:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,2,1,16,16,134.301514,0.005485659837722779,2916.6956160814307,1.159879207611084,0.19431321322917938,1.0485759973526,0.5,ok
+vgg16,2,2,16,8,134.301514,0.006574932485818863,2433.4850638405164,1.5327508449554443,0.19431321322917938,1.0485759973526,0.3333333333333333,ok
+mlp,2,1,16,16,0.01729,0.0008816994726657867,18146.772790534367,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.5,ok
+mlp,2,2,16,8,0.01729,0.0010178036987781524,15720.123653713968,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.3333333333333333,ok
+----- END FILE pipeline.csv -----
+  T=2, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.03302, step_s=0.001831, tokens_s=1.748e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=3.277e-05, peak_mem_GB=0.06834, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "DDP_BUCKET_MB": "1000",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "native",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:01Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+2,2,64,32,0.066048,0.033024,0.0018307419183353584,17479.25236184939,0.008192,4,3.2767999999999995e-05,0.0683392,ok
+----- END FILE tensor_parallel.csv -----
+##### NCCL transport (net=socket, world 4)
+      2  NCCL INFO Using network Socket
+      2  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.223<0>
+      2  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      2  NCCL INFO Connected all trees
+      2  NCCL INFO Connected all rings
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f1630005378
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f1630005300
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f1630005288
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f1630005210
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f1630005198
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f1630005120
+      1  NCCL INFO Connected to proxy localRank 0 -> connection 0x7f16300050a8
+##### net=socket world=4
+  op=all_reduce, k=4, label=pow4, bytes=4096, median_s=0.0001454, p25_s=0.0001433, p75_s=0.0001502, algbw_GBps=0.02817, busbw_GBps=0.04225, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=16384, median_s=0.0001626, p25_s=0.0001615, p75_s=0.0001658, algbw_GBps=0.1008, busbw_GBps=0.1512, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=65536, median_s=0.000333, p25_s=0.0003274, p75_s=0.000344, algbw_GBps=0.1968, busbw_GBps=0.2952, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=262144, median_s=0.0005188, p25_s=0.0005172, p75_s=0.0005237, algbw_GBps=0.5053, busbw_GBps=0.7579, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=1048576, median_s=0.001188, p25_s=0.001178, p75_s=0.00121, algbw_GBps=0.8825, busbw_GBps=1.324, trials=3
+  op=all_reduce, k=4, label=pow4, bytes=4194304, median_s=0.003096, p25_s=0.002819, p75_s=0.003104, algbw_GBps=1.355, busbw_GBps=2.032, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,4,pow4,4096,0.0001454230584204197,0.00014334669336676597,0.00015020813792943955,0.028166097209690214,0.04224914581453532,3
+all_reduce,4,pow4,16384,0.00016257485374808313,0.00016145557165145875,0.00016576990485191344,0.10077819307398994,0.1511672896109849,3
+all_reduce,4,pow4,65536,0.00033303044736385343,0.00032737288624048235,0.00034404436126351357,0.19678681189290312,0.29518021783935466,3
+all_reduce,4,pow4,262144,0.0005188147909939289,0.0005171750299632549,0.0005237405002117157,0.5052747233705362,0.7579120850558043,3
+all_reduce,4,pow4,1048576,0.0011882087029516696,0.0011783011443912983,0.0012099699676036836,0.8824846993589567,1.323727049038435,3
+all_reduce,4,pow4,4194304,0.0030959476716816425,0.0028185983188450336,0.0031036512926220896,1.3547722522460328,2.0321583783690493,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:18Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 0.0001630698246915801,
+      "B_GBps": 1.7599806957633841,
+      "max_rel_err": 0.3426277251341616
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=weak, b_gpu=8, b_global=32, step_s=0.005024, p25_s=0.004062, p75_s=0.007589, t_fwd_s=0.002319, t_bwd_s=0.002029, t_comm_s=3.604e-07, t_opt_s=0.000306, img_s=6369, img_s_per_gpu=1592, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=weak, b_gpu=8, b_global=32, step_s=0.03435, p25_s=0.03388, p75_s=0.03513, t_fwd_s=0.002168, t_bwd_s=0.004963, t_comm_s=0.0269, t_opt_s=0.0003306, img_s=931.6, img_s_per_gpu=232.9, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=weak, b_gpu=8, b_global=32, step_s=0.03327, p25_s=0.03175, p75_s=0.03394, t_fwd_s=0.00303, t_bwd_s=0.02976, t_comm_s=9.257e-07, t_opt_s=0.0004157, img_s=961.8, img_s_per_gpu=240.5, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=local, scaling=strong, b_gpu=4, b_global=16, step_s=0.003907, p25_s=0.003893, p75_s=0.003979, t_fwd_s=0.001935, t_bwd_s=0.001677, t_comm_s=2.999e-07, t_opt_s=0.0002994, img_s=4095, img_s_per_gpu=1024, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=manual, scaling=strong, b_gpu=4, b_global=16, step_s=0.03537, p25_s=0.03447, p75_s=0.03605, t_fwd_s=0.002058, t_bwd_s=0.003993, t_comm_s=0.02888, t_opt_s=0.0003252, img_s=452.3, img_s_per_gpu=113.1, steps=4
+  model=resnet18_cifar, params=11173962, k=4, mode=ddp, scaling=strong, b_gpu=4, b_global=16, step_s=0.03274, p25_s=0.03222, p75_s=0.03333, t_fwd_s=0.002851, t_bwd_s=0.02947, t_comm_s=6.082e-07, t_opt_s=0.0003886, img_s=488.7, img_s_per_gpu=122.2, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:23Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,4,local,weak,8,32,0.005024216137826443,0.004062275635078549,0.007589061511680484,0.002319143619388342,0.002029229886829853,3.604218363761902e-07,0.00030596181750297546,6369.1527438633875,1592.2881859658469,4
+resnet18_cifar,11173962,4,manual,weak,8,32,0.034349421970546246,0.033875804860144854,0.03513379255309701,0.0021682451479136944,0.004963239189237356,0.02690492384135723,0.0003305971622467041,931.6022851109165,232.9005712777291,4
+resnet18_cifar,11173962,4,ddp,weak,8,32,0.033269664738327265,0.03175056236796081,0.033938960172235966,0.0030300156213343143,0.02976319193840027,9.257346391677856e-07,0.00041570840403437614,961.8371646268924,240.4592911567231,4
+resnet18_cifar,11173962,4,local,strong,4,16,0.003906907979398966,0.0038926834240555763,0.0039785674307495356,0.0019354289397597313,0.0016765017062425613,2.998858690261841e-07,0.00029941927641630173,4095.310174789789,1023.8275436974473,4
+resnet18_cifar,11173962,4,manual,strong,4,16,0.035371189936995506,0.034469971200451255,0.036045443499460816,0.002057548612356186,0.003993296530097723,0.02887510322034359,0.00032517267391085625,452.3455396468087,113.08638491170217,4
+resnet18_cifar,11173962,4,ddp,strong,4,16,0.032738267444074154,0.03221571468748152,0.03332928498275578,0.0028505525551736355,0.029473205097019672,6.081536412239075e-07,0.00038859574124217033,488.72470198162875,122.18117549540719,4
+----- END FILE scaling.csv -----
+[vgg16] stage split (layer ranges): [(0, 10), (10, 18), (18, 33), (33, 40)]
+  arch=vgg16, S=4, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.007528, samples_s=2125, peak_mem_GB_max=1.027, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.75, status=ok
+  arch=vgg16, S=4, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006877, samples_s=2327, peak_mem_GB_max=1.438, peak_mem_GB_min=0.04208, sent_MB_per_step=5.308, bubble_theory=0.6, status=ok
+[mlp] stage split (layer ranges): [(0, 1), (1, 2), (2, 3), (3, 5)]
+  arch=mlp, S=4, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.0008973, samples_s=1.783e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.75, status=ok
+  arch=mlp, S=4, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.000999, samples_s=1.602e+04, peak_mem_GB_max=1.024, peak_mem_GB_min=0.06819, sent_MB_per_step=0.02458, bubble_theory=0.6, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:33Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,4,1,16,16,134.301514,0.0075277602300047874,2125.466209221946,1.027281403541565,0.04208025708794594,5.30841588973999,0.75,ok
+vgg16,4,2,16,8,134.301514,0.006877249479293824,2326.5114997170244,1.4382110834121704,0.04208025708794594,5.30841588973999,0.6,ok
+mlp,4,1,16,16,0.01729,0.0008972788229584694,17831.692435630524,1.0238285064697266,0.06818559765815735,0.02457599900662899,0.75,ok
+mlp,4,2,16,8,0.01729,0.0009990081191062928,16015.885851171573,1.0238285064697266,0.06818559765815735,0.02457599900662899,0.6,ok
+----- END FILE pipeline.csv -----
+  T=4, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.01651, step_s=0.00176, tokens_s=1.818e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=4.915e-05, peak_mem_GB=0.06826, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 4,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:42Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+4,2,64,32,0.066048,0.016512,0.001760371805479129,18177.97802736928,0.008192,4,4.9152e-05,0.06825728,ok
+----- END FILE tensor_parallel.csv -----
+##### net=socket world=2
+  op=all_reduce, k=2, label=pow4, bytes=4096, median_s=5.542e-05, p25_s=5.471e-05, p75_s=5.71e-05, algbw_GBps=0.07391, busbw_GBps=0.07391, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=16384, median_s=9.637e-05, p25_s=9.637e-05, p75_s=9.78e-05, algbw_GBps=0.17, busbw_GBps=0.17, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=65536, median_s=0.0001251, p25_s=0.0001227, p75_s=0.0001291, algbw_GBps=0.5238, busbw_GBps=0.5238, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=262144, median_s=0.00023, p25_s=0.0002274, p75_s=0.0002355, algbw_GBps=1.14, busbw_GBps=1.14, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=1048576, median_s=0.0004882, p25_s=0.0004844, p75_s=0.0005032, algbw_GBps=2.148, busbw_GBps=2.148, trials=3
+  op=all_reduce, k=2, label=pow4, bytes=4194304, median_s=0.001399, p25_s=0.001362, p75_s=0.00142, algbw_GBps=2.999, busbw_GBps=2.999, trials=3
+
+----- BEGIN FILE comm.csv -----
+op,k,label,bytes,median_s,p25_s,p75_s,algbw_GBps,busbw_GBps,trials
+all_reduce,2,pow4,4096,5.54187223315239e-05,5.470596253871918e-05,5.7103149592876435e-05,0.07391004028380617,0.07391004028380617,3
+all_reduce,2,pow4,16384,9.637292474508285e-05,9.636716917157174e-05,9.779589250683784e-05,0.17000625479964948,0.17000625479964948,3
+all_reduce,2,pow4,65536,0.00012512493878602982,0.0001226632297039032,0.0001291319355368614,0.5237644920016303,0.5237644920016303,3
+all_reduce,2,pow4,262144,0.0002300173044204712,0.00022743714973330498,0.00023552481085062027,1.1396707767725218,1.1396707767725218,3
+all_reduce,2,pow4,1048576,0.00048819124698638915,0.00048438144847750663,0.0005032101832330226,2.1478795584166517,2.1478795584166517,3
+all_reduce,2,pow4,4194304,0.0013986980542540551,0.0013622893020510674,0.0014203929342329503,2.9987201220758686,2.9987201220758686,3
+----- END FILE comm.csv -----
+
+----- BEGIN FILE fit.json -----
+{
+  "experiment": "E3",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:52Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "backend": "nccl",
+  "fit": {
+    "all_reduce": {
+      "alpha_s": 6.997100605207774e-05,
+      "B_GBps": 2.650504082934271,
+      "max_rel_err": 0.29047313725588786
+    }
+  },
+  "quick": true
+}
+----- END FILE fit.json -----
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=weak, b_gpu=8, b_global=16, step_s=0.004927, p25_s=0.004404, p75_s=0.008326, t_fwd_s=0.002195, t_bwd_s=0.002391, t_comm_s=7.483e-07, t_opt_s=0.0003724, img_s=3247, img_s_per_gpu=1624, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=weak, b_gpu=8, b_global=16, step_s=0.02397, p25_s=0.02182, p75_s=0.02591, t_fwd_s=0.002268, t_bwd_s=0.004403, t_comm_s=0.01678, t_opt_s=0.0003922, img_s=667.6, img_s_per_gpu=333.8, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=weak, b_gpu=8, b_global=16, step_s=0.02185, p25_s=0.02071, p75_s=0.02265, t_fwd_s=0.003092, t_bwd_s=0.01822, t_comm_s=7.111e-07, t_opt_s=0.0004837, img_s=732.3, img_s_per_gpu=366.2, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=local, scaling=strong, b_gpu=8, b_global=16, step_s=0.004551, p25_s=0.004364, p75_s=0.004641, t_fwd_s=0.00209, t_bwd_s=0.002095, t_comm_s=5.085e-07, t_opt_s=0.0003427, img_s=3515, img_s_per_gpu=1758, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=manual, scaling=strong, b_gpu=8, b_global=16, step_s=0.02385, p25_s=0.02354, p75_s=0.02455, t_fwd_s=0.002238, t_bwd_s=0.004476, t_comm_s=0.01656, t_opt_s=0.0003771, img_s=670.9, img_s_per_gpu=335.5, steps=4
+  model=resnet18_cifar, params=11173962, k=2, mode=ddp, scaling=strong, b_gpu=8, b_global=16, step_s=0.0219, p25_s=0.01947, p75_s=0.02292, t_fwd_s=0.003201, t_bwd_s=0.01788, t_comm_s=8.405e-07, t_opt_s=0.0004771, img_s=730.8, img_s_per_gpu=365.4, steps=4
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E4",
+  "k": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:45:57Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "models": {
+      "resnet18_cifar": 8
+    },
+    "strong_global": {
+      "resnet18_cifar": 16
+    },
+    "warmup": 2,
+    "steps": 4
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE scaling.csv -----
+model,params,k,mode,scaling,b_gpu,b_global,step_s,p25_s,p75_s,t_fwd_s,t_bwd_s,t_comm_s,t_opt_s,img_s,img_s_per_gpu,steps
+resnet18_cifar,11173962,2,local,weak,8,16,0.004927107598632574,0.004404176026582718,0.008325689937919378,0.0021945834159851074,0.002391465473920107,7.48317688703537e-07,0.00037240656092762947,3247.3413010993504,1623.6706505496752,4
+resnet18_cifar,11173962,2,manual,weak,8,16,0.02396666305139661,0.021818961948156357,0.02591498102992773,0.002267935313284397,0.004402719903737307,0.016778594348579645,0.0003921603783965111,667.5939810931515,333.7969905465757,4
+resnet18_cifar,11173962,2,ddp,weak,8,16,0.021848817821592093,0.020705663366243243,0.022646078374236822,0.0030923201702535152,0.01822292758151889,7.110647857189178e-07,0.0004837219603359699,732.3050670589602,366.1525335294801,4
+resnet18_cifar,11173962,2,local,strong,8,16,0.004551289137452841,0.004363632295280695,0.004640870029106736,0.0020896615460515022,0.0020953286439180374,5.085021257400513e-07,0.00034266384318470955,3515.48748426792,1757.74374213396,4
+resnet18_cifar,11173962,2,manual,strong,8,16,0.023848092183470726,0.023537305183708668,0.02454698085784912,0.002237926237285137,0.004476271104067564,0.01656170468777418,0.00037705618888139725,670.9132066794722,335.4566033397361,4
+resnet18_cifar,11173962,2,ddp,strong,8,16,0.021895195823162794,0.019470811588689685,0.022918412229046226,0.003200816921889782,0.017883365508168936,8.405186235904694e-07,0.00047707976773381233,730.7539119185999,365.37695595929995,4
+----- END FILE scaling.csv -----
+[vgg16] stage split (layer ranges): [(0, 19), (19, 40)]
+  arch=vgg16, S=2, M=1, b_global=16, b_micro=16, params_M=134.3, step_s=0.005594, samples_s=2860, peak_mem_GB_max=1.16, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.5, status=ok
+  arch=vgg16, S=2, M=2, b_global=16, b_micro=8, params_M=134.3, step_s=0.006627, samples_s=2414, peak_mem_GB_max=1.533, peak_mem_GB_min=0.1943, sent_MB_per_step=1.049, bubble_theory=0.3333, status=ok
+[mlp] stage split (layer ranges): [(0, 2), (2, 5)]
+  arch=mlp, S=2, M=1, b_global=16, b_micro=16, params_M=0.01729, step_s=0.00104, samples_s=1.539e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.5, status=ok
+  arch=mlp, S=2, M=2, b_global=16, b_micro=8, params_M=0.01729, step_s=0.001167, samples_s=1.371e+04, peak_mem_GB_max=1.118, peak_mem_GB_min=0.06821, sent_MB_per_step=0.008192, bubble_theory=0.3333, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9a",
+  "S": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:46:05Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "archs": "vgg16,mlp",
+  "quick": true
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE pipeline.csv -----
+arch,S,M,b_global,b_micro,params_M,step_s,samples_s,peak_mem_GB_max,peak_mem_GB_min,sent_MB_per_step,bubble_theory,status
+vgg16,2,1,16,16,134.301514,0.005593770183622837,2860.3248747765874,1.159879207611084,0.19431321322917938,1.0485759973526,0.5,ok
+vgg16,2,2,16,8,134.301514,0.006627009622752667,2414.3619687931077,1.5327508449554443,0.19431321322917938,1.0485759973526,0.3333333333333333,ok
+mlp,2,1,16,16,0.01729,0.0010398712009191513,15386.520932455347,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.5,ok
+mlp,2,2,16,8,0.01729,0.0011671695858240128,13708.376395623882,1.1182377338409424,0.06820659339427948,0.008191999979317188,0.3333333333333333,ok
+----- END FILE pipeline.csv -----
+  T=2, L=2, H=64, tokens=32, params_M_total=0.06605, params_M_per_rank=0.03302, step_s=0.001789, tokens_s=1.789e+04, allreduce_msg_MB=0.008192, allreduce_per_step=4, comm_GB_per_step_algo=3.277e-05, peak_mem_GB=0.06834, status=ok
+
+----- BEGIN FILE meta.json -----
+{
+  "experiment": "E9b",
+  "T": 2,
+  "env": {
+    "python": "3.11.10",
+    "torch": "2.5.1+cu124",
+    "cuda": "12.4",
+    "cudnn": 90100,
+    "torch_threads": 16,
+    "omp_env": "16",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8462Y+",
+    "blas": "mkl",
+    "device": "cuda:0",
+    "pod": "wave10-quick-0",
+    "net_env": {
+      "NCCL_P2P_DISABLE": "1",
+      "NCCL_NET": "Socket",
+      "NCCL_SHM_DISABLE": "1",
+      "FAST_EXIT": "1",
+      "MASTER_ADDR": "wave10-quick-0.wave10-quick-svc",
+      "NODE_NAME": "<node>",
+      "NET_LABEL": "socket",
+      "NNODES": "2"
+    },
+    "time_utc": "2026-11-22T14:46:11Z",
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "driver": "550.90.07\n550.90.07"
+  },
+  "cfg": {
+    "L": 2,
+    "H": 64,
+    "tokens": 32
+  }
+}
+----- END FILE meta.json -----
+
+----- BEGIN FILE tensor_parallel.csv -----
+T,L,H,tokens,params_M_total,params_M_per_rank,step_s,tokens_s,allreduce_msg_MB,allreduce_per_step,comm_GB_per_step_algo,peak_mem_GB,status
+2,2,64,32,0.066048,0.033024,0.0017886304606993992,17890.78331333304,0.008192,4,3.2767999999999995e-05,0.0683392,ok
+----- END FILE tensor_parallel.csv -----
+WAVE10 FINISHED rc=0 idx=0

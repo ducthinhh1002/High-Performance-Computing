@@ -22,16 +22,35 @@ $K delete job "$NAME" --ignore-not-found
 if [ "$WAVE" = 10 ]; then
   # Đợt 10: Job Indexed 2 pod × 2 GPU + Service headless. SPREAD=1 buộc hai pod ở hai node khác nhau (cần cụm ≥ 2 node).
   AFF=""; [ "${SPREAD:-0}" = 1 ] && AFF='      affinity: {podAntiAffinity: {requiredDuringSchedulingIgnoredDuringExecution: [{labelSelector: {matchLabels: {app: hpc-wave-mn}}, topologyKey: kubernetes.io/hostname}]}}'
+  # Cấu hình chạy (đặt trước khi gọi script): DIAG=1, NETS, WORLDS, STEPS, STEP_TIMEOUT, DIST_TIMEOUT_S, DEBUG_DETAIL, HANG_S, DEADLINE_OVERRIDE
+  [ -n "${DEADLINE_OVERRIDE:-}" ] && DEADLINE=$DEADLINE_OVERRIDE
+  DEF_ST=900; [ "$QUICK" = 1 ] && DEF_ST=300
   $K delete service "$NAME-svc" --ignore-not-found
   RUNID=$(date -u +%Y%m%dT%H%M%SZ)
   sed -e "s/@NAME@/$NAME/g" -e "s/@QUICK@/$QUICK/g" -e "s/@RUNID@/$RUNID/g" -e "s/@DEADLINE@/$DEADLINE/g" \
-      -e "s|@AFFINITY@|$AFF|" k8s/wave-mn-job.tmpl.yaml | ${APPLY:-$K apply -f -}
+      -e "s|@AFFINITY@|$AFF|" -e "s/@DIAG@/${DIAG:-0}/" -e "s/@NETS@/${NETS:-native socket}/" -e "s/@WORLDS@/${WORLDS:-2 1}/" \
+      -e "s/@STEPS@/${STEPS:-e3 e4 pp tp}/" -e "s/@STEP_TIMEOUT@/${STEP_TIMEOUT:-$DEF_ST}/" -e "s/@DIST_TIMEOUT_S@/${DIST_TIMEOUT_S:-180}/" \
+      -e "s/@DEBUG_DETAIL@/${DEBUG_DETAIL:-0}/" -e "s/@HANG_S@/${HANG_S:-60}/" k8s/wave-mn-job.tmpl.yaml | ${APPLY:-$K apply -f -}
   [ "${DRYRUN:-0}" = 1 ] && exit 0
   echo "Đã tạo Job $NAME (2 pod), đang chờ..."
-  $K wait --for=condition=complete --timeout=${DEADLINE}s job/"$NAME" || $K wait --for=condition=failed --timeout=60s job/"$NAME" || true
   mkdir -p results/wave$WAVE
-  for i in 0 1; do $K logs -l job-name="$NAME",batch.kubernetes.io/job-completion-index=$i --tail=-1 > results/wave$WAVE/$NAME-pod$i.log 2>&1 || true; done
-  cp results/wave$WAVE/$NAME-pod0.log results/wave$WAVE/$NAME.log
+  # Lưu log của từng pod mỗi 20 giây: pod bị xoá (hết hạn, lỗi) thì log vẫn còn.
+  snap() { for pod in $($K get pods -l job-name="$NAME" -o name 2>/dev/null); do
+      i=$(echo "$pod" | sed -E "s/.*$NAME-([0-9]+)-.*/\1/"); f=results/wave$WAVE/$NAME-pod$i.log
+      $K logs "$pod" --tail=-1 > "$f.tmp" 2>/dev/null && [ -s "$f.tmp" ] && mv "$f.tmp" "$f"
+      rm -f "$f.tmp"; done; }
+  ( while true; do snap; sleep 20; done ) & SNAP=$!
+  trap 'kill $SNAP 2>/dev/null' EXIT
+  set +e   # lệnh kubectl lỗi thoáng qua không được làm script thoát giữa chừng
+  for ((t=0; t<DEADLINE+180; t+=15)); do
+    st=$($K get job "$NAME" -o jsonpath='{.status.succeeded}/{.status.failed}' 2>/dev/null)
+    [ $((t % 120)) -eq 0 ] && echo "[$(date -u +%H:%M:%S)] t=${t}s trạng thái job (succeeded/failed): '${st}'"
+    case "$st" in 2/*|*/[1-9]*) break;; esac
+    sleep 15
+  done
+  echo "Trạng thái job (succeeded/failed): $st"
+  kill $SNAP 2>/dev/null; snap
+  cp results/wave$WAVE/$NAME-pod0.log results/wave$WAVE/$NAME.log 2>/dev/null
   echo "Log: results/wave$WAVE/$NAME.log (+ -pod1.log)"; tail -3 results/wave$WAVE/$NAME.log
   exit 0
 fi
