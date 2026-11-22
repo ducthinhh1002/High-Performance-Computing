@@ -1,0 +1,5 @@
+{
+  "run_dir": "../experiments/results/dot2_e4b_strong_scaling_unbound/20261123-013111",
+  "comm_source": "../experiments/results/dot2_e4b_strong_scaling_unbound/20261123-013111",
+  "notes": "Single-node runs: MPI uses shared memory, so \u03b1/\u03b2 describe intra-node copies and the model ignores memory-bandwidth contention between ranks."
+}
