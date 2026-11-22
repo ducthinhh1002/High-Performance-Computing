@@ -64,10 +64,39 @@ MNIST, 4 tiến trình (Downpour: 1 server + 3 worker), 3 epoch, 2 cách chia d�
   về gần `iid` (< 1 điểm); (c) ADMM hội tụ chậm hơn Parallel SGD theo epoch nhưng giao tiếp ít nhất;
   (d) Downpour cho độ chính xác thấp nhất sau cùng số epoch, staleness trung bình cỡ 5–15.
 
-## Đợt 2 — máy mục tiêu (i5-12600K + RTX 2060) — chưa chạy
+## Đợt 2 — máy mục tiêu (i5-12600K + RTX 2060) — đã chạy 23/11/2026
 
-Các cấu hình đã có sẵn trong `code/configs/`: `compute_paper_cpu_gpu.yaml` (E2 đầy đủ có GPU,
-bài báo đo GPU nhanh hơn ≈ 40×), `compute_gemm.yaml`, `comm_allreduce.yaml`, `strong_scaling.yaml`
-(đến 10 nhân, có E-core), `hybrid_mpi_omp.yaml`, `gpu_mpi.yaml`, `strategies_convergence.yaml`.
-- Dự đoán cần kiểm chứng: GPU/CPU cho conv tăng theo batch và đạt 20–60× ở batch 256 (cuBLAS so với
-  CPU 12 luồng OpenMP); k > 6 tiến trình làm `sync_wait` tăng rõ vì E-core chậm hơn P-core.
+Phần cứng: Intel Core i5-12600K (6 P-core + 4 E-core, 16 luồng), RTX 2060 6 GB, Windows 11 + WSL2
+(Ubuntu 24.04), GCC 13, CUDA 12.0, OpenMPI 4.1.6. Kết quả và đối chiếu ở
+[`results/SUMMARY_dot2.md`](results/SUMMARY_dot2.md).
+
+| Mã | Cấu hình (`configs/dot2_*.yaml`) | Nội dung |
+|---|---|---|
+| E0 | `e0_correctness` | `pdl_check` CPU + CUDA, 1/2/4 tiến trình |
+| E1 | `e1_gemm` | GEMM CPU (naive/blocked/OpenMP) và GPU (naive/tiled/cuBLAS), N = 64…4096 |
+| E2 | `e2_paper_cpu_gpu` | §3 của bài đầy đủ có GPU: conv theo batch, FC theo n, có và không tính chép dữ liệu |
+| E3 | `e3_comm` | 6 thuật toán allreduce, k = 2…10 |
+| E4 | `e4_strong_scaling`, `e4b_strong_scaling_unbound` | sync SGD k = 1…10; E4b là đối chứng không ghim tiến trình |
+| E5 | `e5_strategies` | 5 chiến lược × IID/không IID × k = 4, 8, 10 epoch |
+| E6 | `e6_hybrid` | MPI × OpenMP với 12 luồng phần cứng |
+| E7 | `e7_gpu_mpi` | 1/2/4 tiến trình dùng chung một GPU so với CPU |
+
+**Cách các dự đoán này được ghi lại (nói rõ để không bị hiểu nhầm là đã commit trước khi chạy):**
+P1–P2 nằm trong file này từ trước khi chạy (commit riêng). P3–P12 được viết trong ghi chú kế hoạch
+trước đợt 2, **nhưng chỉ được đưa vào file này sau khi đã chạy xong**, nên không có commit nào chứng
+minh chúng có trước số đo. Cột "đo được" điền sau khi chạy.
+
+| # | Dự đoán | Đo được | Kết luận |
+|---|---|---|---|
+| P1 | GPU/CPU cho conv đạt 20–60× ở batch 256 (cuBLAS so với CPU 12 luồng OpenMP) | 13,2× (54,5× so với 1 luồng) | **sai** |
+| P2 | `sync_wait` tăng rõ khi k > 6 vì E-core chậm hơn P-core | tăng từ k = 6 (0,16 → 0,77 s), giảm lại ở k = 10; không phân biệt được E-core trong WSL2 | **sai về chỗ; nguyên nhân không kiểm chứng được** |
+| P3 | Tính đúng: CUDA khớp CPU, độ chính xác giữ nguyên | 105/105, 35/35 CUDA, 67/67 MPI; 98,5% | đúng |
+| P4 | 1 epoch LeNet tuần tự 8–11 s (Mac: 19 s) | 7,19 s | nhanh hơn dự đoán |
+| P5 | GEMM 1 luồng 25–35 GFLOP/s | 34–40 (N ≤ 1024), 25,9 (N = 4096) | đúng một phần |
+| P6 | OpenMP 12 luồng nhanh hơn 1 luồng 5–8× | GEMM 5,3×; conv 4,1×; huấn luyện LeNet 2,7× | đúng với GEMM, sai với conv và huấn luyện |
+| P7 | Conv: GPU nhanh hơn 1 luồng 50–150×, bài đo ≈ 40× | 54,5× (không tính chép dữ liệu); 11,2× nếu tính | đúng ở mép dưới |
+| P8 | LeNet/MNIST: GPU chỉ nhanh hơn 2–5× (mô hình quá nhỏ) | không đo (E7 dùng CNN lớn hơn: 60×) | **không kiểm chứng** |
+| P9 | Sync SGD: hiệu suất 85–90% ở k = 2–6, speedup 5× ở k = 6 | 90% / 73% / 52% ở k = 2 / 4 / 6; 3,12× ở k = 6 | **sai** |
+| P10 | k = 8–10 phải dùng E-core, speedup chững ở 6–7× | 3,16× / 3,45× | **sai** |
+| P11 | Allreduce: độ trễ ≈ 1 µs, băng thông 8–15 GB/s, ring và MPI tốt nhất cho message lớn | 0,3–1,0 µs; 14,3 GB/s (đỉnh 21,9); ring tốt nhất từ k = 4 | đúng |
+| P12 | Nhiều tiến trình dùng chung một GPU: gần như không nhanh hơn 1 tiến trình | **chậm hơn** (0,54× ở np = 2, 0,40× ở np = 4) | đúng, thực tế còn tệ hơn |
