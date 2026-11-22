@@ -1,0 +1,31 @@
+# build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-direct,cuda-tiled,cublas --include-transfer 0 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2.json --run-id 0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2 --tag compute_paper_cpu_gpu
+# env: {'OMP_NUM_THREADS': '12', 'OMP_PROC_BIND': 'close', 'OMP_PLACES': 'threads'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=12 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=1          0.249 ms     271.71 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=2          0.469 ms     288.87 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=4          0.923 ms     293.62 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=8          1.831 ms     296.02 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=16         3.605 ms     300.70 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=32         7.161 ms     302.71 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=64        13.809 ms     313.98 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=128       27.537 ms     314.89 GFLOP/s  ok
+[INFO ] conv       cuda-direct  M=96     N=2916   K=121    batch=256       54.368 ms     318.98 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=1          0.103 ms     655.39 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=2          0.197 ms     689.31 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=4          0.342 ms     792.33 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=8          0.697 ms     777.30 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=16         1.402 ms     772.91 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=32         2.734 ms     792.98 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=64         5.363 ms     808.46 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=128       10.744 ms     807.08 GFLOP/s  ok
+[INFO ] conv       cuda-tiled   M=96     N=2916   K=121    batch=256       20.891 ms     830.13 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=1          0.070 ms     965.36 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=2          0.107 ms    1265.68 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=4          0.162 ms    1676.62 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=8          0.344 ms    1576.77 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=16         0.645 ms    1679.76 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=32         1.280 ms    1693.19 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=64         2.591 ms    1673.27 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=128        5.148 ms    1684.35 GFLOP/s  ok
+[INFO ] conv       cublas       M=96     N=2916   K=121    batch=256       10.154 ms    1707.90 GFLOP/s  ok
+[INFO ] results written to ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2.json

@@ -1,0 +1,801 @@
+{
+  "experiment": "compute_paper_cpu_gpu",
+  "description": "CPU vs GPU forward time of the paper's convolution layer (batch sweep) and of a fully connected layer (matrix-size sweep). GPU timings with and without host<->device copies.",
+  "config": {
+    "name": "compute_paper_cpu_gpu",
+    "description": "CPU vs GPU forward time of the paper's convolution layer (batch sweep) and of a fully connected layer (matrix-size sweep). GPU timings with and without host<->device copies.\n",
+    "binary": "pdl_bench_compute",
+    "repeats": 3,
+    "timeout": 3600,
+    "env": {
+      "OMP_NUM_THREADS": 12,
+      "OMP_PROC_BIND": "close",
+      "OMP_PLACES": "threads"
+    },
+    "base_args": {
+      "reps": 5,
+      "warmup": 2,
+      "verify": 1
+    },
+    "variants": [
+      {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0
+      },
+      {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0
+      },
+      {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1
+      },
+      {
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0
+      },
+      {
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0
+      },
+      {
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1
+      }
+    ],
+    "analysis": {
+      "group_by": [
+        "op",
+        "impl",
+        "include_transfer"
+      ],
+      "plots": [
+        "compute_cpu_gpu"
+      ]
+    }
+  },
+  "config_path": "configs/compute_paper_cpu_gpu.yaml",
+  "created": "2026-11-23T00:33:46",
+  "environment": {
+    "windows_host": {
+      "idle_load_percent": 2.1,
+      "cpu": "12th Gen Intel(R) Core(TM) i5-12600K",
+      "cores": 10,
+      "power_plan": "High performance",
+      "logical": 16
+    },
+    "pinning_note": "WSL2: vCPUs are placed by the Windows host; core pinning inside the VM is virtual (P/E cores of the hybrid CPU are indistinguishable)",
+    "timestamp": "2026-11-22T17:33:50Z",
+    "hostname": "TuanNguyen",
+    "os": "Linux 5.15.146.1-microsoft-standard-WSL2 x86_64",
+    "wsl": true,
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12600K",
+    "physical_cores": 8,
+    "logical_cpus": 16,
+    "memory_bytes": 8202395648,
+    "lscpu": "Architecture:                       x86_64\nCPU op-mode(s):                     32-bit, 64-bit\nAddress sizes:                      46 bits physical, 48 bits virtual\nByte Order:                         Little Endian\nCPU(s):                             16\nOn-line CPU(s) list:                0-15\nVendor ID:                          GenuineIntel\nModel name:                         12th Gen Intel(R) Core(TM) i5-12600K\nCPU family:                         6\nModel:                              151\nThread(s) per core:                 2\nCore(s) per socket:                 8\nSocket(s):                          1\nStepping:                           2\nBogoMIPS:                           7372.79\nFlags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves avx_vnni umip waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize flush_l1d arch_capabilities\nVirtualization:                     VT-x\nHypervisor vendor:                  Microsoft\nVirtualization type:                full\nL1d cache:                          384 KiB (8 instances)\nL1i cache:                          256 KiB (8 instances)\nL2 cache:                           10 MiB (8 instances)\nL3 cache:                           20 MiB (1 instance)\nVulnerability Gather data sampling: Not affected\nVulnerability Itlb multihit:        Not affected\nVulnerability L1tf:                 Not affected\nVulnerability Mds:                  Not affected\nVulnerability Meltdown:             Not affected\nVulnerability Mmio stale data:      Not affected\nVulnerability Retbleed:             Mitigation; Enhanced IBRS\nVulnerability Spec rstack overflow: Not affected\nVulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl and seccomp\nVulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:           Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence\nVulnerability Srbds:                Not affected\nVulnerability Tsx async abort:      Not affected",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 2060",
+        "memory": "6144 MiB",
+        "driver": "610.88",
+        "max_sm_clock": "2145 MHz",
+        "pcie_gen": "3"
+      }
+    ],
+    "nvidia_smi": "GPU 0: NVIDIA GeForce RTX 2060 (UUID: GPU-32e2fcd7-f21c-bdc3-c469-19441f361371)",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "nvcc": [
+      "Build cuda_12.0.r12.0/compiler.32267302_0"
+    ],
+    "cmake": "cmake version 3.28.3",
+    "mpirun": "mpirun (Open MPI) 4.1.6",
+    "mpi_flavor": "openmpi",
+    "git": {
+      "commit": "4acdeb458c8a854c16b93667b9ca295d3eb2ef5a",
+      "dirty": true
+    },
+    "python": "3.12.3",
+    "python_packages": {
+      "numpy": "2.5.5",
+      "pandas": "3.1.1",
+      "matplotlib": "3.11.2",
+      "yaml": "6.0.4"
+    },
+    "omp_env": {
+      "LD_LIBRARY_PATH": "/usr/lib/wsl/lib:"
+    }
+  },
+  "runs": [
+    {
+      "name": "0000_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r0",
+      "index": 0,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cpu-direct,cpu-blocked,cpu-omp --include-transfer 0 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0000_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r0.json --run-id 0000_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r0 --tag compute_paper_cpu_gpu",
+      "output": "raw/0000_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 22.221,
+      "started": "2026-11-23T00:33:50"
+    },
+    {
+      "name": "0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1",
+      "index": 1,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cpu-direct,cpu-blocked,cpu-omp --include-transfer 0 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1.json --run-id 0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1 --tag compute_paper_cpu_gpu",
+      "output": "raw/0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 20.163,
+      "started": "2026-11-23T00:34:12"
+    },
+    {
+      "name": "0002_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r2",
+      "index": 2,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cpu-direct,cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cpu-direct,cpu-blocked,cpu-omp --include-transfer 0 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0002_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r2.json --run-id 0002_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r2 --tag compute_paper_cpu_gpu",
+      "output": "raw/0002_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 22.254,
+      "started": "2026-11-23T00:34:33"
+    },
+    {
+      "name": "0003_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r0",
+      "index": 3,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-direct,cuda-tiled,cublas --include-transfer 0 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0003_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r0.json --run-id 0003_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r0 --tag compute_paper_cpu_gpu",
+      "output": "raw/0003_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 26.052,
+      "started": "2026-11-23T00:34:55"
+    },
+    {
+      "name": "0004_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r1",
+      "index": 4,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-direct,cuda-tiled,cublas --include-transfer 0 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0004_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r1.json --run-id 0004_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r1 --tag compute_paper_cpu_gpu",
+      "output": "raw/0004_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 24.368,
+      "started": "2026-11-23T00:35:21"
+    },
+    {
+      "name": "0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2",
+      "index": 5,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-direct,cuda-tiled,cublas",
+        "include-transfer": 0,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-direct,cuda-tiled,cublas --include-transfer 0 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2.json --run-id 0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2 --tag compute_paper_cpu_gpu",
+      "output": "raw/0005_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-direct_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 24.999,
+      "started": "2026-11-23T00:35:45"
+    },
+    {
+      "name": "0006_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r0",
+      "index": 6,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-tiled,cublas --include-transfer 1 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0006_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r0.json --run-id 0006_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r0 --tag compute_paper_cpu_gpu",
+      "output": "raw/0006_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 18.306,
+      "started": "2026-11-23T00:36:10"
+    },
+    {
+      "name": "0007_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r1",
+      "index": 7,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-tiled,cublas --include-transfer 1 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0007_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r1.json --run-id 0007_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r1 --tag compute_paper_cpu_gpu",
+      "output": "raw/0007_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 16.524,
+      "started": "2026-11-23T00:36:28"
+    },
+    {
+      "name": "0008_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r2",
+      "index": 8,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "conv",
+        "conv": "1:224:224:96:11:4:0",
+        "batches": "1,2,4,8,16,32,64,128,256",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "sizes": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cuda-tiled,cublas --include-transfer 1 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0008_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r2.json --run-id 0008_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r2 --tag compute_paper_cpu_gpu",
+      "output": "raw/0008_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cuda-tiled-_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 17.476,
+      "started": "2026-11-23T00:36:45"
+    },
+    {
+      "name": "0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0",
+      "index": 9,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cpu-blocked,cpu-omp --include-transfer 0 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0.json --run-id 0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0 --tag compute_paper_cpu_gpu",
+      "output": "raw/0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.766,
+      "started": "2026-11-23T00:37:02"
+    },
+    {
+      "name": "0010_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r1",
+      "index": 10,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cpu-blocked,cpu-omp --include-transfer 0 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0010_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r1.json --run-id 0010_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r1 --tag compute_paper_cpu_gpu",
+      "output": "raw/0010_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.765,
+      "started": "2026-11-23T00:37:03"
+    },
+    {
+      "name": "0011_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r2",
+      "index": 11,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cpu-blocked,cpu-omp",
+        "include-transfer": 0,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cpu-blocked,cpu-omp --include-transfer 0 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0011_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r2.json --run-id 0011_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r2 --tag compute_paper_cpu_gpu",
+      "output": "raw/0011_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.816,
+      "started": "2026-11-23T00:37:04"
+    },
+    {
+      "name": "0012_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r0",
+      "index": 12,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 0 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0012_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r0.json --run-id 0012_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r0 --tag compute_paper_cpu_gpu",
+      "output": "raw/0012_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.924,
+      "started": "2026-11-23T00:37:05"
+    },
+    {
+      "name": "0013_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r1",
+      "index": 13,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 0 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0013_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r1.json --run-id 0013_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r1 --tag compute_paper_cpu_gpu",
+      "output": "raw/0013_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.874,
+      "started": "2026-11-23T00:37:11"
+    },
+    {
+      "name": "0014_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r2",
+      "index": 14,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 0,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 0 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0014_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r2.json --run-id 0014_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r2 --tag compute_paper_cpu_gpu",
+      "output": "raw/0014_op-fc_batches-1_impls-cuda-tiled-cubla_includet-0_sizes-256-512-1024-204_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.882,
+      "started": "2026-11-23T00:37:17"
+    },
+    {
+      "name": "0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0",
+      "index": 15,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 1 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0.json --run-id 0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0 --tag compute_paper_cpu_gpu",
+      "output": "raw/0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.756,
+      "started": "2026-11-23T00:37:23"
+    },
+    {
+      "name": "0016_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r1",
+      "index": 16,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 1 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0016_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r1.json --run-id 0016_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r1 --tag compute_paper_cpu_gpu",
+      "output": "raw/0016_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.982,
+      "started": "2026-11-23T00:37:29"
+    },
+    {
+      "name": "0017_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r2",
+      "index": 17,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "reps": 5,
+        "warmup": 2,
+        "verify": 1,
+        "op": "fc",
+        "sizes": "256,512,1024,2048,4096",
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12",
+        "OMP_PROC_BIND": "close",
+        "OMP_PLACES": "threads"
+      },
+      "varying": {
+        "op": "fc",
+        "conv": null,
+        "batches": "1",
+        "impls": "cuda-tiled,cublas",
+        "include-transfer": 1,
+        "sizes": "256,512,1024,2048,4096"
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 1 --seed 44 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0017_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r2.json --run-id 0017_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r2 --tag compute_paper_cpu_gpu",
+      "output": "raw/0017_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.987,
+      "started": "2026-11-23T00:37:35"
+    }
+  ],
+  "finished": "2026-11-23T00:37:41",
+  "summary": {
+    "ok": 18,
+    "failed": 0,
+    "resumed": 0
+  }
+}
