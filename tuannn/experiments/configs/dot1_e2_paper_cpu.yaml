@@ -1,0 +1,13 @@
+# Đợt 1 / E2 — paper §3 on the CPU: conv layer of the paper vs batch size, FC vs matrix size.
+name: dot1_e2_paper_cpu
+description: Conv 1:224:224:96:11:4:0 (im2col+GEMM vs direct) for batch 1..64; FC n = 256..4096 at batch 1.
+binary: pdl_bench_compute
+repeats: 1
+timeout: 3600
+mpi: {launcher: mpirun, extra_args: []}
+env: {OMP_NUM_THREADS: 1}
+base_args: {np: 1, reps: 5, warmup: 1, max-naive: 5, conv: "1:224:224:96:11:4:0"}
+variants:
+  - {op: conv, impls: "cpu-blocked,cpu-direct", batches: "1,2,4,8,16,32,64"}
+  - {op: fc, impls: "cpu-naive,cpu-blocked", sizes: "256,512,1024,2048,4096", fc-batch: 1}
+analysis: {group_by: [op, impl, batch, n], plots: [compute_cpu_gpu]}

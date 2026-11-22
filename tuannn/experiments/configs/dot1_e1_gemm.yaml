@@ -1,0 +1,10 @@
+# Đợt 1 / E1 — GEMM CPU: naive vs cache-blocked (single thread).
+name: dot1_e1_gemm
+description: Square GEMM N = 64..1024, cpu-naive vs cpu-blocked, 5 timed repetitions each.
+binary: pdl_bench_compute
+repeats: 1
+timeout: 1800
+mpi: {launcher: mpirun, extra_args: []}
+env: {OMP_NUM_THREADS: 1}
+base_args: {np: 1, op: gemm, impls: "cpu-naive,cpu-blocked", sizes: "64,128,256,512,768,1024", reps: 5, warmup: 1, max-naive: 5}
+analysis: {group_by: [impl, n], plots: [gemm]}
