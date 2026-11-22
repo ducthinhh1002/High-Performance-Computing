@@ -1,0 +1,5 @@
+{
+  "run_dir": "tuannn/experiments/results/dot1_e0_correctness/20261122-152515",
+  "comm_source": "tuannn/experiments/results/dot1_e0_correctness/20261122-152515",
+  "notes": "Single-node runs: MPI uses shared memory, so \u03b1/\u03b2 describe intra-node copies and the model ignores memory-bandwidth contention between ranks."
+}

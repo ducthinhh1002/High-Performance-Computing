@@ -1,0 +1,33 @@
+# build/bin/pdl_bench_compute --reps 5 --warmup 1 --max-naive 5 --conv 1:224:224:96:11:4:0 --op conv --impls cpu-blocked,cpu-direct --batches 1,2,4,8,16,32,64 --seed 42 --output tuannn/experiments/results/dot1_e2_paper_cpu/20261122-152553/raw/0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0.json --run-id 0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0 --tag dot1_e2_paper_cpu
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=1 | CPU: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz | GPU: -
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=1          5.120 ms      13.23 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=2         10.802 ms      12.54 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=4         21.343 ms      12.70 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=8         41.895 ms      12.94 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=16        89.034 ms      12.17 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=32       172.001 ms      12.60 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=64       371.695 ms      11.66 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=1         79.278 ms       0.85 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=2        138.192 ms       0.98 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=4        273.396 ms       0.99 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=8        545.801 ms       0.99 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=16      1101.581 ms       0.98 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=32      2581.884 ms       0.84 GFLOP/s  ok
+[WARN ] built without OpenMP: cpu-omp runs single-threaded
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=64      4702.290 ms       0.92 GFLOP/s  ok
+[INFO ] results written to tuannn/experiments/results/dot1_e2_paper_cpu/20261122-152553/raw/0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0.json

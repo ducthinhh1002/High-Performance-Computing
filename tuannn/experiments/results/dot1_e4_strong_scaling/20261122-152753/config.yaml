@@ -1,0 +1,26 @@
+# Đợt 1 / E4 — strong scaling of synchronous SGD (fixed global batch 256).
+name: dot1_e4_strong_scaling
+description: Sync SGD, LeNet on MNIST (60k), global batch 256, 1 epoch, k = 1, 2, 4, 8, 3 repeats, 1 thread per process.
+binary: pdl_train
+repeats: 3
+timeout: 1800
+mpi: {launcher: mpirun, np: [1, 2, 4, 8], extra_args: [], allow_oversubscribe: true}
+env: {OMP_NUM_THREADS: 1}
+base_args:
+  strategy: sync
+  device: cpu
+  impl: blocked
+  threads: 1
+  model: lenet
+  train-data: data/mnist-train.pdlds
+  test-data: data/mnist-test.pdlds
+  epochs: 1
+  global-batch: 256
+  lr: 0.05
+  allreduce: mpi
+  eval-every: 0
+analysis:
+  group_by: [np]
+  baseline: {np: 1}
+  scaling: strong
+  plots: [strong_scaling, speedup, efficiency, throughput, phase_breakdown, perfmodel]

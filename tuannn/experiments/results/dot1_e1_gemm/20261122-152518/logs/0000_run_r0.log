@@ -1,0 +1,16 @@
+# build/bin/pdl_bench_compute --op gemm --impls cpu-naive,cpu-blocked --sizes 64,128,256,512,768,1024 --reps 5 --warmup 1 --max-naive 5 --seed 42 --output tuannn/experiments/results/dot1_e1_gemm/20261122-152518/raw/0000_run_r0.json --run-id 0000_run_r0 --tag dot1_e1_gemm
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=1 | CPU: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz | GPU: -
+[INFO ] gemm       cpu-naive    M=64     N=64     K=64     batch=0          0.250 ms       2.10 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=128    N=128    K=128    batch=0          2.653 ms       1.58 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=256    N=256    K=256    batch=0         25.797 ms       1.30 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=512    N=512    K=512    batch=0        349.434 ms       0.77 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=768    N=768    K=768    batch=0        987.134 ms       0.92 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=1024   N=1024   K=1024   batch=0       3302.243 ms       0.65 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=64     N=64     K=64     batch=0          0.036 ms      14.48 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=128    N=128    K=128    batch=0          0.244 ms      17.22 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=256    N=256    K=256    batch=0          2.056 ms      16.32 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=512    N=512    K=512    batch=0         16.746 ms      16.03 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=768    N=768    K=768    batch=0         53.994 ms      16.78 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=1024   N=1024   K=1024   batch=0        129.612 ms      16.57 GFLOP/s  ok
+[INFO ] results written to tuannn/experiments/results/dot1_e1_gemm/20261122-152518/raw/0000_run_r0.json

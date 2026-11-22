@@ -1,0 +1,166 @@
+{
+  "experiment": "dot1_e3_comm",
+  "description": "pdl_bench_comm with k = 2, 4, 8; 4 B .. 16 MiB (x4); 20 repetitions, max over ranks.",
+  "config": {
+    "name": "dot1_e3_comm",
+    "description": "pdl_bench_comm with k = 2, 4, 8; 4 B .. 16 MiB (x4); 20 repetitions, max over ranks.",
+    "binary": "pdl_bench_comm",
+    "repeats": 1,
+    "timeout": 1800,
+    "mpi": {
+      "launcher": "mpirun",
+      "np": [
+        2,
+        4,
+        8
+      ],
+      "extra_args": [],
+      "allow_oversubscribe": true
+    },
+    "env": {
+      "OMP_NUM_THREADS": 1
+    },
+    "base_args": {
+      "algos": "all",
+      "min-bytes": 4,
+      "max-bytes": 16777216,
+      "factor": 4,
+      "reps": 20,
+      "warmup": 3
+    },
+    "analysis": {
+      "group_by": [
+        "np"
+      ],
+      "plots": [
+        "comm_allreduce",
+        "comm_scaling",
+        "pingpong"
+      ]
+    }
+  },
+  "config_path": "tuannn/experiments/configs/dot1_e3_comm.yaml",
+  "created": "2026-11-22T15:27:06",
+  "environment": {
+    "timestamp": "2026-11-22T08:27:06Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "wsl": false,
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "physical_cores": 4,
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "lscpu": null,
+    "gpus": [],
+    "nvidia_smi": null,
+    "gcc": "Apple clang version 14.0.3 (clang-1403.0.22.14.1)",
+    "nvcc": null,
+    "cmake": "cmake version 4.4.5",
+    "mpirun": "HYDRA build details:",
+    "mpi_flavor": "mpich",
+    "git": {
+      "commit": "5b0f0ac8f200e8a6631f077f2401052833f42fc8",
+      "dirty": true
+    },
+    "python": "3.9.6",
+    "python_packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "matplotlib": "3.9.4",
+      "yaml": "6.0.3"
+    },
+    "omp_env": {}
+  },
+  "runs": [
+    {
+      "name": "0000_np-2_r0",
+      "index": 0,
+      "binary": "pdl_bench_comm",
+      "np": 2,
+      "repeat": 0,
+      "params": {
+        "algos": "all",
+        "min-bytes": 4,
+        "max-bytes": 16777216,
+        "factor": 4,
+        "reps": 20,
+        "warmup": 3,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 2
+      },
+      "command": "mpirun -np 2 build/bin/pdl_bench_comm --algos all --min-bytes 4 --max-bytes 16777216 --factor 4 --reps 20 --warmup 3 --seed 42 --output tuannn/experiments/results/dot1_e3_comm/20261122-152706/raw/0000_np-2_r0.json --run-id 0000_np-2_r0 --tag dot1_e3_comm",
+      "output": "raw/0000_np-2_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.687,
+      "started": "2026-11-22T15:27:06"
+    },
+    {
+      "name": "0001_np-4_r0",
+      "index": 1,
+      "binary": "pdl_bench_comm",
+      "np": 4,
+      "repeat": 0,
+      "params": {
+        "algos": "all",
+        "min-bytes": 4,
+        "max-bytes": 16777216,
+        "factor": 4,
+        "reps": 20,
+        "warmup": 3,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 4
+      },
+      "command": "mpirun -np 4 build/bin/pdl_bench_comm --algos all --min-bytes 4 --max-bytes 16777216 --factor 4 --reps 20 --warmup 3 --seed 42 --output tuannn/experiments/results/dot1_e3_comm/20261122-152706/raw/0001_np-4_r0.json --run-id 0001_np-4_r0 --tag dot1_e3_comm",
+      "output": "raw/0001_np-4_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.598,
+      "started": "2026-11-22T15:27:11"
+    },
+    {
+      "name": "0002_np-8_r0",
+      "index": 2,
+      "binary": "pdl_bench_comm",
+      "np": 8,
+      "repeat": 0,
+      "params": {
+        "algos": "all",
+        "min-bytes": 4,
+        "max-bytes": 16777216,
+        "factor": 4,
+        "reps": 20,
+        "warmup": 3,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 8
+      },
+      "command": "mpirun -np 8 build/bin/pdl_bench_comm --algos all --min-bytes 4 --max-bytes 16777216 --factor 4 --reps 20 --warmup 3 --seed 42 --output tuannn/experiments/results/dot1_e3_comm/20261122-152706/raw/0002_np-8_r0.json --run-id 0002_np-8_r0 --tag dot1_e3_comm",
+      "output": "raw/0002_np-8_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 22.04,
+      "started": "2026-11-22T15:27:18"
+    }
+  ],
+  "finished": "2026-11-22T15:27:40",
+  "summary": {
+    "ok": 3,
+    "failed": 0,
+    "resumed": 0
+  }
+}

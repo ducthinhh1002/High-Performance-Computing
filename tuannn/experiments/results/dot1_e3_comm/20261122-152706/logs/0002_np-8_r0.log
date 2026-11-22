@@ -1,0 +1,88 @@
+# mpirun -np 8 build/bin/pdl_bench_comm --algos all --min-bytes 4 --max-bytes 16777216 --factor 4 --reps 20 --warmup 3 --seed 42 --output tuannn/experiments/results/dot1_e3_comm/20261122-152706/raw/0002_np-8_r0.json --run-id 0002_np-8_r0 --tag dot1_e3_comm
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl_bench_comm: 8 ranks on 1 host(s), 12 sizes, 6 algorithms
+[INFO ][rank 0] pingpong           4 B  one-way       5.05 us
+[INFO ][rank 0] pingpong          16 B  one-way       2.95 us
+[INFO ][rank 0] pingpong          64 B  one-way       1.93 us
+[INFO ][rank 0] pingpong         256 B  one-way       2.80 us
+[INFO ][rank 0] pingpong        1024 B  one-way      28.77 us
+[INFO ][rank 0] pingpong        4096 B  one-way       6.33 us
+[INFO ][rank 0] pingpong       16384 B  one-way      10.22 us
+[INFO ][rank 0] pingpong       65536 B  one-way      22.08 us
+[INFO ][rank 0] pingpong      262144 B  one-way      75.08 us
+[INFO ][rank 0] pingpong     1048576 B  one-way     349.35 us
+[INFO ][rank 0] pingpong     4194304 B  one-way    1555.23 us
+[INFO ][rank 0] pingpong    16777216 B  one-way    6390.95 us
+[INFO ][rank 0] allreduce mpi                   4 B        1.70 us  (min 1.00)
+[INFO ][rank 0] allreduce mpi                  16 B        1.80 us  (min 1.00)
+[INFO ][rank 0] allreduce mpi                  64 B        1.70 us  (min 1.00)
+[INFO ][rank 0] allreduce mpi                 256 B        2.35 us  (min 2.00)
+[INFO ][rank 0] allreduce mpi                1024 B        9.10 us  (min 3.00)
+[INFO ][rank 0] allreduce mpi                4096 B        6.20 us  (min 5.00)
+[INFO ][rank 0] allreduce mpi               16384 B       18.90 us  (min 18.00)
+[INFO ][rank 0] allreduce mpi               65536 B      185.70 us  (min 70.00)
+[INFO ][rank 0] allreduce mpi              262144 B      941.35 us  (min 259.00)
+[INFO ][rank 0] allreduce mpi             1048576 B     5308.30 us  (min 1358.00)
+[INFO ][rank 0] allreduce mpi             4194304 B     8032.35 us  (min 5474.00)
+[INFO ][rank 0] allreduce mpi            16777216 B    33647.15 us  (min 20403.00)
+[INFO ][rank 0] allreduce ring                  4 B       37.05 us  (min 32.00)
+[INFO ][rank 0] allreduce ring                 16 B       34.10 us  (min 32.00)
+[INFO ][rank 0] allreduce ring                 64 B       33.70 us  (min 32.00)
+[INFO ][rank 0] allreduce ring                256 B       35.00 us  (min 30.00)
+[INFO ][rank 0] allreduce ring               1024 B       36.55 us  (min 35.00)
+[INFO ][rank 0] allreduce ring               4096 B       37.45 us  (min 35.00)
+[INFO ][rank 0] allreduce ring              16384 B       45.25 us  (min 41.00)
+[INFO ][rank 0] allreduce ring              65536 B      172.20 us  (min 144.00)
+[INFO ][rank 0] allreduce ring             262144 B      340.30 us  (min 309.00)
+[INFO ][rank 0] allreduce ring            1048576 B     1422.55 us  (min 1281.00)
+[INFO ][rank 0] allreduce ring            4194304 B     6515.25 us  (min 5958.00)
+[INFO ][rank 0] allreduce ring           16777216 B    30598.15 us  (min 24960.00)
+[INFO ][rank 0] allreduce rd                    4 B       17.80 us  (min 13.00)
+[INFO ][rank 0] allreduce rd                   16 B       12.95 us  (min 8.00)
+[INFO ][rank 0] allreduce rd                   64 B       10.40 us  (min 8.00)
+[INFO ][rank 0] allreduce rd                  256 B       12.00 us  (min 9.00)
+[INFO ][rank 0] allreduce rd                 1024 B       17.90 us  (min 11.00)
+[INFO ][rank 0] allreduce rd                 4096 B       21.60 us  (min 20.00)
+[INFO ][rank 0] allreduce rd                16384 B       51.60 us  (min 44.00)
+[INFO ][rank 0] allreduce rd                65536 B      127.90 us  (min 125.00)
+[INFO ][rank 0] allreduce rd               262144 B      586.60 us  (min 544.00)
+[INFO ][rank 0] allreduce rd              1048576 B     3098.95 us  (min 2892.00)
+[INFO ][rank 0] allreduce rd              4194304 B    12455.35 us  (min 11888.00)
+[INFO ][rank 0] allreduce rd             16777216 B   102605.55 us  (min 99149.00)
+[INFO ][rank 0] allreduce tree                  4 B       15.80 us  (min 13.00)
+[INFO ][rank 0] allreduce tree                 16 B       15.05 us  (min 13.00)
+[INFO ][rank 0] allreduce tree                 64 B       15.80 us  (min 13.00)
+[INFO ][rank 0] allreduce tree                256 B       15.40 us  (min 14.00)
+[INFO ][rank 0] allreduce tree               1024 B       16.80 us  (min 15.00)
+[INFO ][rank 0] allreduce tree               4096 B       20.70 us  (min 17.00)
+[INFO ][rank 0] allreduce tree              16384 B       59.20 us  (min 57.00)
+[INFO ][rank 0] allreduce tree              65536 B      173.85 us  (min 139.00)
+[INFO ][rank 0] allreduce tree             262144 B      594.00 us  (min 543.00)
+[INFO ][rank 0] allreduce tree            1048576 B     2654.60 us  (min 2358.00)
+[INFO ][rank 0] allreduce tree            4194304 B    10769.90 us  (min 9891.00)
+[INFO ][rank 0] allreduce tree           16777216 B    48246.65 us  (min 45003.00)
+[INFO ][rank 0] allreduce naive                 4 B       27.90 us  (min 23.00)
+[INFO ][rank 0] allreduce naive                16 B       25.05 us  (min 21.00)
+[INFO ][rank 0] allreduce naive                64 B       28.15 us  (min 16.00)
+[INFO ][rank 0] allreduce naive               256 B       19.10 us  (min 15.00)
+[INFO ][rank 0] allreduce naive              1024 B       24.15 us  (min 21.00)
+[INFO ][rank 0] allreduce naive              4096 B       36.10 us  (min 31.00)
+[INFO ][rank 0] allreduce naive             16384 B      128.75 us  (min 108.00)
+[INFO ][rank 0] allreduce naive             65536 B      319.00 us  (min 303.00)
+[INFO ][rank 0] allreduce naive            262144 B     3614.80 us  (min 1203.00)
+[INFO ][rank 0] allreduce naive           1048576 B     6350.40 us  (min 4951.00)
+[INFO ][rank 0] allreduce naive           4194304 B    34335.85 us  (min 21845.00)
+[INFO ][rank 0] allreduce naive          16777216 B   111409.25 us  (min 90541.00)
+[INFO ][rank 0] allreduce reduce_bcast          4 B        2.75 us  (min 2.00)
+[INFO ][rank 0] allreduce reduce_bcast         16 B        3.20 us  (min 3.00)
+[INFO ][rank 0] allreduce reduce_bcast         64 B        3.25 us  (min 3.00)
+[INFO ][rank 0] allreduce reduce_bcast        256 B        4.00 us  (min 4.00)
+[INFO ][rank 0] allreduce reduce_bcast       1024 B        4.15 us  (min 4.00)
+[INFO ][rank 0] allreduce reduce_bcast       4096 B        6.80 us  (min 6.00)
+[INFO ][rank 0] allreduce reduce_bcast      16384 B       20.50 us  (min 19.00)
+[INFO ][rank 0] allreduce reduce_bcast      65536 B       78.70 us  (min 77.00)
+[INFO ][rank 0] allreduce reduce_bcast     262144 B      344.80 us  (min 285.00)
+[INFO ][rank 0] allreduce reduce_bcast    1048576 B    81852.05 us  (min 17448.00)
+[INFO ][rank 0] allreduce reduce_bcast    4194304 B    61992.65 us  (min 7824.00)
+[INFO ][rank 0] allreduce reduce_bcast   16777216 B   188014.45 us  (min 32602.00)
+[INFO ][rank 0] results written to tuannn/experiments/results/dot1_e3_comm/20261122-152706/raw/0002_np-8_r0.json

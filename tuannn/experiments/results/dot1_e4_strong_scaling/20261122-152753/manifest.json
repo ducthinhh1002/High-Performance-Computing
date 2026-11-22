@@ -1,0 +1,504 @@
+{
+  "experiment": "dot1_e4_strong_scaling",
+  "description": "Sync SGD, LeNet on MNIST (60k), global batch 256, 1 epoch, k = 1, 2, 4, 8, 3 repeats, 1 thread per process.",
+  "config": {
+    "name": "dot1_e4_strong_scaling",
+    "description": "Sync SGD, LeNet on MNIST (60k), global batch 256, 1 epoch, k = 1, 2, 4, 8, 3 repeats, 1 thread per process.",
+    "binary": "pdl_train",
+    "repeats": 3,
+    "timeout": 1800,
+    "mpi": {
+      "launcher": "mpirun",
+      "np": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "extra_args": [],
+      "allow_oversubscribe": true
+    },
+    "env": {
+      "OMP_NUM_THREADS": 1
+    },
+    "base_args": {
+      "strategy": "sync",
+      "device": "cpu",
+      "impl": "blocked",
+      "threads": 1,
+      "model": "lenet",
+      "train-data": "data/mnist-train.pdlds",
+      "test-data": "data/mnist-test.pdlds",
+      "epochs": 1,
+      "global-batch": 256,
+      "lr": 0.05,
+      "allreduce": "mpi",
+      "eval-every": 0
+    },
+    "analysis": {
+      "group_by": [
+        "np"
+      ],
+      "baseline": {
+        "np": 1
+      },
+      "scaling": "strong",
+      "plots": [
+        "strong_scaling",
+        "speedup",
+        "efficiency",
+        "throughput",
+        "phase_breakdown",
+        "perfmodel"
+      ]
+    }
+  },
+  "config_path": "tuannn/experiments/configs/dot1_e4_strong_scaling.yaml",
+  "created": "2026-11-22T15:27:53",
+  "environment": {
+    "timestamp": "2026-11-22T08:27:53Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "wsl": false,
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "physical_cores": 4,
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "lscpu": null,
+    "gpus": [],
+    "nvidia_smi": null,
+    "gcc": "Apple clang version 14.0.3 (clang-1403.0.22.14.1)",
+    "nvcc": null,
+    "cmake": "cmake version 4.4.5",
+    "mpirun": "HYDRA build details:",
+    "mpi_flavor": "mpich",
+    "git": {
+      "commit": "5b0f0ac8f200e8a6631f077f2401052833f42fc8",
+      "dirty": true
+    },
+    "python": "3.9.6",
+    "python_packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "matplotlib": "3.9.4",
+      "yaml": "6.0.3"
+    },
+    "omp_env": {}
+  },
+  "runs": [
+    {
+      "name": "0000_np-1_r0",
+      "index": 0,
+      "binary": "pdl_train",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 1
+      },
+      "command": "build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 42 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0000_np-1_r0.json --run-id 0000_np-1_r0 --tag dot1_e4_strong_scaling",
+      "output": "raw/0000_np-1_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 20.89,
+      "started": "2026-11-22T15:27:53"
+    },
+    {
+      "name": "0001_np-1_r1",
+      "index": 1,
+      "binary": "pdl_train",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 1
+      },
+      "command": "build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 43 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0001_np-1_r1.json --run-id 0001_np-1_r1 --tag dot1_e4_strong_scaling",
+      "output": "raw/0001_np-1_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 20.718,
+      "started": "2026-11-22T15:28:14"
+    },
+    {
+      "name": "0002_np-1_r2",
+      "index": 2,
+      "binary": "pdl_train",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 1
+      },
+      "command": "build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 44 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0002_np-1_r2.json --run-id 0002_np-1_r2 --tag dot1_e4_strong_scaling",
+      "output": "raw/0002_np-1_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 20.9,
+      "started": "2026-11-22T15:28:34"
+    },
+    {
+      "name": "0003_np-2_r0",
+      "index": 3,
+      "binary": "pdl_train",
+      "np": 2,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 2
+      },
+      "command": "mpirun -np 2 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 42 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0003_np-2_r0.json --run-id 0003_np-2_r0 --tag dot1_e4_strong_scaling",
+      "output": "raw/0003_np-2_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 10.869,
+      "started": "2026-11-22T15:28:55"
+    },
+    {
+      "name": "0004_np-2_r1",
+      "index": 4,
+      "binary": "pdl_train",
+      "np": 2,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 2
+      },
+      "command": "mpirun -np 2 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 43 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0004_np-2_r1.json --run-id 0004_np-2_r1 --tag dot1_e4_strong_scaling",
+      "output": "raw/0004_np-2_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 10.807,
+      "started": "2026-11-22T15:29:06"
+    },
+    {
+      "name": "0005_np-2_r2",
+      "index": 5,
+      "binary": "pdl_train",
+      "np": 2,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 2
+      },
+      "command": "mpirun -np 2 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 44 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0005_np-2_r2.json --run-id 0005_np-2_r2 --tag dot1_e4_strong_scaling",
+      "output": "raw/0005_np-2_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 11.912,
+      "started": "2026-11-22T15:29:17"
+    },
+    {
+      "name": "0006_np-4_r0",
+      "index": 6,
+      "binary": "pdl_train",
+      "np": 4,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 4
+      },
+      "command": "mpirun -np 4 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 42 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0006_np-4_r0.json --run-id 0006_np-4_r0 --tag dot1_e4_strong_scaling",
+      "output": "raw/0006_np-4_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 7.115,
+      "started": "2026-11-22T15:29:29"
+    },
+    {
+      "name": "0007_np-4_r1",
+      "index": 7,
+      "binary": "pdl_train",
+      "np": 4,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 4
+      },
+      "command": "mpirun -np 4 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 43 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0007_np-4_r1.json --run-id 0007_np-4_r1 --tag dot1_e4_strong_scaling",
+      "output": "raw/0007_np-4_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.106,
+      "started": "2026-11-22T15:29:36"
+    },
+    {
+      "name": "0008_np-4_r2",
+      "index": 8,
+      "binary": "pdl_train",
+      "np": 4,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 4
+      },
+      "command": "mpirun -np 4 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 44 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0008_np-4_r2.json --run-id 0008_np-4_r2 --tag dot1_e4_strong_scaling",
+      "output": "raw/0008_np-4_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.19,
+      "started": "2026-11-22T15:29:42"
+    },
+    {
+      "name": "0009_np-8_r0",
+      "index": 9,
+      "binary": "pdl_train",
+      "np": 8,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 8
+      },
+      "command": "mpirun -np 8 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 42 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0009_np-8_r0.json --run-id 0009_np-8_r0 --tag dot1_e4_strong_scaling",
+      "output": "raw/0009_np-8_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.934,
+      "started": "2026-11-22T15:29:48"
+    },
+    {
+      "name": "0010_np-8_r1",
+      "index": 10,
+      "binary": "pdl_train",
+      "np": 8,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 8
+      },
+      "command": "mpirun -np 8 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 43 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0010_np-8_r1.json --run-id 0010_np-8_r1 --tag dot1_e4_strong_scaling",
+      "output": "raw/0010_np-8_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.896,
+      "started": "2026-11-22T15:29:54"
+    },
+    {
+      "name": "0011_np-8_r2",
+      "index": 11,
+      "binary": "pdl_train",
+      "np": 8,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "blocked",
+        "threads": 1,
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 1,
+        "global-batch": 256,
+        "lr": 0.05,
+        "allreduce": "mpi",
+        "eval-every": 0,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 8
+      },
+      "command": "mpirun -np 8 build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 1 --global-batch 256 --lr 0.05 --allreduce mpi --eval-every 0 --seed 44 --output tuannn/experiments/results/dot1_e4_strong_scaling/20261122-152753/raw/0011_np-8_r2.json --run-id 0011_np-8_r2 --tag dot1_e4_strong_scaling",
+      "output": "raw/0011_np-8_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.601,
+      "started": "2026-11-22T15:30:01"
+    }
+  ],
+  "finished": "2026-11-22T15:30:07",
+  "summary": {
+    "ok": 12,
+    "failed": 0,
+    "resumed": 0
+  }
+}

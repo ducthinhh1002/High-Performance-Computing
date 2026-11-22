@@ -1,0 +1,25 @@
+# mpirun -np 4 build/bin/pdl_train --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 3 --momentum 0.9 --eval-every 1 --strategy admm --partition sorted --batch-size 64 --lr 0.01 --admm-rho 0.05 --admm-local-steps 20 --seed 43 --output tuannn/experiments/results/dot1_e5_strategies/20261122-153013/raw/0017_strategy-admm_np-4_partitio-sorted_batchsiz-64_lr-0.01_admmrho-0.05_admm_r1.json --run-id 0017_strategy-admm_np-4_partitio-sorted_batchsiz-64_lr-0.01_admmrho-0.05_admm_r1 --tag dot1_e5_strategies
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=4 | device=cpu impl=cpu-blocked threads=1 | CPU: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz | GPU: -
+[INFO ][rank 0] strategy=admm workers=4 partition=sorted local_batch=64 steps/epoch=234 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ][rank 0] epoch   1 | loss 0.1105 acc 0.9673 |   5.27s (comm  1.0%) | 2844 samples/s/rank | test loss 0.6873 acc 0.7835
+[INFO ][rank 0]           admm rounds 12, primal residual 2.9924e+00
+[INFO ][rank 0] epoch   2 | loss 0.0650 acc 0.9818 |   5.22s (comm  0.5%) | 2869 samples/s/rank | test loss 0.3391 acc 0.8930
+[INFO ][rank 0]           admm rounds 24, primal residual 3.1153e+00
+[INFO ][rank 0] epoch   3 | loss 0.0387 acc 0.9890 |   5.23s (comm  0.7%) | 2861 samples/s/rank | test loss 0.2909 acc 0.9153
+[INFO ][rank 0]           admm rounds 36, primal residual 3.0609e+00
+[INFO ][rank 0] results written to tuannn/experiments/results/dot1_e5_strategies/20261122-153013/raw/0017_strategy-admm_np-4_partitio-sorted_batchsiz-64_lr-0.01_admmrho-0.05_admm_r1.json

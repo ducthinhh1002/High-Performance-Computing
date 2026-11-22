@@ -1,0 +1,199 @@
+{
+  "schema": "pdl-bench/check/v1",
+  "version": "1.0.0",
+  "run_id": "",
+  "tag": "",
+  "config": {
+    "tests": "allreduce,equivalence,sync",
+    "device": "cpu",
+    "tol": "1e-3",
+    "steps": "5",
+    "seed": "42",
+    "output": "tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0002_np-4_tests-allreduce-equiva_r0.json",
+    "verbose": "1"
+  },
+  "environment": {
+    "timestamp": "2026-11-22T08:25:17Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "logical_cpus": 8,
+    "compiler": "Clang 14.0.3",
+    "build_type": "Release",
+    "build_flags": "-Wall -Wextra -Wno-unused-parameter -O3 -march=native",
+    "git_commit": "unknown",
+    "git_dirty": false,
+    "pdl_version": "1.0.0",
+    "mpi_library": "MPICH Version:      5.0.2",
+    "mpi_world_size": 4,
+    "mpi_hosts": 1,
+    "openmp": false,
+    "omp_max_threads": 1,
+    "cuda": false,
+    "cuda_runtime": 0,
+    "cuda_driver": 0,
+    "cublas": false,
+    "gpu_name": null,
+    "device": "cpu",
+    "impl": "cpu-blocked",
+    "threads": 1,
+    "command_line": "build/bin/pdl_check --tests allreduce,equivalence,sync --device cpu --output tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0002_np-4_tests-allreduce-equiva_r0.json",
+    "OMP_NUM_THREADS": "1"
+  },
+  "world_size": 4,
+  "passed": true,
+  "tests": [
+    {
+      "name": "equivalence/sync-sgd-vs-sequential",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.89623776e-08,
+      "tolerance": 0.0001,
+      "detail": "4 ranks x batch 8 vs 1 rank x batch 32, 5 steps"
+    },
+    {
+      "name": "sync/replicas-identical-mpi",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-ring",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-rd",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-tree",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-naive",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-reduce_bcast",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "allreduce/mpi-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/mpi-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/ring-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/ring-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/rd-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/rd-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/tree-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/tree-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/naive-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/naive-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/reduce_bcast-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/reduce_bcast-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    }
+  ]
+}

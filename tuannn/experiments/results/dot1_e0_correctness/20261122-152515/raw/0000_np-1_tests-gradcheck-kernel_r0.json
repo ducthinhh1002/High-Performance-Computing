@@ -1,0 +1,199 @@
+{
+  "schema": "pdl-bench/check/v1",
+  "version": "1.0.0",
+  "run_id": "",
+  "tag": "",
+  "config": {
+    "tests": "gradcheck,kernels,determinism,finite",
+    "device": "cpu",
+    "tol": "1e-3",
+    "steps": "5",
+    "seed": "42",
+    "output": "tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0000_np-1_tests-gradcheck-kernel_r0.json",
+    "verbose": "1"
+  },
+  "environment": {
+    "timestamp": "2026-11-22T08:25:16Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "logical_cpus": 8,
+    "compiler": "Clang 14.0.3",
+    "build_type": "Release",
+    "build_flags": "-Wall -Wextra -Wno-unused-parameter -O3 -march=native",
+    "git_commit": "unknown",
+    "git_dirty": false,
+    "pdl_version": "1.0.0",
+    "mpi_library": "MPICH Version:      5.0.2",
+    "mpi_world_size": 1,
+    "mpi_hosts": 1,
+    "openmp": false,
+    "omp_max_threads": 1,
+    "cuda": false,
+    "cuda_runtime": 0,
+    "cuda_driver": 0,
+    "cublas": false,
+    "gpu_name": null,
+    "device": "cpu",
+    "impl": "cpu-blocked",
+    "threads": 1,
+    "command_line": "build/bin/pdl_check --tests gradcheck,kernels,determinism,finite --device cpu --output tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0000_np-1_tests-gradcheck-kernel_r0.json",
+    "OMP_NUM_THREADS": "1"
+  },
+  "world_size": 1,
+  "passed": true,
+  "tests": [
+    {
+      "name": "gradcheck/conv+relu+pool+fc",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0.000103478113,
+      "tolerance": 0.02,
+      "detail": "56 params probed, 24 skipped at kinks"
+    },
+    {
+      "name": "gradcheck/strided-conv+overlap-pool",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 7.60846189e-05,
+      "tolerance": 0.02,
+      "detail": "66 params probed, 14 skipped at kinks"
+    },
+    {
+      "name": "gradcheck/mlp",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0.000114480086,
+      "tolerance": 0.02,
+      "detail": "79 params probed, 14 skipped at kinks"
+    },
+    {
+      "name": "gradcheck/two-conv",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.72969076e-05,
+      "tolerance": 0.02,
+      "detail": "76 params probed, 11 skipped at kinks"
+    },
+    {
+      "name": "determinism/same-seed-same-params",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "finite/detects-nan-and-inf",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2,
+      "tolerance": 2,
+      "detail": "expects exactly 2"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-NN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.2622514e-07,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-NT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.69124406e-07,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-TN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.83521396e-07,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-TT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-NN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-NT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-TN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-TT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-NN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-NT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-TN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-TT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/conv-direct-vs-im2col",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 1.23039913e-07,
+      "tolerance": 0.001,
+      "detail": ""
+    }
+  ]
+}

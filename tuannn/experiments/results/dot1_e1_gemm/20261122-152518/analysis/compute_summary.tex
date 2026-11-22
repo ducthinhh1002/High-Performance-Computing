@@ -1,0 +1,18 @@
+\begin{tabular}{llllllllllll}
+\hline
+op & impl & device & n & M & N & K & batch & conv & model & include\_transfer & threads \\
+\hline
+gemm & cpu-blocked & cpu & 64 & 64 & 64 & 64 & 0 & - & - & False & 1 \\
+gemm & cpu-blocked & cpu & 128 & 128 & 128 & 128 & 0 & - & - & False & 1 \\
+gemm & cpu-blocked & cpu & 256 & 256 & 256 & 256 & 0 & - & - & False & 1 \\
+gemm & cpu-blocked & cpu & 512 & 512 & 512 & 512 & 0 & - & - & False & 1 \\
+gemm & cpu-blocked & cpu & 768 & 768 & 768 & 768 & 0 & - & - & False & 1 \\
+gemm & cpu-blocked & cpu & 1024 & 1024 & 1024 & 1024 & 0 & - & - & False & 1 \\
+gemm & cpu-naive & cpu & 64 & 64 & 64 & 64 & 0 & - & - & False & 1 \\
+gemm & cpu-naive & cpu & 128 & 128 & 128 & 128 & 0 & - & - & False & 1 \\
+gemm & cpu-naive & cpu & 256 & 256 & 256 & 256 & 0 & - & - & False & 1 \\
+gemm & cpu-naive & cpu & 512 & 512 & 512 & 512 & 0 & - & - & False & 1 \\
+gemm & cpu-naive & cpu & 768 & 768 & 768 & 768 & 0 & - & - & False & 1 \\
+gemm & cpu-naive & cpu & 1024 & 1024 & 1024 & 1024 & 0 & - & - & False & 1 \\
+\hline
+\end{tabular}
