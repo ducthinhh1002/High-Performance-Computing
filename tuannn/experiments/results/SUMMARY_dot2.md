@@ -135,8 +135,9 @@ Thời gian allreduce, trung bình 3 lần chạy × 20 lần đo:
 - **Message lớn**: ring nhanh nhất hoặc đồng hạng ở mọi k, đúng như đợt 1 và đúng dự đoán "ring và MPI tốt
   nhất". Khác với đợt 1, ring hơn `MPI_Allreduce` rõ ràng khi k ≥ 6 (33,2 so với 46,9 ms ở k = 10): bản
   tự viết thắng thư viện OpenMPI mặc định ở message lớn.
-- **Message nhỏ**: `mpi` nhanh nhất ở 4 B (1,0 µs), ring **chậm nhất** (2,1 µs ở k = 4 và 10,2 µs
-  ở k = 10, vì 2(k−1) vòng). Ở 4 KiB, ring bằng `mpi`.
+- **Message nhỏ** (4 B): `mpi` nhanh nhất ở k = 2 và k = 4 (0,3 và 1,0 µs). Ring **chậm nhất ở 4 trên 5
+  giá trị k** (k = 2, 6, 8, 10; 10,2 µs ở k = 10), vì cần 2(k−1) vòng; riêng k = 4 ring (2,1 µs) chỉ hơn
+  naive (3,4 µs). Ở 4 KiB, ring ngang `mpi`.
 - **Recursive doubling sụp ở k ≥ 8** với message lớn (71,8 ms ở k = 8 và 85,2 ms ở k = 10, gấp 2,6×
   ring). k = 8 là lũy thừa của 2 nên không phải do xử lý số tiến trình lẻ; nguyên nhân chưa rõ (có thể là
   mẫu truyền cả vector ở mỗi vòng cộng với băng thông shared memory bị chia), chưa có phép đo tách riêng.
