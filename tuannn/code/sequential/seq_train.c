@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
     pdl_dataset *test = NULL;
     const char *test_path = pdl_cli_str(&cli, "test-data");
     if (strcmp(test_path, "none") != 0 && test_path[0]) {
-        pdl_dataset *tl = pdl_dataset_load(test_path, (int)pdl_cli_int(&cli, "test-limit"), seed + 7919);
+        pdl_dataset *tl = pdl_dataset_load_split(test_path, (int)pdl_cli_int(&cli, "test-limit"), seed, 1);
         int nt = pdl_partition_indices(tl, PDL_PART_GLOBAL, 0, 1, 0, &all);
         test = pdl_dataset_subset(tl, all, nt);
         free(all);
