@@ -1,0 +1,18 @@
+# mpirun -np 2 --bind-to core --map-by core build/bin/pdl_train --strategy sync --model cnn --width 4 --train-data data/cifar10-train.pdlds --test-data data/cifar10-test.pdlds --train-limit 20000 --test-limit 2000 --epochs 1 --global-batch 256 --lr 0.01 --timing-sync 1 --eval-every 0 --device cuda --impl cublas --seed 44 --output ../experiments/results/dot2_e7_gpu_mpi/20261123-005610/raw/0008_np-2_device-cuda_impl-cublas_r2.json --run-id 0008_np-2_device-cuda_impl-cublas_r2 --tag gpu_mpi
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=2 | device=cuda impl=cublas threads=1 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: NVIDIA GeForce RTX 2060
+[INFO ][rank 0] strategy=sync workers=2 partition=global local_batch=128 steps/epoch=78 train=20000 test=2000
+Model: conv:64:3:1:1,relu,pool:2:2,conv:128:3:1:1,relu,pool:2:2,fc:512,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     3x32x32          64x32x32                 1792          3.539
+  relu1    relu     64x32x32         64x32x32                    0          0.066
+  pool1    maxpool  64x32x32         64x16x16                    0          0.066
+  conv2    conv     64x16x16         128x16x16               73856         37.749
+  relu2    relu     128x16x16        128x16x16                   0          0.033
+  pool2    maxpool  128x16x16        128x8x8                     0          0.033
+  fc1      fc       128x8x8          512x1x1               4194816          8.389
+  relu3    relu     512x1x1          512x1x1                     0          0.001
+  fc2      fc       512x1x1          10x1x1                   5130          0.010
+  total params: 4275594 (17.10 MB), forward: 49.884 MFLOP/sample
+[INFO ][rank 0] epoch   1 | loss 1.6902 acc 0.4007 |   3.13s (comm 25.9%) | 3189 samples/s/rank | test loss 1.4174 acc 0.4995
+[INFO ][rank 0] results written to ../experiments/results/dot2_e7_gpu_mpi/20261123-005610/raw/0008_np-2_device-cuda_impl-cublas_r2.json
