@@ -18,6 +18,7 @@ thì đo được nguyên nhân nào? Thư mục này **chỉ đo lại mục 3*
 | [`kaggle/hpc_replication_kaggle.ipynb`](kaggle/hpc_replication_kaggle.ipynb) | Notebook tự chứa để chạy trên Kaggle, sinh từ `code/make_kaggle_notebook.py` |
 | [`results/`](results/) | Dữ liệu gốc (CSV, `env.json`, log) và hình. Nên dùng thư mục nào: [results/README.md](results/README.md) |
 | [`ANALYSIS.md`](ANALYSIS.md) | Phân tích: đối chiếu từng kết luận của bài báo, mô hình, giới hạn, bước kiểm chứng tiếp |
+| [`PREDICTIONS.md`](PREDICTIONS.md) | Dự đoán ghi trước khi đo băng thông (kiểm chứng ANALYSIS mục 7); cột kết quả điền sau khi chạy |
 | [`results/analysis/`](results/analysis/) | Bảng số (`tables.md`) và 3 hình phân tích (Hình 7–9), sinh từ `code/analyze.py` |
 | [`results/paper_digitized.csv`](results/paper_digitized.csv) | Điểm đọc từ Hình 1–4 của bài báo, kèm sai số đọc |
 | [`REFERENCES.md`](REFERENCES.md) | Trích dẫn và đường dẫn tài liệu |
@@ -99,7 +100,8 @@ chứng được thứ tự thời gian từ lịch sử repo.
 | Tỷ lệ GPU/CPU khác 40 lần nhưng xu hướng giống | Đúng: 27,8× (conv) và 21,7× (matvec, n = 16384). Kế hoạch không dự đoán tỷ lệ sẽ lớn hơn hay nhỏ hơn 40 |
 
 Các hướng giải thích khác trong kế hoạch (vòng lặp từng ảnh, chi phí khởi chạy kernel, giới hạn tính toán/băng thông) và kết quả, kể cả phần
-không đúng: [ANALYSIS.md](ANALYSIS.md) mục 5.
+không đúng: [ANALYSIS.md](ANALYSIS.md) mục 5. Dự đoán của phép đo băng thông sau đó (D1–D6, ghi trước khi đo) ở [PREDICTIONS.md](PREDICTIONS.md):
+D1, D2 (gần như hoàn toàn), D3, D5 đúng; **D4 sai** (đoán 22–28×, đo được 35× ở B = 64).
 
 ### Các con số chính
 
@@ -151,14 +153,15 @@ Hình và bảng đầy đủ: [`results/kaggle/agg_20261122_074407/figures/`](r
   đổi từ 1005 đến 1510 MHz (tương quan giữa thời gian và 1/xung nhịp: 0,994). Nghĩa là thời gian GPU chủ yếu do xung nhịp quyết định.
   Riêng lần chạy đầu **không ghi xung nhịp**, nên với lần đó đây là suy luận.
 
+- **Matvec (FC) bị giới hạn bởi băng thông bộ nhớ trên Kaggle** (PREDICTIONS.md D1–D3, ghi trước khi đo): kernel đọc độc lập (`sum`, `dot`) đạt 13–14 GB/s ở CPU 1 luồng và 253–272 GB/s ở GPU; matvec đạt 92–100% và 97–99% của mức đó. Tỷ lệ băng thông GPU/CPU (18–20×) khớp tỷ lệ matvec (17,6–21,4×) trong 7%. Chỉ một máy, 3 lần chạy.
+
 ### Chưa chứng minh
 
 - **Nguyên nhân** của khác biệt so với con số 40× của bài báo (27,8× ở đây): phần cứng, phần mềm và cách cài đặt đều khác
   nhau, chúng tôi không tách được từng yếu tố.
-- **Speedup FC bằng tỷ lệ băng thông bộ nhớ:** GB/s trong bảng được **tính từ chính thời gian đo**, nên tỷ lệ GB/s bằng tỷ lệ thời gian (21,7×) **không phải bằng chứng độc lập**, và số đo hiện có không phân biệt được "theo băng thông" với "theo FLOP".
-  (Có bằng chứng độc lập rằng matvec **trên GPU** bị giới hạn bởi bộ nhớ: GB/s giữ 262–268 khi xung nhịp GPU đổi 630–1590 MHz; CPU chưa kiểm chứng.)
+- **Speedup FC bằng tỷ lệ băng thông bộ nhớ** mới được kiểm chứng trên **một** máy Kaggle (khớp trong 7%, xem bên trên); chưa biết có lặp lại ở máy khác.
 - Vì sao matvec 8 luồng trên laptop không nhanh hơn 1 luồng.
-- **Nguyên nhân bên trong** khiến conv trên GPU chỉ đạt khoảng 14% trần FP32 (im2col, ma trận nhỏ, số kernel) vì chưa đo riêng từng bước.
+- **Vì sao GEMM của conv (ma trận 96×121 nhỏ) chỉ đạt 26% trần FP32** (đã đo riêng: im2col chiếm 46% chu kỳ; phần còn lại chưa rõ nguyên nhân).
 - Vì sao số tuyệt đối FC của bài báo không khớp matvec thường (CPU khoảng 0,28 GB/s, GPU khoảng 14–16 GB/s): giả thuyết là nhân với nhiều vector (khoảng 64–78), **chưa kiểm chứng**; xem ANALYSIS.md mục 3.
 
 ## Giới hạn
@@ -176,5 +179,5 @@ Hình và bảng đầy đủ: [`results/kaggle/agg_20261122_074407/figures/`](r
   20–24% (2 luồng), trên laptop chậm hơn 7–9% (1 luồng) và 28–30% (8 luồng), theo từng lần chạy. Chưa biết vì sao.
 - Các lần chạy cũ (`run_kaggle_20261121_074742`, `run_trial_balanced`) có lỗi đo ở `batched` và `conv2d` trên CPU; không trích số từ đó
   (xem [results/README.md](results/README.md)).
-- Số nhân vật lý của CPU Kaggle chỉ được suy từ mặc định 2 luồng của torch. Tên và thông số phần cứng của bài báo lấy từ phần chữ của bài.
+- CPU Kaggle là máy ảo: `lscpu` báo 2 nhân × 2 luồng, L3 38,5 MB (đã ghi ở `results/kaggle/lscpu_20261122_095300.txt`). Tên và thông số phần cứng của bài báo lấy từ phần chữ của bài.
 - Phần phân tích đối chiếu từng kết luận của bài báo ở [ANALYSIS.md](ANALYSIS.md); **báo cáo và slide chưa làm**.

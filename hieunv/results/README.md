@@ -13,7 +13,9 @@ tài liệu tham khảo ở [`../REFERENCES.md`](../REFERENCES.md).
 | `kaggle/diag_cold_20261122_074407` | Chẩn đoán | GPU nguội, batch tăng dần; dùng để tìm nguyên nhân bậc nhảy thời gian GPU |
 | `laptop/agg_20261122_152118` | **Chính** | Gộp 3 lần chạy trên laptop (Ryzen 7 5800H, không có GPU CUDA) |
 | `laptop/run{1,2,3}_20261122_152118` | Dữ liệu thô của bản chính | 30 lần đo/điểm; có `cpu_perf.csv` (xung nhịp và tải nền) |
-| `analysis` | Phân tích | Bảng số và Hình 7–9, sinh bởi `../code/analyze.py`; xem `../ANALYSIS.md` |
+| `analysis` | Phân tích | Bảng số (`tables.md`, `mem_tables.md`) và Hình 7–10, sinh bởi `../code/analyze.py` và `../code/analyze_mem.py`; xem `../ANALYSIS.md` |
+| `kaggle/bw{1,2,3}_20261122_095300` | Kiểm chứng | Đo băng thông độc lập, FC nhiều vector, tách im2col/GEMM (`bw.csv`, `fcb.csv`, `step.csv`); dự đoán ở `../PREDICTIONS.md` |
+| `kaggle/lscpu_20261122_095300.txt` | Kiểm chứng | Thông tin CPU của máy ảo Kaggle (2 nhân × 2 luồng, L3 38,5 MB) |
 | `paper_digitized.csv` | Số liệu bài báo | Điểm đọc từ Hình 1–4 của bài báo, kèm sai số đọc |
 | `kaggle/run_kaggle_20261121_074742` | **Cũ** | 1 lần chạy, 10 lần đo. Cột CPU của `batched` và `conv2d` sai (tính cả chi phí cấp phát bộ nhớ); thời gian GPU bị ảnh hưởng bởi xung nhịp |
 | `laptop/run_trial_balanced` | **Cũ** | Chạy thử, có cùng lỗi cấp phát, matvec bị nhiễu (52,5 ms ở n=16384, bản chính là 38,4 ms) |
