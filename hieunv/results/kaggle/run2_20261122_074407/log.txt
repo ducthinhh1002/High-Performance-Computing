@@ -1,0 +1,148 @@
+run folder: /kaggle/working/results/kaggle/run2_20261122_074407
+cpu: Intel(R) Xeon(R) CPU @ 2.00GHz | torch threads (max): 2 | gpu: Tesla T4
+conv  cuda t=2  caffe   batch=160      11.190 ms ± 0.413  (968.61 GFLOP/s)  issue 7.295 ms
+conv  cuda t=2  caffe   batch=256      17.560 ms ± 0.094  (987.613 GFLOP/s)  issue 10.837 ms
+conv  cuda t=2  caffe   batch=32        2.218 ms ± 0.013  (977.228 GFLOP/s)  issue 1.392 ms
+conv  cuda t=2  caffe   batch=64        4.433 ms ± 0.028  (978.092 GFLOP/s)  issue 2.855 ms
+conv  cuda t=2  caffe   batch=16        1.109 ms ± 0.010  (977.43 GFLOP/s)  issue 0.705 ms
+conv  cuda t=2  caffe   batch=192      13.242 ms ± 0.093  (982.259 GFLOP/s)  issue 8.219 ms
+conv  cuda t=2  caffe   batch=128       8.833 ms ± 0.084  (981.706 GFLOP/s)  issue 5.373 ms
+conv  cuda t=2  caffe   batch=96        6.640 ms ± 0.037  (979.427 GFLOP/s)  issue 4.251 ms
+conv  cuda t=2  caffe   batch=224      15.537 ms ± 0.302  (976.684 GFLOP/s)  issue 9.799 ms
+conv  cuda t=2  caffe   batch=8         0.574 ms ± 0.007  (943.898 GFLOP/s)  issue 0.361 ms
+conv  cuda t=2  caffe   batch=1         0.093 ms ± 0.017  (731.63 GFLOP/s)  issue 0.056 ms
+conv  cuda t=2  batched batch=160      11.816 ms ± 0.374  (917.348 GFLOP/s)  issue 0.854 ms
+conv  cuda t=2  batched batch=256      20.285 ms ± 0.389  (854.961 GFLOP/s)  issue 1.345 ms
+conv  cuda t=2  batched batch=32        2.440 ms ± 0.098  (888.272 GFLOP/s)  issue 0.214 ms
+conv  cuda t=2  batched batch=64        4.668 ms ± 0.049  (928.893 GFLOP/s)  issue 0.374 ms
+conv  cuda t=2  batched batch=16        1.200 ms ± 0.013  (903.077 GFLOP/s)  issue 0.133 ms
+conv  cuda t=2  batched batch=192      14.232 ms ± 0.315  (913.896 GFLOP/s)  issue 0.999 ms
+conv  cuda t=2  batched batch=128       9.565 ms ± 0.301  (906.568 GFLOP/s)  issue 0.692 ms
+conv  cuda t=2  batched batch=96        7.102 ms ± 0.139  (915.662 GFLOP/s)  issue 0.518 ms
+conv  cuda t=2  batched batch=224      16.822 ms ± 0.710  (902.056 GFLOP/s)  issue 1.162 ms
+conv  cuda t=2  batched batch=8         0.601 ms ± 0.008  (901.234 GFLOP/s)  issue 0.095 ms
+conv  cuda t=2  batched batch=1         0.104 ms ± 0.007  (649.616 GFLOP/s)  issue 0.049 ms
+conv  cuda t=2  conv2d  batch=160       8.996 ms ± 0.701  (1204.937 GFLOP/s)  issue 0.075 ms
+conv  cuda t=2  conv2d  batch=256      15.330 ms ± 0.517  (1131.262 GFLOP/s)  issue 0.074 ms
+conv  cuda t=2  conv2d  batch=32        1.606 ms ± 0.058  (1349.562 GFLOP/s)  issue 0.058 ms
+conv  cuda t=2  conv2d  batch=64        3.421 ms ± 0.336  (1267.507 GFLOP/s)  issue 0.062 ms
+conv  cuda t=2  conv2d  batch=16        0.860 ms ± 0.021  (1260.688 GFLOP/s)  issue 0.059 ms
+conv  cuda t=2  conv2d  batch=192      11.502 ms ± 0.467  (1130.863 GFLOP/s)  issue 0.073 ms
+conv  cuda t=2  conv2d  batch=128       7.071 ms ± 0.582  (1226.391 GFLOP/s)  issue 0.071 ms
+conv  cuda t=2  conv2d  batch=96        5.224 ms ± 0.427  (1244.846 GFLOP/s)  issue 0.072 ms
+conv  cuda t=2  conv2d  batch=224      13.290 ms ± 0.480  (1141.837 GFLOP/s)  issue 0.074 ms
+conv  cuda t=2  conv2d  batch=8         0.522 ms ± 0.010  (1037.611 GFLOP/s)  issue 0.046 ms
+conv  cuda t=2  conv2d  batch=1         0.096 ms ± 0.011  (707.228 GFLOP/s)  issue 0.042 ms
+fc    cuda t=2  matvec  n=8192        1.025 ms ± 0.006  (130.995 GFLOP/s, 262.054 GB/s)
+fc    cuda t=2  matvec  n=2048        0.086 ms ± 0.003  (97.212 GFLOP/s, 194.614 GB/s)
+fc    cuda t=2  matvec  n=4096        0.274 ms ± 0.006  (122.416 GFLOP/s, 244.951 GB/s)
+fc    cuda t=2  matvec  n=512         0.028 ms ± 0.005  (18.942 GFLOP/s, 38.031 GB/s)
+fc    cuda t=2  matvec  n=1024        0.029 ms ± 0.006  (72.92 GFLOP/s, 146.125 GB/s)
+fc    cuda t=2  matvec  n=12288       2.270 ms ± 0.008  (133.058 GFLOP/s, 266.16 GB/s)
+fc    cuda t=2  matvec  n=16384       4.018 ms ± 0.014  (133.612 GFLOP/s, 267.257 GB/s)
+fc    cuda t=2  matvec  n=256         0.026 ms ± 0.012  (5.084 GFLOP/s, 10.247 GB/s)
+fc    cuda t=2  gemm    n=1024        0.745 ms ± 0.095  (2881.412 GFLOP/s, 16.883 GB/s)
+fc    cuda t=2  gemm    n=1536        1.774 ms ± 0.457  (4084.724 GFLOP/s, 15.956 GB/s)
+fc    cuda t=2  gemm    n=512         0.151 ms ± 0.003  (1783.349 GFLOP/s, 20.899 GB/s)
+fc    cuda t=2  gemm    n=2048        5.453 ms ± 1.892  (3150.735 GFLOP/s, 9.231 GB/s)
+fc    cuda t=2  gemm    n=3072       20.293 ms ± 1.266  (2857.18 GFLOP/s, 5.58 GB/s)
+fc    cuda t=2  gemm    n=256         0.067 ms ± 0.002  (498.11 GFLOP/s, 11.674 GB/s)
+fc    cuda t=2  gemm    n=4096       46.029 ms ± 0.718  (2985.949 GFLOP/s, 4.374 GB/s)
+gpu clock log: 1444 samples
+conv  cpu  t=1  caffe   batch=160     302.098 ms ± 7.624  (35.879 GFLOP/s)
+conv  cpu  t=1  caffe   batch=256     481.048 ms ± 9.539  (36.052 GFLOP/s)
+conv  cpu  t=1  caffe   batch=32       60.109 ms ± 1.244  (36.065 GFLOP/s)
+conv  cpu  t=1  caffe   batch=64      121.771 ms ± 3.894  (35.605 GFLOP/s)
+conv  cpu  t=1  caffe   batch=16       29.562 ms ± 0.966  (36.666 GFLOP/s)
+conv  cpu  t=1  caffe   batch=192     362.583 ms ± 6.351  (35.873 GFLOP/s)
+conv  cpu  t=1  caffe   batch=128     242.298 ms ± 6.810  (35.788 GFLOP/s)
+conv  cpu  t=1  caffe   batch=96      183.790 ms ± 3.844  (35.385 GFLOP/s)
+conv  cpu  t=1  caffe   batch=224     424.006 ms ± 8.059  (35.789 GFLOP/s)
+conv  cpu  t=1  caffe   batch=8        14.309 ms ± 0.601  (37.875 GFLOP/s)
+conv  cpu  t=1  caffe   batch=1         1.729 ms ± 0.075  (39.178 GFLOP/s)
+conv  cpu  t=1  batched batch=160     274.470 ms ± 5.156  (39.491 GFLOP/s)
+conv  cpu  t=1  batched batch=256     442.599 ms ± 10.074  (39.184 GFLOP/s)
+conv  cpu  t=1  batched batch=32       53.802 ms ± 3.830  (40.293 GFLOP/s)
+conv  cpu  t=1  batched batch=64      109.735 ms ± 1.724  (39.51 GFLOP/s)
+conv  cpu  t=1  batched batch=16       25.901 ms ± 0.709  (41.849 GFLOP/s)
+conv  cpu  t=1  batched batch=192     328.226 ms ± 4.583  (39.628 GFLOP/s)
+conv  cpu  t=1  batched batch=128     220.122 ms ± 7.460  (39.393 GFLOP/s)
+conv  cpu  t=1  batched batch=96      165.611 ms ± 3.892  (39.27 GFLOP/s)
+conv  cpu  t=1  batched batch=224     384.870 ms ± 6.892  (39.428 GFLOP/s)
+conv  cpu  t=1  batched batch=8        12.333 ms ± 0.477  (43.945 GFLOP/s)
+conv  cpu  t=1  batched batch=1         1.760 ms ± 0.096  (38.482 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=160     125.642 ms ± 2.215  (86.27 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=256     202.860 ms ± 4.388  (85.49 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=32       26.000 ms ± 1.155  (83.379 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=64       51.035 ms ± 1.346  (84.955 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=16       12.265 ms ± 0.595  (88.377 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=192     151.540 ms ± 2.480  (85.832 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=128      99.933 ms ± 2.265  (86.771 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=96       76.083 ms ± 2.034  (85.479 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=224     183.867 ms ± 9.005  (82.531 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=8         5.678 ms ± 0.248  (95.455 GFLOP/s)
+conv  cpu  t=1  conv2d  batch=1         0.862 ms ± 0.054  (78.552 GFLOP/s)
+conv  cpu  t=2  caffe   batch=160     204.184 ms ± 4.016  (53.085 GFLOP/s)
+conv  cpu  t=2  caffe   batch=256     334.726 ms ± 9.963  (51.811 GFLOP/s)
+conv  cpu  t=2  caffe   batch=32       40.790 ms ± 0.754  (53.146 GFLOP/s)
+conv  cpu  t=2  caffe   batch=64       82.683 ms ± 1.673  (52.437 GFLOP/s)
+conv  cpu  t=2  caffe   batch=16       19.911 ms ± 0.514  (54.437 GFLOP/s)
+conv  cpu  t=2  caffe   batch=192     244.549 ms ± 9.030  (53.188 GFLOP/s)
+conv  cpu  t=2  caffe   batch=128     163.991 ms ± 3.763  (52.877 GFLOP/s)
+conv  cpu  t=2  caffe   batch=96      125.411 ms ± 9.354  (51.857 GFLOP/s)
+conv  cpu  t=2  caffe   batch=224     292.932 ms ± 10.472  (51.803 GFLOP/s)
+conv  cpu  t=2  caffe   batch=8         9.936 ms ± 0.297  (54.544 GFLOP/s)
+conv  cpu  t=2  caffe   batch=1         1.222 ms ± 0.042  (55.456 GFLOP/s)
+conv  cpu  t=2  batched batch=160     158.036 ms ± 2.974  (68.586 GFLOP/s)
+conv  cpu  t=2  batched batch=256     253.907 ms ± 7.780  (68.303 GFLOP/s)
+conv  cpu  t=2  batched batch=32       31.451 ms ± 1.103  (68.927 GFLOP/s)
+conv  cpu  t=2  batched batch=64       65.561 ms ± 6.784  (66.131 GFLOP/s)
+conv  cpu  t=2  batched batch=16       14.616 ms ± 0.538  (74.157 GFLOP/s)
+conv  cpu  t=2  batched batch=192     190.485 ms ± 4.189  (68.283 GFLOP/s)
+conv  cpu  t=2  batched batch=128     129.341 ms ± 7.309  (67.042 GFLOP/s)
+conv  cpu  t=2  batched batch=96       94.506 ms ± 2.536  (68.815 GFLOP/s)
+conv  cpu  t=2  batched batch=224     219.942 ms ± 8.831  (68.995 GFLOP/s)
+conv  cpu  t=2  batched batch=8         7.133 ms ± 0.304  (75.98 GFLOP/s)
+conv  cpu  t=2  batched batch=1         1.183 ms ± 0.071  (57.26 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=160      64.670 ms ± 1.053  (167.607 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=256     103.270 ms ± 1.401  (167.935 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=32       12.585 ms ± 0.635  (172.255 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=64       26.013 ms ± 0.587  (166.675 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=16        6.851 ms ± 1.534  (158.212 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=192      79.044 ms ± 6.020  (164.554 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=128      51.763 ms ± 1.384  (167.519 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=96       38.612 ms ± 0.862  (168.431 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=224      90.796 ms ± 1.583  (167.131 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=8         3.066 ms ± 0.209  (176.784 GFLOP/s)
+conv  cpu  t=2  conv2d  batch=1         0.466 ms ± 0.042  (145.412 GFLOP/s)
+fc    cpu  t=1  matvec  n=8192       20.725 ms ± 0.545  (6.476 GFLOP/s, 12.955 GB/s)
+fc    cpu  t=1  matvec  n=2048        0.764 ms ± 0.032  (10.976 GFLOP/s, 21.973 GB/s)
+fc    cpu  t=1  matvec  n=4096        5.152 ms ± 0.232  (6.513 GFLOP/s, 13.033 GB/s)
+fc    cpu  t=1  matvec  n=512         0.037 ms ± 0.017  (14.225 GFLOP/s, 28.56 GB/s)
+fc    cpu  t=1  matvec  n=1024        0.226 ms ± 0.024  (9.29 GFLOP/s, 18.615 GB/s)
+fc    cpu  t=1  matvec  n=12288      48.167 ms ± 0.518  (6.27 GFLOP/s, 12.541 GB/s)
+fc    cpu  t=1  matvec  n=16384      87.592 ms ± 1.199  (6.129 GFLOP/s, 12.26 GB/s)
+fc    cpu  t=1  matvec  n=256         0.012 ms ± 0.004  (10.663 GFLOP/s, 21.493 GB/s)
+fc    cpu  t=1  gemm    n=1024       16.534 ms ± 0.745  (129.881 GFLOP/s, 0.761 GB/s)
+fc    cpu  t=1  gemm    n=1536       56.124 ms ± 1.083  (129.139 GFLOP/s, 0.504 GB/s)
+fc    cpu  t=1  gemm    n=512         2.165 ms ± 0.152  (123.962 GFLOP/s, 1.453 GB/s)
+fc    cpu  t=1  gemm    n=2048      130.959 ms ± 6.015  (131.185 GFLOP/s, 0.384 GB/s)
+fc    cpu  t=1  gemm    n=3072      453.469 ms ± 6.956  (127.863 GFLOP/s, 0.25 GB/s)
+fc    cpu  t=1  gemm    n=256         0.280 ms ± 0.032  (119.926 GFLOP/s, 2.811 GB/s)
+fc    cpu  t=1  gemm    n=4096     1068.638 ms ± 15.949  (128.611 GFLOP/s, 0.188 GB/s)
+fc    cpu  t=2  matvec  n=8192       10.741 ms ± 0.236  (12.496 GFLOP/s, 24.998 GB/s)
+fc    cpu  t=2  matvec  n=2048        0.431 ms ± 0.037  (19.483 GFLOP/s, 39.003 GB/s)
+fc    cpu  t=2  matvec  n=4096        2.502 ms ± 0.113  (13.412 GFLOP/s, 26.837 GB/s)
+fc    cpu  t=2  matvec  n=512         0.024 ms ± 0.013  (22.157 GFLOP/s, 44.486 GB/s)
+fc    cpu  t=2  matvec  n=1024        0.110 ms ± 0.018  (19.014 GFLOP/s, 38.102 GB/s)
+fc    cpu  t=2  matvec  n=12288      25.252 ms ± 0.336  (11.959 GFLOP/s, 23.922 GB/s)
+fc    cpu  t=2  matvec  n=16384      45.684 ms ± 1.539  (11.752 GFLOP/s, 23.506 GB/s)
+fc    cpu  t=2  matvec  n=256         0.013 ms ± 0.004  (10.22 GFLOP/s, 20.6 GB/s)
+fc    cpu  t=2  gemm    n=1024        8.992 ms ± 0.656  (238.826 GFLOP/s, 1.399 GB/s)
+fc    cpu  t=2  gemm    n=1536       29.793 ms ± 0.777  (243.271 GFLOP/s, 0.95 GB/s)
+fc    cpu  t=2  gemm    n=512         1.144 ms ± 0.099  (234.626 GFLOP/s, 2.75 GB/s)
+fc    cpu  t=2  gemm    n=2048       69.771 ms ± 2.055  (246.232 GFLOP/s, 0.721 GB/s)
+fc    cpu  t=2  gemm    n=3072      235.168 ms ± 5.910  (246.556 GFLOP/s, 0.482 GB/s)
+fc    cpu  t=2  gemm    n=256         0.154 ms ± 0.022  (217.427 GFLOP/s, 5.096 GB/s)
+fc    cpu  t=2  gemm    n=4096      556.395 ms ± 16.947  (247.017 GFLOP/s, 0.362 GB/s)
+done in 421.8 s -> /kaggle/working/results/kaggle/run2_20261122_074407
