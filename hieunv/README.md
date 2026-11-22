@@ -64,10 +64,10 @@ Lệnh `--quick` chỉ để thử trong vài giây. Trên Windows, `run_session
 **Kaggle.** Mở notebook bằng File → Import Notebook, chọn Accelerator **GPU T4 x2**, bấm Run All. Notebook chạy một lần
 chẩn đoán GPU nguội rồi 3 lần đo (mỗi lần khoảng 7 phút). Tải `results_kaggle.zip` ở panel Output về `results/kaggle/`.
 
-**Chỉ vẽ lại hình và bảng từ dữ liệu có sẵn** (không cần chạy lại phép đo; `summary.md` sinh ra giống hệt bản đã commit):
+**Chỉ vẽ lại hình và bảng từ dữ liệu có sẵn** (chạy trong `hieunv\code`, không cần đo lại; `summary.md` sinh ra giống hệt bản đã commit):
 
 ```powershell
-python plot.py ..\results\kaggle\agg_20261122_074407 --figdir ..\figures_moi
+python plot.py ..\results\kaggle\agg_20261122_074407 --figdir $env:TEMP\figures_moi
 ```
 
 ## Kết quả
@@ -120,7 +120,8 @@ Khoảng n ≥ 4096 được chọn **sau khi đã thấy** kết quả với n 
 21,7× trên Kaggle.
 
 **Cách cài đặt thay đổi tỷ lệ rất nhiều.** Với `nn.Conv2d` trên cả hai thiết bị, tỷ lệ CPU 1 luồng / GPU trên Kaggle chỉ
-còn khoảng 14× (15,8 / 13,4 / 13,0 từng lần), vì CPU dùng oneDNN nhanh hơn 2,4× so với kiểu Caffe. Con số 40× hay 27,8×
+còn khoảng 14× (15,8 / 13,4 / 13,0 từng lần): so với kiểu Caffe, CPU (oneDNN) nhanh hơn 2,4× còn GPU (cuDNN, đo khi bị hạ xung) chỉ nhanh
+hơn 1,2×. Con số 40× hay 27,8×
 vì vậy gắn với cách cài đặt kiểu Caffe, không phải là tỷ lệ của "convolution nói chung".
 
 **GEMM n = 4096 (phần thêm, vì chú thích Hình 3 của bài ghi "matrix-matrix"):** Kaggle CPU 1 luồng 129 GFLOP/s, GPU 2,97–3,49 TFLOP/s;
