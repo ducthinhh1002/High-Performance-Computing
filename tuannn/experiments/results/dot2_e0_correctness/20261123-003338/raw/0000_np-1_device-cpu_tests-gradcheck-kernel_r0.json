@@ -1,0 +1,202 @@
+{
+  "schema": "pdl-bench/check/v1",
+  "version": "1.0.0",
+  "run_id": "",
+  "tag": "",
+  "config": {
+    "tests": "gradcheck,kernels,determinism,finite",
+    "device": "cpu",
+    "tol": "1e-3",
+    "steps": "5",
+    "seed": "42",
+    "output": "../experiments/results/dot2_e0_correctness/20261123-003338/raw/0000_np-1_device-cpu_tests-gradcheck-kernel_r0.json",
+    "verbose": "1"
+  },
+  "environment": {
+    "timestamp": "2026-11-22T17:33:42Z",
+    "hostname": "TuanNguyen",
+    "os": "Linux 5.15.146.1-microsoft-standard-WSL2 x86_64",
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12600K",
+    "logical_cpus": 16,
+    "compiler": "GNU 13.3.0",
+    "build_type": "Release",
+    "build_flags": "-Wall -Wextra -Wno-unused-parameter -O3 -march=native",
+    "git_commit": "unknown",
+    "git_dirty": false,
+    "pdl_version": "1.0.0",
+    "mpi_library": "Open MPI v4.1.6, package: Debian OpenMPI, ident: 4.1.6, repo rev: v4.1.6, Sep 30, 2023",
+    "mpi_world_size": 1,
+    "mpi_hosts": 1,
+    "openmp": true,
+    "omp_max_threads": 2,
+    "cuda": true,
+    "cuda_runtime": 12000,
+    "cuda_driver": 13030,
+    "cublas": true,
+    "gpu_name": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_bytes": 6442123264,
+    "gpu_sm_count": 30,
+    "gpu_cc": "7.5",
+    "device": "cpu",
+    "impl": "cpu-blocked",
+    "threads": 2,
+    "command_line": "build/bin/pdl_check --device cpu --tests gradcheck,kernels,determinism,finite --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0000_np-1_device-cpu_tests-gradcheck-kernel_r0.json",
+    "OMP_NUM_THREADS": "2"
+  },
+  "world_size": 1,
+  "passed": true,
+  "tests": [
+    {
+      "name": "gradcheck/conv+relu+pool+fc",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0.000103071504,
+      "tolerance": 0.02,
+      "detail": "56 params probed, 24 skipped at kinks"
+    },
+    {
+      "name": "gradcheck/strided-conv+overlap-pool",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 5.78949379e-05,
+      "tolerance": 0.02,
+      "detail": "66 params probed, 14 skipped at kinks"
+    },
+    {
+      "name": "gradcheck/mlp",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 7.49863405e-05,
+      "tolerance": 0.02,
+      "detail": "79 params probed, 14 skipped at kinks"
+    },
+    {
+      "name": "gradcheck/two-conv",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 3.05086713e-05,
+      "tolerance": 0.02,
+      "detail": "76 params probed, 11 skipped at kinks"
+    },
+    {
+      "name": "determinism/same-seed-same-params",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "finite/detects-nan-and-inf",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2,
+      "tolerance": 2,
+      "detail": "expects exactly 2"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-NN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.2622514e-07,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-NT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 1.79416287e-07,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-TN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 2.83521396e-07,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-naive-TT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 9.12542227e-08,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-NN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-NT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-TN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-blocked-TT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-NN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-NT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-TN",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/gemm-cpu-omp-TT",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0.001,
+      "detail": "37x53x29 batch 3, alpha 1.5 beta 0.5"
+    },
+    {
+      "name": "kernels/conv-direct-vs-im2col",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 1.23039913e-07,
+      "tolerance": 0.001,
+      "detail": ""
+    }
+  ]
+}

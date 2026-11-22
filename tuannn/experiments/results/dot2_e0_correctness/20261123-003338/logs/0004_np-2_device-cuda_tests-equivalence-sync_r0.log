@@ -1,0 +1,11 @@
+# mpirun -np 2 --bind-to none build/bin/pdl_check --device cuda --tests equivalence,sync --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0004_np-2_device-cuda_tests-equivalence-sync_r0.json
+# env: {'OMP_NUM_THREADS': '2'}
+[ PASS ] equivalence/sync-sgd-vs-sequential   cuda  err=2.860e-08 tol=1.0e-04 2 ranks x batch 8 vs 1 rank x batch 16, 5 steps
+[ PASS ] sync/replicas-identical-mpi          cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-ring         cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-rd           cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-tree         cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-naive        cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-reduce_bcast cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+
+7 tests, 0 failed
