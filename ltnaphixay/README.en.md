@@ -9,7 +9,7 @@ cuBLAS or MPI). The paper analyses the communication cost (O(L·k) + O(k·p/B)) 
 this project measures it.
 
 Sections 1–6 come from Kaggle, 2× Tesla T4, with the fixed settings (10 epochs) and 3 repeats per
-configuration, built from this repository (commit 3fd2b8a). Results and raw CSVs:
+configuration, built from this part's own repository, [infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA](https://github.com/infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA) (commit [3fd2b8a](https://github.com/infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA/commit/3fd2b8a)); the code in this folder is the same as that repository's. Results and raw CSVs:
 [`runs/kaggle-final-2026-11-22/`](runs/kaggle-final-2026-11-22/) (training and allreduce, with
 [`summary.md`](runs/kaggle-final-2026-11-22/summary.md)) and
 [`runs/kaggle-profile-2026-11-22/`](runs/kaggle-profile-2026-11-22/) (kernel profile) and
@@ -297,6 +297,8 @@ What this shows:
 
 ## Build and run
 
+Run the commands below inside the `ltnaphixay/` folder.
+
 ```bash
 make data          # download MNIST into ./data
 make seq           # sequential C baseline (gcc only)
@@ -311,7 +313,7 @@ bash scripts/run_experiments.sh 2 "tree ring rd"  # the full comparison
 python3 scripts/flops.py --hidden 512             # FLOP count, matmul vs the rest
 ```
 
-On Kaggle (set your username in `kernel-metadata.json` first):
+On Kaggle (set your username in `kernel-metadata.json` first). The Kaggle scripts clone the standalone repository [infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA](https://github.com/infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA) (same code as this folder) and build at its root:
 
 ```bash
 kaggle kernels push -p scripts/kaggle/check --accelerator NvidiaTeslaT4    # build, check, train, benchmark

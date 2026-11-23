@@ -9,7 +9,7 @@ hay MPI). Bài báo chỉ phân tích chi phí truyền thông (O(L·k) + O(k·p
 này đo nó trên thực tế.
 
 Mục 1–6 đo trên Kaggle, 2× Tesla T4, với thiết lập cố định (10 epoch) và lặp 3 lần mỗi cấu hình,
-build từ chính repo này (commit 3fd2b8a). Kết quả và CSV gốc:
+build từ repo riêng của phần này, [infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA](https://github.com/infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA) (commit [3fd2b8a](https://github.com/infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA/commit/3fd2b8a)); mã trong thư mục này giống mã của repo đó. Kết quả và CSV gốc:
 [`runs/kaggle-final-2026-11-22/`](runs/kaggle-final-2026-11-22/) (huấn luyện và allreduce, kèm
 [`summary.md`](runs/kaggle-final-2026-11-22/summary.md)) và
 [`runs/kaggle-profile-2026-11-22/`](runs/kaggle-profile-2026-11-22/) (profile kernel) và
@@ -296,6 +296,8 @@ Kết quả cho thấy:
 
 ## Build và chạy
 
+Các lệnh dưới đây chạy trong thư mục `ltnaphixay/`.
+
 ```bash
 make data          # tải MNIST vào ./data
 make seq           # bản C tuần tự (chỉ cần gcc)
@@ -310,7 +312,7 @@ bash scripts/run_experiments.sh 2 "tree ring rd"  # so sánh đầy đủ
 python3 scripts/flops.py --hidden 512             # đếm FLOP, nhân ma trận so với phần còn lại
 ```
 
-Trên Kaggle (điền username vào `kernel-metadata.json` trước):
+Trên Kaggle (điền username vào `kernel-metadata.json` trước). Các script Kaggle clone repo riêng [infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA](https://github.com/infinityrbx/HPC_20261B_GroupN_DataParallelSGD_CUDA) (cùng mã với thư mục này) và build ở thư mục gốc của repo đó:
 
 ```bash
 kaggle kernels push -p scripts/kaggle/check --accelerator NvidiaTeslaT4    # build, kiểm tra, huấn luyện, benchmark
