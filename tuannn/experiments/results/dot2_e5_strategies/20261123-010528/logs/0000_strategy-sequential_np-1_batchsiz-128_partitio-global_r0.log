@@ -1,0 +1,29 @@
+# build/bin/pdl_train --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 10 --batch-size 128 --lr 0.02 --momentum 0.9 --eval-every 1 --partition global --strategy sequential --seed 42 --output ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0000_strategy-sequential_np-1_batchsiz-128_partitio-global_r0.json --run-id 0000_strategy-sequential_np-1_batchsiz-128_partitio-global_r0 --tag strategies_convergence
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=cpu impl=cpu-blocked threads=1 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ] strategy=sequential workers=1 partition=global local_batch=128 steps/epoch=468 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ] epoch   1 | loss 0.1912 acc 0.9400 |   6.95s (comm  0.0%) | 8623 samples/s/rank | test loss 0.0700 acc 0.9789
+[INFO ] epoch   2 | loss 0.0591 acc 0.9816 |   6.90s (comm  0.0%) | 8679 samples/s/rank | test loss 0.0463 acc 0.9850
+[INFO ] epoch   3 | loss 0.0421 acc 0.9865 |   6.93s (comm  0.0%) | 8649 samples/s/rank | test loss 0.0392 acc 0.9872
+[INFO ] epoch   4 | loss 0.0326 acc 0.9901 |   6.81s (comm  0.0%) | 8791 samples/s/rank | test loss 0.0359 acc 0.9886
+[INFO ] epoch   5 | loss 0.0247 acc 0.9922 |   6.79s (comm  0.0%) | 8821 samples/s/rank | test loss 0.0479 acc 0.9854
+[INFO ] epoch   6 | loss 0.0204 acc 0.9931 |   6.79s (comm  0.0%) | 8827 samples/s/rank | test loss 0.0434 acc 0.9872
+[INFO ] epoch   7 | loss 0.0167 acc 0.9946 |   6.78s (comm  0.0%) | 8839 samples/s/rank | test loss 0.0407 acc 0.9888
+[INFO ] epoch   8 | loss 0.0149 acc 0.9950 |   6.75s (comm  0.0%) | 8873 samples/s/rank | test loss 0.0429 acc 0.9880
+[INFO ] epoch   9 | loss 0.0111 acc 0.9964 |   6.92s (comm  0.0%) | 8651 samples/s/rank | test loss 0.0379 acc 0.9897
+[INFO ] epoch  10 | loss 0.0082 acc 0.9974 |   6.96s (comm  0.0%) | 8608 samples/s/rank | test loss 0.0438 acc 0.9895
+[INFO ] results written to ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0000_strategy-sequential_np-1_batchsiz-128_partitio-global_r0.json

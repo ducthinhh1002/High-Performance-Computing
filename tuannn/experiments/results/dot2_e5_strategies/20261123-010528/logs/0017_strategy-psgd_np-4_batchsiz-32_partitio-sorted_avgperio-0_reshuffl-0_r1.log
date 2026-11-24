@@ -1,0 +1,29 @@
+# mpirun -np 4 --bind-to core --map-by core build/bin/pdl_train --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 10 --batch-size 32 --lr 0.02 --momentum 0.9 --eval-every 1 --partition sorted --strategy psgd --avg-period 0 --reshuffle 0 --seed 43 --output ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0017_strategy-psgd_np-4_batchsiz-32_partitio-sorted_avgperio-0_reshuffl-0_r1.json --run-id 0017_strategy-psgd_np-4_batchsiz-32_partitio-sorted_avgperio-0_reshuffl-0_r1 --tag strategies_convergence
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=4 | device=cpu impl=cpu-blocked threads=1 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ][rank 0] strategy=psgd workers=4 partition=sorted local_batch=32 steps/epoch=468 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ][rank 0] epoch   1 | loss 0.0563 acc 0.9816 |   1.91s (comm  1.9%) | 7836 samples/s/rank | test loss 1.7543 acc 0.4501
+[INFO ][rank 0] epoch   2 | loss 0.0371 acc 0.9897 |   1.89s (comm  0.2%) | 7932 samples/s/rank | test loss 1.0523 acc 0.6422
+[INFO ][rank 0] epoch   3 | loss 0.0275 acc 0.9925 |   1.90s (comm  0.7%) | 7898 samples/s/rank | test loss 0.6033 acc 0.8556
+[INFO ][rank 0] epoch   4 | loss 0.0248 acc 0.9936 |   1.91s (comm  0.4%) | 7843 samples/s/rank | test loss 0.4065 acc 0.8788
+[INFO ][rank 0] epoch   5 | loss 0.0137 acc 0.9956 |   1.91s (comm  1.0%) | 7837 samples/s/rank | test loss 0.2300 acc 0.9443
+[INFO ][rank 0] epoch   6 | loss 0.0112 acc 0.9971 |   1.88s (comm  0.0%) | 7949 samples/s/rank | test loss 0.2034 acc 0.9382
+[INFO ][rank 0] epoch   7 | loss 0.0096 acc 0.9967 |   1.89s (comm  1.4%) | 7933 samples/s/rank | test loss 0.1776 acc 0.9426
+[INFO ][rank 0] epoch   8 | loss 0.0091 acc 0.9975 |   1.90s (comm  0.7%) | 7899 samples/s/rank | test loss 0.1681 acc 0.9415
+[INFO ][rank 0] epoch   9 | loss 0.0075 acc 0.9975 |   1.89s (comm  0.0%) | 7939 samples/s/rank | test loss 0.1650 acc 0.9412
+[INFO ][rank 0] epoch  10 | loss 0.0073 acc 0.9979 |   1.91s (comm  1.2%) | 7857 samples/s/rank | test loss 0.1833 acc 0.9345
+[INFO ][rank 0] results written to ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0017_strategy-psgd_np-4_batchsiz-32_partitio-sorted_avgperio-0_reshuffl-0_r1.json

@@ -1,0 +1,14 @@
+# build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cuda-tiled,cublas --include-transfer 1 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0.json --run-id 0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0 --tag compute_paper_cpu_gpu
+# env: {'OMP_NUM_THREADS': '12', 'OMP_PROC_BIND': 'close', 'OMP_PLACES': 'threads'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=12 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ] fc         cuda-tiled   M=1      N=256    K=256    batch=1          0.140 ms       0.94 GFLOP/s  ok
+[INFO ] fc         cuda-tiled   M=1      N=512    K=512    batch=1          0.337 ms       1.56 GFLOP/s  ok
+[INFO ] fc         cuda-tiled   M=1      N=1024   K=1024   batch=1          0.645 ms       3.25 GFLOP/s  ok
+[INFO ] fc         cuda-tiled   M=1      N=2048   K=2048   batch=1          2.285 ms       3.67 GFLOP/s  ok
+[INFO ] fc         cuda-tiled   M=1      N=4096   K=4096   batch=1          9.026 ms       3.72 GFLOP/s  ok
+[INFO ] fc         cublas       M=1      N=256    K=256    batch=1          0.170 ms       0.77 GFLOP/s  ok
+[INFO ] fc         cublas       M=1      N=512    K=512    batch=1          0.195 ms       2.69 GFLOP/s  ok
+[INFO ] fc         cublas       M=1      N=1024   K=1024   batch=1          0.504 ms       4.16 GFLOP/s  ok
+[INFO ] fc         cublas       M=1      N=2048   K=2048   batch=1          1.613 ms       5.20 GFLOP/s  ok
+[INFO ] fc         cublas       M=1      N=4096   K=4096   batch=1          6.820 ms       4.92 GFLOP/s  ok
+[INFO ] results written to ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0015_op-fc_batches-1_impls-cuda-tiled-cubla_includet-1_sizes-256-512-1024-204_r0.json

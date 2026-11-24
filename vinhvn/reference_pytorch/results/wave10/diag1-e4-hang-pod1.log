@@ -1,0 +1,281 @@
+MN: idx=1 node=<node> master=wave10-quick-0.wave10-quick-svc run=20261122T141150Z quick=1
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-418157eb-0f54-f42e-3813-383cc6ed91bc)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-419cbbb0-c906-f877-3dda-a9d3a430c411)
+CFG: NETS='native' WORLDS='2' STEPS='e3 e4 pp tp' STEP_TIMEOUT=240 DIST_TIMEOUT_S=120 DIAG=1
+##### NCCL transport (net=native, world 4)
+      2  NCCL INFO Using network Socket
+      2  NCCL INFO NET/Socket : Using [0]eth0:100.96.1.220<0>
+      2  NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+      2  NCCL INFO Connected all trees
+      2  NCCL INFO Connected all rings
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8044005210
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8044005198
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8044005120
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f80440050a8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8044005030
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8044004fb8
+      1  NCCL INFO Connected to proxy localRank 1 -> connection 0x7f8044004f40
+##### net=native world=4
+[rank3]:[W1122 14:12:23.438217158 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 3]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank2]:[W1122 14:12:23.459188074 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 2]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+=== PY-SPY pid=203 sống 62s: /opt/conda/bin/python -u -m e4_dp.scaling --quick
+Error: Permission denied (os error 13)
+
+Caused by:
+    Permission denied (os error 13)
+=== PY-SPY pid=204 sống 62s: /opt/conda/bin/python -u -m e4_dp.scaling --quick
+Error: Permission denied (os error 13)
+
+Caused by:
+    Permission denied (os error 13)
+[rank2]:[E1122 14:14:24.965791914 ProcessGroupNCCL.cpp:616] [Rank 2] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120010 milliseconds before timing out.
+[rank2]:[E1122 14:14:24.966633569 ProcessGroupNCCL.cpp:1785] [PG ID 0 PG GUID 0(default_pg) Rank 2] Exception (either an error or timeout) detected by watchdog at work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank3]:[E1122 14:14:24.984540244 ProcessGroupNCCL.cpp:616] [Rank 3] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120029 milliseconds before timing out.
+[rank3]:[E1122 14:14:24.985306236 ProcessGroupNCCL.cpp:1785] [PG ID 0 PG GUID 0(default_pg) Rank 3] Exception (either an error or timeout) detected by watchdog at work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank3]:[E1122 14:14:29.299638871 ProcessGroupNCCL.cpp:1834] [PG ID 0 PG GUID 0(default_pg) Rank 3] Timeout at NCCL work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank3]:[E1122 14:14:29.299657285 ProcessGroupNCCL.cpp:630] [Rank 3] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank3]:[E1122 14:14:29.299660979 ProcessGroupNCCL.cpp:636] [Rank 3] To avoid data inconsistency, we are taking the entire process down.
+[rank3]:[E1122 14:14:29.300762575 ProcessGroupNCCL.cpp:1595] [PG ID 0 PG GUID 0(default_pg) Rank 3] Process group watchdog thread terminated with exception: [Rank 3] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120029 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f01240b9446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x7f00da019772 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f00da020bb3 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f00da02261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x7f01244ea5c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x94ac3 (0x7f0124e30ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #6: <unknown function> + 0x126850 (0x7f0124ec2850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 3] Process group watchdog thread terminated with exception: [Rank 3] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120029 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f01240b9446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x7f00da019772 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f00da020bb3 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f00da02261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x7f01244ea5c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x94ac3 (0x7f0124e30ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #6: <unknown function> + 0x126850 (0x7f0124ec2850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1601 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f01240b9446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe4271b (0x7f00d9c8f71b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x7f01244ea5c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x94ac3 (0x7f0124e30ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x126850 (0x7f0124ec2850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank2]:[E1122 14:14:29.306744941 ProcessGroupNCCL.cpp:1834] [PG ID 0 PG GUID 0(default_pg) Rank 2] Timeout at NCCL work: 22, last enqueued NCCL work: 24, last completed NCCL work: 21.
+[rank2]:[E1122 14:14:29.306762203 ProcessGroupNCCL.cpp:630] [Rank 2] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank2]:[E1122 14:14:29.306765501 ProcessGroupNCCL.cpp:636] [Rank 2] To avoid data inconsistency, we are taking the entire process down.
+[rank2]:[E1122 14:14:29.307819559 ProcessGroupNCCL.cpp:1595] [PG ID 0 PG GUID 0(default_pg) Rank 2] Process group watchdog thread terminated with exception: [Rank 2] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120010 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f351596c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x7f34cb819772 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f34cb820bb3 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f34cb82261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x7f3515db05c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x94ac3 (0x7f35166f6ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #6: <unknown function> + 0x126850 (0x7f3516788850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 2] Process group watchdog thread terminated with exception: [Rank 2] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=22, OpType=ALLREDUCE, NumelIn=2365450, NumelOut=2365450, Timeout(ms)=120000) ran for 120010 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f351596c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x7f34cb819772 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f34cb820bb3 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x7f34cb82261d in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x7f3515db05c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x94ac3 (0x7f35166f6ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #6: <unknown function> + 0x126850 (0x7f3516788850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+Exception raised from ncclCommWatchdog at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1601 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f351596c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe4271b (0x7f34cb48f71b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x7f3515db05c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x94ac3 (0x7f35166f6ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #4: <unknown function> + 0x126850 (0x7f3516788850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+W1122 14:14:29.641000 187 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 203 closing signal SIGTERM
+E1122 14:14:29.757000 187 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: -6) local_rank: 1 (pid: 204) of binary: /opt/conda/bin/python
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 923, in <module>
+    main()
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+e4_dp.scaling FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-11-22_14:14:29
+  host      : wave10-quick-1.wave10-quick-svc.hpc-dl-exp.svc.cluster.local
+  rank      : 3 (local_rank: 1)
+  exitcode  : -6 (pid: 204)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 204
+============================================================
+NCCL version 2.21.5+cuda12.4
+[rank2]:[E1122 14:14:40.166385983 ProcessGroupNCCL.cpp:1133] [PG ID 0 PG GUID 0(default_pg) Rank 2] Exception thrown when waiting for future ProcessGroup abort: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at ../c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f6900f6c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x7f6900f166e4 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x7f69013d7a18 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10::cuda::ExchangeDevice(signed char) + 0x4d (0x7f69013d7cbd in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::abortCommsFromMap(std::unordered_map<std::string, std::shared_ptr<c10d::NCCLComm>, std::hash<std::string>, std::equal_to<std::string>, std::allocator<std::pair<std::string const, std::shared_ptr<c10d::NCCLComm> > > >&, std::optional<std::string>) + 0x40 (0x7f68b6e1a960 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::abort(std::optional<std::string>) + 0xc0 (0x7f68b6e1c1a0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: <unknown function> + 0x11cf2de (0x7f68b6e1c2de in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x1024c4b (0x7f68b6c71c4b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #8: <unknown function> + 0x99ee8 (0x7f6901d9dee8 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x11ca8e6 (0x7f68b6e178e6 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #10: <unknown function> + 0x145c0 (0x7f69014525c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #11: <unknown function> + 0x94ac3 (0x7f6901d98ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #12: <unknown function> + 0x126850 (0x7f6901e2a850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank3]:[E1122 14:14:40.167215732 ProcessGroupNCCL.cpp:1133] [PG ID 0 PG GUID 0(default_pg) Rank 3] Exception thrown when waiting for future ProcessGroup abort: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+Exception raised from c10_cuda_check_implementation at ../c10/cuda/CUDAException.cpp:43 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7fd36076c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x7fd3607166e4 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x7fd360b13a18 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #3: c10::cuda::ExchangeDevice(signed char) + 0x4d (0x7fd360b13cbd in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::abortCommsFromMap(std::unordered_map<std::string, std::shared_ptr<c10d::NCCLComm>, std::hash<std::string>, std::equal_to<std::string>, std::allocator<std::pair<std::string const, std::shared_ptr<c10d::NCCLComm> > > >&, std::optional<std::string>) + 0x40 (0x7fd31661a960 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: c10d::ProcessGroupNCCL::abort(std::optional<std::string>) + 0xc0 (0x7fd31661c1a0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #6: <unknown function> + 0x11cf2de (0x7fd31661c2de in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #7: <unknown function> + 0x1024c4b (0x7fd316471c4b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #8: <unknown function> + 0x99ee8 (0x7fd3614d9ee8 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #9: <unknown function> + 0x11ca8e6 (0x7fd3166178e6 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+frame #10: <unknown function> + 0x145c0 (0x7fd360b8e5c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+frame #11: <unknown function> + 0x94ac3 (0x7fd3614d4ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #12: <unknown function> + 0x126850 (0x7fd361566850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank2]:   File "<frozen runpy>", line 88, in _run_code
+[rank2]:   File "/tmp/exp/e9_mp/pipeline.py", line 273, in <module>
+[rank2]:     main()
+[rank2]:   File "/tmp/exp/e9_mp/pipeline.py", line 269, in main
+[rank2]:     cleanup()
+[rank2]:   File "/tmp/exp/common/dist.py", line 49, in cleanup
+[rank2]:     dist.destroy_process_group()
+[rank2]:   File "/opt/conda/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 1928, in destroy_process_group
+[rank2]:     _shutdown_backend(pg_to_shutdown)
+[rank2]:   File "/opt/conda/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 1621, in _shutdown_backend
+[rank2]:     backend._shutdown()
+[rank2]: torch.distributed.DistBackendError: [PG ID 0 PG GUID 0(default_pg) Rank 2] Exception thrown when waiting for future ProcessGroup abort: CUDA error: invalid device ordinal
+[rank2]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank2]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank2]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank2]: Exception raised from c10_cuda_check_implementation at ../c10/cuda/CUDAException.cpp:43 (most recent call first):
+[rank2]: frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f6900f6c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+[rank2]: frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x7f6900f166e4 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+[rank2]: frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x7f69013d7a18 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+[rank2]: frame #3: c10::cuda::ExchangeDevice(signed char) + 0x4d (0x7f69013d7cbd in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+[rank2]: frame #4: c10d::ProcessGroupNCCL::abortCommsFromMap(std::unordered_map<std::string, std::shared_ptr<c10d::NCCLComm>, std::hash<std::string>, std::equal_to<std::string>, std::allocator<std::pair<std::string const, std::shared_ptr<c10d::NCCLComm> > > >&, std::optional<std::string>) + 0x40 (0x7f68b6e1a960 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank2]: frame #5: c10d::ProcessGroupNCCL::abort(std::optional<std::string>) + 0xc0 (0x7f68b6e1c1a0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank2]: frame #6: <unknown function> + 0x11cf2de (0x7f68b6e1c2de in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank2]: frame #7: <unknown function> + 0x1024c4b (0x7f68b6c71c4b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank2]: frame #8: <unknown function> + 0x99ee8 (0x7f6901d9dee8 in /lib/x86_64-linux-gnu/libc.so.6)
+[rank2]: frame #9: <unknown function> + 0x11ca8e6 (0x7f68b6e178e6 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank2]: frame #10: <unknown function> + 0x145c0 (0x7f69014525c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+[rank2]: frame #11: <unknown function> + 0x94ac3 (0x7f6901d98ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+[rank2]: frame #12: <unknown function> + 0x126850 (0x7f6901e2a850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "<frozen runpy>", line 198, in _run_module_as_main
+[rank3]:   File "<frozen runpy>", line 88, in _run_code
+[rank3]:   File "/tmp/exp/e9_mp/pipeline.py", line 273, in <module>
+[rank3]:     main()
+[rank3]:   File "/tmp/exp/e9_mp/pipeline.py", line 269, in main
+[rank3]:     cleanup()
+[rank3]:   File "/tmp/exp/common/dist.py", line 49, in cleanup
+[rank3]:     dist.destroy_process_group()
+[rank3]:   File "/opt/conda/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 1928, in destroy_process_group
+[rank3]:     _shutdown_backend(pg_to_shutdown)
+[rank3]:   File "/opt/conda/lib/python3.11/site-packages/torch/distributed/distributed_c10d.py", line 1621, in _shutdown_backend
+[rank3]:     backend._shutdown()
+[rank3]: torch.distributed.DistBackendError: [PG ID 0 PG GUID 0(default_pg) Rank 3] Exception thrown when waiting for future ProcessGroup abort: CUDA error: invalid device ordinal
+[rank3]: CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+[rank3]: For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+[rank3]: Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[rank3]: Exception raised from c10_cuda_check_implementation at ../c10/cuda/CUDAException.cpp:43 (most recent call first):
+[rank3]: frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7fd36076c446 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+[rank3]: frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::string const&) + 0x64 (0x7fd3607166e4 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10.so)
+[rank3]: frame #2: c10::cuda::c10_cuda_check_implementation(int, char const*, char const*, int, bool) + 0x118 (0x7fd360b13a18 in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+[rank3]: frame #3: c10::cuda::ExchangeDevice(signed char) + 0x4d (0x7fd360b13cbd in /opt/conda/lib/python3.11/site-packages/torch/lib/libc10_cuda.so)
+[rank3]: frame #4: c10d::ProcessGroupNCCL::abortCommsFromMap(std::unordered_map<std::string, std::shared_ptr<c10d::NCCLComm>, std::hash<std::string>, std::equal_to<std::string>, std::allocator<std::pair<std::string const, std::shared_ptr<c10d::NCCLComm> > > >&, std::optional<std::string>) + 0x40 (0x7fd31661a960 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank3]: frame #5: c10d::ProcessGroupNCCL::abort(std::optional<std::string>) + 0xc0 (0x7fd31661c1a0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank3]: frame #6: <unknown function> + 0x11cf2de (0x7fd31661c2de in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank3]: frame #7: <unknown function> + 0x1024c4b (0x7fd316471c4b in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank3]: frame #8: <unknown function> + 0x99ee8 (0x7fd3614d9ee8 in /lib/x86_64-linux-gnu/libc.so.6)
+[rank3]: frame #9: <unknown function> + 0x11ca8e6 (0x7fd3166178e6 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch_cuda.so)
+[rank3]: frame #10: <unknown function> + 0x145c0 (0x7fd360b8e5c0 in /opt/conda/lib/python3.11/site-packages/torch/lib/libtorch.so)
+[rank3]: frame #11: <unknown function> + 0x94ac3 (0x7fd3614d4ac3 in /lib/x86_64-linux-gnu/libc.so.6)
+[rank3]: frame #12: <unknown function> + 0x126850 (0x7fd361566850 in /lib/x86_64-linux-gnu/libc.so.6)
+
+=== PY-SPY pid=405 sống 69s: /opt/conda/bin/python -u -m e9_mp.pipeline --quick --archs vgg16,mlp
+Error: Permission denied (os error 13)
+
+Caused by:
+    Permission denied (os error 13)
+=== PY-SPY pid=406 sống 69s: /opt/conda/bin/python -u -m e9_mp.pipeline --quick --archs vgg16,mlp
+Error: Permission denied (os error 13)
+
+Caused by:
+    Permission denied (os error 13)
+W1122 14:18:30.053000 387 site-packages/torch/distributed/elastic/agent/server/api.py:704] Received 15 death signal, shutting down workers
+W1122 14:18:30.053000 387 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 405 closing signal SIGTERM
+W1122 14:18:30.054000 387 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 406 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 923, in <module>
+    main()
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 696, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/agent/server/api.py", line 855, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/opt/conda/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 387 got signal: 15
+WAVE10 FINISHED rc=1 idx=1

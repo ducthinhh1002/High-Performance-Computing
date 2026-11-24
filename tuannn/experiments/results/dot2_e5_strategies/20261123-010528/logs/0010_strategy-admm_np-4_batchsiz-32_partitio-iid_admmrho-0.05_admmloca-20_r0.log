@@ -1,0 +1,39 @@
+# mpirun -np 4 --bind-to core --map-by core build/bin/pdl_train --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 10 --batch-size 32 --lr 0.02 --momentum 0.9 --eval-every 1 --partition iid --strategy admm --admm-rho 0.05 --admm-local-steps 20 --seed 42 --output ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0010_strategy-admm_np-4_batchsiz-32_partitio-iid_admmrho-0.05_admmloca-20_r0.json --run-id 0010_strategy-admm_np-4_batchsiz-32_partitio-iid_admmrho-0.05_admmloca-20_r0 --tag strategies_convergence
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=4 | device=cpu impl=cpu-blocked threads=1 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ][rank 0] strategy=admm workers=4 partition=iid local_batch=32 steps/epoch=468 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ][rank 0] epoch   1 | loss 0.3106 acc 0.9024 |   2.06s (comm  1.2%) | 7280 samples/s/rank | test loss 0.0794 acc 0.9753
+[INFO ][rank 0]           admm rounds 24, primal residual 3.6212e+00
+[INFO ][rank 0] epoch   2 | loss 0.0980 acc 0.9690 |   2.06s (comm  1.1%) | 7280 samples/s/rank | test loss 0.0564 acc 0.9825
+[INFO ][rank 0]           admm rounds 48, primal residual 2.9115e+00
+[INFO ][rank 0] epoch   3 | loss 0.0809 acc 0.9762 |   2.04s (comm  1.4%) | 7342 samples/s/rank | test loss 0.0469 acc 0.9858
+[INFO ][rank 0]           admm rounds 72, primal residual 2.7200e+00
+[INFO ][rank 0] epoch   4 | loss 0.0692 acc 0.9789 |   2.05s (comm  1.6%) | 7301 samples/s/rank | test loss 0.0405 acc 0.9869
+[INFO ][rank 0]           admm rounds 96, primal residual 2.4556e+00
+[INFO ][rank 0] epoch   5 | loss 0.0551 acc 0.9834 |   2.05s (comm  1.4%) | 7319 samples/s/rank | test loss 0.0402 acc 0.9878
+[INFO ][rank 0]           admm rounds 120, primal residual 2.6000e+00
+[INFO ][rank 0] epoch   6 | loss 0.0515 acc 0.9846 |   2.05s (comm  1.3%) | 7313 samples/s/rank | test loss 0.0356 acc 0.9881
+[INFO ][rank 0]           admm rounds 144, primal residual 2.3990e+00
+[INFO ][rank 0] epoch   7 | loss 0.0438 acc 0.9865 |   2.04s (comm  1.6%) | 7341 samples/s/rank | test loss 0.0324 acc 0.9906
+[INFO ][rank 0]           admm rounds 168, primal residual 2.3740e+00
+[INFO ][rank 0] epoch   8 | loss 0.0414 acc 0.9866 |   2.05s (comm  1.9%) | 7293 samples/s/rank | test loss 0.0310 acc 0.9898
+[INFO ][rank 0]           admm rounds 192, primal residual 2.2825e+00
+[INFO ][rank 0] epoch   9 | loss 0.0361 acc 0.9884 |   2.04s (comm  2.0%) | 7341 samples/s/rank | test loss 0.0338 acc 0.9899
+[INFO ][rank 0]           admm rounds 216, primal residual 2.2970e+00
+[INFO ][rank 0] epoch  10 | loss 0.0343 acc 0.9897 |   2.05s (comm  1.5%) | 7314 samples/s/rank | test loss 0.0310 acc 0.9907
+[INFO ][rank 0]           admm rounds 240, primal residual 2.1444e+00
+[INFO ][rank 0] results written to ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0010_strategy-admm_np-4_batchsiz-32_partitio-iid_admmrho-0.05_admmloca-20_r0.json

@@ -1,0 +1,18 @@
+{
+  "run_dir": "../experiments/results/dot2_e3_comm/20261123-004330",
+  "comm_source": "../experiments/results/dot2_e3_comm/20261123-004330",
+  "alpha_s": 4.2539639370234546e-07,
+  "beta_s_per_byte": 7.015062296747476e-11,
+  "bandwidth_Bps": 14255040906.246103,
+  "gamma_s_per_byte": 4.6049646706210696e-10,
+  "allreduce_median_abs_rel_err": 0.4345860533157788,
+  "allreduce_by_algo": {
+    "mpi": 0.3753882524520805,
+    "naive": 1.0365936344884998,
+    "rd": 0.4524837695458608,
+    "reduce_bcast": 0.44910343586372653,
+    "ring": 0.25369159988796364,
+    "tree": 0.3688367363897887
+  },
+  "notes": "Single-node runs: MPI uses shared memory, so \u03b1/\u03b2 describe intra-node copies and the model ignores memory-bandwidth contention between ranks."
+}

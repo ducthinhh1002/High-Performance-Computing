@@ -1,0 +1,70 @@
+# Job đa pod (Indexed) cho Đợt 10: 2 pod × 2 GPU, ghép thành job torchrun 2 node.
+# Thay @NAME@, @QUICK@, @RUNID@, @DEADLINE@ (tools/submit_wave.sh 10). Cần quota ≥ 4 GPU, 32 CPU.
+# Nếu cụm có từ 2 node, đặt @SPREAD@ để hai pod bị buộc nằm ở hai máy khác nhau (anti-affinity); mặc định tắt vì cụm hiện có 1 node.
+apiVersion: v1
+kind: Service
+metadata:
+  name: @NAME@-svc
+  namespace: hpc-dl-exp
+spec:
+  clusterIP: None
+  publishNotReadyAddresses: true
+  selector: {job-name: @NAME@}
+  ports: [{name: rdzv, port: 29500}]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: @NAME@
+  namespace: hpc-dl-exp
+spec:
+  completionMode: Indexed
+  completions: 2
+  parallelism: 2
+  backoffLimit: 0
+  activeDeadlineSeconds: @DEADLINE@
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels: {app: hpc-wave-mn, wave: "10"}
+    spec:
+      subdomain: @NAME@-svc
+      restartPolicy: Never
+@AFFINITY@
+      containers:
+        - name: run
+          image: pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+          command: ["bash", "/code/run_mn.sh"]
+          env:
+            - {name: QUICK, value: "@QUICK@"}
+            - {name: RUN_ID, value: "@RUNID@"}
+            - {name: MASTER_ADDR, value: "@NAME@-0.@NAME@-svc"}
+            - {name: NNODES, value: "2"}
+            - {name: DIAG, value: "@DIAG@"}
+            - {name: NETS, value: "@NETS@"}
+            - {name: WORLDS, value: "@WORLDS@"}
+            - {name: STEPS, value: "@STEPS@"}
+            - {name: STEP_TIMEOUT, value: "@STEP_TIMEOUT@"}
+            - {name: DIST_TIMEOUT_S, value: "@DIST_TIMEOUT_S@"}
+            - {name: DEBUG_DETAIL, value: "@DEBUG_DETAIL@"}
+            - {name: HANG_S, value: "@HANG_S@"}
+            - {name: OUT_DIR, value: /data/results}
+            - {name: DATA_DIR, value: /data/datasets}
+            - name: NODE_NAME
+              valueFrom: {fieldRef: {fieldPath: spec.nodeName}}
+            - name: OMP_NUM_THREADS
+              valueFrom: {resourceFieldRef: {resource: limits.cpu, divisor: "1"}}
+          resources:
+            requests: {cpu: "16", memory: 64Gi, nvidia.com/gpu: "2"}
+            limits:   {cpu: "16", memory: 64Gi, nvidia.com/gpu: "2"}
+          volumeMounts:
+            - {name: code, mountPath: /code}
+            - {name: results, mountPath: /data/results}
+            - {name: dshm, mountPath: /dev/shm}
+      volumes:
+        - name: code
+          configMap: {name: hpc-code}
+        - name: results
+          hostPath: {path: /var/lib/hpc-dl-exp/results, type: Directory}
+        - name: dshm
+          emptyDir: {medium: Memory, sizeLimit: 16Gi}

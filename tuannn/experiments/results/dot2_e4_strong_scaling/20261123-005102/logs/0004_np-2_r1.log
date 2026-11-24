@@ -1,0 +1,22 @@
+# mpirun -np 2 --bind-to core --map-by core build/bin/pdl_train --strategy sync --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 3 --global-batch 256 --lr 0.05 --momentum 0.9 --allreduce mpi --eval-every 0 --seed 43 --output ../experiments/results/dot2_e4_strong_scaling/20261123-005102/raw/0004_np-2_r1.json --run-id 0004_np-2_r1 --tag strong_scaling
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=2 | device=cpu impl=cpu-blocked threads=1 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ][rank 0] strategy=sync workers=2 partition=global local_batch=128 steps/epoch=234 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ][rank 0] epoch   1 | loss 0.2492 acc 0.9218 |   4.02s (comm  1.7%) | 7458 samples/s/rank
+[INFO ][rank 0] epoch   2 | loss 0.0574 acc 0.9827 |   3.98s (comm  1.7%) | 7518 samples/s/rank
+[INFO ][rank 0] epoch   3 | loss 0.0423 acc 0.9858 |   4.01s (comm  1.5%) | 7462 samples/s/rank | test loss 0.0427 acc 0.9870
+[INFO ][rank 0] results written to ../experiments/results/dot2_e4_strong_scaling/20261123-005102/raw/0004_np-2_r1.json

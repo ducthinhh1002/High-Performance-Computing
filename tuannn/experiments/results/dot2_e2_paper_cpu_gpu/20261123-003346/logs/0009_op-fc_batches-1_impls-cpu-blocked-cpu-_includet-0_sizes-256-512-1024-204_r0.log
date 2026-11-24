@@ -1,0 +1,14 @@
+# build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op fc --sizes 256,512,1024,2048,4096 --batches 1 --impls cpu-blocked,cpu-omp --include-transfer 0 --seed 42 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0.json --run-id 0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0 --tag compute_paper_cpu_gpu
+# env: {'OMP_NUM_THREADS': '12', 'OMP_PROC_BIND': 'close', 'OMP_PLACES': 'threads'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=12 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ] fc         cpu-blocked  M=1      N=256    K=256    batch=1          0.004 ms      32.26 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=512    K=512    batch=1          0.016 ms      33.12 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=1024   K=1024   batch=1          0.066 ms      31.61 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=2048   K=2048   batch=1          0.386 ms      21.72 GFLOP/s  ok
+[INFO ] fc         cpu-blocked  M=1      N=4096   K=4096   batch=1          3.030 ms      11.07 GFLOP/s  ok
+[INFO ] fc         cpu-omp      M=1      N=256    K=256    batch=1          0.003 ms      40.59 GFLOP/s  ok
+[INFO ] fc         cpu-omp      M=1      N=512    K=512    batch=1          0.006 ms      92.36 GFLOP/s  ok
+[INFO ] fc         cpu-omp      M=1      N=1024   K=1024   batch=1          0.015 ms     136.29 GFLOP/s  ok
+[INFO ] fc         cpu-omp      M=1      N=2048   K=2048   batch=1          0.107 ms      78.70 GFLOP/s  ok
+[INFO ] fc         cpu-omp      M=1      N=4096   K=4096   batch=1          1.573 ms      21.34 GFLOP/s  ok
+[INFO ] results written to ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0009_op-fc_batches-1_impls-cpu-blocked-cpu-_includet-0_sizes-256-512-1024-204_r0.json

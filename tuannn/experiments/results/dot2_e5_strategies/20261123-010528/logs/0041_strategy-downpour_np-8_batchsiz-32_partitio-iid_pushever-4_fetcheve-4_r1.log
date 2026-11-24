@@ -1,0 +1,39 @@
+# mpirun -np 8 --bind-to core --map-by core build/bin/pdl_train --device cpu --impl blocked --threads 1 --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 10 --batch-size 32 --lr 0.02 --momentum 0.9 --eval-every 1 --partition iid --strategy downpour --push-every 4 --fetch-every 4 --seed 43 --output ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0041_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r1.json --run-id 0041_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r1 --tag strategies_convergence
+# env: {'OMP_NUM_THREADS': '1'}
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=8 | device=cpu impl=cpu-blocked threads=1 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ][rank 0] strategy=downpour workers=7 partition=iid local_batch=32 steps/epoch=267 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ][rank 0] epoch   1 |   1.80s | test loss 0.0922 acc 0.9710
+[INFO ][rank 0]           server updates 469, mean staleness 5.61
+[INFO ][rank 0] epoch   2 |   1.75s | test loss 0.0574 acc 0.9807
+[INFO ][rank 0]           server updates 938, mean staleness 5.82
+[INFO ][rank 0] epoch   3 |   1.75s | test loss 0.1080 acc 0.9660
+[INFO ][rank 0]           server updates 1407, mean staleness 6.28
+[INFO ][rank 0] epoch   4 |   1.74s | test loss 0.0391 acc 0.9875
+[INFO ][rank 0]           server updates 1876, mean staleness 7.22
+[INFO ][rank 0] epoch   5 |   1.75s | test loss 0.0373 acc 0.9879
+[INFO ][rank 0]           server updates 2345, mean staleness 7.01
+[INFO ][rank 0] epoch   6 |   1.78s | test loss 0.0377 acc 0.9889
+[INFO ][rank 0]           server updates 2814, mean staleness 6.91
+[INFO ][rank 0] epoch   7 |   1.75s | test loss 0.0417 acc 0.9872
+[INFO ][rank 0]           server updates 3283, mean staleness 7.01
+[INFO ][rank 0] epoch   8 |   1.81s | test loss 0.0380 acc 0.9878
+[INFO ][rank 0]           server updates 3752, mean staleness 7.31
+[INFO ][rank 0] epoch   9 |   1.76s | test loss 0.0346 acc 0.9886
+[INFO ][rank 0]           server updates 4221, mean staleness 7.22
+[INFO ][rank 0] epoch  10 |   2.09s | test loss 0.0305 acc 0.9905
+[INFO ][rank 0]           server updates 4690, mean staleness 7.00
+[INFO ][rank 0] results written to ../experiments/results/dot2_e5_strategies/20261123-010528/raw/0041_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r1.json

@@ -1,0 +1,758 @@
+{
+  "experiment": "hybrid_mpi_omp",
+  "description": "Synchronous SGD on MNIST/LeNet, global batch 256, 12 threads in total split between MPI ranks and OpenMP threads per rank (no core binding so threads can spread).",
+  "config": {
+    "name": "hybrid_mpi_omp",
+    "description": "Synchronous SGD on MNIST/LeNet, global batch 256, 12 threads in total split between MPI ranks and OpenMP threads per rank (no core binding so threads can spread).\n",
+    "binary": "pdl_train",
+    "repeats": 3,
+    "timeout": 3600,
+    "mpi": {
+      "launcher": "mpirun",
+      "extra_args": [
+        "--bind-to",
+        "none"
+      ],
+      "allow_oversubscribe": true
+    },
+    "base_args": {
+      "strategy": "sync",
+      "device": "cpu",
+      "impl": "omp",
+      "model": "lenet",
+      "train-data": "data/mnist-train.pdlds",
+      "test-data": "data/mnist-test.pdlds",
+      "epochs": 2,
+      "global-batch": 256,
+      "lr": 0.05,
+      "eval-every": 0,
+      "threads": "=12 // np",
+      "env.OMP_NUM_THREADS": "=12 // np"
+    },
+    "variants": [
+      {
+        "np": 1
+      },
+      {
+        "np": 2
+      },
+      {
+        "np": 3
+      },
+      {
+        "np": 4
+      },
+      {
+        "np": 6
+      },
+      {
+        "np": 12
+      }
+    ],
+    "analysis": {
+      "group_by": [
+        "np",
+        "threads"
+      ],
+      "baseline": {
+        "np": 1
+      },
+      "x": "np",
+      "plots": [
+        "training_time",
+        "throughput",
+        "phase_breakdown"
+      ]
+    }
+  },
+  "config_path": "configs/hybrid_mpi_omp.yaml",
+  "created": "2026-11-23T00:54:31",
+  "environment": {
+    "windows_host": {
+      "idle_load_percent": 7.1,
+      "cpu": "12th Gen Intel(R) Core(TM) i5-12600K",
+      "cores": 10,
+      "power_plan": "High performance",
+      "logical": 16
+    },
+    "pinning_note": "WSL2: vCPUs are placed by the Windows host; core pinning inside the VM is virtual (P/E cores of the hybrid CPU are indistinguishable)",
+    "timestamp": "2026-11-22T17:54:35Z",
+    "hostname": "TuanNguyen",
+    "os": "Linux 5.15.146.1-microsoft-standard-WSL2 x86_64",
+    "wsl": true,
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12600K",
+    "physical_cores": 8,
+    "logical_cpus": 16,
+    "memory_bytes": 8202395648,
+    "lscpu": "Architecture:                       x86_64\nCPU op-mode(s):                     32-bit, 64-bit\nAddress sizes:                      46 bits physical, 48 bits virtual\nByte Order:                         Little Endian\nCPU(s):                             16\nOn-line CPU(s) list:                0-15\nVendor ID:                          GenuineIntel\nModel name:                         12th Gen Intel(R) Core(TM) i5-12600K\nCPU family:                         6\nModel:                              151\nThread(s) per core:                 2\nCore(s) per socket:                 8\nSocket(s):                          1\nStepping:                           2\nBogoMIPS:                           7372.79\nFlags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves avx_vnni umip waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize flush_l1d arch_capabilities\nVirtualization:                     VT-x\nHypervisor vendor:                  Microsoft\nVirtualization type:                full\nL1d cache:                          384 KiB (8 instances)\nL1i cache:                          256 KiB (8 instances)\nL2 cache:                           10 MiB (8 instances)\nL3 cache:                           20 MiB (1 instance)\nVulnerability Gather data sampling: Not affected\nVulnerability Itlb multihit:        Not affected\nVulnerability L1tf:                 Not affected\nVulnerability Mds:                  Not affected\nVulnerability Meltdown:             Not affected\nVulnerability Mmio stale data:      Not affected\nVulnerability Retbleed:             Mitigation; Enhanced IBRS\nVulnerability Spec rstack overflow: Not affected\nVulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl and seccomp\nVulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:           Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence\nVulnerability Srbds:                Not affected\nVulnerability Tsx async abort:      Not affected",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 2060",
+        "memory": "6144 MiB",
+        "driver": "610.88",
+        "max_sm_clock": "2145 MHz",
+        "pcie_gen": "3"
+      }
+    ],
+    "nvidia_smi": "GPU 0: NVIDIA GeForce RTX 2060 (UUID: GPU-32e2fcd7-f21c-bdc3-c469-19441f361371)",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "nvcc": [
+      "Build cuda_12.0.r12.0/compiler.32267302_0"
+    ],
+    "cmake": "cmake version 3.28.3",
+    "mpirun": "mpirun (Open MPI) 4.1.6",
+    "mpi_flavor": "openmpi",
+    "git": {
+      "commit": "3e73d8f802d0085f1fbcb639b235b64160afdc54",
+      "dirty": true
+    },
+    "python": "3.12.3",
+    "python_packages": {
+      "numpy": "2.5.5",
+      "pandas": "3.1.1",
+      "matplotlib": "3.11.2",
+      "yaml": "6.0.4"
+    },
+    "omp_env": {
+      "LD_LIBRARY_PATH": "/usr/lib/wsl/lib:"
+    }
+  },
+  "runs": [
+    {
+      "name": "0000_np-1_threads-12_OMPNUMTH-12_r0",
+      "index": 0,
+      "binary": "pdl_train",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 12,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12"
+      },
+      "varying": {
+        "np": 1,
+        "threads": 12,
+        "env.OMP_NUM_THREADS": "12"
+      },
+      "command": "build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 12 --seed 42 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0000_np-1_threads-12_OMPNUMTH-12_r0.json --run-id 0000_np-1_threads-12_OMPNUMTH-12_r0 --tag hybrid_mpi_omp",
+      "output": "raw/0000_np-1_threads-12_OMPNUMTH-12_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.039,
+      "started": "2026-11-23T00:54:36"
+    },
+    {
+      "name": "0001_np-1_threads-12_OMPNUMTH-12_r1",
+      "index": 1,
+      "binary": "pdl_train",
+      "np": 1,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 12,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12"
+      },
+      "varying": {
+        "np": 1,
+        "threads": 12,
+        "env.OMP_NUM_THREADS": "12"
+      },
+      "command": "build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 12 --seed 43 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0001_np-1_threads-12_OMPNUMTH-12_r1.json --run-id 0001_np-1_threads-12_OMPNUMTH-12_r1 --tag hybrid_mpi_omp",
+      "output": "raw/0001_np-1_threads-12_OMPNUMTH-12_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 6.037,
+      "started": "2026-11-23T00:54:42"
+    },
+    {
+      "name": "0002_np-1_threads-12_OMPNUMTH-12_r2",
+      "index": 2,
+      "binary": "pdl_train",
+      "np": 1,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 12,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "12"
+      },
+      "varying": {
+        "np": 1,
+        "threads": 12,
+        "env.OMP_NUM_THREADS": "12"
+      },
+      "command": "build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 12 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0002_np-1_threads-12_OMPNUMTH-12_r2.json --run-id 0002_np-1_threads-12_OMPNUMTH-12_r2 --tag hybrid_mpi_omp",
+      "output": "raw/0002_np-1_threads-12_OMPNUMTH-12_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.988,
+      "started": "2026-11-23T00:54:48"
+    },
+    {
+      "name": "0003_np-2_threads-6_OMPNUMTH-6_r0",
+      "index": 3,
+      "binary": "pdl_train",
+      "np": 2,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 6,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "6"
+      },
+      "varying": {
+        "np": 2,
+        "threads": 6,
+        "env.OMP_NUM_THREADS": "6"
+      },
+      "command": "mpirun -np 2 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 6 --seed 42 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0003_np-2_threads-6_OMPNUMTH-6_r0.json --run-id 0003_np-2_threads-6_OMPNUMTH-6_r0 --tag hybrid_mpi_omp",
+      "output": "raw/0003_np-2_threads-6_OMPNUMTH-6_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.76,
+      "started": "2026-11-23T00:54:54"
+    },
+    {
+      "name": "0004_np-2_threads-6_OMPNUMTH-6_r1",
+      "index": 4,
+      "binary": "pdl_train",
+      "np": 2,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 6,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "6"
+      },
+      "varying": {
+        "np": 2,
+        "threads": 6,
+        "env.OMP_NUM_THREADS": "6"
+      },
+      "command": "mpirun -np 2 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 6 --seed 43 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0004_np-2_threads-6_OMPNUMTH-6_r1.json --run-id 0004_np-2_threads-6_OMPNUMTH-6_r1 --tag hybrid_mpi_omp",
+      "output": "raw/0004_np-2_threads-6_OMPNUMTH-6_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.137,
+      "started": "2026-11-23T00:54:59"
+    },
+    {
+      "name": "0005_np-2_threads-6_OMPNUMTH-6_r2",
+      "index": 5,
+      "binary": "pdl_train",
+      "np": 2,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 6,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "6"
+      },
+      "varying": {
+        "np": 2,
+        "threads": 6,
+        "env.OMP_NUM_THREADS": "6"
+      },
+      "command": "mpirun -np 2 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 6 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0005_np-2_threads-6_OMPNUMTH-6_r2.json --run-id 0005_np-2_threads-6_OMPNUMTH-6_r2 --tag hybrid_mpi_omp",
+      "output": "raw/0005_np-2_threads-6_OMPNUMTH-6_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.045,
+      "started": "2026-11-23T00:55:05"
+    },
+    {
+      "name": "0006_np-3_threads-4_OMPNUMTH-4_r0",
+      "index": 6,
+      "binary": "pdl_train",
+      "np": 3,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 4,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "4"
+      },
+      "varying": {
+        "np": 3,
+        "threads": 4,
+        "env.OMP_NUM_THREADS": "4"
+      },
+      "command": "mpirun -np 3 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 4 --seed 42 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0006_np-3_threads-4_OMPNUMTH-4_r0.json --run-id 0006_np-3_threads-4_OMPNUMTH-4_r0 --tag hybrid_mpi_omp",
+      "output": "raw/0006_np-3_threads-4_OMPNUMTH-4_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.783,
+      "started": "2026-11-23T00:55:10"
+    },
+    {
+      "name": "0007_np-3_threads-4_OMPNUMTH-4_r1",
+      "index": 7,
+      "binary": "pdl_train",
+      "np": 3,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 4,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "4"
+      },
+      "varying": {
+        "np": 3,
+        "threads": 4,
+        "env.OMP_NUM_THREADS": "4"
+      },
+      "command": "mpirun -np 3 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 4 --seed 43 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0007_np-3_threads-4_OMPNUMTH-4_r1.json --run-id 0007_np-3_threads-4_OMPNUMTH-4_r1 --tag hybrid_mpi_omp",
+      "output": "raw/0007_np-3_threads-4_OMPNUMTH-4_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.835,
+      "started": "2026-11-23T00:55:14"
+    },
+    {
+      "name": "0008_np-3_threads-4_OMPNUMTH-4_r2",
+      "index": 8,
+      "binary": "pdl_train",
+      "np": 3,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 4,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "4"
+      },
+      "varying": {
+        "np": 3,
+        "threads": 4,
+        "env.OMP_NUM_THREADS": "4"
+      },
+      "command": "mpirun -np 3 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 4 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0008_np-3_threads-4_OMPNUMTH-4_r2.json --run-id 0008_np-3_threads-4_OMPNUMTH-4_r2 --tag hybrid_mpi_omp",
+      "output": "raw/0008_np-3_threads-4_OMPNUMTH-4_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.787,
+      "started": "2026-11-23T00:55:19"
+    },
+    {
+      "name": "0009_np-4_threads-3_OMPNUMTH-3_r0",
+      "index": 9,
+      "binary": "pdl_train",
+      "np": 4,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 3,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "3"
+      },
+      "varying": {
+        "np": 4,
+        "threads": 3,
+        "env.OMP_NUM_THREADS": "3"
+      },
+      "command": "mpirun -np 4 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 3 --seed 42 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0009_np-4_threads-3_OMPNUMTH-3_r0.json --run-id 0009_np-4_threads-3_OMPNUMTH-3_r0 --tag hybrid_mpi_omp",
+      "output": "raw/0009_np-4_threads-3_OMPNUMTH-3_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.644,
+      "started": "2026-11-23T00:55:24"
+    },
+    {
+      "name": "0010_np-4_threads-3_OMPNUMTH-3_r1",
+      "index": 10,
+      "binary": "pdl_train",
+      "np": 4,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 3,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "3"
+      },
+      "varying": {
+        "np": 4,
+        "threads": 3,
+        "env.OMP_NUM_THREADS": "3"
+      },
+      "command": "mpirun -np 4 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 3 --seed 43 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0010_np-4_threads-3_OMPNUMTH-3_r1.json --run-id 0010_np-4_threads-3_OMPNUMTH-3_r1 --tag hybrid_mpi_omp",
+      "output": "raw/0010_np-4_threads-3_OMPNUMTH-3_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.368,
+      "started": "2026-11-23T00:55:29"
+    },
+    {
+      "name": "0011_np-4_threads-3_OMPNUMTH-3_r2",
+      "index": 11,
+      "binary": "pdl_train",
+      "np": 4,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 3,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "3"
+      },
+      "varying": {
+        "np": 4,
+        "threads": 3,
+        "env.OMP_NUM_THREADS": "3"
+      },
+      "command": "mpirun -np 4 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 3 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0011_np-4_threads-3_OMPNUMTH-3_r2.json --run-id 0011_np-4_threads-3_OMPNUMTH-3_r2 --tag hybrid_mpi_omp",
+      "output": "raw/0011_np-4_threads-3_OMPNUMTH-3_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.739,
+      "started": "2026-11-23T00:55:34"
+    },
+    {
+      "name": "0012_np-6_threads-2_OMPNUMTH-2_r0",
+      "index": 12,
+      "binary": "pdl_train",
+      "np": 6,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 2,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 6,
+        "threads": 2,
+        "env.OMP_NUM_THREADS": "2"
+      },
+      "command": "mpirun -np 6 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 2 --seed 42 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0012_np-6_threads-2_OMPNUMTH-2_r0.json --run-id 0012_np-6_threads-2_OMPNUMTH-2_r0 --tag hybrid_mpi_omp",
+      "output": "raw/0012_np-6_threads-2_OMPNUMTH-2_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.735,
+      "started": "2026-11-23T00:55:39"
+    },
+    {
+      "name": "0013_np-6_threads-2_OMPNUMTH-2_r1",
+      "index": 13,
+      "binary": "pdl_train",
+      "np": 6,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 2,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 6,
+        "threads": 2,
+        "env.OMP_NUM_THREADS": "2"
+      },
+      "command": "mpirun -np 6 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 2 --seed 43 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0013_np-6_threads-2_OMPNUMTH-2_r1.json --run-id 0013_np-6_threads-2_OMPNUMTH-2_r1 --tag hybrid_mpi_omp",
+      "output": "raw/0013_np-6_threads-2_OMPNUMTH-2_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.684,
+      "started": "2026-11-23T00:55:44"
+    },
+    {
+      "name": "0014_np-6_threads-2_OMPNUMTH-2_r2",
+      "index": 14,
+      "binary": "pdl_train",
+      "np": 6,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 2,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 6,
+        "threads": 2,
+        "env.OMP_NUM_THREADS": "2"
+      },
+      "command": "mpirun -np 6 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 2 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0014_np-6_threads-2_OMPNUMTH-2_r2.json --run-id 0014_np-6_threads-2_OMPNUMTH-2_r2 --tag hybrid_mpi_omp",
+      "output": "raw/0014_np-6_threads-2_OMPNUMTH-2_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.594,
+      "started": "2026-11-23T00:55:48"
+    },
+    {
+      "name": "0015_np-12_threads-1_OMPNUMTH-1_r0",
+      "index": 15,
+      "binary": "pdl_train",
+      "np": 12,
+      "repeat": 0,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 1,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 12,
+        "threads": 1,
+        "env.OMP_NUM_THREADS": "1"
+      },
+      "command": "mpirun -np 12 --bind-to hwthread --use-hwthread-cpus build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 1 --seed 42 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0015_np-12_threads-1_OMPNUMTH-1_r0.json --run-id 0015_np-12_threads-1_OMPNUMTH-1_r0 --tag hybrid_mpi_omp",
+      "output": "raw/0015_np-12_threads-1_OMPNUMTH-1_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.04,
+      "started": "2026-11-23T00:55:53"
+    },
+    {
+      "name": "0016_np-12_threads-1_OMPNUMTH-1_r1",
+      "index": 16,
+      "binary": "pdl_train",
+      "np": 12,
+      "repeat": 1,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 1,
+        "seed": 43
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 12,
+        "threads": 1,
+        "env.OMP_NUM_THREADS": "1"
+      },
+      "command": "mpirun -np 12 --bind-to hwthread --use-hwthread-cpus build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 1 --seed 43 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0016_np-12_threads-1_OMPNUMTH-1_r1.json --run-id 0016_np-12_threads-1_OMPNUMTH-1_r1 --tag hybrid_mpi_omp",
+      "output": "raw/0016_np-12_threads-1_OMPNUMTH-1_r1.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 4.903,
+      "started": "2026-11-23T00:55:58"
+    },
+    {
+      "name": "0017_np-12_threads-1_OMPNUMTH-1_r2",
+      "index": 17,
+      "binary": "pdl_train",
+      "np": 12,
+      "repeat": 2,
+      "params": {
+        "strategy": "sync",
+        "device": "cpu",
+        "impl": "omp",
+        "model": "lenet",
+        "train-data": "data/mnist-train.pdlds",
+        "test-data": "data/mnist-test.pdlds",
+        "epochs": 2,
+        "global-batch": 256,
+        "lr": 0.05,
+        "eval-every": 0,
+        "threads": 1,
+        "seed": 44
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 12,
+        "threads": 1,
+        "env.OMP_NUM_THREADS": "1"
+      },
+      "command": "mpirun -np 12 --bind-to hwthread --use-hwthread-cpus build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 1 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0017_np-12_threads-1_OMPNUMTH-1_r2.json --run-id 0017_np-12_threads-1_OMPNUMTH-1_r2 --tag hybrid_mpi_omp",
+      "output": "raw/0017_np-12_threads-1_OMPNUMTH-1_r2.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 5.682,
+      "started": "2026-11-23T00:56:03"
+    }
+  ],
+  "finished": "2026-11-23T00:56:08",
+  "summary": {
+    "ok": 18,
+    "failed": 0,
+    "resumed": 0
+  }
+}

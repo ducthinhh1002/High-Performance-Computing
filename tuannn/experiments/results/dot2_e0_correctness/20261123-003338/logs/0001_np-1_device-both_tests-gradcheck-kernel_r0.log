@@ -1,0 +1,45 @@
+# build/bin/pdl_check --device both --tests gradcheck,kernels,determinism,finite --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0001_np-1_device-both_tests-gradcheck-kernel_r0.json
+# env: {'OMP_NUM_THREADS': '2'}
+[ PASS ] gradcheck/conv+relu+pool+fc          cpu   err=1.031e-04 tol=2.0e-02 56 params probed, 24 skipped at kinks
+[ PASS ] gradcheck/strided-conv+overlap-pool  cpu   err=5.789e-05 tol=2.0e-02 66 params probed, 14 skipped at kinks
+[ PASS ] gradcheck/mlp                        cpu   err=7.499e-05 tol=2.0e-02 79 params probed, 14 skipped at kinks
+[ PASS ] gradcheck/two-conv                   cpu   err=3.051e-05 tol=2.0e-02 76 params probed, 11 skipped at kinks
+[ PASS ] determinism/same-seed-same-params    cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] finite/detects-nan-and-inf           cpu   err=2.000e+00 tol=2.0e+00 expects exactly 2
+[ PASS ] gradcheck/conv+relu+pool+fc          cuda  err=1.712e-04 tol=2.0e-02 56 params probed, 24 skipped at kinks
+[ PASS ] gradcheck/strided-conv+overlap-pool  cuda  err=7.770e-05 tol=2.0e-02 66 params probed, 14 skipped at kinks
+[ PASS ] gradcheck/mlp                        cuda  err=7.489e-05 tol=2.0e-02 79 params probed, 14 skipped at kinks
+[ PASS ] gradcheck/two-conv                   cuda  err=4.465e-05 tol=2.0e-02 76 params probed, 11 skipped at kinks
+[ PASS ] determinism/same-seed-same-params    cuda  err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] finite/detects-nan-and-inf           cuda  err=2.000e+00 tol=2.0e+00 expects exactly 2
+[ PASS ] kernels/gemm-cpu-naive-NN            cpu   err=2.262e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-naive-NT            cpu   err=1.794e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-naive-TN            cpu   err=2.835e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-naive-TT            cpu   err=9.125e-08 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-NN          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-NT          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-TN          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-TT          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-NN              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-NT              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-TN              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-TT              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/conv-direct-vs-im2col        cpu   err=1.230e-07 tol=1.0e-03 
+[ PASS ] kernels/gemm-cuda-naive-NN           cuda  err=2.262e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-naive-NT           cuda  err=2.243e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-naive-TN           cuda  err=2.835e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-naive-TT           cuda  err=1.825e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-tiled-NN           cuda  err=2.262e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-tiled-NT           cuda  err=2.243e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-tiled-TN           cuda  err=2.835e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cuda-tiled-TT           cuda  err=1.825e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/cnn-pipeline-cuda-vs-cpu     cuda  err=0.000e+00 tol=1.0e-03 conv, direct conv, relu, maxpool fwd/bwd, col2im, softmax
+[ PASS ] kernels/softmax-loss-cuda-vs-cpu     cuda  err=0.000e+00 tol=1.0e-03 
+[ PASS ] kernels/sumsq-cuda-vs-cpu            cuda  err=1.537e-13 tol=1.0e-06 
+[ PASS ] kernels/sgd-momentum-cuda-vs-cpu     cuda  err=1.533e-07 tol=1.0e-03 
+[ PASS ] kernels/gemm-cublas-NN               cuda  err=2.262e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cublas-NT               cuda  err=2.243e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cublas-TN               cuda  err=2.835e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cublas-TT               cuda  err=1.825e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+
+41 tests, 0 failed
