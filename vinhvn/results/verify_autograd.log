@@ -1,0 +1,4 @@
+REF   impl=autograd-fp64 H=64 L=2 B=32 loss=1.799829914e-01 gradnorm=9.918247114e-02
+CHECK impl=seq H=64 L=2 B=32 loss=1.799829906e-01 gradnorm=9.918247051e-02
+REF   impl=autograd-fp64 H=128 L=3 B=48 loss=1.971845956e-01 gradnorm=1.363524172e-01
+CHECK impl=seq H=128 L=3 B=48 loss=1.971845961e-01 gradnorm=1.363524222e-01

@@ -1,0 +1,39 @@
+# A. tuần tự (C, CPU) so với CUDA 1 GPU (H=512 L=4 B=128)
++ bin/mlp_seq --H 512 --L 4 --B 128 --steps 2 --warmup 1
+RESULT impl=seq mode=seq gpus=0 micro=0 H=512 L=4 B=128 params_M=8.4 step_ms=744.062 samples_s=172.0 gflops=8.66 loss=2.057644e-01
++ bin/mlp_cuda --mode pipeline --gpus 1 --micro 1 --H 512 --L 4 --B 128 --steps 20 --warmup 3
+RESULT impl=cuda mode=pipeline gpus=1 micro=1 H=512 L=4 B=128 params_M=8.4 step_ms=2.008 samples_s=63750.9 tflops=3.21 mem_GB_max=0.63 mem_GB_min=0.63 comm_MB=0.0 loss=2.054371e-01 status=ok
+# B. mô hình vừa một GPU (H=4096 L=8 B=2048, 1,07 tỉ tham số)
++ bin/mlp_cuda --mode pipeline --gpus 1 --micro 1 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=1 micro=1 H=4096 L=8 B=2048 params_M=1073.9 step_ms=553.485 samples_s=3700.2 tflops=23.84 mem_GB_max=10.72 mem_GB_min=10.72 comm_MB=0.0 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 2 --micro 1 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=2 micro=1 H=4096 L=8 B=2048 params_M=1073.9 step_ms=554.374 samples_s=3694.3 tflops=23.80 mem_GB_max=5.79 mem_GB_min=5.76 comm_MB=67.1 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 2 --micro 2 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=2 micro=2 H=4096 L=8 B=2048 params_M=1073.9 step_ms=424.288 samples_s=4826.9 tflops=31.10 mem_GB_max=5.69 mem_GB_min=5.66 comm_MB=67.1 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 2 --micro 4 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=2 micro=4 H=4096 L=8 B=2048 params_M=1073.9 step_ms=363.492 samples_s=5634.2 tflops=36.30 mem_GB_max=5.64 mem_GB_min=5.60 comm_MB=67.1 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 2 --micro 8 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=2 micro=8 H=4096 L=8 B=2048 params_M=1073.9 step_ms=342.348 samples_s=5982.2 tflops=38.54 mem_GB_max=5.61 mem_GB_min=5.58 comm_MB=67.1 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 2 --micro 16 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=2 micro=16 H=4096 L=8 B=2048 params_M=1073.9 step_ms=402.292 samples_s=5090.8 tflops=32.80 mem_GB_max=5.60 mem_GB_min=5.57 comm_MB=67.1 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 4 --micro 1 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=4 micro=1 H=4096 L=8 B=2048 params_M=1073.9 step_ms=554.348 samples_s=3694.4 tflops=23.80 mem_GB_max=3.31 mem_GB_min=3.27 comm_MB=201.3 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 4 --micro 2 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=4 micro=2 H=4096 L=8 B=2048 params_M=1073.9 step_ms=353.931 samples_s=5786.4 tflops=37.28 mem_GB_max=3.21 mem_GB_min=3.17 comm_MB=201.3 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 4 --micro 4 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=4 micro=4 H=4096 L=8 B=2048 params_M=1073.9 step_ms=254.531 samples_s=8046.2 tflops=51.84 mem_GB_max=3.16 mem_GB_min=3.12 comm_MB=201.3 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 4 --micro 8 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=4 micro=8 H=4096 L=8 B=2048 params_M=1073.9 step_ms=209.459 samples_s=9777.6 tflops=62.99 mem_GB_max=3.13 mem_GB_min=3.10 comm_MB=201.3 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 4 --micro 16 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=4 micro=16 H=4096 L=8 B=2048 params_M=1073.9 step_ms=225.153 samples_s=9096.0 tflops=58.60 mem_GB_max=3.12 mem_GB_min=3.08 comm_MB=201.3 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode tensor --gpus 2 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=tensor gpus=2 micro=0 H=4096 L=8 B=2048 params_M=1073.9 step_ms=284.623 samples_s=7195.5 tflops=46.36 mem_GB_max=5.86 mem_GB_min=5.86 comm_MB=1073.7 loss=2.586814e-01 status=ok
++ bin/mlp_cuda --mode tensor --gpus 4 --H 4096 --L 8 --B 2048 --steps 3 --warmup 1
+RESULT impl=cuda mode=tensor gpus=4 micro=0 H=4096 L=8 B=2048 params_M=1073.9 step_ms=148.326 samples_s=13807.4 tflops=88.95 mem_GB_max=3.41 mem_GB_min=3.41 comm_MB=4295.0 loss=2.586814e-01 status=ok
+# C. mô hình không vừa một GPU (H=8192 L=24 B=256, 12,9 tỉ tham số; trọng số + gradient FP32 ≈ 103 GB > 80 GB)
++ bin/mlp_cuda --mode pipeline --gpus 1 --micro 4 --H 8192 --L 24 --B 256 --steps 2 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=1 micro=4 H=8192 L=24 B=256 params_M=12885.7 status=OOM(alloc) failed_alloc_GB=25.8
++ bin/mlp_cuda --mode pipeline --gpus 2 --micro 4 --H 8192 --L 24 --B 256 --steps 2 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=2 micro=4 H=8192 L=24 B=256 params_M=12885.7 step_ms=793.402 samples_s=322.7 tflops=24.94 mem_GB_max=52.63 mem_GB_min=52.62 comm_MB=16.8 loss=6.151495e-01 status=ok
++ bin/mlp_cuda --mode pipeline --gpus 4 --micro 4 --H 8192 --L 24 --B 256 --steps 2 --warmup 1
+RESULT impl=cuda mode=pipeline gpus=4 micro=4 H=8192 L=24 B=256 params_M=12885.7 step_ms=548.669 samples_s=466.6 tflops=36.07 mem_GB_max=26.61 mem_GB_min=26.60 comm_MB=50.3 loss=6.151495e-01 status=ok
