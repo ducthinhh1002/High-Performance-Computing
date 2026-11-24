@@ -1,0 +1,155 @@
+{
+  "experiment": "dot1_e0_correctness",
+  "description": "pdl_check on CPU (1 process) and MPI tests with 2 and 4 processes.",
+  "config": {
+    "name": "dot1_e0_correctness",
+    "description": "pdl_check on CPU (1 process) and MPI tests with 2 and 4 processes.",
+    "binary": "pdl_check",
+    "repeats": 1,
+    "vary_seed": false,
+    "timeout": 600,
+    "mpi": {
+      "launcher": "mpirun",
+      "extra_args": [],
+      "allow_oversubscribe": true
+    },
+    "env": {
+      "OMP_NUM_THREADS": 1
+    },
+    "variants": [
+      {
+        "np": 1,
+        "tests": "gradcheck,kernels,determinism,finite",
+        "device": "cpu"
+      },
+      {
+        "np": 2,
+        "tests": "allreduce,equivalence,sync",
+        "device": "cpu"
+      },
+      {
+        "np": 4,
+        "tests": "allreduce,equivalence,sync",
+        "device": "cpu"
+      }
+    ],
+    "analysis": {
+      "group_by": [
+        "np"
+      ],
+      "plots": []
+    }
+  },
+  "config_path": "tuannn/experiments/configs/dot1_e0_correctness.yaml",
+  "created": "2026-11-22T15:25:15",
+  "environment": {
+    "timestamp": "2026-11-22T08:25:15Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "wsl": false,
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "physical_cores": 4,
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "lscpu": null,
+    "gpus": [],
+    "nvidia_smi": null,
+    "gcc": "Apple clang version 14.0.3 (clang-1403.0.22.14.1)",
+    "nvcc": null,
+    "cmake": "cmake version 4.4.5",
+    "mpirun": "HYDRA build details:",
+    "mpi_flavor": "mpich",
+    "git": {
+      "commit": "5b0f0ac8f200e8a6631f077f2401052833f42fc8",
+      "dirty": true
+    },
+    "python": "3.9.6",
+    "python_packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "matplotlib": "3.9.4",
+      "yaml": "6.0.3"
+    },
+    "omp_env": {}
+  },
+  "runs": [
+    {
+      "name": "0000_np-1_tests-gradcheck-kernel_r0",
+      "index": 0,
+      "binary": "pdl_check",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "tests": "gradcheck,kernels,determinism,finite",
+        "device": "cpu"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 1,
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      "command": "build/bin/pdl_check --tests gradcheck,kernels,determinism,finite --device cpu --output tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0000_np-1_tests-gradcheck-kernel_r0.json",
+      "output": "raw/0000_np-1_tests-gradcheck-kernel_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.754,
+      "started": "2026-11-22T15:25:15"
+    },
+    {
+      "name": "0001_np-2_tests-allreduce-equiva_r0",
+      "index": 1,
+      "binary": "pdl_check",
+      "np": 2,
+      "repeat": 0,
+      "params": {
+        "tests": "allreduce,equivalence,sync",
+        "device": "cpu"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 2,
+        "tests": "allreduce,equivalence,sync"
+      },
+      "command": "mpirun -np 2 build/bin/pdl_check --tests allreduce,equivalence,sync --device cpu --output tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0001_np-2_tests-allreduce-equiva_r0.json",
+      "output": "raw/0001_np-2_tests-allreduce-equiva_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.338,
+      "started": "2026-11-22T15:25:16"
+    },
+    {
+      "name": "0002_np-4_tests-allreduce-equiva_r0",
+      "index": 2,
+      "binary": "pdl_check",
+      "np": 4,
+      "repeat": 0,
+      "params": {
+        "tests": "allreduce,equivalence,sync",
+        "device": "cpu"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "np": 4,
+        "tests": "allreduce,equivalence,sync"
+      },
+      "command": "mpirun -np 4 build/bin/pdl_check --tests allreduce,equivalence,sync --device cpu --output tuannn/experiments/results/dot1_e0_correctness/20261122-152515/raw/0002_np-4_tests-allreduce-equiva_r0.json",
+      "output": "raw/0002_np-4_tests-allreduce-equiva_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.251,
+      "started": "2026-11-22T15:25:16"
+    }
+  ],
+  "finished": "2026-11-22T15:25:17",
+  "summary": {
+    "ok": 3,
+    "failed": 0,
+    "resumed": 0
+  }
+}

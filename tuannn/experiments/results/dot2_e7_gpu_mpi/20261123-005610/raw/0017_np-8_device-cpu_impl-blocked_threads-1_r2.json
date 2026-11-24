@@ -1,0 +1,521 @@
+{
+  "schema": "pdl-bench/train/v1",
+  "version": "1.0.0",
+  "run_id": "0017_np-8_device-cpu_impl-blocked_threads-1_r2",
+  "tag": "gpu_mpi",
+  "config": {
+    "strategy": "sync",
+    "device": "cpu",
+    "impl": "blocked",
+    "threads": 1,
+    "gpu_id": -1,
+    "timing_sync": 1,
+    "train_data": "data/cifar10-train.pdlds",
+    "test_data": "data/cifar10-test.pdlds",
+    "train_limit": 20000,
+    "test_limit": 2000,
+    "partition": "global",
+    "model": "cnn",
+    "width": 4,
+    "epochs": 1,
+    "batch_size": 64,
+    "global_batch": 256,
+    "lr": 0.01,
+    "momentum": 0.9,
+    "weight_decay": 0,
+    "lr_decay": 1,
+    "lr_step": 0,
+    "lr_scale": 0,
+    "max_steps": 0,
+    "warmup_steps": 0,
+    "seed": 44,
+    "allreduce": "mpi",
+    "fusion": "flat",
+    "overlap": 0,
+    "measure_sync": 1,
+    "avg_period": 0,
+    "reshuffle": 0,
+    "admm_rho": 0.05,
+    "admm_local_steps": 20,
+    "push_every": 1,
+    "fetch_every": 1,
+    "server_lr": 0,
+    "check_sync": 0,
+    "check_finite": 1,
+    "eval_every": 0,
+    "output": "../experiments/results/dot2_e7_gpu_mpi/20261123-005610/raw/0017_np-8_device-cpu_impl-blocked_threads-1_r2.json",
+    "log_steps": 0,
+    "dump_params": "",
+    "run_id": "0017_np-8_device-cpu_impl-blocked_threads-1_r2",
+    "tag": "gpu_mpi",
+    "verbose": 1
+  },
+  "environment": {
+    "timestamp": "2026-11-22T18:05:25Z",
+    "hostname": "TuanNguyen",
+    "os": "Linux 5.15.146.1-microsoft-standard-WSL2 x86_64",
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12600K",
+    "logical_cpus": 16,
+    "compiler": "GNU 13.3.0",
+    "build_type": "Release",
+    "build_flags": "-Wall -Wextra -Wno-unused-parameter -O3 -march=native",
+    "git_commit": "unknown",
+    "git_dirty": false,
+    "pdl_version": "1.0.0",
+    "mpi_library": "Open MPI v4.1.6, package: Debian OpenMPI, ident: 4.1.6, repo rev: v4.1.6, Sep 30, 2023",
+    "mpi_world_size": 8,
+    "mpi_hosts": 1,
+    "openmp": true,
+    "omp_max_threads": 1,
+    "cuda": true,
+    "cuda_runtime": 12000,
+    "cuda_driver": 13030,
+    "cublas": true,
+    "gpu_name": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_bytes": 6442123264,
+    "gpu_sm_count": 30,
+    "gpu_cc": "7.5",
+    "device": "cpu",
+    "impl": "cpu-blocked",
+    "threads": 1,
+    "command_line": "build/bin/pdl_train --strategy sync --model cnn --width 4 --train-data data/cifar10-train.pdlds --test-data data/cifar10-test.pdlds --train-limit 20000 --test-limit 2000 --epochs 1 --global-batch 256 --lr 0.01 --timing-sync 1 --eval-every 0 --device cpu --impl blocked --threads 1 --seed 44 --output ../experiments/results/dot2_e7_gpu_mpi/20261123-005610/raw/0017_np-8_device-cpu_impl-blocked_threads-1_r2.json --run-id 0017_np-8_device-cpu_impl-blocked_threads-1_r2 --tag gpu_mpi",
+    "OMP_NUM_THREADS": "1"
+  },
+  "strategy": "sync",
+  "world_size": 8,
+  "num_workers": 8,
+  "dataset": {
+    "train": "data/cifar10-train.pdlds",
+    "test": "data/cifar10-test.pdlds",
+    "n_train": 20000,
+    "n_train_local_rank0": 20000,
+    "n_test": 2000,
+    "shape": [
+      3,
+      32,
+      32
+    ],
+    "classes": 10,
+    "partition": "global"
+  },
+  "model": {
+    "spec": "conv:64:3:1:1,relu,pool:2:2,conv:128:3:1:1,relu,pool:2:2,fc:512,relu,fc:10",
+    "num_params": 4275594,
+    "param_bytes": 17102376,
+    "flops_per_sample": 49883648,
+    "layers": [
+      {
+        "name": "conv1",
+        "kind": "conv",
+        "in": [
+          3,
+          32,
+          32
+        ],
+        "out": [
+          64,
+          32,
+          32
+        ],
+        "params": 1792,
+        "flops": 3538944
+      },
+      {
+        "name": "relu1",
+        "kind": "relu",
+        "in": [
+          64,
+          32,
+          32
+        ],
+        "out": [
+          64,
+          32,
+          32
+        ],
+        "params": 0,
+        "flops": 65536
+      },
+      {
+        "name": "pool1",
+        "kind": "maxpool",
+        "in": [
+          64,
+          32,
+          32
+        ],
+        "out": [
+          64,
+          16,
+          16
+        ],
+        "params": 0,
+        "flops": 65536
+      },
+      {
+        "name": "conv2",
+        "kind": "conv",
+        "in": [
+          64,
+          16,
+          16
+        ],
+        "out": [
+          128,
+          16,
+          16
+        ],
+        "params": 73856,
+        "flops": 37748736
+      },
+      {
+        "name": "relu2",
+        "kind": "relu",
+        "in": [
+          128,
+          16,
+          16
+        ],
+        "out": [
+          128,
+          16,
+          16
+        ],
+        "params": 0,
+        "flops": 32768
+      },
+      {
+        "name": "pool2",
+        "kind": "maxpool",
+        "in": [
+          128,
+          16,
+          16
+        ],
+        "out": [
+          128,
+          8,
+          8
+        ],
+        "params": 0,
+        "flops": 32768
+      },
+      {
+        "name": "fc1",
+        "kind": "fc",
+        "in": [
+          128,
+          8,
+          8
+        ],
+        "out": [
+          512,
+          1,
+          1
+        ],
+        "params": 4194816,
+        "flops": 8388608
+      },
+      {
+        "name": "relu3",
+        "kind": "relu",
+        "in": [
+          512,
+          1,
+          1
+        ],
+        "out": [
+          512,
+          1,
+          1
+        ],
+        "params": 0,
+        "flops": 512
+      },
+      {
+        "name": "fc2",
+        "kind": "fc",
+        "in": [
+          512,
+          1,
+          1
+        ],
+        "out": [
+          10,
+          1,
+          1
+        ],
+        "params": 5130,
+        "flops": 10240
+      }
+    ]
+  },
+  "local_batch": 32,
+  "global_batch": 256,
+  "steps_per_epoch": 78,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 1.69553753,
+      "train_acc": 0.402994792,
+      "test_loss": 1.41656191,
+      "test_acc": 0.497,
+      "time_s": 27.2818924,
+      "elapsed_s": 27.2818924,
+      "samples": 19968,
+      "steps": 78,
+      "phases_mean": {
+        "data": 0.0119405795,
+        "h2d": 0.00524244037,
+        "forward": 7.2554459,
+        "backward": 11.7031009,
+        "transfer": 0,
+        "sync_wait": 3.73876794,
+        "comm": 2.30285727,
+        "update": 2.25047217,
+        "eval": 0.686336099,
+        "shuffle": 0
+      },
+      "phases_max": {
+        "data": 0.012822845,
+        "h2d": 0.00632648899,
+        "forward": 8.05643381,
+        "backward": 12.1479015,
+        "transfer": 0,
+        "sync_wait": 4.40057318,
+        "comm": 2.35705036,
+        "update": 2.34475646,
+        "eval": 0.694239143,
+        "shuffle": 0
+      }
+    }
+  ],
+  "summary": {
+    "train_time_s": 27.2818924,
+    "wall_time_s": 28.2401247,
+    "samples_processed": 19968,
+    "throughput_samples_per_s": 731.914038,
+    "final_train_loss": 1.69553753,
+    "final_train_acc": 0.402994792,
+    "final_test_loss": 1.41656191,
+    "final_test_acc": 0.497,
+    "best_test_acc": 0.497,
+    "phases_mean": {
+      "data": 0.0119405795,
+      "h2d": 0.00524244037,
+      "forward": 7.2554459,
+      "backward": 11.7031009,
+      "transfer": 0,
+      "sync_wait": 3.73876794,
+      "comm": 2.30285727,
+      "update": 2.25047217,
+      "eval": 0.686336099,
+      "shuffle": 0
+    },
+    "phases_max": {
+      "data": 0.012822845,
+      "h2d": 0.00632648899,
+      "forward": 8.05643381,
+      "backward": 12.1479015,
+      "transfer": 0,
+      "sync_wait": 4.40057318,
+      "comm": 2.35705036,
+      "update": 2.34475646,
+      "eval": 0.694239143,
+      "shuffle": 0
+    },
+    "phases_min": {
+      "data": 0.011054162,
+      "h2d": 0.004741322,
+      "forward": 6.92031771,
+      "backward": 10.9346228,
+      "transfer": 0,
+      "sync_wait": 2.5146838,
+      "comm": 2.2608837,
+      "update": 2.17734235,
+      "eval": 0.672609187,
+      "shuffle": 0
+    },
+    "compute_time_mean_s": 21.226202,
+    "comm_time_mean_s": 2.30285727,
+    "sync_wait_mean_s": 3.73876794,
+    "comm_fraction": 0.221563551,
+    "load_imbalance": 1.05787934,
+    "comm_bytes_per_rank": 2334474324,
+    "comm_calls_per_rank": 78,
+    "sync_checks": 0,
+    "sync_failures": 0,
+    "nonfinite_events": 0,
+    "server": null
+  },
+  "per_rank": [
+    {
+      "rank": 0,
+      "role": "worker",
+      "train_time_s": 27.2818924,
+      "samples": 2496,
+      "phases": {
+        "data": 0.011439838,
+        "h2d": 0.004741322,
+        "forward": 6.92031771,
+        "backward": 12.1479015,
+        "transfer": 0,
+        "sync_wait": 3.63089561,
+        "comm": 2.30298464,
+        "update": 2.26328872,
+        "eval": 0.672609187,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 1,
+      "role": "worker",
+      "train_time_s": 27.2670609,
+      "samples": 2496,
+      "phases": {
+        "data": 0.011747022,
+        "h2d": 0.00492311498,
+        "forward": 7.0050866,
+        "backward": 11.8787624,
+        "transfer": 0,
+        "sync_wait": 3.81466094,
+        "comm": 2.30281616,
+        "update": 2.24873738,
+        "eval": 0.687436347,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 2,
+      "role": "worker",
+      "train_time_s": 27.2633044,
+      "samples": 2496,
+      "phases": {
+        "data": 0.012822845,
+        "h2d": 0.005403377,
+        "forward": 7.15308036,
+        "backward": 11.8913781,
+        "transfer": 0,
+        "sync_wait": 3.69761195,
+        "comm": 2.2608837,
+        "update": 2.24179602,
+        "eval": 0.691189083,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 3,
+      "role": "worker",
+      "train_time_s": 27.2776837,
+      "samples": 2496,
+      "phases": {
+        "data": 0.012442024,
+        "h2d": 0.005039992,
+        "forward": 6.93945297,
+        "backward": 11.7115293,
+        "transfer": 0,
+        "sync_wait": 4.10379875,
+        "comm": 2.26098643,
+        "update": 2.24411064,
+        "eval": 0.676814114,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 4,
+      "role": "worker",
+      "train_time_s": 27.2682556,
+      "samples": 2496,
+      "phases": {
+        "data": 0.011586737,
+        "h2d": 0.00513291599,
+        "forward": 7.43737106,
+        "backward": 11.3180326,
+        "transfer": 0,
+        "sync_wait": 3.93334875,
+        "comm": 2.35696478,
+        "update": 2.20552487,
+        "eval": 0.68613448,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 5,
+      "role": "worker",
+      "train_time_s": 27.2657644,
+      "samples": 2496,
+      "phases": {
+        "data": 0.011054162,
+        "h2d": 0.00534124801,
+        "forward": 7.09112768,
+        "backward": 11.7081353,
+        "transfer": 0,
+        "sync_wait": 3.81457057,
+        "comm": 2.35705036,
+        "update": 2.27822094,
+        "eval": 0.688738007,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 6,
+      "role": "worker",
+      "train_time_s": 27.2608622,
+      "samples": 2496,
+      "phases": {
+        "data": 0.011633591,
+        "h2d": 0.005031064,
+        "forward": 7.44069704,
+        "backward": 10.9346228,
+        "transfer": 0,
+        "sync_wait": 4.40057318,
+        "comm": 2.29066643,
+        "update": 2.17734235,
+        "eval": 0.693528433,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    },
+    {
+      "rank": 7,
+      "role": "worker",
+      "train_time_s": 27.260271,
+      "samples": 2496,
+      "phases": {
+        "data": 0.012798417,
+        "h2d": 0.00632648899,
+        "forward": 8.05643381,
+        "backward": 12.0344455,
+        "transfer": 0,
+        "sync_wait": 2.5146838,
+        "comm": 2.29050568,
+        "update": 2.34475646,
+        "eval": 0.694239143,
+        "shuffle": 0
+      },
+      "comm_bytes": 2334474324,
+      "comm_messages": 1092,
+      "comm_calls": 78
+    }
+  ]
+}

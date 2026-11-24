@@ -1,0 +1,18 @@
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+sequential: 12000 training samples, 10000 test samples, batch 64, 187 steps/epoch
+epoch   1 | loss 0.4446 acc 0.8620 |   4.04s | 2962 samples/s | test loss 0.1780 acc 0.9450
+epoch   2 | loss 0.1173 acc 0.9637 |   4.04s | 2960 samples/s | test loss 0.1101 acc 0.9648
+results written to tuannn/experiments/results/dot1_e0_equivalence/seq_train.json

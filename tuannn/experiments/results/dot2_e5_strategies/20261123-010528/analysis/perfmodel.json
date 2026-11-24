@@ -1,0 +1,151 @@
+{
+  "run_dir": "../experiments/results/dot2_e5_strategies/20261123-010528",
+  "comm_source": "../experiments/results/dot2_e5_strategies/20261123-010528",
+  "downpour": [
+    {
+      "run": "0012_strategy-downpour_np-4_batchsiz-32_partitio-iid_pushever-1_fetcheve-1_r0",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.003785940736,
+      "tau_s": 0.00127988217136,
+      "k_star": 2.958038498166646,
+      "mean_staleness": 6.76053333
+    },
+    {
+      "run": "0013_strategy-downpour_np-4_batchsiz-32_partitio-iid_pushever-1_fetcheve-1_r1",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.0037284295680000005,
+      "tau_s": 0.0012583886144533333,
+      "k_star": 2.962860220743254,
+      "mean_staleness": 6.9592
+    },
+    {
+      "run": "0014_strategy-downpour_np-4_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r0",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.014686069632,
+      "tau_s": 0.0028058474855626324,
+      "k_star": 5.234094050929903,
+      "mean_staleness": 2.10573248
+    },
+    {
+      "run": "0015_strategy-downpour_np-4_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r1",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.014788305984000001,
+      "tau_s": 0.002943985255414013,
+      "k_star": 5.023226918954226,
+      "mean_staleness": 2.12738854
+    },
+    {
+      "run": "0024_strategy-downpour_np-4_batchsiz-32_partitio-sorted_pushever-1_fetcheve-1_r0",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.003723727536,
+      "tau_s": 0.0012547534566399998,
+      "k_star": 2.967696575207261,
+      "mean_staleness": 6.68890667
+    },
+    {
+      "run": "0025_strategy-downpour_np-4_batchsiz-32_partitio-sorted_pushever-1_fetcheve-1_r1",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.0037310897119999997,
+      "tau_s": 0.0012603494213866667,
+      "k_star": 2.960361347962508,
+      "mean_staleness": 6.67456
+    },
+    {
+      "run": "0026_strategy-downpour_np-4_batchsiz-32_partitio-sorted_pushever-4_fetcheve-4_r0",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.01469037728,
+      "tau_s": 0.0028026844747346073,
+      "k_star": 5.241538036989007,
+      "mean_staleness": 2.12866242
+    },
+    {
+      "run": "0027_strategy-downpour_np-4_batchsiz-32_partitio-sorted_pushever-4_fetcheve-4_r1",
+      "np": 4,
+      "workers": 3,
+      "T_grad_s": 0.014584612608,
+      "tau_s": 0.0029459770819532907,
+      "k_star": 4.950687735265703,
+      "mean_staleness": 2.12462845
+    },
+    {
+      "run": "0038_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-1_fetcheve-1_r0",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.006734997415730338,
+      "tau_s": 0.0011972337747993582,
+      "k_star": 5.625465600366178,
+      "mean_staleness": 23.1181915
+    },
+    {
+      "run": "0039_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-1_fetcheve-1_r1",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.006737868576779027,
+      "tau_s": 0.0011878430666666666,
+      "k_star": 5.672355857316135,
+      "mean_staleness": 22.9372392
+    },
+    {
+      "run": "0040_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r0",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.02603251895131086,
+      "tau_s": 0.003583390675053305,
+      "k_star": 7.264772756301157,
+      "mean_staleness": 6.75501066
+    },
+    {
+      "run": "0041_strategy-downpour_np-8_batchsiz-32_partitio-iid_pushever-4_fetcheve-4_r1",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.026227399850187263,
+      "tau_s": 0.0036045707061833692,
+      "k_star": 7.276150750822043,
+      "mean_staleness": 7.00127932
+    },
+    {
+      "run": "0050_strategy-downpour_np-8_batchsiz-32_partitio-sorted_pushever-1_fetcheve-1_r0",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.006830513970037453,
+      "tau_s": 0.001200364420599251,
+      "k_star": 5.690366902600708,
+      "mean_staleness": 22.9867309
+    },
+    {
+      "run": "0051_strategy-downpour_np-8_batchsiz-32_partitio-sorted_pushever-1_fetcheve-1_r1",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.0069062025468164786,
+      "tau_s": 0.0012044248019261637,
+      "k_star": 5.734025516389074,
+      "mean_staleness": 22.9452113
+    },
+    {
+      "run": "0052_strategy-downpour_np-8_batchsiz-32_partitio-sorted_pushever-4_fetcheve-4_r0",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.025529548764044944,
+      "tau_s": 0.003516413971855011,
+      "k_star": 7.260109011163257,
+      "mean_staleness": 6.91236674
+    },
+    {
+      "run": "0053_strategy-downpour_np-8_batchsiz-32_partitio-sorted_pushever-4_fetcheve-4_r1",
+      "np": 8,
+      "workers": 7,
+      "T_grad_s": 0.025921115056179778,
+      "tau_s": 0.003578771011513859,
+      "k_star": 7.24302140952429,
+      "mean_staleness": 6.82153518
+    }
+  ],
+  "notes": "Single-node runs: MPI uses shared memory, so \u03b1/\u03b2 describe intra-node copies and the model ignores memory-bandwidth contention between ranks."
+}

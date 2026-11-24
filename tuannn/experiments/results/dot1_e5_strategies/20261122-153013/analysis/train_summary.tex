@@ -1,0 +1,17 @@
+\begin{tabular}{llllllllllll}
+\hline
+strategy & partition & avg\_period & reshuffle & n\_runs & train\_time\_s\_mean & train\_time\_s\_ci95 & wall\_time\_s\_mean & wall\_time\_s\_ci95 & throughput\_samples\_per\_s\_mean & throughput\_samples\_per\_s\_ci95 & samples\_processed\_mean \\
+\hline
+admm & iid & 0 & 0 & 2 & 15.99 & 7.227 & 17.21 & 7.933 & 1.125e+04 & 5086 & 1.797e+05 \\
+admm & sorted & 0 & 0 & 2 & 16.82 & 14 & 18.12 & 14.46 & 1.073e+04 & 8931 & 1.797e+05 \\
+downpour & iid & 0 & 0 & 2 & 25.26 & 5.418 & 26.75 & 5.495 & 7117 & 1527 & 1.797e+05 \\
+downpour & sorted & 0 & 0 & 2 & 25.67 & 2.572 & 27.19 & 2.735 & 7001 & 701.3 & 1.797e+05 \\
+psgd & iid & 0 & 0 & 2 & 14.66 & 0.4159 & 15.88 & 1.208 & 1.226e+04 & 348 & 1.797e+05 \\
+psgd & iid & 10 & 0 & 2 & 15.4 & 2.576 & 16.61 & 2.727 & 1.167e+04 & 1951 & 1.797e+05 \\
+psgd & sorted & 0 & 0 & 2 & 15.57 & 1.338 & 16.81 & 0.3645 & 1.154e+04 & 991.3 & 1.797e+05 \\
+psgd & sorted & 0 & 1 & 2 & 17.13 & 14.66 & 18.46 & 16.61 & 1.054e+04 & 9019 & 1.797e+05 \\
+psgd & sorted & 10 & 0 & 2 & 15.39 & 7.315 & 16.54 & 7.321 & 1.169e+04 & 5558 & 1.797e+05 \\
+sequential & global & 0 & 0 & 2 & 57.79 & 2.765 & 62.21 & 2.43 & 3110 & 148.8 & 1.797e+05 \\
+sync & global & 0 & 0 & 2 & 17.08 & 5.516 & 18.35 & 5.546 & 1.053e+04 & 3401 & 1.797e+05 \\
+\hline
+\end{tabular}

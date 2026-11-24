@@ -1,0 +1,242 @@
+{
+  "experiment": "correctness",
+  "description": "Correctness checks for every component. CUDA variants compare GPU kernels with the CPU reference. MPI tests run with 2 and 4 ranks.",
+  "config": {
+    "name": "correctness",
+    "description": "Correctness checks for every component. CUDA variants compare GPU kernels with the CPU reference. MPI tests run with 2 and 4 ranks.\n",
+    "binary": "pdl_check",
+    "repeats": 1,
+    "timeout": 900,
+    "mpi": {
+      "launcher": "mpirun",
+      "extra_args": [
+        "--bind-to",
+        "none"
+      ],
+      "allow_oversubscribe": true
+    },
+    "env": {
+      "OMP_NUM_THREADS": 2
+    },
+    "variants": [
+      {
+        "np": 1,
+        "device": "cpu",
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      {
+        "np": 1,
+        "device": "both",
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      {
+        "np": 2,
+        "device": "cpu",
+        "tests": "allreduce,equivalence,sync"
+      },
+      {
+        "np": 4,
+        "device": "cpu",
+        "tests": "allreduce,equivalence,sync"
+      },
+      {
+        "np": 2,
+        "device": "cuda",
+        "tests": "equivalence,sync"
+      }
+    ],
+    "analysis": {
+      "group_by": [
+        "np",
+        "device",
+        "tests"
+      ],
+      "plots": []
+    }
+  },
+  "config_path": "configs/correctness.yaml",
+  "created": "2026-11-23T00:33:38",
+  "environment": {
+    "windows_host": {
+      "idle_load_percent": 0,
+      "cpu": "12th Gen Intel(R) Core(TM) i5-12600K",
+      "cores": 10,
+      "power_plan": "High performance",
+      "logical": 16
+    },
+    "pinning_note": "WSL2: vCPUs are placed by the Windows host; core pinning inside the VM is virtual (P/E cores of the hybrid CPU are indistinguishable)",
+    "timestamp": "2026-11-22T17:33:42Z",
+    "hostname": "TuanNguyen",
+    "os": "Linux 5.15.146.1-microsoft-standard-WSL2 x86_64",
+    "wsl": true,
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12600K",
+    "physical_cores": 8,
+    "logical_cpus": 16,
+    "memory_bytes": 8202395648,
+    "lscpu": "Architecture:                       x86_64\nCPU op-mode(s):                     32-bit, 64-bit\nAddress sizes:                      46 bits physical, 48 bits virtual\nByte Order:                         Little Endian\nCPU(s):                             16\nOn-line CPU(s) list:                0-15\nVendor ID:                          GenuineIntel\nModel name:                         12th Gen Intel(R) Core(TM) i5-12600K\nCPU family:                         6\nModel:                              151\nThread(s) per core:                 2\nCore(s) per socket:                 8\nSocket(s):                          1\nStepping:                           2\nBogoMIPS:                           7372.79\nFlags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid pni pclmulqdq vmx ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves avx_vnni umip waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize flush_l1d arch_capabilities\nVirtualization:                     VT-x\nHypervisor vendor:                  Microsoft\nVirtualization type:                full\nL1d cache:                          384 KiB (8 instances)\nL1i cache:                          256 KiB (8 instances)\nL2 cache:                           10 MiB (8 instances)\nL3 cache:                           20 MiB (1 instance)\nVulnerability Gather data sampling: Not affected\nVulnerability Itlb multihit:        Not affected\nVulnerability L1tf:                 Not affected\nVulnerability Mds:                  Not affected\nVulnerability Meltdown:             Not affected\nVulnerability Mmio stale data:      Not affected\nVulnerability Retbleed:             Mitigation; Enhanced IBRS\nVulnerability Spec rstack overflow: Not affected\nVulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl and seccomp\nVulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:           Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence\nVulnerability Srbds:                Not affected\nVulnerability Tsx async abort:      Not affected",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 2060",
+        "memory": "6144 MiB",
+        "driver": "610.88",
+        "max_sm_clock": "2145 MHz",
+        "pcie_gen": "3"
+      }
+    ],
+    "nvidia_smi": "GPU 0: NVIDIA GeForce RTX 2060 (UUID: GPU-32e2fcd7-f21c-bdc3-c469-19441f361371)",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "nvcc": [
+      "Build cuda_12.0.r12.0/compiler.32267302_0"
+    ],
+    "cmake": "cmake version 3.28.3",
+    "mpirun": "mpirun (Open MPI) 4.1.6",
+    "mpi_flavor": "openmpi",
+    "git": {
+      "commit": "4acdeb458c8a854c16b93667b9ca295d3eb2ef5a",
+      "dirty": true
+    },
+    "python": "3.12.3",
+    "python_packages": {
+      "numpy": "2.5.5",
+      "pandas": "3.1.1",
+      "matplotlib": "3.11.2",
+      "yaml": "6.0.4"
+    },
+    "omp_env": {
+      "LD_LIBRARY_PATH": "/usr/lib/wsl/lib:"
+    }
+  },
+  "runs": [
+    {
+      "name": "0000_np-1_device-cpu_tests-gradcheck-kernel_r0",
+      "index": 0,
+      "binary": "pdl_check",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "device": "cpu",
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 1,
+        "device": "cpu",
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      "command": "build/bin/pdl_check --device cpu --tests gradcheck,kernels,determinism,finite --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0000_np-1_device-cpu_tests-gradcheck-kernel_r0.json",
+      "output": "raw/0000_np-1_device-cpu_tests-gradcheck-kernel_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.465,
+      "started": "2026-11-23T00:33:42"
+    },
+    {
+      "name": "0001_np-1_device-both_tests-gradcheck-kernel_r0",
+      "index": 1,
+      "binary": "pdl_check",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "device": "both",
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 1,
+        "device": "both",
+        "tests": "gradcheck,kernels,determinism,finite"
+      },
+      "command": "build/bin/pdl_check --device both --tests gradcheck,kernels,determinism,finite --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0001_np-1_device-both_tests-gradcheck-kernel_r0.json",
+      "output": "raw/0001_np-1_device-both_tests-gradcheck-kernel_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.815,
+      "started": "2026-11-23T00:33:42"
+    },
+    {
+      "name": "0002_np-2_device-cpu_tests-allreduce-equiva_r0",
+      "index": 2,
+      "binary": "pdl_check",
+      "np": 2,
+      "repeat": 0,
+      "params": {
+        "device": "cpu",
+        "tests": "allreduce,equivalence,sync"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 2,
+        "device": "cpu",
+        "tests": "allreduce,equivalence,sync"
+      },
+      "command": "mpirun -np 2 --bind-to none build/bin/pdl_check --device cpu --tests allreduce,equivalence,sync --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0002_np-2_device-cpu_tests-allreduce-equiva_r0.json",
+      "output": "raw/0002_np-2_device-cpu_tests-allreduce-equiva_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.515,
+      "started": "2026-11-23T00:33:43"
+    },
+    {
+      "name": "0003_np-4_device-cpu_tests-allreduce-equiva_r0",
+      "index": 3,
+      "binary": "pdl_check",
+      "np": 4,
+      "repeat": 0,
+      "params": {
+        "device": "cpu",
+        "tests": "allreduce,equivalence,sync"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 4,
+        "device": "cpu",
+        "tests": "allreduce,equivalence,sync"
+      },
+      "command": "mpirun -np 4 --bind-to none build/bin/pdl_check --device cpu --tests allreduce,equivalence,sync --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0003_np-4_device-cpu_tests-allreduce-equiva_r0.json",
+      "output": "raw/0003_np-4_device-cpu_tests-allreduce-equiva_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.665,
+      "started": "2026-11-23T00:33:44"
+    },
+    {
+      "name": "0004_np-2_device-cuda_tests-equivalence-sync_r0",
+      "index": 4,
+      "binary": "pdl_check",
+      "np": 2,
+      "repeat": 0,
+      "params": {
+        "device": "cuda",
+        "tests": "equivalence,sync"
+      },
+      "env": {
+        "OMP_NUM_THREADS": "2"
+      },
+      "varying": {
+        "np": 2,
+        "device": "cuda",
+        "tests": "equivalence,sync"
+      },
+      "command": "mpirun -np 2 --bind-to none build/bin/pdl_check --device cuda --tests equivalence,sync --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0004_np-2_device-cuda_tests-equivalence-sync_r0.json",
+      "output": "raw/0004_np-2_device-cuda_tests-equivalence-sync_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.665,
+      "started": "2026-11-23T00:33:44"
+    }
+  ],
+  "finished": "2026-11-23T00:33:45",
+  "summary": {
+    "ok": 5,
+    "failed": 0,
+    "resumed": 0
+  }
+}

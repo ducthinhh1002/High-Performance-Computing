@@ -1,0 +1,156 @@
+{
+  "experiment": "dot1_e2_paper_cpu",
+  "description": "Conv 1:224:224:96:11:4:0 (im2col+GEMM vs direct) for batch 1..64; FC n = 256..4096 at batch 1.",
+  "config": {
+    "name": "dot1_e2_paper_cpu",
+    "description": "Conv 1:224:224:96:11:4:0 (im2col+GEMM vs direct) for batch 1..64; FC n = 256..4096 at batch 1.",
+    "binary": "pdl_bench_compute",
+    "repeats": 1,
+    "timeout": 3600,
+    "mpi": {
+      "launcher": "mpirun",
+      "extra_args": []
+    },
+    "env": {
+      "OMP_NUM_THREADS": 1
+    },
+    "base_args": {
+      "np": 1,
+      "reps": 5,
+      "warmup": 1,
+      "max-naive": 5,
+      "conv": "1:224:224:96:11:4:0"
+    },
+    "variants": [
+      {
+        "op": "conv",
+        "impls": "cpu-blocked,cpu-direct",
+        "batches": "1,2,4,8,16,32,64"
+      },
+      {
+        "op": "fc",
+        "impls": "cpu-naive,cpu-blocked",
+        "sizes": "256,512,1024,2048,4096",
+        "fc-batch": 1
+      }
+    ],
+    "analysis": {
+      "group_by": [
+        "op",
+        "impl",
+        "batch",
+        "n"
+      ],
+      "plots": [
+        "compute_cpu_gpu"
+      ]
+    }
+  },
+  "config_path": "tuannn/experiments/configs/dot1_e2_paper_cpu.yaml",
+  "created": "2026-11-22T15:25:53",
+  "environment": {
+    "timestamp": "2026-11-22T08:25:53Z",
+    "hostname": "dev-macbook",
+    "os": "Darwin 22.6.0 x86_64",
+    "wsl": false,
+    "cpu_model": "Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz",
+    "physical_cores": 4,
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "lscpu": null,
+    "gpus": [],
+    "nvidia_smi": null,
+    "gcc": "Apple clang version 14.0.3 (clang-1403.0.22.14.1)",
+    "nvcc": null,
+    "cmake": "cmake version 4.4.5",
+    "mpirun": "HYDRA build details:",
+    "mpi_flavor": "mpich",
+    "git": {
+      "commit": "5b0f0ac8f200e8a6631f077f2401052833f42fc8",
+      "dirty": true
+    },
+    "python": "3.9.6",
+    "python_packages": {
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "matplotlib": "3.9.4",
+      "yaml": "6.0.3"
+    },
+    "omp_env": {}
+  },
+  "runs": [
+    {
+      "name": "0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0",
+      "index": 0,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 1,
+        "max-naive": 5,
+        "conv": "1:224:224:96:11:4:0",
+        "op": "conv",
+        "impls": "cpu-blocked,cpu-direct",
+        "batches": "1,2,4,8,16,32,64",
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "op": "conv",
+        "impls": "cpu-blocked,cpu-direct",
+        "batches": "1,2,4,8,16,32,64",
+        "sizes": null,
+        "fc-batch": null
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 1 --max-naive 5 --conv 1:224:224:96:11:4:0 --op conv --impls cpu-blocked,cpu-direct --batches 1,2,4,8,16,32,64 --seed 42 --output tuannn/experiments/results/dot1_e2_paper_cpu/20261122-152553/raw/0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0.json --run-id 0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0 --tag dot1_e2_paper_cpu",
+      "output": "raw/0000_op-conv_impls-cpu-blocked-cpu-_batches-1-2-4-8-16-32-64_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 65.737,
+      "started": "2026-11-22T15:25:54"
+    },
+    {
+      "name": "0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0",
+      "index": 1,
+      "binary": "pdl_bench_compute",
+      "np": 1,
+      "repeat": 0,
+      "params": {
+        "reps": 5,
+        "warmup": 1,
+        "max-naive": 5,
+        "conv": "1:224:224:96:11:4:0",
+        "op": "fc",
+        "impls": "cpu-naive,cpu-blocked",
+        "sizes": "256,512,1024,2048,4096",
+        "fc-batch": 1,
+        "seed": 42
+      },
+      "env": {
+        "OMP_NUM_THREADS": "1"
+      },
+      "varying": {
+        "op": "fc",
+        "impls": "cpu-naive,cpu-blocked",
+        "batches": null,
+        "sizes": "256,512,1024,2048,4096",
+        "fc-batch": 1
+      },
+      "command": "build/bin/pdl_bench_compute --reps 5 --warmup 1 --max-naive 5 --conv 1:224:224:96:11:4:0 --op fc --impls cpu-naive,cpu-blocked --sizes 256,512,1024,2048,4096 --fc-batch 1 --seed 42 --output tuannn/experiments/results/dot1_e2_paper_cpu/20261122-152553/raw/0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0.json --run-id 0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0 --tag dot1_e2_paper_cpu",
+      "output": "raw/0001_op-fc_impls-cpu-naive-cpu-bl_sizes-256-512-1024-204_fcbatch-1_r0.json",
+      "status": "ok",
+      "returncode": 0,
+      "duration_s": 0.755,
+      "started": "2026-11-22T15:27:00"
+    }
+  ],
+  "finished": "2026-11-22T15:27:00",
+  "summary": {
+    "ok": 2,
+    "failed": 0,
+    "resumed": 0
+  }
+}

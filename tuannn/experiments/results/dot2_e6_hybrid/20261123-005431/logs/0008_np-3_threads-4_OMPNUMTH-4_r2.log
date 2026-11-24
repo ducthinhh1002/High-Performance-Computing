@@ -1,0 +1,22 @@
+# mpirun -np 3 --bind-to none build/bin/pdl_train --strategy sync --device cpu --impl omp --model lenet --train-data data/mnist-train.pdlds --test-data data/mnist-test.pdlds --epochs 2 --global-batch 256 --lr 0.05 --eval-every 0 --threads 4 --seed 44 --output ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0008_np-3_threads-4_OMPNUMTH-4_r2.json --run-id 0008_np-3_threads-4_OMPNUMTH-4_r2 --tag hybrid_mpi_omp
+# env: {'OMP_NUM_THREADS': '4'}
+[WARN ][rank 0] global batch 256 not divisible by 3 workers; using 85 per worker
+[INFO ][rank 0] pdl-bench 1.0.0 | ranks=3 | device=cpu impl=cpu-omp threads=4 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ][rank 0] strategy=sync workers=3 partition=global local_batch=85 steps/epoch=235 train=60000 test=10000
+Model: conv:6:5:1:2,relu,pool:2:2,conv:16:5:1:0,relu,pool:2:2,fc:120,relu,fc:84,relu,fc:10
+  layer    kind     input            output                 params   MFLOP/sample
+  conv1    conv     1x28x28          6x28x28                   156          0.235
+  relu1    relu     6x28x28          6x28x28                     0          0.005
+  pool1    maxpool  6x28x28          6x14x14                     0          0.005
+  conv2    conv     6x14x14          16x10x10                 2416          0.480
+  relu2    relu     16x10x10         16x10x10                    0          0.002
+  pool2    maxpool  16x10x10         16x5x5                      0          0.002
+  fc1      fc       16x5x5           120x1x1                 48120          0.096
+  relu3    relu     120x1x1          120x1x1                     0          0.000
+  fc2      fc       120x1x1          84x1x1                  10164          0.020
+  relu4    relu     84x1x1           84x1x1                      0          0.000
+  fc3      fc       84x1x1           10x1x1                    850          0.002
+  total params: 61706 (0.25 MB), forward: 0.846 MFLOP/sample
+[INFO ][rank 0] epoch   1 | loss 0.3140 acc 0.9012 |   2.02s (comm  4.6%) | 9866 samples/s/rank
+[INFO ][rank 0] epoch   2 | loss 0.0682 acc 0.9791 |   2.05s (comm  3.6%) | 9750 samples/s/rank | test loss 0.0617 acc 0.9803
+[INFO ][rank 0] results written to ../experiments/results/dot2_e6_hybrid/20261123-005431/raw/0008_np-3_threads-4_OMPNUMTH-4_r2.json
