@@ -1,0 +1,44 @@
+# build/bin/pdl_bench_compute --op gemm --sizes 64,128,256,512,1024,2048,4096 --impls all --max-naive 5 --reps 5 --warmup 2 --seed 44 --output ../experiments/results/dot2_e1_gemm/20261123-003744/raw/0002_run_r2.json --run-id 0002_run_r2 --tag compute_gemm
+# env: {'OMP_NUM_THREADS': '12', 'OMP_PROC_BIND': 'close', 'OMP_PLACES': 'threads'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=12 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ] gemm       cpu-naive    M=64     N=64     K=64     batch=0          0.081 ms       6.50 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=128    N=128    K=128    batch=0          0.851 ms       4.93 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=256    N=256    K=256    batch=0          7.957 ms       4.22 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=512    N=512    K=512    batch=0         68.120 ms       3.94 GFLOP/s  ok
+[INFO ] gemm       cpu-naive    M=1024   N=1024   K=1024   batch=0       2084.432 ms       1.03 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=64     N=64     K=64     batch=0          0.013 ms      40.34 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=128    N=128    K=128    batch=0          0.110 ms      38.00 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=256    N=256    K=256    batch=0          0.898 ms      37.35 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=512    N=512    K=512    batch=0          6.487 ms      41.38 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=1024   N=1024   K=1024   batch=0         56.423 ms      38.06 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=2048   N=2048   K=2048   batch=0        618.704 ms      27.77 GFLOP/s  ok
+[INFO ] gemm       cpu-blocked  M=4096   N=4096   K=4096   batch=0       5324.516 ms      25.81 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=64     N=64     K=64     batch=0          0.043 ms      12.22 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=128    N=128    K=128    batch=0          0.158 ms      26.58 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=256    N=256    K=256    batch=0          0.661 ms      50.78 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=512    N=512    K=512    batch=0          1.757 ms     152.77 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=1024   N=1024   K=1024   batch=0         11.593 ms     185.24 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=2048   N=2048   K=2048   batch=0        107.370 ms     160.01 GFLOP/s  ok
+[INFO ] gemm       cpu-omp      M=4096   N=4096   K=4096   batch=0       1040.692 ms     132.06 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=64     N=64     K=64     batch=0          0.034 ms      15.39 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=128    N=128    K=128    batch=0          0.038 ms     109.82 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=256    N=256    K=256    batch=0          0.086 ms     388.49 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=512    N=512    K=512    batch=0          0.494 ms     543.25 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=1024   N=1024   K=1024   batch=0          4.016 ms     534.79 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=2048   N=2048   K=2048   batch=0         30.750 ms     558.69 GFLOP/s  ok
+[INFO ] gemm       cuda-naive   M=4096   N=4096   K=4096   batch=0        247.435 ms     555.46 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=64     N=64     K=64     batch=0          0.085 ms       6.19 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=128    N=128    K=128    batch=0          0.064 ms      65.11 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=256    N=256    K=256    batch=0          0.062 ms     539.76 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=512    N=512    K=512    batch=0          0.250 ms    1074.63 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=1024   N=1024   K=1024   batch=0          1.897 ms    1132.08 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=2048   N=2048   K=2048   batch=0         14.398 ms    1193.22 GFLOP/s  ok
+[INFO ] gemm       cuda-tiled   M=4096   N=4096   K=4096   batch=0        114.867 ms    1196.51 GFLOP/s  ok
+[INFO ] gemm       cublas       M=64     N=64     K=64     batch=0          0.043 ms      12.08 GFLOP/s  ok
+[INFO ] gemm       cublas       M=128    N=128    K=128    batch=0          0.045 ms      92.54 GFLOP/s  ok
+[INFO ] gemm       cublas       M=256    N=256    K=256    batch=0          0.050 ms     670.38 GFLOP/s  ok
+[INFO ] gemm       cublas       M=512    N=512    K=512    batch=0          0.083 ms    3244.85 GFLOP/s  ok
+[INFO ] gemm       cublas       M=1024   N=1024   K=1024   batch=0          0.429 ms    5001.12 GFLOP/s  ok
+[INFO ] gemm       cublas       M=2048   N=2048   K=2048   batch=0          2.920 ms    5883.59 GFLOP/s  ok
+[INFO ] gemm       cublas       M=4096   N=4096   K=4096   batch=0         22.012 ms    6243.71 GFLOP/s  ok
+[INFO ] results written to ../experiments/results/dot2_e1_gemm/20261123-003744/raw/0002_run_r2.json

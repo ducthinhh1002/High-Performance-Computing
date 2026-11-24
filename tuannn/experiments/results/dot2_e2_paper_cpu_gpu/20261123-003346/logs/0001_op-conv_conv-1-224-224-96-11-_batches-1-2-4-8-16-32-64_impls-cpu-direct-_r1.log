@@ -1,0 +1,29 @@
+# build/bin/pdl_bench_compute --reps 5 --warmup 2 --verify 1 --op conv --conv 1:224:224:96:11:4:0 --batches 1,2,4,8,16,32,64,128,256 --impls cpu-direct,cpu-blocked,cpu-omp --include-transfer 0 --seed 43 --output ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1.json --run-id 0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1 --tag compute_paper_cpu_gpu
+# env: {'OMP_NUM_THREADS': '12', 'OMP_PROC_BIND': 'close', 'OMP_PLACES': 'threads'}
+[INFO ] pdl-bench 1.0.0 | ranks=1 | device=- impl=- threads=12 | CPU: 12th Gen Intel(R) Core(TM) i5-12600K | GPU: -
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=1          5.786 ms      11.71 GFLOP/s  ok
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=2          6.373 ms      21.26 GFLOP/s  ok
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=4         16.536 ms      16.39 GFLOP/s  ok
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=8         31.820 ms      17.03 GFLOP/s  ok
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=16        59.701 ms      18.16 GFLOP/s  ok
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=32       120.103 ms      18.05 GFLOP/s  ok
+[INFO ] conv       cpu-direct   M=96     N=2916   K=121    batch=64       213.540 ms      20.30 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=1          1.881 ms      36.01 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=2          3.724 ms      36.39 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=4          7.850 ms      34.52 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=8         17.750 ms      30.53 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=16        37.454 ms      28.94 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=32        66.937 ms      32.39 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=64       154.979 ms      27.98 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=128      292.329 ms      29.66 GFLOP/s  ok
+[INFO ] conv       cpu-blocked  M=96     N=2916   K=121    batch=256      543.962 ms      31.88 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=1          0.755 ms      89.76 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=2          3.186 ms      42.53 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=4          4.203 ms      64.47 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=8          4.274 ms     126.79 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=16         9.045 ms     119.84 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=32        17.152 ms     126.39 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=64        39.363 ms     110.14 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=128       81.515 ms     106.38 GFLOP/s  ok
+[INFO ] conv       cpu-omp      M=96     N=2916   K=121    batch=256      136.893 ms     126.69 GFLOP/s  ok
+[INFO ] results written to ../experiments/results/dot2_e2_paper_cpu_gpu/20261123-003346/raw/0001_op-conv_conv-1-224-224-96-11-_batches-1-2-4-8-16-32-64_impls-cpu-direct-_r1.json

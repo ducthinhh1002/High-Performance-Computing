@@ -1,0 +1,23 @@
+# build/bin/pdl_check --device cpu --tests gradcheck,kernels,determinism,finite --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0000_np-1_device-cpu_tests-gradcheck-kernel_r0.json
+# env: {'OMP_NUM_THREADS': '2'}
+[ PASS ] gradcheck/conv+relu+pool+fc          cpu   err=1.031e-04 tol=2.0e-02 56 params probed, 24 skipped at kinks
+[ PASS ] gradcheck/strided-conv+overlap-pool  cpu   err=5.789e-05 tol=2.0e-02 66 params probed, 14 skipped at kinks
+[ PASS ] gradcheck/mlp                        cpu   err=7.499e-05 tol=2.0e-02 79 params probed, 14 skipped at kinks
+[ PASS ] gradcheck/two-conv                   cpu   err=3.051e-05 tol=2.0e-02 76 params probed, 11 skipped at kinks
+[ PASS ] determinism/same-seed-same-params    cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] finite/detects-nan-and-inf           cpu   err=2.000e+00 tol=2.0e+00 expects exactly 2
+[ PASS ] kernels/gemm-cpu-naive-NN            cpu   err=2.262e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-naive-NT            cpu   err=1.794e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-naive-TN            cpu   err=2.835e-07 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-naive-TT            cpu   err=9.125e-08 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-NN          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-NT          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-TN          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-blocked-TT          cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-NN              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-NT              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-TN              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/gemm-cpu-omp-TT              cpu   err=0.000e+00 tol=1.0e-03 37x53x29 batch 3, alpha 1.5 beta 0.5
+[ PASS ] kernels/conv-direct-vs-im2col        cpu   err=1.230e-07 tol=1.0e-03 
+
+19 tests, 0 failed

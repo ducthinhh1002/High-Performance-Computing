@@ -1,0 +1,5 @@
+{
+  "run_dir": "../experiments/results/dot2_e1_gemm/20261123-003744",
+  "comm_source": "../experiments/results/dot2_e1_gemm/20261123-003744",
+  "notes": "Single-node runs: MPI uses shared memory, so \u03b1/\u03b2 describe intra-node copies and the model ignores memory-bandwidth contention between ranks."
+}

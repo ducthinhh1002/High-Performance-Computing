@@ -1,0 +1,202 @@
+{
+  "schema": "pdl-bench/check/v1",
+  "version": "1.0.0",
+  "run_id": "",
+  "tag": "",
+  "config": {
+    "tests": "allreduce,equivalence,sync",
+    "device": "cpu",
+    "tol": "1e-3",
+    "steps": "5",
+    "seed": "42",
+    "output": "../experiments/results/dot2_e0_correctness/20261123-003338/raw/0003_np-4_device-cpu_tests-allreduce-equiva_r0.json",
+    "verbose": "1"
+  },
+  "environment": {
+    "timestamp": "2026-11-22T17:33:44Z",
+    "hostname": "TuanNguyen",
+    "os": "Linux 5.15.146.1-microsoft-standard-WSL2 x86_64",
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12600K",
+    "logical_cpus": 16,
+    "compiler": "GNU 13.3.0",
+    "build_type": "Release",
+    "build_flags": "-Wall -Wextra -Wno-unused-parameter -O3 -march=native",
+    "git_commit": "unknown",
+    "git_dirty": false,
+    "pdl_version": "1.0.0",
+    "mpi_library": "Open MPI v4.1.6, package: Debian OpenMPI, ident: 4.1.6, repo rev: v4.1.6, Sep 30, 2023",
+    "mpi_world_size": 4,
+    "mpi_hosts": 1,
+    "openmp": true,
+    "omp_max_threads": 2,
+    "cuda": true,
+    "cuda_runtime": 12000,
+    "cuda_driver": 13030,
+    "cublas": true,
+    "gpu_name": "NVIDIA GeForce RTX 2060",
+    "gpu_memory_bytes": 6442123264,
+    "gpu_sm_count": 30,
+    "gpu_cc": "7.5",
+    "device": "cpu",
+    "impl": "cpu-blocked",
+    "threads": 2,
+    "command_line": "build/bin/pdl_check --device cpu --tests allreduce,equivalence,sync --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0003_np-4_device-cpu_tests-allreduce-equiva_r0.json",
+    "OMP_NUM_THREADS": "2"
+  },
+  "world_size": 4,
+  "passed": true,
+  "tests": [
+    {
+      "name": "equivalence/sync-sgd-vs-sequential",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 5.79247553e-08,
+      "tolerance": 0.0001,
+      "detail": "4 ranks x batch 8 vs 1 rank x batch 32, 5 steps"
+    },
+    {
+      "name": "sync/replicas-identical-mpi",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-ring",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-rd",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-tree",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-naive",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "sync/replicas-identical-reduce_bcast",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "bitwise parameter hash"
+    },
+    {
+      "name": "allreduce/mpi-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/mpi-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/ring-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/ring-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/rd-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/rd-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/tree-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/tree-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/naive-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/naive-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    },
+    {
+      "name": "allreduce/reduce_bcast-exact-sum",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": "sizes 1, 7, 1000, 65539"
+    },
+    {
+      "name": "allreduce/reduce_bcast-identical-on-ranks",
+      "device": "cpu",
+      "passed": true,
+      "max_err": 0,
+      "tolerance": 0,
+      "detail": ""
+    }
+  ]
+}

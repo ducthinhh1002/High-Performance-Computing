@@ -1,0 +1,12 @@
+\begin{tabular}{llllllllllll}
+\hline
+device & np & n\_runs & train\_time\_s\_mean & train\_time\_s\_ci95 & wall\_time\_s\_mean & wall\_time\_s\_ci95 & throughput\_samples\_per\_s\_mean & throughput\_samples\_per\_s\_ci95 & samples\_processed\_mean & samples\_processed\_ci95 & final\_train\_loss\_mean \\
+\hline
+cpu & 1 & 3 & 101.1 & 0.9611 & 104.9 & 1.102 & 197.5 & 1.875 & 1.997e+04 & 0 & 1.78 \\
+cpu & 4 & 3 & 31.71 & 0.9929 & 32.92 & 0.952 & 629.9 & 19.58 & 1.997e+04 & 0 & 1.78 \\
+cpu & 8 & 3 & 27.42 & 3.705 & 28.4 & 3.858 & 729.7 & 98.02 & 1.997e+04 & 0 & 1.78 \\
+cuda & 1 & 3 & 1.691 & 0.07243 & 2.095 & 0.1899 & 1.181e+04 & 501 & 1.997e+04 & 0 & 1.78 \\
+cuda & 2 & 3 & 3.148 & 0.0793 & 3.569 & 0.1809 & 6343 & 158.8 & 1.997e+04 & 0 & 1.78 \\
+cuda & 4 & 3 & 4.285 & 0.07565 & 4.782 & 0.05481 & 4660 & 82.4 & 1.997e+04 & 0 & 1.78 \\
+\hline
+\end{tabular}

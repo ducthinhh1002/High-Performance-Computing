@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Hình cho báo cáo và slide, vẽ lại từ dữ liệu gốc trong ../experiments/results (đợt 1).
+"""Hình cho báo cáo và slide, vẽ lại từ dữ liệu gốc trong ../experiments/results.
 
     python report/make_figures.py          # chạy từ thư mục tuannn/
-Ghi PNG (200 dpi) vào report/figures/. Chỉ cần numpy, pandas, matplotlib.
+Ghi PNG (200 dpi) vào report/figures/: f1-f5 từ đợt 1 (dot1_*), g1-g6 từ đợt 2 (dot2_*).
+Chỉ cần numpy, pandas, matplotlib.
 """
 from __future__ import annotations
 
@@ -205,6 +206,173 @@ def fig_strategies() -> None:
     save(fig, "f5_strategies")
 
 
+# --------------------------------------------------------------------------------------------
+# Đợt 2 — i5-12600K + RTX 2060 (WSL2)
+# --------------------------------------------------------------------------------------------
+RTX2060_PEAK_TFLOPS = 6.45  # FP32, 1920 CUDA core x 2 FLOP x 1,68 GHz (xung boost danh định)
+
+
+def summary(exp: str) -> pd.DataFrame:
+    return pd.read_csv(latest(exp) / "analysis" / "train_summary.csv")
+
+
+def fig_gemm_gpu() -> None:
+    df = records("dot2_e1_gemm").groupby(["impl", "n"], as_index=False).gflops.mean()
+    spec = [("cublas", "cuBLAS", C[0]), ("cuda-tiled", "CUDA tiled", C[2]), ("cuda-naive", "CUDA naive", C[3]),
+            ("cpu-omp", "CPU OpenMP (12 luồng)", C[1]), ("cpu-blocked", "CPU blocked (1 luồng)", C[4]),
+            ("cpu-naive", "CPU naive (1 luồng)", C[5])]
+    fig, ax = plt.subplots(figsize=(6.6, 4.2))
+    for impl, lab, col in spec:
+        g = df[df.impl == impl].sort_values("n")
+        ax.plot(g.n, g.gflops, "o-", ms=4, lw=1.8, color=col, label=lab)
+    ax.axhline(RTX2060_PEAK_TFLOPS * 1e3, color=INK2, ls=":", lw=1.2)
+    ax.text(70, RTX2060_PEAK_TFLOPS * 1e3 * 1.08, "đỉnh FP32 của RTX 2060 ≈ 6,45 TFLOP/s", fontsize=8.5, color=INK2)
+    ax.set(title="GEMM N×N×N: CPU và GPU", xlabel="N", ylabel="GFLOP/s", ylim=(0.5, 2e4))
+    ax.set_xscale("log", base=2)
+    ax.set_yscale("log")
+    ax.legend(fontsize=8.5, loc="lower right")
+    save(fig, "g1_gemm_gpu")
+
+
+def fig_conv_gpu() -> None:
+    df = records("dot2_e2_paper_cpu_gpu")
+    df = df[df.op == "conv"].groupby(["impl", "include_transfer", "batch"], as_index=False).time_mean_s.mean()
+
+    def t(impl, xfer):
+        g = df[(df.impl == impl) & (df.include_transfer == xfer)].sort_values("batch")
+        return g.batch.values, g.time_mean_s.values * 1e3
+
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4))
+    for (impl, xfer, lab, col, ls) in (("cpu-blocked", False, "CPU 1 luồng (im2col + GEMM)", C[4], "o-"),
+                                       ("cpu-omp", False, "CPU OpenMP 12 luồng", C[1], "o-"),
+                                       ("cublas", True, "GPU cuBLAS + chép host↔device", C[3], "s--"),
+                                       ("cublas", False, "GPU cuBLAS (dữ liệu đã ở GPU)", C[0], "s-")):
+        b, y = t(impl, xfer)
+        a1.plot(b, y, ls, ms=4, lw=1.8, color=col, label=lab)
+    a1.set(title="Conv của bài: thời gian forward", xlabel="batch size", ylabel="thời gian [ms]")
+    a1.set_xscale("log", base=2)
+    a1.set_yscale("log")
+    a1.legend(fontsize=8.5)
+    b, base1 = t("cpu-blocked", False)
+    _, omp = t("cpu-omp", False)
+    _, gpu = t("cublas", False)
+    _, gpux = t("cublas", True)
+    a2.plot(b, base1 / gpu, "o-", color=C[0], label="GPU / CPU 1 luồng")
+    a2.plot(b, omp / gpu, "o-", color=C[1], label="GPU / CPU 12 luồng")
+    a2.plot(b, base1 / gpux, "s--", color=C[3], label="GPU + chép dữ liệu / CPU 1 luồng")
+    a2.axhline(40, color=INK2, ls=":", lw=1.2)
+    a2.text(6, 37, "bài báo: ≈ 40× (K520 so với 1 nhân Xeon)", fontsize=8.5, color=INK2, va="top")
+    a2.annotate(f"{(base1 / gpu)[-1]:.0f}×", (b[-1], (base1 / gpu)[-1]), textcoords="offset points", xytext=(-4, 7), fontsize=9)
+    a2.annotate(f"{(omp / gpu)[-1]:.1f}×", (b[-1], (omp / gpu)[-1]), textcoords="offset points", xytext=(-6, 8), fontsize=9)
+    a2.set(title="GPU nhanh hơn CPU bao nhiêu lần", xlabel="batch size", ylabel="tỉ lệ thời gian (×)")
+    a2.set_xscale("log", base=2)
+    a2.set_yscale("log")
+    a2.legend(fontsize=8.5, loc="lower right")
+    save(fig, "g2_conv_gpu")
+
+
+def fig_comm_dot2() -> None:
+    a = pd.read_csv(latest("dot2_e3_comm") / "analysis" / "comm_allreduce_summary.csv")
+    algos = ["mpi", "ring", "rd", "tree", "naive", "reduce_bcast"]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4))
+    for ax, size, title, unit, scale in ((a1, 4096, "message nhỏ (4 KiB)", "µs", 1e6), (a2, 16 * 2**20, "message lớn (16 MiB)", "ms", 1e3)):
+        for i, al in enumerate(algos):
+            g = a[(a.algo == al) & (a.bytes == size)].sort_values("world_size")
+            ax.plot(g.world_size, g.time_mean_s_mean * scale, "o-", ms=4, lw=1.8, color=C[i], label=al)
+        ax.set(title=f"Allreduce {title}", xlabel="số tiến trình k", ylabel=f"thời gian [{unit}]")
+        ax.set_xticks(sorted(a.world_size.unique()))
+    a2.legend(ncol=2, fontsize=8.5)
+    save(fig, "g3_allreduce_dot2")
+
+
+def fig_scaling_dot2() -> None:
+    pin, unb = summary("dot2_e4_strong_scaling").sort_values("np"), summary("dot2_e4b_strong_scaling_unbound").sort_values("np")
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4))
+    k = pin.np.values
+    a1.plot(k, k, "--", color=INK2, lw=1.2, label="lý tưởng")
+    a1.errorbar(k, pin.speedup, yerr=pin.speedup * pin.train_time_s_std / pin.train_time_s_mean, fmt="o-", color=C[0], capsize=3, label="ghim vào nhân (--bind-to core)")
+    a1.errorbar(unb.np, unb.speedup, yerr=unb.speedup * unb.train_time_s_std / unb.train_time_s_mean, fmt="s--", color=C[1], capsize=3, label="không ghim")
+    for x, y in zip(k, pin.speedup):
+        if x > 1:
+            a1.annotate(f"{y:.2f}×", (x, y), textcoords="offset points", xytext=(5, -13), fontsize=8.5, color=INK)
+    a1.set(title="Strong scaling sync SGD (LeNet/MNIST, batch tổng 256)", xlabel="số tiến trình k", ylabel="speedup")
+    a1.set_xticks(k)
+    a1.legend(loc="upper left", fontsize=8.5)
+    comp = pin.compute_time_mean_s_mean
+    wait, comm = pin.phase_mean_sync_wait_mean * 1.0, pin.phase_mean_comm_mean
+    lab = [str(x) for x in k]
+    a2.bar(lab, comp, color=C[0], width=0.6, label="tính toán (forward + backward)")
+    a2.bar(lab, wait, bottom=comp, color=C[3], width=0.6, label="chờ đồng bộ")
+    a2.bar(lab, comm, bottom=comp + wait, color=C[1], width=0.6, label="allreduce")
+    a2.plot(lab, comp.values[0] / k, "k_", ms=22, mew=2, label="tính toán lý tưởng (T₁ / k)")
+    a2.set(title="Thời gian 3 epoch theo pha", xlabel="số tiến trình k", ylabel="giây", ylim=(0, comp.values[0] * 1.12))
+    a2.grid(axis="x", visible=False)
+    a2.legend(fontsize=8.5)
+    save(fig, "g4_scaling_dot2")
+
+
+def fig_hybrid_gpu() -> None:
+    h = summary("dot2_e6_hybrid").sort_values("np")
+    g = summary("dot2_e7_gpu_mpi")
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4))
+    labels = [f"{int(n)}×{int(t)}" for n, t in zip(h.np, h.threads)]
+    ep = h.train_time_s_mean / 2
+    a1.bar(labels, ep, color=C[0], width=0.6, yerr=h.train_time_s_std / 2, error_kw=dict(ecolor=INK2, lw=1))
+    for i, v in enumerate(ep):
+        a1.text(i, v + 0.05, f"{v:.2f} s", ha="center", fontsize=9)
+    a1.set(title="MPI × OpenMP với 12 luồng phần cứng", xlabel="tiến trình × luồng OpenMP", ylabel="giây / epoch",
+           ylim=(0, ep.max() * 1.18))
+    a1.grid(axis="x", visible=False)
+    g = g.sort_values(["device", "np"])
+    labels = [f"{'GPU' if d == 'cuda' else 'CPU'}\nnp={int(n)}" for d, n in zip(g.device, g.np)]
+    cols = [C[2] if d == "cuda" else C[4] for d in g.device]
+    a2.bar(labels, g.train_time_s_mean, color=cols, width=0.6, yerr=g.train_time_s_std, error_kw=dict(ecolor=INK2, lw=1))
+    for i, v in enumerate(g.train_time_s_mean):
+        a2.text(i, v * 1.12, f"{v:.1f} s", ha="center", fontsize=9)
+    a2.set_yscale("log")
+    a2.set(title="CIFAR-10, CNN width 4: 1 epoch (20k ảnh)", ylabel="giây (thang log)", ylim=(1, 400))
+    a2.grid(axis="x", visible=False)
+    save(fig, "g5_hybrid_gpu_mpi")
+
+
+def fig_strategies_dot2() -> None:
+    s = summary("dot2_e5_strategies")
+
+    def name(r) -> str:
+        if r.strategy == "psgd":
+            return "PSGD + ShuffleSGD" if r.reshuffle else ("PSGD (TB mỗi 10 bước)" if r.avg_period else "PSGD (TB mỗi epoch)")
+        if r.strategy == "downpour":
+            return f"Downpour (push mỗi {int(r.push_every)})"
+        return {"sequential": "Tuần tự", "sync": "Sync SGD", "admm": "ADMM"}[r.strategy]
+
+    s["name"] = [name(r) for r in s.itertuples()]
+    order = ["Tuần tự", "Sync SGD", "PSGD (TB mỗi epoch)", "PSGD (TB mỗi 10 bước)", "PSGD + ShuffleSGD", "ADMM",
+             "Downpour (push mỗi 1)", "Downpour (push mỗi 4)"]
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+    for ax, np_ in zip(axes, (4, 8)):
+        y = np.arange(len(order))
+        h = 0.38
+        for j, (part, lab, col) in enumerate((("iid", "IID / toàn bộ dữ liệu", C[0]), ("sorted", "không IID (shard theo nhãn)", C[1]))):
+            vals, errs = [], []
+            for n in order:
+                m = (s.name == n) & ((s.np == np_) | (s.strategy == "sequential"))
+                m &= (s.partition == part) | ((s.partition == "global") & (part == "iid"))
+                r = s[m]
+                vals.append(r.final_test_acc_mean.values[0] * 100 if len(r) else np.nan)
+                errs.append(r.final_test_acc_std.values[0] * 100 if len(r) else 0)
+            ax.barh(y + (j - 0.5) * h, vals, height=h * 0.92, color=col, xerr=errs, error_kw=dict(ecolor=INK2, lw=1), label=lab)
+            for yi, v in zip(y, vals):
+                if not np.isnan(v):
+                    ax.text(100.8, yi + (j - 0.5) * h, f"{v:.1f}", va="center", ha="right", fontsize=8, color=INK)
+        ax.set_yticks(y, order)
+        ax.invert_yaxis()
+        ax.set(title=f"{np_} tiến trình" + (" (Downpour: 1 server + 7 worker)" if np_ == 8 else " (Downpour: 1 server + 3 worker)"),
+               xlabel="test accuracy sau 10 epoch [%]", xlim=(84, 101.5))
+        ax.grid(axis="y", visible=False)
+    axes[0].legend(loc="upper center", bbox_to_anchor=(1.0, -0.12), ncol=2, fontsize=9)
+    save(fig, "g6_strategies_dot2")
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     style()
@@ -213,6 +381,12 @@ def main() -> None:
     fig_comm()
     fig_scaling()
     fig_strategies()
+    fig_gemm_gpu()
+    fig_conv_gpu()
+    fig_comm_dot2()
+    fig_scaling_dot2()
+    fig_hybrid_gpu()
+    fig_strategies_dot2()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,23 @@
+# mpirun -np 2 --bind-to none build/bin/pdl_check --device cpu --tests allreduce,equivalence,sync --output ../experiments/results/dot2_e0_correctness/20261123-003338/raw/0002_np-2_device-cpu_tests-allreduce-equiva_r0.json
+# env: {'OMP_NUM_THREADS': '2'}
+[ PASS ] equivalence/sync-sgd-vs-sequential   cpu   err=2.860e-08 tol=1.0e-04 2 ranks x batch 8 vs 1 rank x batch 16, 5 steps
+[ PASS ] sync/replicas-identical-mpi          cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-ring         cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-rd           cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-tree         cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-naive        cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] sync/replicas-identical-reduce_bcast cpu   err=0.000e+00 tol=0.0e+00 bitwise parameter hash
+[ PASS ] allreduce/mpi-exact-sum              cpu   err=0.000e+00 tol=0.0e+00 sizes 1, 7, 1000, 65539
+[ PASS ] allreduce/mpi-identical-on-ranks     cpu   err=0.000e+00 tol=0.0e+00 
+[ PASS ] allreduce/ring-exact-sum             cpu   err=0.000e+00 tol=0.0e+00 sizes 1, 7, 1000, 65539
+[ PASS ] allreduce/ring-identical-on-ranks    cpu   err=0.000e+00 tol=0.0e+00 
+[ PASS ] allreduce/rd-exact-sum               cpu   err=0.000e+00 tol=0.0e+00 sizes 1, 7, 1000, 65539
+[ PASS ] allreduce/rd-identical-on-ranks      cpu   err=0.000e+00 tol=0.0e+00 
+[ PASS ] allreduce/tree-exact-sum             cpu   err=0.000e+00 tol=0.0e+00 sizes 1, 7, 1000, 65539
+[ PASS ] allreduce/tree-identical-on-ranks    cpu   err=0.000e+00 tol=0.0e+00 
+[ PASS ] allreduce/naive-exact-sum            cpu   err=0.000e+00 tol=0.0e+00 sizes 1, 7, 1000, 65539
+[ PASS ] allreduce/naive-identical-on-ranks   cpu   err=0.000e+00 tol=0.0e+00 
+[ PASS ] allreduce/reduce_bcast-exact-sum     cpu   err=0.000e+00 tol=0.0e+00 sizes 1, 7, 1000, 65539
+[ PASS ] allreduce/reduce_bcast-identical-on-ranks cpu   err=0.000e+00 tol=0.0e+00 
+
+19 tests, 0 failed
