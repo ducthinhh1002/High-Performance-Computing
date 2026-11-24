@@ -1,0 +1,17 @@
+mkdir -p bin
+cc -O3 -march=native -Wall -Wextra -o bin/mlp_seq src/mlp_seq.c -lm
+nvcc -O3 -arch=sm_90 -std=c++14 -o bin/mlp_cuda src/mlp_cuda.cu
+tuần tự (C): loss=2.109902743e-01 gradnorm=1.637007150e-01   [H=128 L=4 B=64, ngưỡng sai số tương đối 1e-4]
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 1 --micro 1
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 2 --micro 1
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 2 --micro 2
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 2 --micro 4
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 2 --micro 8
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 4 --micro 1
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 4 --micro 2
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 4 --micro 4
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode pipeline --gpus 4 --micro 8
+ĐÚNG loss_err=0.0e+00 grad_err=1.8e-09  --mode tensor --gpus 1
+ĐÚNG loss_err=8.1e-09 grad_err=1.4e-08  --mode tensor --gpus 2
+ĐÚNG loss_err=8.1e-09 grad_err=1.4e-08  --mode tensor --gpus 4
+kết quả: 12/12 cấu hình khớp bản tuần tự
